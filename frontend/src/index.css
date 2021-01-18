@@ -1,0 +1,104 @@
+main {
+    min-height: 80vh;
+    background-color: #fff
+}
+.card{
+    background-color: #fff
+}
+
+h1,
+h3,
+h4,
+h5,
+thead,
+tr,
+td a,
+strong,
+li
+{
+    color: black
+}
+
+tr:hover,
+td a:hover {
+    color: red !important;
+    cursor: pointer
+}
+
+h3 {
+    padding: 1rem 0
+}
+
+h1{
+    font-size: 1.8rem;
+    padding: 1rem 0
+}
+
+h2 {
+    font-size: 1.4rem;
+    padding: .5rem 0
+}
+
+.rating span {
+    margin: 0.1rem
+}
+
+/* Header */
+.fa-shopping-cart {
+    font-size: 1.5rem
+}
+
+.fa-dollar-sign {
+    font-size: .5rem;
+    color: red
+}
+
+Nav:nth-child(3):hover {
+    background-color: transparent
+}
+
+#navItem {
+    font-size: 1.1rem;
+    font-weight: 550;
+    border-bottom: 2px solid transparent;
+    padding: 0 .8rem
+}
+
+#navItem:hover {
+ color: #fff;
+ border-bottom: 2px solid green;
+ background-color: white !important;
+}
+
+.menu-link {
+    color: black;
+    border: 1px solid black;
+    border-radius: 10%;
+}
+
+/* carousel */
+.carousel-item-next, 
+.carousel-item-prev,
+.carousel-item.active {
+    display: flex
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 0
+}
+
+.carousel-caption h2 {
+    color: #fff
+}
+
+.carousel img {
+    height: 300px;
+    padding: 30px;
+    margin: 40px;
+    border-radius: 50%;
+}
+
+.carousel a {
+    margin: 0 auto
+}

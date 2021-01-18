@@ -38,15 +38,13 @@ const deleteProduct = asyncHandler( async(req, res) => {
     }
 })
 const createProduct = asyncHandler( async(req, res) => {
+    console.log(req.user)
     const product = new Product({
         name: 'Sample Name',
         price: 0,
-        user: req.user._id,
+        user: req.body.id,
         image: '/images/sample.jpg',
-        brand: 'Sample brand',
         category: 'Sample category',
-        countInStock: 0,
-        numReviews: 0,
         description: 'Sample description'
     })
 
@@ -54,7 +52,7 @@ const createProduct = asyncHandler( async(req, res) => {
     res.status(201).json(createdProduct)
 })
 const updateProduct = asyncHandler( async(req, res) => {
-    const {name, price, user, image, brand, category, countInStock, description} = req.body
+    const {name, price, image, category, description} = req.body
     const product = await Product.findById(req.params.id)
 
     if(product) {
@@ -62,54 +60,13 @@ const updateProduct = asyncHandler( async(req, res) => {
         product.price = price
         product.description = description
         product.image = image
-        product.brand = brand
         product.category = category
-        product.countInStock = countInStock
     } else {
         res.status(404)
         throw new Error('Product Not Found')
     }
     const updatedProduct = await product.save()
     res.json(updatedProduct)
-})
-const createReview = asyncHandler( async(req, res) => {
-    const {rating, comment} = req.body
-    const product = await Product.findById(req.params.id)
-
-    if(product) {
-       const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString())
-       if(alreadyReviewed) {
-           res.status(400)
-           throw new Error('Product already reviewed')
-       }
-
-       const review = {
-           name: req.user.name,
-           rating: Number(rating),
-           comment,
-           user: req.user._id
-       }
-
-       product.reviews.push(review)
-
-       product.numReviews = product.reviews.length
-       
-       product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0)/ product.reviews.length
-
-       await product.save()
-       res.status(201).json({ message: 'Review added'})
-    } else {
-        res.status(404)
-        throw new Error('Product Not Found')
-    }
-    const updatedProduct = await product.save()
-    res.json(updatedProduct)
-})
-
-const getTopProducts = asyncHandler( async(req, res) => {
-    const products = await Product.find({}).sort({ rating: -1}).limit(3)
-
-    res.json(products)
 })
 
 export {
@@ -117,7 +74,5 @@ export {
     getProductById,
     deleteProduct,
     createProduct,
-    updateProduct,
-    createReview,
-    getTopProducts
+    updateProduct
 }
