@@ -1,23 +1,13 @@
-import React, { useEffect } from 'react'
-import { useSelector  } from 'react-redux'
+import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
 
+const Burger = ({ burgers }) => {
 
-const Burger = () => {
-
-    const productList = useSelector(state => state.productList)
-    const { loading, error, products } = productList
-
-    const burgers = products.filter(product => product.category === 'Burger')
 
     return (
         <>
             <h3>Burgers</h3>
-            {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
-            <>  
                <Row>
                     {burgers.map(product => (
                         <Col key={product._id} sm={12} md={6} lg={4}>
@@ -25,8 +15,6 @@ const Burger = () => {
                         </Col>
                     ))}
                 </Row>
-            </>
-            }
         </>
     )
 }

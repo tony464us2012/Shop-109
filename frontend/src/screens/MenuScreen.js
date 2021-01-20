@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector  } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import Meta from '../components/Meta'
@@ -7,28 +7,28 @@ import Burger from '../components/Burger'
 import Salad from '../components/Salad'
 import Appetizer from '../components/Appetizer'
 
-const MenuScreen = ({ match }) => {
-    const keyword = match.params.keyword
+const MenuScreen = () => {
 
-    const pageNumber = match.params.pageNumber || 1
 
     const dispatch = useDispatch()
 
     const productList = useSelector(state => state.productList)
-    const { loading, error, products, page, pages } = productList
+    const { loading, error, products } = productList
 
-    useEffect(() => {
-        dispatch(listProducts(keyword, pageNumber))
-    }, [dispatch, keyword, pageNumber])
+    const burgers = products.filter(product => product.category === 'Burger')
+    const appetizers = products.filter(appetizer => appetizer.category === 'Appetizer')
+    const salads = products.filter(salad => salad.category === 'Salad')
+
+    console.log(products)
 
     return (
         <>
             <Meta />
             <MenuHeader />
             <h1>Menu</h1>
-            <Appetizer />
-            <Salad />
-            <Burger />
+            <Appetizer appetizers={appetizers} />
+            <Salad salads={salads}/>
+            <Burger burgers={burgers} />
         </>
     )
 }
