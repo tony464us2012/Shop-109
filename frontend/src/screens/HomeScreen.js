@@ -11,21 +11,20 @@ import ProductCarousel from '../components/ProductCarousel'
 import Meta from '../components/Meta'
 
 
-const HomeScreen = ({ match }) => {
-    const keyword = match.params.keyword
-
-    const pageNumber = match.params.pageNumber || 1
+const HomeScreen = () => {
+  
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(listProducts(keyword, pageNumber))
-    }, [dispatch, keyword, pageNumber])
+        dispatch(listProducts())
+    }, [dispatch])
 
     return (
         <>
             <Meta />
-            {!keyword ? (<ProductCarousel />) : (<Link to='/' className='btn btn-light'>Go Back</Link>) }
+            <ProductCarousel />
+            {/* {!keyword ? (<ProductCarousel />) : (<Link to='/' className='btn btn-light'>Go Back</Link>) } */}
         </>
     )
 }

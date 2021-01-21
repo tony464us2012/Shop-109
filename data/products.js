@@ -158,6 +158,118 @@ const products = [
       'Your favorite burger served bun less on a bed of organic heritage mix lettuce, cherry tomatoes, and red onions.',
     category: 'Salad',
     price: 11.00
+  },
+  {
+    name: 'Homemade Mac & Cheese',
+    image: '/images/forkandknife.jpg',
+    description: 
+      'The perfect combination of creamy and cheesy four cheese mac and cheese.',
+    category: 'ForkandKnife',
+    price: 10.00
+  },
+  {
+    name: 'Loaded Quesadilla',
+    image: '/images/forkandknife.jpg',
+    description: 
+      'A huge flour tortilla filled with cheese, chicken, and bacon. Tossed on the grill to perfectly melt the cheese and toast the tortilla. We then load the quesadilla with chips, melted cheese, pink sauce, cilantro sauce, and more bacon!',
+    category: 'ForkandKnife',
+    price: 14.00
+  },
+  {
+    name: 'Big Boy Tenders',
+    image: '/images/forkandknife.jpg',
+    description: 
+      'A big mountain of fresh fries loaded with Mexican blend cheese and a bunch of bacon. Served with your choice of our specialty fried chicken or fish.',
+    category: 'ForkandKnife',
+    price: 14.00
+  },
+  {
+    name: 'Chicken Fit Club',
+    image: '/images/sandwich.png',
+    description: 
+      'Grilled chicken breast with crisp Applewood smoked bacon, sliced avocado, crumbled Blue cheese, Dijon mustard-mayo, romaine lettuce, and tomato. Served on a toasted honey wheat bun.',
+    category: 'Sandwich',
+    price: 12.00
+  },
+  {
+    name: 'Spicy Crisp Sandwich',
+    image: '/images/sandwich.png',
+    description: 
+      'A tender crisp fried chicken breast on a bed of lettuce and tomatoes, with grated Parmesan cheese, sriracha, fresh jalapeño peppers, and an onion ring. Served between our parmesan crusted sourdough bread (Caution: Very Spicy).',
+    category: 'Sandwich',
+    price: 12.00
+  },
+  {
+    name: 'Chicken and Waffle Sandwich',
+    image: '/images/sandwich.png',
+    description: 
+      'Perfectly fried chicken breast served on a bed of sweet potato fries with sriracha maple sauce, bacon, and topped with a fried egg. Served between Viv’s perfect Belgian waffles.',
+    category: 'Sandwich',
+    price: 14.00
+  },
+  {
+    name: 'Fries',
+    image: '/images/side.jfif',
+    description:
+      'Topped with Sea Salt and a side of our homemade ketchup. Ask for them loaded up with cheese and Applewood smoked bacon bits.',
+    category: 'Side',
+    price: 4.00
+  },
+  {
+    name: 'Tots',
+    image: '/images/side.jfif',
+    description:
+      'Tots topped with Sea Salt and a side of chef prepared pink sauce. Ask for them loaded up cheese and Applewood smoked bacon.',
+    category: 'Side',
+    price: 4.00
+  },
+  {
+    name: 'Truffle Fries',
+    image: '/images/side.jfif',
+    description:
+      'Hand cut fries with parmesan and truffle oil, served with Truffle Aioli sauce.',
+    category: 'Side',
+    price: 5.00
+  },
+  {
+    name: 'Onion Rings',
+    image: '/images/side.jfif',
+    description:
+      'Beer battered and served with Chipotle Mayo.',
+    category: 'Side',
+    price: 5.00
+  },
+  {
+    name: 'Sweet Potato Fries',
+    image: '/images/side.jfif',
+    description:
+      'Perfectly crispy string style sweet potato fires served with maple cream sauce. Ask for them loaded up with caramel and cinnamon.',
+    category: 'Side',
+    price: 4.00
+  },
+  {
+    name: 'Sweet Potato Tots',
+    image: '/images/side.jfif',
+    description:
+      'An innovative twist on classic tater tots, these are tater tots made with sweet potato. Served with our delicious maple cream sauce. Ask for them loaded up with caramel and cinnamon.',
+    category: 'Side',
+    price: 5.00
+  },
+  {
+    name: 'Nica Cheese Bites',
+    image: '/images/side.jfif',
+    description:
+      'Fried Nicaraguan cheese cut in the shape of fries and served with our homemade guava sauce.',
+    category: 'Side',
+    price: 6.00
+  },
+  {
+    name: 'Oinkin Sliders',
+    image: '/images/burger.png',
+    description: 
+        'Homemade pulled pork bathed in our specialty BBQ Sauce served with a side of Coleslaw.',
+    category: 'Slider',
+    price: 10.00
   }
 ]
 
