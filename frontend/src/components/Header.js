@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button, Img } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 
 
@@ -34,7 +34,7 @@ const Header = () => {
                <Container>
                    <h6>{date.toLocaleTimeString()}</h6>
                    <LinkContainer to='/' className='mr-auto ml-4'>
-                        <Navbar.Brand >109 Burger Joint</Navbar.Brand>
+                       <img src='/images/109_Logo.png' variant='top' width='6%' height='6%' />
                    </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, CardDeck } from 'react-bootstrap'
 import Product from '../components/Product'
 
 const ForkandKnife = ({ forkandknifes }) => {
@@ -10,9 +10,9 @@ const ForkandKnife = ({ forkandknifes }) => {
             <h3>Fork and Knife</h3>
                <Row>
                     {forkandknifes.map(product => (
-                        <Col key={product._id} sm={12} md={6} lg={4}>
+                        <CardDeck key={product._id}  style={{margin: '0 .25rem'}}>
                             <Product product={product} />
-                        </Col>
+                        </CardDeck>
                     ))}
                 </Row>
         </>

@@ -10,6 +10,7 @@ h1,
 h3,
 h4,
 h5,
+h6,
 thead,
 tr,
 td a,
@@ -74,6 +75,11 @@ Nav:nth-child(3):hover {
     color: black;
     border: 1px solid black;
     border-radius: 10%;
+}
+
+.menu-link:active {
+    background-color: grey;
+    color: white
 }
 
 /* carousel */
