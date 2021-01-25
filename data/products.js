@@ -6,6 +6,7 @@ const products = [
     'Certified 100% Angus Beef (Americanized) with American cheese, house ketchup, organic heritage mix lettuce, tomato, and red onion. Served on sesame bun.',
     category: 'Burger',
     price: 11.00,
+    available: true
   },
   {
     name: 'Wake Up',
@@ -14,6 +15,7 @@ const products = [
      'Certified 100% Angus beef, aged Cheddar cheese, applewood smoked bacon, hash brown patty, charred balsamic onions, baby pink sauce, and a fried egg to top it off. Served on a sesame bun.',
     category: 'Burger',
     price: 14.00,
+    available: true
   },
   {
     name: 'Nica',
@@ -22,6 +24,7 @@ const products = [
       'Certified 100% Angus beef, authentic Nicaraguan fried cheese, mild jalapeño cream sauce, fried sweet plantains patty, and Nicaraguan coleslaw. Served on a Brioche bun.',
     category: 'Burger',
     price: 14.00,
+    available: true
   },
   {
     name: 'Mac Addict',
@@ -30,6 +33,7 @@ const products = [
       'Certified 100% Angus beef, four cheese homemade macaroni cheese (Cheddar, Mozzarella, American and Monterrey Jack) and applewood smoked bacon bits on a pretzel bun.',
     category: 'Burger',
     price: 14.00,
+    available: true
   },
   {
     name: 'Double O',
@@ -37,7 +41,8 @@ const products = [
     description:
       'Certified 100% Angus beef, jalapeño Cheddar Jack cheese, truffle aioli sauce, house ketchup, fresh caramelized strawberries, and bacon. Served between glazed doughnuts from Mojo Donuts.',
     category: 'Burger',
-    price: 14.00
+    price: 14.00,
+    available: true
   },
   {
     name: 'Blue Moon',
@@ -46,6 +51,7 @@ const products = [
       'Certified 100% Angus beef aged with Blue Moon beer, Buttermilk Blue cheese, sautéed onions and mushrooms, orange mayo, organic heritage mix lettuce, tomato, and pickles. Served on a sesame bun.',
     category: 'Burger',
     price: 14.00,
+    available: true
   },
   {
     name: 'Panther',
@@ -54,6 +60,7 @@ const products = [
       'Half certified 100% Angus beef and half ground Italian pancetta with aged Cheddar cheese, Applewood smoked bacon, homemade bbq sauce, organic heritage mix lettuce, tomato, red onion, and a pickle spear. Served on Parmesan crusted sourdough bread.',
     category: 'Burger',
     price: 13.00,
+    available: true
   },
   {
     name: 'Colombian Voyage',
@@ -62,6 +69,7 @@ const products = [
       'Certified 100% Angus beef mix with chorizo on a bed of chips with a traditional AREPA DE CHOCLO, melted Mozzarella cheese, crunchy chicharones, cilantro sauce, and topped off with a fried egg. Served on a brioche bun.',
     category: 'Burger',
     price: 15.00,
+    available: true
   },
   {
     name: 'Say Hello to My Little Burger',
@@ -70,6 +78,7 @@ const products = [
       'Certified 100% Angus beef with Swiss cheese, ham croquetas, sliced roasted pork, and Dijon mayo. Served on a bed of fried sweet plantain between perfectly toasted Cuban bread.',
     category: 'Burger',
     price: 15.00,
+    available: true
   },
   {
     name: 'BBQ Blues',
@@ -78,6 +87,7 @@ const products = [
       'Certified 100% Angus beef mix made spicy with seven spices, Havarti cheese, applewood smoked bacon, onion jam, and homemade blue berry corn bread covered with our unique blue cheese bbq sauce. Served on a sesame bun.',
     category: 'Burger',
     price: 13.00,
+    available: true
   },
   {
     name: 'Mex 109',
@@ -86,6 +96,7 @@ const products = [
       'Certified 100% Angus beef, homemade guacamole, fresh pico de gallo, sliced jalapeño and jalapeño cheddar jack cheese. Served on a brioche bun.',
     category: 'Burger',
     price: 13.00,
+    available: true
   },
   {
     name: 'Fry Sampler Small',
@@ -93,7 +104,8 @@ const products = [
     description: 
       'A perfect chance to sample our fries, the small includes three types of fries and the large includes five types of fries.',
     category: 'Appetizer',
-    price: 8.00
+    price: 8.00,
+    available: true
   },
   {
     name: 'Duck Wings',
@@ -101,7 +113,8 @@ const products = [
     description: 
       'Six perfectly deep fried duck wings served with your choice of spicy buffalo, house bbq, honey ginger, Asian chili, or Blue cheese bbq.',
     category: 'Appetizer',
-    price: 10.00
+    price: 10.00,
+    available: true
   },
   {
     name: 'Mini Mac Balls',
@@ -109,7 +122,8 @@ const products = [
     description: 
       'Three deep fried balls stuffed with our delicious homemade four cheese mac and cheese balls.',
     category: 'Appetizer',
-    price: 9.00
+    price: 9.00,
+    available: true
   },
   {
     name: 'Chicken Wings 8 Piece',
@@ -117,7 +131,8 @@ const products = [
     description: 
       'Double cooked specialty chicken wings served with your choice of spicy buffalo, house bbq, honey ginger, Asian chili, or blue cheese bbq.',
     category: 'Appetizer',
-    price: 9.00
+    price: 9.00,
+    available: true
   },
   {
     name: 'Pizza Dip',
@@ -125,7 +140,8 @@ const products = [
     description: 
       'Incredibly cheesy and yummy pepperoni pizza dip served with pita bread.',
     category: 'Appetizer',
-    price: 9.00
+    price: 9.00,
+    available: true
   },
   {
     name: 'Caesar Salad',
@@ -133,7 +149,8 @@ const products = [
     description: 
       'Organic heritage mix lettuce, parmesan cheese, and homemade croutons. All tossed in classic caesar dressing.',
     category: 'Salad',
-    price: 10.00
+    price: 10.00,
+    available: true
   },
   {
     name: 'Bacon Salad',
@@ -141,7 +158,8 @@ const products = [
     description: 
       'Organic heritage mix lettuce tossed with; chopped up crispy bacon, Mexican blend cheese, cherry tomatoes, and pickled onions.',
     category: 'Salad',
-    price: 12.00
+    price: 12.00,
+    available: true
   },
   {
     name: 'Hollywood Bowl',
@@ -149,7 +167,8 @@ const products = [
     description: 
       'Organic heritage mix lettuce, fresh avocado, hardboiled egg, Applewood smoked bacon, bleu cheese crumbles, and cherry tomatoes.',
     category: 'Salad',
-    price: 12.00
+    price: 12.00,
+    available: true
   },
   {
     name: 'Burger in a Bowl',
@@ -157,7 +176,8 @@ const products = [
     description: 
       'Your favorite burger served bun less on a bed of organic heritage mix lettuce, cherry tomatoes, and red onions.',
     category: 'Salad',
-    price: 11.00
+    price: 11.00,
+    available: true
   },
   {
     name: 'Homemade Mac & Cheese',
@@ -165,7 +185,8 @@ const products = [
     description: 
       'The perfect combination of creamy and cheesy four cheese mac and cheese.',
     category: 'ForkandKnife',
-    price: 10.00
+    price: 10.00,
+    available: true
   },
   {
     name: 'Loaded Quesadilla',
@@ -173,7 +194,8 @@ const products = [
     description: 
       'A huge flour tortilla filled with cheese, chicken, and bacon. Tossed on the grill to perfectly melt the cheese and toast the tortilla. We then load the quesadilla with chips, melted cheese, pink sauce, cilantro sauce, and more bacon!',
     category: 'ForkandKnife',
-    price: 14.00
+    price: 14.00,
+    available: true
   },
   {
     name: 'Big Boy Tenders',
@@ -181,7 +203,8 @@ const products = [
     description: 
       'A big mountain of fresh fries loaded with Mexican blend cheese and a bunch of bacon. Served with your choice of our specialty fried chicken or fish.',
     category: 'ForkandKnife',
-    price: 14.00
+    price: 14.00,
+    available: true
   },
   {
     name: 'Chicken Fit Club',
@@ -189,7 +212,8 @@ const products = [
     description: 
       'Grilled chicken breast with crisp Applewood smoked bacon, sliced avocado, crumbled Blue cheese, Dijon mustard-mayo, romaine lettuce, and tomato. Served on a toasted honey wheat bun.',
     category: 'Sandwich',
-    price: 12.00
+    price: 12.00,
+    available: true
   },
   {
     name: 'Spicy Crisp Sandwich',
@@ -197,7 +221,8 @@ const products = [
     description: 
       'A tender crisp fried chicken breast on a bed of lettuce and tomatoes, with grated Parmesan cheese, sriracha, fresh jalapeño peppers, and an onion ring. Served between our parmesan crusted sourdough bread (Caution: Very Spicy).',
     category: 'Sandwich',
-    price: 12.00
+    price: 12.00,
+    available: true
   },
   {
     name: 'Chicken and Waffle Sandwich',
@@ -205,7 +230,8 @@ const products = [
     description: 
       'Perfectly fried chicken breast served on a bed of sweet potato fries with sriracha maple sauce, bacon, and topped with a fried egg. Served between Viv’s perfect Belgian waffles.',
     category: 'Sandwich',
-    price: 14.00
+    price: 14.00,
+    available: true
   },
   {
     name: 'Fries',
@@ -213,7 +239,8 @@ const products = [
     description:
       'Topped with Sea Salt and a side of our homemade ketchup. Ask for them loaded up with cheese and Applewood smoked bacon bits.',
     category: 'Side',
-    price: 4.00
+    price: 4.00,
+    available: true
   },
   {
     name: 'Tots',
@@ -221,7 +248,8 @@ const products = [
     description:
       'Tots topped with Sea Salt and a side of chef prepared pink sauce. Ask for them loaded up cheese and Applewood smoked bacon.',
     category: 'Side',
-    price: 4.00
+    price: 4.00,
+    available: true
   },
   {
     name: 'Truffle Fries',
@@ -229,7 +257,8 @@ const products = [
     description:
       'Hand cut fries with parmesan and truffle oil, served with Truffle Aioli sauce.',
     category: 'Side',
-    price: 5.00
+    price: 5.00,
+    available: true
   },
   {
     name: 'Onion Rings',
@@ -237,7 +266,8 @@ const products = [
     description:
       'Beer battered and served with Chipotle Mayo.',
     category: 'Side',
-    price: 5.00
+    price: 5.00,
+    available: true
   },
   {
     name: 'Sweet Potato Fries',
@@ -245,7 +275,8 @@ const products = [
     description:
       'Perfectly crispy string style sweet potato fires served with maple cream sauce. Ask for them loaded up with caramel and cinnamon.',
     category: 'Side',
-    price: 4.00
+    price: 4.00,
+    available: true
   },
   {
     name: 'Sweet Potato Tots',
@@ -253,7 +284,8 @@ const products = [
     description:
       'An innovative twist on classic tater tots, these are tater tots made with sweet potato. Served with our delicious maple cream sauce. Ask for them loaded up with caramel and cinnamon.',
     category: 'Side',
-    price: 5.00
+    price: 5.00,
+    available: true
   },
   {
     name: 'Nica Cheese Bites',
@@ -261,7 +293,8 @@ const products = [
     description:
       'Fried Nicaraguan cheese cut in the shape of fries and served with our homemade guava sauce.',
     category: 'Side',
-    price: 6.00
+    price: 6.00,
+    available: true
   },
   {
     name: 'Oinkin Sliders',
@@ -269,7 +302,8 @@ const products = [
     description: 
         'Homemade pulled pork bathed in our specialty BBQ Sauce served with a side of Coleslaw.',
     category: 'Slider',
-    price: 10.00
+    price: 10.00,
+    available: true
   }
 ]
 

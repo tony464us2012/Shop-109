@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -17,6 +18,7 @@ const ProductEditScreen = ({ match, history }) => {
     const [category, setCategory] = useState('')
     const [description, setDescription] = useState('')
     const [uploading, setUploading] = useState(false)
+    const [available, setAvailable] = useState(true)
 
     const dispatch = useDispatch()
 
@@ -40,9 +42,10 @@ const ProductEditScreen = ({ match, history }) => {
                     setImage(product.image)
                     setCategory(product.category)
                     setDescription(product.description)
+                    setAvailable(product.available)
                 }
             }
-    }, [dispatch, productId, product, history, successUpdate])
+    }, [dispatch, productId, product, successUpdate])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -53,6 +56,7 @@ const ProductEditScreen = ({ match, history }) => {
             image,
             category,
             description,
+            available
         }))
     }
     
@@ -80,7 +84,9 @@ const ProductEditScreen = ({ match, history }) => {
 
     return (
         <>
-        {/* <LinkContainer to='/admin/productlist' className='btn btn-light my-3'>Go Back</LinkContainer> */}
+        <LinkContainer to='/admin/productlist' className='btn btn-light my-3'>
+        <Button variant="outline-secondary" size='lg'>Back</Button>
+        </LinkContainer>
         <FormContainer>
             <h1>Edit Product</h1>
             {loadingUpdate && <Loader />}
@@ -95,19 +101,42 @@ const ProductEditScreen = ({ match, history }) => {
                     <Form.Label>Price</Form.Label>
                     <Form.Control type='number' placeholder='Enter Price' value={price} onChange={(e) => setPrice(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Form.Group controlId='image'>
+                <div className="mb-3">
+                    <Form.File id="formcheck-api-custom" custom>
+                    <Form.File.Input isValid />
+                    <Form.File.Label data-browse="Choose File">
+                        ...
+                    </Form.File.Label>
+                    </Form.File>
+                </div>
+                {/* <Form.Group controlId='image'>
                     <Form.Label>Image</Form.Label>
                     <Form.Control type='text' placeholder='Enter image url' value={image} onChange={(e) => setImage(e.target.value)}></Form.Control>
                     <Form.File id='image-file' label='Choose File' custom onChange={uploadFileHandler}></Form.File>
                     {uploading && <Loader />}
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group controlId='brand'>
                     <Form.Label>Category</Form.Label>
-                    <Form.Control type='text' placeholder='Enter category' value={category} onChange={(e) => setCategory(e.target.value)}></Form.Control>
+                    <Form.Control as='select' placeholder='Enter category' value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <option value='Burger'>Burger</option>
+                        <option value='Salad'>Salad</option>
+                        <option value='Appetizer'>Appetizer</option>
+                        <option value='ForkandKnife'>ForkandKnife</option>
+                        <option value='Sandwich'>Sandwich</option>
+                        <option value='Slider'>Slider</option>
+                        <option value='Side'>Side</option>
+                    </Form.Control>
                 </Form.Group>
                 <Form.Group controlId='description'>
                     <Form.Label>Description</Form.Label>
                     <Form.Control type='text' placeholder='Enter description' value={description} onChange={(e) => setDescription(e.target.value)}></Form.Control>
+                </Form.Group>
+                <Form.Group controlId='brand'>
+                    <Form.Label>Available?</Form.Label>
+                    <Form.Control as='select' value={available} onChange={(e) => setAvailable(e.target.value)}>
+                        <option value={true}>True</option>
+                        <option value={false}>False</option>
+                    </Form.Control>
                 </Form.Group>
                 <Button type='submit' variant='primary'>
                     Update

@@ -1,29 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import Paginate from '../components/Paginate'
-import { listProducts, deleteProduct, createProduct, listProductDetails } from '../actions/productActions'
+import { deleteProduct, createProduct, listProductDetails, updateProduct } from '../actions/productActions'
 
 
-const ProductListScreen = ({ history, match }) => {
-    const pageNumber = match.params.pageNumber || 1
+const ProductListScreen = ({ history }) => {
 
+    
     const dispatch = useDispatch()
-
+    
     const productList = useSelector(state => state.productList)
-    const { loading, error, products, page, pages } = productList
-  
+    const { loading, error, products } = productList
+    
     const productDelete = useSelector(state => state.productDelete)
     const { loading:loadingDelete, error:errorDelete, success:successDelete } = productDelete
     
     const productCreate = useSelector(state => state.productCreate)
     const { loading:loadingCreate, error:errorCreate, success:successCreate, product:createdProduct } = productCreate
-  
+    
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
+    
+    const availableHandler = (product) => {
+        dispatch(updateProduct(product))
+        console.log(product)
+    }
 
     useEffect(() => {
         if(!userInfo.isAdmin) {
@@ -31,10 +35,8 @@ const ProductListScreen = ({ history, match }) => {
         } 
         if(successCreate) {
             history.push(`/admin/product/${createdProduct._id}/edit`)
-        } else {
-            dispatch(listProducts('', pageNumber))
         }
-    }, [dispatch, history,  userInfo, successDelete, successCreate, createdProduct, pageNumber])
+    }, [dispatch, history, products,  userInfo, successDelete, successCreate, availableHandler])
 
     const deleteHandler = (id) => {
         if(window.confirm('Are you sure?')) {
@@ -54,11 +56,11 @@ const ProductListScreen = ({ history, match }) => {
         <>
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Products</h1>
+                    <h1>Menu Items</h1>
                 </Col>
                 <Col className='text-right'>
                     <Button className='my-3' onClick={createProductHandler}>
-                        <i className='fas fa-plus'></i> Create Product
+                        <i className='fas fa-plus'></i> Create Item
                     </Button>
                 </Col>
             </Row>
@@ -71,17 +73,15 @@ const ProductListScreen = ({ history, match }) => {
                 <Table striped bordered hover responsive className='table-sm'>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>NAME</th>
                             <th>PRICE</th>
                             <th>CATEGORY</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map(product => (
+                        {products.sort((a, b) => (a.category > b.category) ? 1 : -1).map(product => (
                             <tr key={product._id}>
-                                <td>{product._id}</td>
-                                <td>{product.name}</td>
+                                <td>{product.name}{' '}<i style={{ marginLeft: '.5rem', color: product.available ? 'green' : 'red'}}  className={`fas fa-${product.available ? 'check' : 'ban'}`}></i></td>
                                 <td>${product.price}</td>
                                 <td>{product.category}</td>
                                 <td>
@@ -98,7 +98,6 @@ const ProductListScreen = ({ history, match }) => {
                         ))}
                     </tbody>
                 </Table>
-                <Paginate pages={pages} page={page} isAdmin={true}/>
             </>
             )}
         </>

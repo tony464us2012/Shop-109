@@ -28,6 +28,11 @@ const productSchema = mongoose.Schema({
         required: true, 
         default: 0
     },
+    available: {
+        type: Boolean,
+        required: true,
+        default: true
+    }
   
 }, {
     timestaps: true

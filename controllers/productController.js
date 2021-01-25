@@ -26,8 +26,9 @@ const deleteProduct = asyncHandler( async(req, res) => {
     const product = await Product.findById(req.params.id)
 
     if (product) {
-       await product.remove()
-       res.json({ message: 'Product removed' })
+     await product.remove()
+     const products = await Product.find({})
+       res.json(products)
     } else {
         res.status(404)
         throw new Error('Product Not Found')
@@ -40,15 +41,16 @@ const createProduct = asyncHandler( async(req, res) => {
         price: 0,
         user: req.body.id,
         image: '/images/sample.jpg',
-        category: 'Sample category',
-        description: 'Sample description'
+        category: 'Burger',
+        description: 'Sample description',
+        available: true
     })
 
     const createdProduct = await product.save()
     res.status(201).json(createdProduct)
 })
 const updateProduct = asyncHandler( async(req, res) => {
-    const {name, price, image, category, description} = req.body
+    const {name, price, image, category, description, available} = req.body
     const product = await Product.findById(req.params.id)
 
     if(product) {
@@ -57,12 +59,14 @@ const updateProduct = asyncHandler( async(req, res) => {
         product.description = description
         product.image = image
         product.category = category
+        product.available = available
     } else {
         res.status(404)
         throw new Error('Product Not Found')
     }
-    const updatedProduct = await product.save()
-    res.json(updatedProduct)
+    await product.save()
+    const products = await Product.find({})
+    res.json(products)
 })
 
 export {

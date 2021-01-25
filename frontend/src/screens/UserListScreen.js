@@ -40,16 +40,14 @@ const UserListScreen = ({ history }) => {
                 <Table striped bordered hover responsive className='table-sm'>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>NAME</th>
                             <th>EMAIL</th>
                             <th>ADMIN</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map(user => (
+                        {users.filter((a, b) => (a.name > b.name) ? 1 : -1).map(user => (
                             <tr key={user._id}>
-                                <td>{user._id}</td>
                                 <td>{user.name}</td>
                                 <td><a href={`mailto:${user.email}`}>{user.email}</a></td>
                                 <td>{user.isAdmin ? (<i className='fas fa-check' style={{color: 'green'}}></i>) : (<i className='fas fa-times' style={{color: 'red'}}></i>)}</td>
