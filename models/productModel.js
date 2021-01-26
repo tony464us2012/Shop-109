@@ -21,12 +21,15 @@ const productSchema = mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
     },
     price: {
         type: Number,
         required: true, 
         default: 0
+    },
+    typeofBeer: {
+        type: String,
+
     },
     available: {
         type: Boolean,

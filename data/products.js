@@ -304,6 +304,46 @@ const products = [
     category: 'Slider',
     price: 10.00,
     available: true
+  },
+  {
+    name: '21 Amendment Tasty',
+    image: '/images/beer.png',
+    category: 'Beer', 
+    price: 7,
+    typeofBeer: 'IPA',
+    available: true
+  },
+  {
+    name: 'Brooklyn Winter Lager',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 6,
+    typeofBeer: 'Lager',
+    available: true
+  },
+  {
+    name: 'Cigar City Margarita Gose',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 6,
+    typeofBeer: 'Sour',
+    available: true
+  },
+  {
+    name: 'Abita Christmas Ale',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 7,
+    typeofBeer: 'Ale',
+    available: true
+  },
+  {
+    name: 'ACE Pineapple',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 6,
+    typeofBeer: 'Ciders',
+    available: true
   }
 ]
 

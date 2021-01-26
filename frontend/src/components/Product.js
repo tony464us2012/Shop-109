@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Card } from 'react-bootstrap'
+import { Card, Row } from 'react-bootstrap'
 
 const Product = ({ product }) => {
     return (
@@ -10,10 +10,10 @@ const Product = ({ product }) => {
             </Link>
             <Card.Body>
                 <Link to={`/product/${product._id}`}>
-                    <Card.Title as='div'><strong>{product.name}</strong></Card.Title>
+                    <Card.Title as='div'><strong className='title-text'>{product.name}</strong></Card.Title>
                 </Link>
-                <Card.Text as='h3'> ${product.price} </Card.Text>
-                <Card.Text as='h6'> {product.description} </Card.Text>
+                <Card.Text as='h6'> ${product.price} </Card.Text>
+                {/* <Card.Text as='h6'> {product.description} </Card.Text> */}
             </Card.Body>
         </Card>
     )

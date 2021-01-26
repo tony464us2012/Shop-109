@@ -7,7 +7,6 @@ const ForkandKnife = ({ forkandknifes }) => {
 
     return (
         <>
-            <h3>Fork and Knife</h3>
                <Row>
                     {forkandknifes.map(product => (
                         <CardDeck key={product._id}  style={{margin: '0 .25rem'}}>

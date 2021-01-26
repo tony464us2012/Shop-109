@@ -26,10 +26,6 @@ td a:hover {
     cursor: pointer
 }
 
-h3 {
-    padding: 1rem 0
-}
-
 h1{
     font-size: 1.8rem;
     padding: 1rem 0
@@ -52,6 +48,10 @@ h2 {
 .fa-dollar-sign {
     font-size: .5rem;
     color: red
+}
+
+.menu-container {
+    margin-bottom: .8rem
 }
 
 Nav:nth-child(3):hover {
@@ -80,6 +80,12 @@ Nav:nth-child(3):hover {
 .menu-link:active {
     background-color: grey;
     color: white
+}
+
+/* Menu */
+
+.title-text {
+    text-align: center
 }
 
 /* carousel */

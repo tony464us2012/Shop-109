@@ -9,7 +9,6 @@ const Appetizer = ({ appetizers }) => {
 
     return (
         <>
-            <h3>Appetizer</h3>
                <Row>
                     {appetizers.map(product => (
                         <CardDeck key={product._id} sm={12} md={6} lg={4} style={{margin: '0 .25rem'}}>

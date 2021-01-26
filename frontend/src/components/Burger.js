@@ -7,7 +7,6 @@ const Burger = ({ burgers }) => {
 
     return (
         <>
-            <h3>Burgers</h3>
                <Row>
                     {burgers.map(product => (
                         <CardDeck key={product._id} sm={12} md={6} lg={4} style={{margin: '0 .25rem'}}>

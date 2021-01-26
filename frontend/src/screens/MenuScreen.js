@@ -10,6 +10,7 @@ import ForkandKnife from '../components/ForkandKnife'
 import Sandwich from '../components/Sandwich'
 import Slider from '../components/Slider'
 import Side from '../components/Side'
+import Beer from '../components/Beer'
 
 const MenuScreen = () => {
 
@@ -31,6 +32,7 @@ const MenuScreen = () => {
     const sandwiches = products.filter(sandwich => sandwich.category === 'Sandwich')
     const sliders = products.filter(slider => slider.category === 'Slider')
     const sides = products.filter(side => side.category === 'Side')
+    const beers = products.filter(beer => beer.category === 'Beer')
 
     const tabHandler = (tab) => {
         setTab(tab)
@@ -47,7 +49,8 @@ const MenuScreen = () => {
              tab === 'ForkandKnife' ?  <ForkandKnife forkandknifes={forkandknifes} /> :
              tab === 'Sandwich' ? <Sandwich sandwiches={sandwiches} /> : 
              tab === 'Slider' ? <Slider sliders={sliders} /> :
-             <Side sides={sides} />
+             tab === 'Side' ? <Side sides={sides} /> : 
+             <Beer beers={beers} />
             }
         </>
     )
