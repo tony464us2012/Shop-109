@@ -1,15 +1,17 @@
 import React from 'react'
 import { Row, CardDeck } from 'react-bootstrap'
-import Product from '../components/Product'
+import Product from '../Product'
 
-const ForkandKnife = ({ forkandknifes }) => {
+
+
+const Lager = ({ lager }) => {
 
 
     return (
         <>
                <Row>
-                    {forkandknifes.map(product => (
-                        <CardDeck key={product._id}  style={{margin: '0 .25rem'}}>
+                    {lager.map(product => (
+                        <CardDeck key={product._id} sm={12} md={6} lg={4} style={{margin: '0 .25rem'}}>
                             <Product product={product} />
                         </CardDeck>
                     ))}
@@ -18,4 +20,4 @@ const ForkandKnife = ({ forkandknifes }) => {
     )
 }
 
-export default ForkandKnife
+export default Lager

@@ -1,14 +1,16 @@
 import React from 'react'
 import { Row, CardDeck } from 'react-bootstrap'
-import Product from '../components/Product'
+import Product from '../Product'
 
-const Slider = ({ sliders }) => {
+
+
+const Ale = ({ ale }) => {
 
 
     return (
         <>
                <Row>
-                    {sliders.map(product => (
+                    {ale.map(product => (
                         <CardDeck key={product._id} sm={12} md={6} lg={4} style={{margin: '0 .25rem'}}>
                             <Product product={product} />
                         </CardDeck>
@@ -18,4 +20,4 @@ const Slider = ({ sliders }) => {
     )
 }
 
-export default Slider
+export default Ale

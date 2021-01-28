@@ -309,7 +309,23 @@ const products = [
     name: '21 Amendment Tasty',
     image: '/images/beer.png',
     category: 'Beer', 
-    price: 7,
+    price: 7.00,
+    typeofBeer: 'IPA',
+    available: true
+  },
+  {
+    name: 'Ballast Point Sculpin',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 8.00,
+    typeofBeer: 'IPA',
+    available: true
+  },
+  {
+    name: 'CigarCity Florida Man',
+    image: './images/beer.png',
+    category: 'Beer',
+    price: 7.00,
     typeofBeer: 'IPA',
     available: true
   },
@@ -317,7 +333,23 @@ const products = [
     name: 'Brooklyn Winter Lager',
     image: '/images/beer.png',
     category: 'Beer',
-    price: 6,
+    price: 6.00,
+    typeofBeer: 'Lager',
+    available: true
+  },
+  {
+    name: 'Concrete Beach Havana Lager',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 7.00,
+    typeofBeer: 'Lager',
+    available: true
+  },
+  {
+    name: 'Yuengling Lager',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 6.00,
     typeofBeer: 'Lager',
     available: true
   },
@@ -330,10 +362,66 @@ const products = [
     available: true
   },
   {
+    name: 'Cooperpoint Florida Season w/Hibiscus',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 7.00,
+    typeofBeer: 'Sour',
+    available: true
+  },
+  {
+    name: 'Destihl Wild Sour Apricot',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 6,
+    typeofBeer: 'Sour',
+    available: true
+  },
+  {
+    name: 'Highland Seasonal Porter',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 6.00,
+    typeofBeer: 'PorterandStout',
+    available: true
+  },
+  {
+    name: 'Wynwood Cup of Jose',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 8.00,
+    typeofBeer: 'PorterandStout',
+    available: true
+  },
+  {
+    name: 'Yuengling Black & Tan',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 6.00,
+    typeofBeer: 'PorterandStout',
+    available: true
+  },
+  {
     name: 'Abita Christmas Ale',
     image: '/images/beer.png',
     category: 'Beer',
-    price: 7,
+    price: 7.00,
+    typeofBeer: 'Ale',
+    available: true
+  },
+  {
+    name: 'Bone Hook Sunset Surfer',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 5.00,
+    typeofBeer: 'Ale',
+    available: true
+  },
+  {
+    name: 'Boulevard Nutcracker Winter',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 7.00,
     typeofBeer: 'Ale',
     available: true
   },
@@ -341,8 +429,16 @@ const products = [
     name: 'ACE Pineapple',
     image: '/images/beer.png',
     category: 'Beer',
-    price: 6,
-    typeofBeer: 'Ciders',
+    price: 6.00,
+    typeofBeer: 'Cider',
+    available: true
+  },
+  {
+    name: 'Newground Cafe Latte',
+    image: '/images/beer.png',
+    category: 'Beer',
+    price: 5.00,
+    typeofBeer: 'Special',
     available: true
   }
 ]

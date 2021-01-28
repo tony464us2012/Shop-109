@@ -1,14 +1,14 @@
 import React from 'react'
 import { Row, CardDeck } from 'react-bootstrap'
-import Product from '../components/Product'
+import Product from '../Product'
 
-const Burger = ({ burgers }) => {
+const Side = ({ sides }) => {
 
 
     return (
         <>
                <Row>
-                    {burgers.map(product => (
+                    {sides.map(product => (
                         <CardDeck key={product._id} sm={12} md={6} lg={4} style={{margin: '0 .25rem'}}>
                             <Product product={product} />
                         </CardDeck>
@@ -18,4 +18,4 @@ const Burger = ({ burgers }) => {
     )
 }
 
-export default Burger
+export default Side

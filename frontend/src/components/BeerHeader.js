@@ -1,35 +1,35 @@
 import React from 'react'
 import { Nav } from 'react-bootstrap'
 
-const BeerHeader = ({tabHandler, tab}) => {
+const BeerHeader = ({beerTabHandler, beerTab}) => {
 
   const selectHandler = (selected) =>  {
-    if (tab === selected) {
+    if (beerTab === selected) {
       return { backgroundColor: 'grey', color: '#fff'}
     }
   }
     return (
         <Nav as="ul" className='menu-container'>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('Appetizer')} onClick={() => tabHandler('Appetizer')}>IPA</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('IPA')} onClick={() => beerTabHandler('IPA')}>IPA</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('Burger')}  onClick={() => tabHandler('Burger')}>Lager</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('Lager')}  onClick={() => beerTabHandler('Lager')}>Lager</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('Salad')}  onClick={() => tabHandler('Salad')}>Sour</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('Sour')}  onClick={() => beerTabHandler('Sour')}>Sour</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('ForkandKnife')}  onClick={() => tabHandler('ForkandKnife')}>Porter and Stout</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('PorterandStout')}  onClick={() => beerTabHandler('PorterandStout')}>Porter and Stout</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('Sandwich')}  onClick={() => tabHandler('Sandwich')}>Ale</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('Ale')}  onClick={() => beerTabHandler('Ale')}>Ale</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('Slider')}  onClick={() => tabHandler('Slider')}>Ciders</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('Cider')}  onClick={() => beerTabHandler('Cider')}>Ciders</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('Side')}  onClick={() => tabHandler('Side')}>Specials</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('Special')}  onClick={() => beerTabHandler('Special')}>Specials</Nav.Link>
           </Nav.Item>
         </Nav>
     )

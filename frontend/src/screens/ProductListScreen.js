@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import ProductListHeader from '../components/ProfileListHeader'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { deleteProduct, createProduct, listProductDetails, updateProduct } from '../actions/productActions'
+import MenuItem from '../components/product-list-components/MenuItem'
+import Beers from '../components/product-list-components/Beers'
+import AddOns from '../components/product-list-components/AddOns'
 
 
 const ProductListScreen = ({ history }) => {
 
+    const [tab, setTab] = useState('MenuItems')
     
     const dispatch = useDispatch()
     
@@ -28,15 +32,16 @@ const ProductListScreen = ({ history }) => {
         dispatch(updateProduct(product))
         console.log(product)
     }
-
+    
     useEffect(() => {
         if(!userInfo.isAdmin) {
-           history.push('/login')
+            history.push('/login')
         } 
         if(successCreate) {
             history.push(`/admin/product/${createdProduct._id}/edit`)
         }
     }, [dispatch, history, products,  userInfo, successDelete, successCreate, availableHandler])
+    
 
     const deleteHandler = (id) => {
         if(window.confirm('Are you sure?')) {
@@ -52,11 +57,22 @@ const ProductListScreen = ({ history }) => {
         dispatch(listProductDetails(id))
     }
 
+    const menuitems = products.filter(menuitem => menuitem.category !== 'Beer' && menuitem.category !== 'AddOns')
+    const beers = products.filter(beer => beer.category === 'Beer')
+    const addons = products.filter(addon => addon.category === 'AddOns')
+
+    console.log(menuitems)
+    console.log(beers)
+
+    const tabHandler = (tab) => {
+        setTab(tab)
+    }
+
     return (
         <>
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Menu Items</h1>
+                <ProductListHeader tabHandler={tabHandler} tab={tab}/>
                 </Col>
                 <Col className='text-right'>
                     <Button className='my-3' onClick={createProductHandler}>
@@ -78,25 +94,10 @@ const ProductListScreen = ({ history }) => {
                             <th>CATEGORY</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {products.sort((a, b) => (a.category > b.category) ? 1 : -1).map(product => (
-                            <tr key={product._id}>
-                                <td>{product.name}{' '}<i style={{ marginLeft: '.5rem', color: product.available ? 'green' : 'red'}}  className={`fas fa-${product.available ? 'check' : 'ban'}`}></i></td>
-                                <td>${product.price}</td>
-                                <td>{product.category}</td>
-                                <td>
-                                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                                        <Button variant='light' className='btn-sm' onClick={() => getProductHandler(product._id)}>
-                                            <i className='fas fa-edit'></i>
-                                        </Button>
-                                    </LinkContainer>
-                                    <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
-                                        <i className='fas fa-trash'></i>
-                                    </Button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
+                        {tab === 'MenuItems' ? <MenuItem menuitems={menuitems} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
+                        tab === 'Beers' ? <Beers beers={beers} getProductHandler={getProductHandler} deleteHandler={deleteHandler}/> :
+                        <AddOns addons={addons} getProductHandler={getProductHandler} deleteHandler={deleteHandler}/> 
+                        }
                 </Table>
             </>
             )}

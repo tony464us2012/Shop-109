@@ -3,13 +3,13 @@ import { useDispatch, useSelector  } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import Meta from '../components/Meta'
 import MenuHeader from '../components/MenuHeader'
-import Burger from '../components/Burger'
-import Salad from '../components/Salad'
-import Appetizer from '../components/Appetizer'
-import ForkandKnife from '../components/ForkandKnife'
-import Sandwich from '../components/Sandwich'
-import Slider from '../components/Slider'
-import Side from '../components/Side'
+import Burger from '../components/menu-components/Burger'
+import Salad from '../components/menu-components/Salad'
+import Appetizer from '../components/menu-components/Appetizer'
+import ForkandKnife from '../components/menu-components/ForkandKnife'
+import Sandwich from '../components/menu-components/Sandwich'
+import Slider from '../components/menu-components/Slider'
+import Side from '../components/menu-components/Side'
 import Beer from '../components/Beer'
 
 const MenuScreen = () => {
@@ -32,7 +32,6 @@ const MenuScreen = () => {
     const sandwiches = products.filter(sandwich => sandwich.category === 'Sandwich')
     const sliders = products.filter(slider => slider.category === 'Slider')
     const sides = products.filter(side => side.category === 'Side')
-    const beers = products.filter(beer => beer.category === 'Beer')
 
     const tabHandler = (tab) => {
         setTab(tab)
@@ -50,7 +49,7 @@ const MenuScreen = () => {
              tab === 'Sandwich' ? <Sandwich sandwiches={sandwiches} /> : 
              tab === 'Slider' ? <Slider sliders={sliders} /> :
              tab === 'Side' ? <Side sides={sides} /> : 
-             <Beer beers={beers} />
+             <Beer />
             }
         </>
     )
