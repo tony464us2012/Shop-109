@@ -1,3 +1,5 @@
+
+
 const products = [
   {
     name: 'America',
@@ -440,6 +442,156 @@ const products = [
     price: 5.00,
     typeofBeer: 'Special',
     available: true
+  },
+  {
+    name: 'Extra Meat Patty',
+    category: 'AddOns',
+    price: 4.00,
+    addOnType: 'AddOns',
+    available: true
+  },
+  {
+    name: 'Swap for Turkey Patty',
+    category: 'AddOns',
+    addOnType: 'SwapOption',
+    available: true
+  },
+  {
+    name: 'Swap for Americanized Patties',
+    category: 'AddOns',
+    price: 1.00,
+    addOnType: 'SwapOption',
+    available: true
+  },
+  {
+    name: 'Swap for Black Bean Patty',
+    category: 'AddOns',
+    addOnType: 'SwapOption',
+    available: true
+  },
+  {
+    name: 'Swap for Buffalo Patty',
+    category: 'AddOns',
+    price: 6.00,
+    addOnType: 'SwapOption',
+    available: true
+  },
+  {
+    name: 'Fried Egg',
+    category: 'AddOns',
+    price: 1.00,
+    addOnType: 'Extras',
+    available: true
+  },
+  {
+    name: 'Bacon',
+    category: 'AddOns',
+    price: 2.00,
+    addOnType: 'Extras',
+    available: true
+  },
+  {
+    name: 'Extra Cheese',
+    category: 'AddOns',
+    price: 1.00,
+    addOnType: 'Extras',
+    available: true
+  },
+  {
+    name: 'Extra Sauce',
+    category: 'AddOns',
+    addOnType: 'Extras',
+    available: true
+  },
+  {
+    name: 'Nica Cheese',
+    category: 'AddOns',
+    price: 2.00,
+    addOnType: 'Extras',
+    available: true
+  },
+  {
+    name: 'Swap Side for Chili',
+    category: 'AddOns',
+    price: 4.00,
+    addOnType: 'SwapSideOption',
+    available: true
+  },
+  {
+    name: 'Swap Side for Mac & Cheese',
+    category: 'AddOns',
+    price: 4.00,
+    addOnType: 'SwapSideOption',
+    available: true
+  },
+  {
+    name: 'Nica Cheese Bites',
+    category: 'AddOns',
+    price: 2.00,
+    addOnType: 'UpgradeOption',
+    available: true
+  },
+  {
+    name: 'Onion Rings',
+    category: 'AddOns',
+    price: 1.00,
+    addOnType: 'UpgradeOption',
+    available: true
+  },
+  {
+    name: 'Sweet Potato Fries',
+    category: 'AddOns',
+    price: 1.00,
+    addOnType: 'UpgradeOption',
+    available: true
+  },
+  {
+    name: 'Sweet Potato Tater Tots',
+    category: 'AddOns',
+    price: 1.00,
+    addOnType: 'UpgradeOption',
+    available: true
+  },
+  {
+    name: 'Tater Tots',
+    category: 'AddOns',
+    price: 1.00,
+    addOnType: 'UpgradeOption',
+    available: true
+  },
+  {
+    name: 'Truffle Fries',
+    category: 'AddOns',
+    price: 2.00,
+    addOnType: 'UpgradeOption',
+    availabLe: true
+  },
+  {
+    name: 'Large Fry Sampler',
+    category: 'AddOns',
+    price: 4.00,
+    addOnType: 'LargeFrySampler',
+    available: true
+  },
+  {
+    name: 'Chicken Wing 15pc',
+    category: 'AddOns',
+    price: 7.00,
+    addOnType: 'LargeChickenWings',
+    available: true
+  },
+  {
+    name: 'Fish',
+    category: 'AddOns',
+    price: 5.00,
+    addOnType: 'AddOns',
+    available: true
+  },
+  {
+    name: 'All Natural Chicken Breast',
+    category: 'AddOns',
+    price: 3.00,
+    addOntype: 'AddOns'
   }
 ]
 

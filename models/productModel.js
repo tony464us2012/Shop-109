@@ -30,6 +30,9 @@ const productSchema = mongoose.Schema({
         type: String,
 
     },
+    addOnType: {
+        type: String
+    },
     available: {
         type: Boolean,
         required: true,
