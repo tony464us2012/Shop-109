@@ -76,8 +76,8 @@ const Header = () => {
             </Navbar>
             <Navbar bg="light" variant="light">
                 <Nav className="mr-auto ml-5">
+                <Nav.Link id='navItem' href='/'>HOME</Nav.Link>
                 <Nav.Link id='navItem' href='/menu'>MENU</Nav.Link>
-                <Nav.Link id='navItem' href='#'>BEERS</Nav.Link>
                 <Nav.Link id='navItem' href='#'>109 REWARDS</Nav.Link>
                 <Nav.Link id='navItem' href='#'>DELIVERY</Nav.Link>
                 </Nav>

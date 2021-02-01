@@ -11,6 +11,7 @@ import Sandwich from '../components/menu-components/Sandwich'
 import Slider from '../components/menu-components/Slider'
 import Side from '../components/menu-components/Side'
 import Beer from '../components/Beer'
+import ProductModal from '../components/Modal'
 
 const MenuScreen = () => {
 

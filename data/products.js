@@ -581,17 +581,129 @@ const products = [
     available: true
   },
   {
-    name: 'Fish',
+    name: 'All Natural Chicken Breast',
     category: 'AddOns',
-    price: 5.00,
+    price: 3.00,
     addOnType: 'AddOns',
     available: true
   },
   {
-    name: 'All Natural Chicken Breast',
+    name: 'Mex 109',
+    category: 'AddOns',
+    price: 2.00,
+    addonType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'America',
+    category: 'AddOns',
+    addOnType: 'BurgerInABowl',
+    available: true
+  }, 
+  {
+    name: 'BBQ Blues',
+    category: 'AddOns',
+    price: 4.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Black Veggie',
+    category: 'AddOns',
+    price: 2.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Blue Moon',
     category: 'AddOns',
     price: 3.00,
-    addOntype: 'AddOns'
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Colombian Voyage',
+    category: 'AddOns',
+    price: 4.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Double O',
+    category: 'AddOns',
+    price: 3.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Mac Addict',
+    category: 'AddOns',
+    price: 3.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Nica',
+    category: 'AddOns',
+    price: 3.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Panther',
+    category: 'AddOns',
+    price: 2.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Say Hello To My Little Burger',
+    category: 'AddOns',
+    price: 4.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Super 109',
+    category: 'AddOns',
+    price: 5.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Trotting Turkey',
+    category: 'AddOns',
+    price: 1.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Truffle Lovers',
+    category: 'AddOns',
+    price: 3.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Wake Up',
+    category: 'AddOns',
+    price: 3.00,
+    addOnType: 'BurgerInABowl',
+    available: true
+  },
+  {
+    name: 'Loaded up with Cheese & Applewood Smoked Bacon Bits',
+    category: 'AddOns',
+    price: 2.00,
+    addonType: 'AddOnFries',
+    available: true
+  },
+  {
+    name: 'Loaded up With Caramel & Cinnamon',
+    category: 'AddOns',
+    price: 2.00,
+    addonType: 'AddOnFries',
+    available: true
   }
 ]
 
