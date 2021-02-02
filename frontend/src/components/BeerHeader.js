@@ -5,7 +5,7 @@ const BeerHeader = ({beerTabHandler, beerTab}) => {
 
   const selectHandler = (selected) =>  {
     if (beerTab === selected) {
-      return { backgroundColor: 'grey', color: '#fff'}
+      return { backgroundColor: 'black', color: '#fff'}
     }
   }
     return (

@@ -18,7 +18,7 @@ const Product = ({ product }) => {
                     </Card.Body>
                 </Card>
             </a>
-            <ProductModal show={modalShow} onHide={() => setModalShow(false)} productId={product._id} />
+            {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} productId={product._id} /> : '' }
         </>
     )
 }

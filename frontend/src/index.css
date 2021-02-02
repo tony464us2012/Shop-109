@@ -73,12 +73,13 @@ Nav:nth-child(3):hover {
 
 .menu-link {
     color: black;
-    border: 1px solid black;
-    border-radius: 10%;
+    border: 2px solid black;
+    margin-right: 1rem;
+    font-weight: 500
 }
 
 .menu-link:active {
-    background-color: grey;
+    background-color: black;
     color: white
 }
 
@@ -113,4 +114,11 @@ Nav:nth-child(3):hover {
 
 .carousel a {
     margin: 0 auto
+}
+
+/* Modal */
+
+textarea {
+    width: 100%;
+    padding: .5rem
 }

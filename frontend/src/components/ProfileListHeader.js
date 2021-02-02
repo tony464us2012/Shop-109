@@ -5,7 +5,7 @@ const ProfileListHeader = ({tabHandler, tab}) => {
 
   const selectHandler = (selected) =>  {
     if (tab === selected) {
-      return { backgroundColor: 'grey', color: '#fff'}
+      return { backgroundColor: 'black', color: '#fff'}
     }
   }
     return (
