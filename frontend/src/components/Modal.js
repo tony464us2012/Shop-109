@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { listProductDetails } from '../actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Button, Image, Col, Form, Row } from 'react-bootstrap'
 import { PRODUCT_DETAILS_RESET } from '../actions/types'
 import Loader from './Loader'
+import { set } from 'mongoose'
 
 
 const ProductModal = ({show, onHide, productId}) => {
@@ -25,19 +26,18 @@ const ProductModal = ({show, onHide, productId}) => {
         dispatch({type: PRODUCT_DETAILS_RESET})
         
       }
-    }, [show, dispatch,])
+    }, [show])
     
-    const [itemPrice, setItemPrice] = useState(null)
+    const [itemPrice, setItemPrice] = useState(0)
     const [instructions, setInstructions] = useState('')
+    const [radio, setRadio] = useState(false)
 
     const addons = products.filter(product => product.category === 'AddOns')
-
-    
-    const LargeFrySamplerPrice = addons.map(addon => addon.addOnType === 'LargeFrySampler')
-    const { price:samplerPrice } = [...LargeFrySamplerPrice]
-    console.log(LargeFrySamplerPrice)
+    const largefrysampler = addons.filter(sampler =>  sampler.addOnType === 'LargeFrySampler')
+    const [{ price:samplerPrice }] = largefrysampler
 
     const handleChange = (e) => {setInstructions(e.target.value)}
+    const radioChange = (e) => {setItemPrice(price + Number(e.target.value))}
 
     const white = {backgroundColor: 'white', color: 'grey', paddingBottom: '1rem'}
    
@@ -61,33 +61,14 @@ const ProductModal = ({show, onHide, productId}) => {
                       {image ? <Col ><Image src={image} alt={name}/></Col> : ''}
                       <Form>
                         {name === 'Fry Sampler Small' ? 
-                         <fieldset>
-                         <Form.Group as={Row}>
-                           <Form.Label as="legend" row sm={2}> 
-                             Choose Side
-                           </Form.Label>
-                           <Col sm={10}>
-                             <Form.Check
-                               type="radio"
-                               label={`Large  +${samplerPrice}`}
-                               name="formHorizontalRadios"
-                               id="formHorizontalRadios1"
-                             />
-                             <Form.Check
-                               type="radio"
-                               label="Small"
-                               name="formHorizontalRadios"
-                               id="formHorizontalRadios2"
-                             />
-                             <Form.Check
-                               type="radio"
-                               label="third radio"
-                               name="formHorizontalRadios"
-                               id="formHorizontalRadios3"
-                             />
-                           </Col>
-                         </Form.Group>
-                       </fieldset> : ''
+                         <Fragment>
+                          <p>Select Size:</p>
+                            <input type="radio" id="frysampler" name="frysampler" value={0} onChange={radioChange} />
+                            <label htmlFor="smallfrysampler"> Small </label><br/>
+                            <input type="radio" id="frysampler" name="frysampler" value={samplerPrice} onChange={radioChange} />
+                            <label htmlFor="largefrysampler">{`Large +${samplerPrice}`}</label>
+                         </Fragment>
+                        : ''
                       }
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>List Any Preferences</Form.Label>
