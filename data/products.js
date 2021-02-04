@@ -101,7 +101,7 @@ const products = [
     available: true
   },
   {
-    name: 'Fry Sampler Small',
+    name: 'Fry Sampler',
     image: '/images/appetizer.png',
     description: 
       'A perfect chance to sample our fries, the small includes three types of fries and the large includes five types of fries.',
