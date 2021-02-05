@@ -38,9 +38,21 @@ const ProductModal = ({show, onHide, productId}) => {
     const [{ price:samplerPrice, available:samplerAvailable }] = largefrysampler
     const largechickenwings = addons.filter(wings => wings.addOnType === 'LargeChickenWings')
     const [{name:wingName, price:wingPrice, available:wingAvailable}] = largechickenwings
+    const addMeat = addons.filter(meat => meat.addOnType === 'Addons')
+    const [{name:meatName, price:meatPrice, available:meatAvailable}] = addMeat
+    const swapOptions = addons.filter(swap => swap.addOnType === 'SwapOption')
+    const extras = addons.filter(extra => extra.addOnType === 'Extras')
+    const swapSides = addons.filter (swapSide => swapSide.addOnType === 'SwapSideOption')
+    const upgrades = addons.filter(upgrade => upgrade.addOnType === 'UpgradeOption')
 
-    const handleChange = (e) => {setInstructions(e.target.value)}
-    const radioChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Large: +e.target.value})}
+      const handleChange = (e) => {setInstructions(e.target.value)}
+      const radioChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Large: +e.target.value})}
+      const sauceChange = (e) => {setAddOns( state => ({...state, Sauce: e.target.value}))}
+      const meatChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
+      const swapChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
+      const extraChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
+      const swapSideChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
+      const upgradeChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
 
     const item = {
       name,
@@ -79,7 +91,7 @@ const ProductModal = ({show, onHide, productId}) => {
                       <Form onSubmit={addToCartHandler}>
                         {name === 'Fry Sampler Small' ? 
                          <Fragment>
-                          <p>Select Size:</p>
+                          <h6>Select Size:</h6>
                             <input type="radio" id="frysampler" name="frysampler" value={0} onChange={radioChange} required />
                             <label htmlFor="smallfrysampler"> Small </label><br/>
                             {samplerAvailable ? <><input type="radio" id="frysampler" name="frysampler" value={samplerPrice} onChange={radioChange} required/>
@@ -89,13 +101,45 @@ const ProductModal = ({show, onHide, productId}) => {
                       }
                         {name === 'Chicken Wings 8 Piece' ? 
                          <Fragment>
-                          <p>Select Size:</p>
+                          <h6>Select Size:</h6>
                             <input type="radio" name="chickenwings" value={0} onChange={radioChange} required />
-                            <label htmlFor="chickenwings">{' '} 8 Pieces </label><br/>
+                            <label htmlFor="chickenwings"> 8 Pieces </label><br/>
                             {wingAvailable ? <><input type="radio" name='chickenwings' value={wingPrice} onChange={radioChange} required/>
                             <label htmlFor='chickenwings'>{`15 Pieces +${wingPrice}`}</label></> : ''}
                          </Fragment>
                         : ''
+                      }
+                      {name === 'Chicken Wings 8 Piece' || name === 'Duck Wings' ? 
+                      <Form.Group>
+                       <h6>Select Sauce:</h6>
+                         <input type="radio" name="sauce" value={'Asian Chili'} onChange={sauceChange} required />
+                         <Form.Label htmlFor="sauce">Asian Chili</Form.Label><br/>
+                         <input type="radio" name='sauce' value={'Blue Cheese BBQ'} onChange={sauceChange} required/>
+                         <Form.Label htmlFor='sauce'>Blue Cheese BBQ</Form.Label><br/>
+                         <input type="radio" name='sauce' value={'Honey Ginger'} onChange={sauceChange} required/>
+                         <Form.Label htmlFor='sauce'>Honey Ginger</Form.Label><br/>
+                         <input type="radio" name='sauce' value={'House BBQ'} onChange={sauceChange} required/>
+                         <Form.Label htmlFor='sauce'>House BBQ</Form.Label><br/>
+                         <input type="radio" name='sauce' value={'Spicy Buffalo'} onChange={sauceChange} required/>
+                         <Form.Label htmlFor='sauce'>Spicy Buffalo</Form.Label>
+                      </Form.Group>
+                     : ''
+                      }
+                      { category === 'Burger' ? 
+                        <Fragment>
+                          <Form.Group>
+                            <h6>Add Ons</h6>
+                              <input type="radio" name="sauce" value={``} onChange={sauceChange} required />
+                              <Form.Label htmlFor="sauce">Extra Meat Patty</Form.Label><br/>
+                          </Form.Group>
+                          <Form.Group>
+                            <h6>Swap Patty</h6>
+                              <input type="radio" name="sauce" value={``} onChange={sauceChange} required />
+                              <Form.Label htmlFor="sauce">Extra Meat Patty</Form.Label><br/>
+                          </Form.Group>
+
+                        </Fragment>: ''
+                        
                       }
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>List Any Preferences</Form.Label>
