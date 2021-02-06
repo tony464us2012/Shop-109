@@ -34,11 +34,12 @@ const ProductModal = ({show, onHide, productId}) => {
     const [radio, setRadio] = useState(false)
 
     const addons = products.filter(product => product.category === 'AddOns')
+    console.log(addons)
     const largefrysampler = addons.filter(sampler =>  sampler.addOnType === 'LargeFrySampler')
     const [{ price:samplerPrice, available:samplerAvailable }] = largefrysampler
     const largechickenwings = addons.filter(wings => wings.addOnType === 'LargeChickenWings')
-    const [{name:wingName, price:wingPrice, available:wingAvailable}] = largechickenwings
-    const addMeat = addons.filter(meat => meat.addOnType === 'Addons')
+    const [{price:wingPrice, available:wingAvailable}] = largechickenwings
+    const addMeat = addons.filter(meat => meat.name === 'Extra Meat Patty')
     const [{name:meatName, price:meatPrice, available:meatAvailable}] = addMeat
     const swapOptions = addons.filter(swap => swap.addOnType === 'SwapOption')
     const extras = addons.filter(extra => extra.addOnType === 'Extras')
@@ -49,7 +50,7 @@ const ProductModal = ({show, onHide, productId}) => {
       const radioChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Large: +e.target.value})}
       const sauceChange = (e) => {setAddOns( state => ({...state, Sauce: e.target.value}))}
       const meatChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
-      const swapChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
+      const swapChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({...addOns,  [e.target.name]: e.target.value})}
       const extraChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
       const swapSideChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
       const upgradeChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
@@ -127,15 +128,22 @@ const ProductModal = ({show, onHide, productId}) => {
                       }
                       { category === 'Burger' ? 
                         <Fragment>
+                          { meatAvailable ? 
                           <Form.Group>
                             <h6>Add Ons</h6>
-                              <input type="radio" name="sauce" value={``} onChange={sauceChange} required />
-                              <Form.Label htmlFor="sauce">Extra Meat Patty</Form.Label><br/>
-                          </Form.Group>
+                              <input type="radio" name="sauce" value={meatPrice} onChange={meatChange} required />
+                              <Form.Label htmlFor="sauce">{`Add Extra Patty +${meatPrice}`}`</Form.Label><br/>
+                          </Form.Group> : ''}
                           <Form.Group>
                             <h6>Swap Patty</h6>
-                              <input type="radio" name="sauce" value={``} onChange={sauceChange} required />
-                              <Form.Label htmlFor="sauce">Extra Meat Patty</Form.Label><br/>
+                              {
+                                addons.filter(addon => addon.available && addon.addOnType === 'SwapOption').map(addon => 
+                                  <>
+                                      <input type="radio" name={addon.name} value={addon.price} onChange={swapChange} required />
+                                      <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                  </>
+                                  )
+                              }
                           </Form.Group>
 
                         </Fragment>: ''

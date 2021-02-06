@@ -453,6 +453,7 @@ const products = [
   {
     name: 'Swap for Turkey Patty',
     category: 'AddOns',
+    price: 0,
     addOnType: 'SwapOption',
     available: true
   },
@@ -466,6 +467,7 @@ const products = [
   {
     name: 'Swap for Black Bean Patty',
     category: 'AddOns',
+    price: 0,
     addOnType: 'SwapOption',
     available: true
   },
@@ -500,6 +502,7 @@ const products = [
   {
     name: 'Extra Sauce',
     category: 'AddOns',
+    price: 0,
     addOnType: 'Extras',
     available: true
   },
@@ -597,6 +600,7 @@ const products = [
   {
     name: 'America',
     category: 'AddOns',
+    price: 0,
     addOnType: 'BurgerInABowl',
     available: true
   }, 
