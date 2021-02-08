@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, useRef, Fragment } from 'react'
 import { listProductDetails } from '../actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Button, Image, Col, Form, Row } from 'react-bootstrap'
@@ -17,6 +17,13 @@ const ProductModal = ({show, onHide, productId}) => {
 
     const { name, image, description, price, category, available } = productInfo
 
+    const [itemPrice, setItemPrice] = useState(0)
+    const [addOns, setAddOns] = useState()
+    const [instructions, setInstructions] = useState('')
+    const [radio, setRadio] = useState(false)
+    const ref = useRef(price);
+
+    console.log(ref.current)
     
     const dispatch = useDispatch()
     
@@ -28,32 +35,21 @@ const ProductModal = ({show, onHide, productId}) => {
       }
     }, [show])
     
-    const [itemPrice, setItemPrice] = useState(0)
-    const [addOns, setAddOns] = useState({})
-    const [instructions, setInstructions] = useState('')
-    const [radio, setRadio] = useState(false)
-
     const addons = products.filter(product => product.category === 'AddOns')
-    console.log(addons)
     const largefrysampler = addons.filter(sampler =>  sampler.addOnType === 'LargeFrySampler')
     const [{ price:samplerPrice, available:samplerAvailable }] = largefrysampler
     const largechickenwings = addons.filter(wings => wings.addOnType === 'LargeChickenWings')
     const [{price:wingPrice, available:wingAvailable}] = largechickenwings
     const addMeat = addons.filter(meat => meat.name === 'Extra Meat Patty')
     const [{name:meatName, price:meatPrice, available:meatAvailable}] = addMeat
-    const swapOptions = addons.filter(swap => swap.addOnType === 'SwapOption')
-    const extras = addons.filter(extra => extra.addOnType === 'Extras')
-    const swapSides = addons.filter (swapSide => swapSide.addOnType === 'SwapSideOption')
-    const upgrades = addons.filter(upgrade => upgrade.addOnType === 'UpgradeOption')
+    const chicken = addons.filter(chk => chk.addOnType === 'Chicken')
+    const [{name:chickenName, price:chickenPrice, available:chickenAvailable}] = chicken
+    const bacon = addons.filter(bcn => bcn.addOnType === 'Bacon')
+    const [{name:baconName, price:baconPrice, available:baconAvailable}] = bacon
 
       const handleChange = (e) => {setInstructions(e.target.value)}
-      const radioChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Large: +e.target.value})}
+      const radioChange = (e) => {ref.current = ref.current + e.target.value}
       const sauceChange = (e) => {setAddOns( state => ({...state, Sauce: e.target.value}))}
-      const meatChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
-      const swapChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({...addOns,  [e.target.name]: e.target.value})}
-      const extraChange = (e) => {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
-      const swapSideChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
-      const upgradeChange = (e) =>  {setItemPrice(price + Number(e.target.value)); setAddOns({ Extra_Patty: +e.target.value})}
 
     const item = {
       name,
@@ -131,15 +127,48 @@ const ProductModal = ({show, onHide, productId}) => {
                           { meatAvailable ? 
                           <Form.Group>
                             <h6>Add Ons</h6>
-                              <input type="radio" name="sauce" value={meatPrice} onChange={meatChange} required />
-                              <Form.Label htmlFor="sauce">{`Add Extra Patty +${meatPrice}`}`</Form.Label><br/>
+                              <input type="radio" name={meatName} value={meatPrice} onChange={radioChange} required />
+                              <Form.Label htmlFor="sauce">{`${meatName} +${meatPrice}`}</Form.Label><br/>
                           </Form.Group> : ''}
                           <Form.Group>
                             <h6>Swap Patty</h6>
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'SwapOption').map(addon => 
                                   <>
-                                      <input type="radio" name={addon.name} value={addon.price} onChange={swapChange} required />
+                                      <input type="radio" name={addon.name} value={addon.price} onChange={radioChange} required />
+                                      <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                  </>
+                                  )
+                              }
+                          </Form.Group>
+                          <Form.Group>
+                            <h6>Extras</h6>
+                              {
+                                addons.filter(addon => addon.available && addon.addOnType === 'Extras').map(addon => 
+                                  <>
+                                      <input type="radio" name={addon.name} value={addon.price} onChange={radioChange} required />
+                                      <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                  </>
+                                  )
+                              }
+                          </Form.Group>
+                          <Form.Group>
+                            <h6>Swap Side</h6>
+                              {
+                                addons.filter(addon => addon.available && addon.addOnType === 'SwapSideOption').map(addon => 
+                                  <>
+                                      <input type="radio" name={addon.name} value={addon.price} onChange={radioChange} required />
+                                      <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                  </>
+                                  )
+                              }
+                          </Form.Group>
+                          <Form.Group>
+                            <h6>Upgrade Side</h6>
+                              {
+                                addons.filter(addon => addon.available && addon.addOnType === 'UpgradeOption').map(addon => 
+                                  <>
+                                      <input type="radio" name={addon.name} value={addon.price} onChange={radioChange} required />
                                       <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
@@ -147,14 +176,118 @@ const ProductModal = ({show, onHide, productId}) => {
                           </Form.Group>
 
                         </Fragment>: ''
-                        
+                      }
+                      { category === 'Salad' && name !== 'Burger In A Bowl' ? 
+                        <Fragment>
+                          <Form.Group>
+                            <h6>Add-Ons</h6>
+                            {
+                              name === 'Caesar Salad' && baconAvailable ? 
+                              <>
+                              <input type="radio" name={baconName} value={baconPrice} onChange={radioChange} required />
+                              <Form.Label htmlFor="sauce">{`${baconName} +${baconPrice}`}</Form.Label><br/>
+                          </> : ''
+                            }
+                              {
+                                chickenAvailable ? 
+                                  <>
+                                      <input type="radio" name={chickenName} value={chickenPrice} onChange={radioChange} required />
+                                      <Form.Label htmlFor="sauce">{`${chickenName} +${chickenPrice}`}</Form.Label><br/>
+                                  </> : ''
+                                
+                              }
+                          </Form.Group>
+                        </Fragment>: ''
+                      }
+                      { name === 'Burger In A Bowl' ? 
+                        <Fragment>
+                          <Form.Group>
+                            <h6>Select Burger</h6>
+                              {
+                                addons.filter(addon => addon.available && addon.addOnType === 'BurgerInABowl').map(addon => 
+                                  <>
+                                      <input type="radio" name={addon.name} value={addon.price} onChange={radioChange} required />
+                                      <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                  </>
+                                  )
+                              }
+                          </Form.Group>
+                        </Fragment>: ''
+                      }
+                      { name === 'Homemade Mac & Cheese' ? 
+                        <Fragment>
+                          <Form.Group>
+                            <h6>Add-Ons</h6>
+                              {
+                                baconAvailable ? 
+                                  <>
+                                      <input type="radio" name={baconName} value={baconPrice} onChange={radioChange} required />
+                                      <Form.Label htmlFor="sauce">{`${baconName} +${baconPrice}`}</Form.Label><br/>
+                                  </> : ''
+                              }
+                              {
+                                chickenAvailable ? 
+                                  <>
+                                      <input type="radio" name={chickenName} value={chickenPrice} onChange={radioChange} required />
+                                      <Form.Label htmlFor="sauce">{`${chickenName} +${chickenPrice}`}</Form.Label><br/>
+                                  </> : ''
+                              }
+                          </Form.Group>
+                        </Fragment>: ''
+                      }
+                      { category === 'Sandwich' ? 
+                        <Fragment>
+                          <Form.Group>
+                            <h6>Upgrade Option</h6>
+                            {
+                                addons.filter(addon => addon.available && addon.addOnType === 'UpgradeOption').map(addon => 
+                                  <>
+                                      <input type="radio" name={addon.name} value={addon.price} onChange={radioChange} required />
+                                      <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                  </>
+                                  )
+                              }
+                          </Form.Group>
+                        </Fragment>: ''
+                      }
+                      {
+                        name === 'Fries' ||  name === 'Tots' ? 
+                        <Fragment>
+                        <Form.Group>
+                          <h6>Add-Ons</h6>
+                          {
+                              addons.filter(addon => addon.available && addon.name === 'Loaded up with Cheese & Applewood Smoked Bacon Bits').map(addon => 
+                                <>
+                                    <input type="radio" name={addon.name} value={addon.price} onChange={radioChange} required />
+                                    <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                </>
+                                )
+                            }
+                        </Form.Group>
+                      </Fragment>: ''
+                      }
+                      {
+                        name === 'Sweet Potato Fries' ||  name === 'Sweet Potato Tots' ? 
+                        <Fragment>
+                        <Form.Group>
+                          <h6>Add-Ons</h6>
+                          {
+                              addons.filter(addon => addon.available && addon.name === 'Loaded up With Caramel & Cinnamon').map(addon => 
+                                <>
+                                    <input type="radio" name={addon.name} value={addon.price} onChange={radioChange} required />
+                                    <Form.Label htmlFor="sauce">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                </>
+                                )
+                            }
+                        </Form.Group>
+                      </Fragment>: ''
                       }
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>List Any Preferences</Form.Label>
                         <Form.Text as="textarea" placeholder='allergies, etc.' width='100%' value={instructions} onChange={handleChange} rows={3} />
                       </Form.Group>
                     {available ? 
-                    <input type='submit' value={`Add To Cart-$${!itemPrice ? price : itemPrice}`}/> :
+                    <input type='submit' value={`Add To Cart-$${ref.current}`}/> :
                     <input type='submit' value='Out of Stock' disabled /> 
                   }
                       </Form>

@@ -173,7 +173,7 @@ const products = [
     available: true
   },
   {
-    name: 'Burger in a Bowl',
+    name: 'Burger In A Bowl',
     image: '/images/salad.jfif',
     description: 
       'Your favorite burger served bun less on a bed of organic heritage mix lettuce, cherry tomatoes, and red onions.',
@@ -203,7 +203,7 @@ const products = [
     name: 'Big Boy Tenders',
     image: '/images/forkandknife.jpg',
     description: 
-      'A big mountain of fresh fries loaded with Mexican blend cheese and a bunch of bacon. Served with your choice of our specialty fried chicken or fish.',
+      'A big mountain of fresh fries loaded with Mexican blend cheese and a bunch of bacon. Served with your choice of our specialty fried chicken.',
     category: 'ForkandKnife',
     price: 14.00,
     available: true
@@ -489,7 +489,7 @@ const products = [
     name: 'Bacon',
     category: 'AddOns',
     price: 2.00,
-    addOnType: 'Extras',
+    addOnType: 'Bacon',
     available: true
   },
   {
@@ -587,7 +587,7 @@ const products = [
     name: 'All Natural Chicken Breast',
     category: 'AddOns',
     price: 3.00,
-    addOnType: 'AddOns',
+    addOnType: 'Chicken',
     available: true
   },
   {
