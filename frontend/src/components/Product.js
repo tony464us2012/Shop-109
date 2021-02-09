@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { listProductDetails } from '../actions/productActions'
+import { useDispatch} from 'react-redux'
 import {Card} from 'react-bootstrap'
 import ProductModal from './Modal'
 
 const Product = ({ product }) => {
     const [modalShow, setModalShow] = useState(false);
+    const dispatch = useDispatch()
 
-  
+
     return (
         <>
-            <a  onClick={() => setModalShow(true)}>
+            <a  onClick={() => {setModalShow(true);  dispatch(listProductDetails(product._id))}}>
                 <Card className='my-3 p-3 rounded card' style={{width: '18rem'}} >
                         <Card.Img src={product.image} variant='top' />
                     <Card.Body>

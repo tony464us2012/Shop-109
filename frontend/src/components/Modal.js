@@ -11,30 +11,32 @@ const ProductModal = ({show, onHide, productId}) => {
    
     const productDetail = useSelector(state => state.productDetails)
     const { loading, error, product:productInfo } = productDetail
+    const { name, image, description, price, category, available } = productInfo
     
       const productList = useSelector(state => state.productList)
       const { products } = productList
+      
+      const [itemPrice, setItemPrice] = useState()
 
-    const { name, image, description, price, category, available } = productInfo
-
-    const [itemPrice, setItemPrice] = useState(0)
-    const [addOns, setAddOns] = useState()
-    const [instructions, setInstructions] = useState('')
-    const [radio, setRadio] = useState(false)
-    const ref = useRef(price);
-
-    console.log(ref.current)
-    
-    const dispatch = useDispatch()
-    
-    useEffect(() => {
-      dispatch(listProductDetails(productId))
-      return () => {
-        dispatch({type: PRODUCT_DETAILS_RESET})
-        
-      }
-    }, [show])
-    
+      console.log(price)
+      
+      const dispatch = useDispatch()
+      
+      useEffect(  () => {
+        localStorage.setItem("price", price)
+        if(!productInfo) {
+          dispatch(listProductDetails(productId))
+        }
+        return () => {
+          dispatch({type: PRODUCT_DETAILS_RESET})
+          localStorage.removeItem("price")
+        }
+      }, [show, itemPrice])
+      
+            const [addOns, setAddOns] = useState()
+            const [instructions, setInstructions] = useState('')
+            const [radio, setRadio] = useState(false)
+      
     const addons = products.filter(product => product.category === 'AddOns')
     const largefrysampler = addons.filter(sampler =>  sampler.addOnType === 'LargeFrySampler')
     const [{ price:samplerPrice, available:samplerAvailable }] = largefrysampler
@@ -48,7 +50,7 @@ const ProductModal = ({show, onHide, productId}) => {
     const [{name:baconName, price:baconPrice, available:baconAvailable}] = bacon
 
       const handleChange = (e) => {setInstructions(e.target.value)}
-      const radioChange = (e) => {ref.current = ref.current + e.target.value}
+      const radioChange = (e) => {setItemPrice( Number(localStorage.getItem("price")) + Number(e.target.value))}
       const sauceChange = (e) => {setAddOns( state => ({...state, Sauce: e.target.value}))}
 
     const item = {
@@ -287,7 +289,7 @@ const ProductModal = ({show, onHide, productId}) => {
                         <Form.Text as="textarea" placeholder='allergies, etc.' width='100%' value={instructions} onChange={handleChange} rows={3} />
                       </Form.Group>
                     {available ? 
-                    <input type='submit' value={`Add To Cart-$${ref.current}`}/> :
+                    <input type='submit' value={`Add To Cart-$${!itemPrice ? price : itemPrice}`}/> :
                     <input type='submit' value='Out of Stock' disabled /> 
                   }
                       </Form>
