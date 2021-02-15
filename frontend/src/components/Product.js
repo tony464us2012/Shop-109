@@ -11,7 +11,7 @@ const Product = ({ product }) => {
 
     return (
         <>
-            <a  onClick={() => {setModalShow(true);  dispatch(listProductDetails(product._id))}}>
+            <a  onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}>
                 <Card className='my-3 p-3 rounded card' style={{width: '18rem'}} >
                         <Card.Img src={product.image} variant='top' />
                     <Card.Body>
@@ -21,7 +21,7 @@ const Product = ({ product }) => {
                     </Card.Body>
                 </Card>
             </a>
-            {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} productId={product._id} /> : '' }
+            {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} productId={product._id} price={product.price}/> : '' }
         </>
     )
 }
