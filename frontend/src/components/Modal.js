@@ -18,10 +18,12 @@ const ProductModal = ({show, onHide, productId, price}) => {
       const { products } = productList
 
       const [itemPrice, setItemPrice] = useState(price)
-      const ref = useRef(itemPrice)
-      const [addOns, setAddOns] = useState({})
+      const [addOns, setAddOns] = useState([])
       const [instructions, setInstructions] = useState('')
       const [selected, setSelected] = useState({})
+      const [selected2, setSelected2] = useState({})
+      const ref = useRef(itemPrice)
+      const objectRef = useRef({})
       
               
               useEffect(() => {
@@ -51,32 +53,57 @@ const ProductModal = ({show, onHide, productId, price}) => {
         console.log(e.target.checked)
        
         if (e.target.checked) {
-          if (e.target.name === 'SwapOption') {
-            const newObject = addOns['SwapOption'] = string
-            setAddOns(newObject)
-            setSelected({...selected, selected: newLabel})
+          if (e.target.name === 'SwapOption' || e.target.name === 'SwapSideOption') {
+            if(!addOns['SwapOption']){
+              // Adding New Swap
+              objectRef.current = [string, ...addOns]
+              setAddOns(objectRef.current)
+              setSelected({...selected, selected: newLabel})
+              setItemPrice( Number(ref.current) + Number(newPrice)); 
+              console.log('1')
+            } else {
+              // For Switching Existing Swaps
+              let object = addOns
+              let object2  = selected
+              if (e.target.name === 'SwapOption') {
+                  object.SwapOption = string
+                  object2.selected = newLabel
+              }
+              if(e.target.name === 'SwapSideOption') {
+                  object.SwapSideOption = string
+                  object2.selected2 = newLabel
+              }
+                setAddOns(object)
+                setSelected(object2)
+                // setItemPrice( Number(ref.current) - oldPrice + Number(newPrice)); 
+                console.log('2')
+            }
           } else {
+              // Adding AddOns
+            objectRef.current = [string, ...addOns]
             setItemPrice( Number(ref.current) + Number(newPrice)); 
-            setAddOns({...addOns, [e.target.name]: string})
+            setAddOns(objectRef.current)
+            console.log('3')
           }
         } else {
             if (e.target.name === 'SwapOption') {
-              const newSelected = delete selected[selected]
-              setSelected(newSelected)
-            } else {
+              // Removing Swaps
+              setSelected({})
+              console.log('it passed here')
               setItemPrice( Number(ref.current) - Number(newPrice)); 
-              setAddOns(addOns.filter(x => x !== string))
+              console.log('4')
+            } else {
+              // Removing AddOns
+              let array = addOns
+              array = array.filter(x => x !== string)
+              console.log(array)
+              objectRef.current = array
+              setAddOns(objectRef.current)
+              setItemPrice( Number(ref.current) - Number(newPrice)); 
+              console.log('5')
             }
-          removePersist(e.target.name)
         }
         }
-     
-      const removePersist = (type) => {
-        if (type === 'SwapOption') {
-          const newSelected = delete selected[selected]
-          setSelected(newSelected)
-        }
-      }
 
     const item = {
       name,
@@ -163,7 +190,7 @@ const ProductModal = ({show, onHide, productId, price}) => {
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'SwapOption').map(addon => 
                                   <>
-                                      <input type="checkbox" className="checkbox" checked={selected && selected.selected === addon.name} name='SwapOption' value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                      <input type="checkbox" className="checkbox" checked={selected && selected.selected === addon.name}  name='SwapOption' value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
                                       <Form.Label htmlFor="SwapOption">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
@@ -174,7 +201,7 @@ const ProductModal = ({show, onHide, productId, price}) => {
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'Extras').map(addon => 
                                   <>
-                                      <input type="radio" name="Extras" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                      <input type="checkbox" name="Extras" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
                                       <Form.Label htmlFor="Extras">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
