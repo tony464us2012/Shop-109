@@ -1,36 +1,34 @@
-import React, { useState, useEffect, useRef, Fragment } from 'react'
-import { listProductDetails } from '../actions/productActions'
+import React, { useState, useRef, Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, Button, Image, Col, Form, Row } from 'react-bootstrap'
+import { Modal, Image, Col, Form } from 'react-bootstrap'
+import { addToCart } from '../actions/cartActions'
 import { PRODUCT_DETAILS_RESET } from '../actions/types'
 import Loader from './Loader'
 
 
-
-const ProductModal = ({show, onHide, productId, price}) => {
+const ProductModal = ({show, onHide, id, price}) => {
     const dispatch = useDispatch()
    
     const productDetail = useSelector(state => state.productDetails)
-    const { loading, error, product:productInfo } = productDetail
+    const { loading, product:productInfo } = productDetail
     const { name, image, description, category, available } = productInfo
     
       const productList = useSelector(state => state.productList)
       const { products } = productList
 
       const [itemPrice, setItemPrice] = useState(price)
-      const [addOns, setAddOns] = useState([])
+      const [extraPatty, setExtraPatty] = useState('')
+      const [pattySwap, setPattySwap] = useState('')
+      const [sideSwap, setSideSwap] = useState('')
+      const [upgradeSide, setUpgradeSide] = useState('')
+      const [extras, setExtras] = useState([])
+      const [large, setLarge] = useState(false)
+      const [sauce, setSauce] = useState('')
+      const [burger, setBurger] = useState('')
+      const [fryAddOn, setFryAddOn] = useState('')
       const [instructions, setInstructions] = useState('')
-      const [selected, setSelected] = useState({})
-      const [selected2, setSelected2] = useState({})
-      const ref = useRef(itemPrice)
-      const objectRef = useRef({})
-      
-              
-              useEffect(() => {
-                ref.current = itemPrice
-                console.log('first render')
-              },[itemPrice])
-              
+      const ref = useRef(price)
+
       
     const addons = products.filter(product => product.category === 'AddOns')
     const largefrysampler = addons.filter(sampler =>  sampler.addOnType === 'LargeFrySampler')
@@ -46,77 +44,113 @@ const ProductModal = ({show, onHide, productId, price}) => {
 
       const handleChange = (e) => {setInstructions(e.target.value)}
       const radioChange = (e) => {
-        let string = e.target.value;
-        let newString = string.split('+')
-        const newLabel = newString[0].trim()
-        const newPrice = Number(newString[1])
-        console.log(e.target.checked)
-       
-        if (e.target.checked) {
-          if (e.target.name === 'SwapOption' || e.target.name === 'SwapSideOption') {
-            if(!addOns['SwapOption']){
-              // Adding New Swap
-              objectRef.current = [string, ...addOns]
-              setAddOns(objectRef.current)
-              setSelected({...selected, selected: newLabel})
-              setItemPrice( Number(ref.current) + Number(newPrice)); 
-              console.log('1')
-            } else {
-              // For Switching Existing Swaps
-              let object = addOns
-              let object2  = selected
-              if (e.target.name === 'SwapOption') {
-                  object.SwapOption = string
-                  object2.selected = newLabel
-              }
-              if(e.target.name === 'SwapSideOption') {
-                  object.SwapSideOption = string
-                  object2.selected2 = newLabel
-              }
-                setAddOns(object)
-                setSelected(object2)
-                // setItemPrice( Number(ref.current) - oldPrice + Number(newPrice)); 
-                console.log('2')
-            }
+        let { name, value } = e.target
+        let newValue = extractPrice(value)
+
+        if (name === 'frysampler' || name === 'chickenwings') {
+          if (newValue) {
+            setLarge(true)
+            ref.current = ref.current + newValue
           } else {
-              // Adding AddOns
-            objectRef.current = [string, ...addOns]
-            setItemPrice( Number(ref.current) + Number(newPrice)); 
-            setAddOns(objectRef.current)
-            console.log('3')
+            setLarge(false)
+            ref.current = price
           }
-        } else {
-            if (e.target.name === 'SwapOption') {
-              // Removing Swaps
-              setSelected({})
-              console.log('it passed here')
-              setItemPrice( Number(ref.current) - Number(newPrice)); 
-              console.log('4')
-            } else {
-              // Removing AddOns
-              let array = addOns
-              array = array.filter(x => x !== string)
-              console.log(array)
-              objectRef.current = array
-              setAddOns(objectRef.current)
-              setItemPrice( Number(ref.current) - Number(newPrice)); 
-              console.log('5')
-            }
+        }
+        if(name === 'sauce') {
+          setSauce(value)
+        }
+        if (name === 'meat' && e.target.checked) {
+          setExtraPatty(value)
+          ref.current = ref.current + (extractPrice(value))
+        }
+        if (name === 'meat' && !e.target.checked) {
+          setExtraPatty('')
+          ref.current = ref.current - (extractPrice(value))
+        }
+        if (name === 'SwapOption') {
+          if (!pattySwap){
+            setPattySwap(value)
+            ref.current = ref.current + (extractPrice(value))
+          } else {
+            const prevPrice = extractPrice(pattySwap)
+            setPattySwap(value)
+            ref.current = ref.current - prevPrice + (extractPrice(value))
+          }
+        }
+        if (name === 'SwapSide') {
+          if (!sideSwap) {
+            setSideSwap(value)
+            ref.current = ref.current + (extractPrice(value))
+          } else {
+            const prevPrice = extractPrice(sideSwap)
+            setSideSwap(value)
+            ref.current = ref.current - prevPrice + (extractPrice(value))
+          }
+        }
+        if (name === 'UpgradeSide') {
+          if (!upgradeSide) {
+            setUpgradeSide(value)
+            ref.current = ref.current + (extractPrice(value))
+          } else {
+            const prevPrice = extractPrice(upgradeSide)
+            setUpgradeSide(value)
+            ref.current = ref.current - prevPrice + (extractPrice(value))
+          }
+        }
+        if (name === 'Extras' && e.target.checked || name === 'bacon' && e.target.checked || name === 'chicken' && e.target.checked) {
+          setExtras([...extras, value])
+          ref.current = ref.current + newValue
+        }
+        if (name === 'Extras' && !e.target.checked || name === 'bacon' && !e.target.checked || name === 'chicken' && !e.target.checked) {
+         const newArray = extras.filter(x => x !== value)
+         setExtras(newArray)
+         ref.current = ref.current - newValue 
+        }
+        if (name === 'burger') {
+          if (!burger) {
+            setBurger(value)
+            ref.current = ref.current + (extractPrice(value))
+          } else {
+            const prevPrice = extractPrice(burger)
+            setBurger(value)
+            ref.current = ref.current - prevPrice + (extractPrice(value))
+          }
+        }
+        if (name === 'fryAddOn') {
+          setFryAddOn(value)
+          ref.current = ref.current + newValue
         }
         }
 
-    const item = {
-      name,
-      image,
-      itemPrice,
-      addOns, 
-      instructions
+    const extractPrice = (string) => {
+      if(string) {
+        return Number(string.split('+')[1])
+      } else {
+        return 0
+      }
     }
-    
+
     const addToCartHandler = (e) => {
       e.preventDefault()
-      console.log(item)
-      
+      const cartItem = {
+        id,
+        name,
+        image,
+        price: ref.current,
+        extraPatty, 
+        pattySwap,
+        sideSwap,
+        upgradeSide,
+        extras,
+        large,
+        sauce, 
+        burger,
+        fryAddOn,
+        instructions
+      }
+      onHide()
+      dispatch(addToCart(cartItem))
+      console.log(cartItem)
     }
     
     const white = {backgroundColor: 'white', color: 'grey', paddingBottom: '1rem'}
@@ -164,15 +198,15 @@ const ProductModal = ({show, onHide, productId, price}) => {
                       {name === 'Chicken Wings 8 Piece' || name === 'Duck Wings' ? 
                       <Form.Group>
                        <h6>Select Sauce:</h6>
-                         <input type="radio" name="sauce1" value={'Asian Chili Sauce +0'} onChange={radioChange} required />
+                         <input type="radio" name="sauce" value={'Asian Chili Sauce'} onChange={radioChange} required />
                          <Form.Label htmlFor="sauce">Asian Chili Sauce</Form.Label><br/>
-                         <input type="radio" name='sauce2' value={'Blue Cheese BBQ Sauce +0'} onChange={radioChange} required/>
+                         <input type="radio" name='sauce' value={'Blue Cheese BBQ Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>Blue Cheese BBQ Sauce</Form.Label><br/>
-                         <input type="radio" name='sauce3' value={'Honey Ginger Sauce +0'} onChange={radioChange} required/>
+                         <input type="radio" name='sauce' value={'Honey Ginger Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>Honey Ginger Sauce</Form.Label><br/>
-                         <input type="radio" name='sauce4' value={'House BBQ Sauce +0'} onChange={radioChange} required/>
+                         <input type="radio" name='sauce' value={'House BBQ Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>House BBQ Sauce</Form.Label><br/>
-                         <input type="radio" name='sauce5' value={'Spicy Buffalo Sauce +0'} onChange={radioChange} required/>
+                         <input type="radio" name='sauce' value={'Spicy Buffalo Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>Spicy Buffalo Sauce</Form.Label>
                       </Form.Group>
                      : ''
@@ -182,26 +216,28 @@ const ProductModal = ({show, onHide, productId, price}) => {
                           { meatAvailable ? 
                           <Form.Group>
                             <h6>Add Ons</h6>
-                              <input type="checkbox" name="meat" value={`${meatName} +${meatPrice}`} onChange={radioChange}/>
+                              <input type="checkbox" name="meat" selected={extraPatty} value={`${meatName} +${meatPrice}`} onChange={radioChange}/>
                               <Form.Label htmlFor="meat">{`${meatName} +${meatPrice}`}</Form.Label><br/>
                           </Form.Group> : ''}
                           <Form.Group>
                             <h6>Swap Patty</h6>
+                            <div id="SwapPatty">
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'SwapOption').map(addon => 
                                   <>
-                                      <input type="checkbox" className="checkbox" checked={selected && selected.selected === addon.name}  name='SwapOption' value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                      <input type="radio" className="checkbox"  name='SwapOption' selected={`${addon.name} +${addon.price}` === pattySwap } value={`${addon.name} +${addon.price}`} onChange={radioChange} />
                                       <Form.Label htmlFor="SwapOption">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
                               }
+                            </div>
                           </Form.Group>
                           <Form.Group>
                             <h6>Extras</h6>
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'Extras').map(addon => 
                                   <>
-                                      <input type="checkbox" name="Extras" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                      <input type="checkbox" name="Extras" value={`${addon.name} +${addon.price}`} onChange={radioChange} />
                                       <Form.Label htmlFor="Extras">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
@@ -212,7 +248,7 @@ const ProductModal = ({show, onHide, productId, price}) => {
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'SwapSideOption').map(addon => 
                                   <>
-                                      <input type="radio" name="SwapSide" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                      <input type="radio" name="SwapSide" disabled={upgradeSide} selected={`${addon.name} +${addon.price}` === sideSwap } value={`${addon.name} +${addon.price}`}  onChange={radioChange}/>
                                       <Form.Label htmlFor="SwapSide">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
@@ -223,7 +259,7 @@ const ProductModal = ({show, onHide, productId, price}) => {
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'UpgradeOption').map(addon => 
                                   <>
-                                      <input type="radio" name="UpgradeSide" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                      <input type="radio" name="UpgradeSide" disabled={sideSwap} selected={`${addon.name} +${addon.price}` === upgradeSide } value={`${addon.name} +${addon.price}`} onChange={radioChange} />
                                       <Form.Label htmlFor="UpgradeSide">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
@@ -239,14 +275,14 @@ const ProductModal = ({show, onHide, productId, price}) => {
                             {
                               name === 'Caesar Salad' && baconAvailable ? 
                               <>
-                              <input type="radio" name="Bacon" value={`${baconName} +${baconPrice}`} onChange={radioChange} required />
+                              <input type="checkbox" name="bacon" value={`${baconName} +${baconPrice}`} onChange={radioChange} />
                               <Form.Label htmlFor="Bacon">{`${baconName} +${baconPrice}`}</Form.Label><br/>
                           </> : ''
                             }
                               {
                                 chickenAvailable ? 
                                   <>
-                                      <input type="radio" name="Chicken" value={`${chickenName} +${chickenPrice}`} onChange={radioChange} required />
+                                      <input type="checkbox" name="chicken" value={`${chickenName} +${chickenPrice}`} onChange={radioChange} />
                                       <Form.Label htmlFor="sauce">{`${chickenName} +${chickenPrice}`}</Form.Label><br/>
                                   </> : ''
                                 
@@ -261,7 +297,7 @@ const ProductModal = ({show, onHide, productId, price}) => {
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'BurgerInABowl').map(addon => 
                                   <>
-                                      <input type="radio" name="Burger" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                      <input type="radio" name="burger" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
                                       <Form.Label htmlFor="Burger">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
@@ -276,14 +312,14 @@ const ProductModal = ({show, onHide, productId, price}) => {
                               {
                                 baconAvailable ? 
                                   <>
-                                      <input type="radio" name="Bacon" value={`${baconName} +${baconPrice}`} onChange={radioChange} required />
+                                      <input type="checkbox" name="bacon" value={`${baconName} +${baconPrice}`} onChange={radioChange} />
                                       <Form.Label htmlFor="Bacon">{`${baconName} +${baconPrice}`}</Form.Label><br/>
                                   </> : ''
                               }
                               {
                                 chickenAvailable ? 
                                   <>
-                                      <input type="radio" name="Chicken" value={`${chickenName} +${chickenPrice}`} onChange={radioChange} required />
+                                      <input type="checkbox" name="chicken" value={`${chickenName} +${chickenPrice}`} onChange={radioChange} />
                                       <Form.Label htmlFor="Chicken">{`${chickenName} +${chickenPrice}`}</Form.Label><br/>
                                   </> : ''
                               }
@@ -297,8 +333,8 @@ const ProductModal = ({show, onHide, productId, price}) => {
                             {
                                 addons.filter(addon => addon.available && addon.addOnType === 'UpgradeOption').map(addon => 
                                   <>
-                                      <input type="radio" name="UpgradeOption" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
-                                      <Form.Label htmlFor="UpgradeOption">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                      <input type="radio" name="UpgradeSide" value={`${addon.name} +${addon.price}`} onChange={radioChange} />
+                                      <Form.Label htmlFor="UpgradeSide">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                   </>
                                   )
                               }
@@ -313,8 +349,8 @@ const ProductModal = ({show, onHide, productId, price}) => {
                           {
                               addons.filter(addon => addon.available && addon.name === 'Loaded up with Cheese & Applewood Smoked Bacon Bits').map(addon => 
                                 <>
-                                    <input type="radio" name="Add-Ons" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
-                                    <Form.Label htmlFor="Add-Ons">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                    <input type="radio" name="fryAddOn" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                    <Form.Label htmlFor="fryAddOn">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                 </>
                                 )
                             }
@@ -329,8 +365,8 @@ const ProductModal = ({show, onHide, productId, price}) => {
                           {
                               addons.filter(addon => addon.available && addon.name === 'Loaded up With Caramel & Cinnamon').map(addon => 
                                 <>
-                                    <input type="radio" name="Add-Ons" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
-                                    <Form.Label htmlFor="Add-Ons">{`${addon.name} +${addon.price}`}</Form.Label><br/>
+                                    <input type="radio" name="fryAddOn" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                    <Form.Label htmlFor="fryAddOn">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                 </>
                                 )
                             }
@@ -342,7 +378,7 @@ const ProductModal = ({show, onHide, productId, price}) => {
                         <Form.Text as="textarea" placeholder='allergies, etc.' width='100%' value={instructions} onChange={handleChange} rows={3} />
                       </Form.Group>
                     {available ? 
-                    <input type='submit' value={`Add To Cart $${itemPrice}`}/> :
+                    <input type='submit' value={`Add To Cart $${ref.current ? ref.current : itemPrice}`}/> :
                     <input type='submit' value='Out of Stock' disabled /> 
                   }
                       </Form>

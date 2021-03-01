@@ -11,7 +11,6 @@ import Sandwich from '../components/menu-components/Sandwich'
 import Slider from '../components/menu-components/Slider'
 import Side from '../components/menu-components/Side'
 import Beer from '../components/Beer'
-import ProductModal from '../components/Modal'
 
 const MenuScreen = () => {
 
@@ -24,7 +23,7 @@ const MenuScreen = () => {
     }, [dispatch])
 
     const productList = useSelector(state => state.productList)
-    const { loading, error, products } = productList
+    const { products } = productList
 
     const burgers = products.filter(product => product.category === 'Burger')
     const appetizers = products.filter(appetizer => appetizer.category === 'Appetizer')

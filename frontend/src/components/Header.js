@@ -86,7 +86,7 @@ const Header = () => {
                 <Button variant="success" size='sm'>Apply</Button>
                 </Form>
                 <LinkContainer to='/cart' className='ml-2' style={{color: '#000'}}>
-                    <Nav.Link><i className="fas fa-shopping-cart"></i>{'  $'}{cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</Nav.Link>
+                    <Nav.Link><i className="fas fa-shopping-cart"></i>{'  $'}{Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))}</Nav.Link>
                 </LinkContainer>
             </Navbar>
         </header>

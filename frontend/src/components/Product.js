@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { listProductDetails } from '../actions/productActions'
 import { useDispatch} from 'react-redux'
 import {Card} from 'react-bootstrap'
@@ -17,11 +17,10 @@ const Product = ({ product }) => {
                     <Card.Body>
                             <Card.Title as='div'><strong className='title-text'>{product.name}</strong></Card.Title>
                         <Card.Text as='h6'> ${product.price} </Card.Text>
-                        {/* <Card.Text as='h6'> {product.description} </Card.Text> */}
                     </Card.Body>
                 </Card>
             </a>
-            {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} productId={product._id} price={product.price}/> : '' }
+            {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} key={product._id} id={product._id} price={product.price}/> : '' }
         </>
     )
 }

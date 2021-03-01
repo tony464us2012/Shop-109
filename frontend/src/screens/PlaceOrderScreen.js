@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { Row, Col, ListGroup, Card, Button, Image } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -10,19 +9,11 @@ const PlaceOrderScreen = ({ history }) => {
 
     const cart = useSelector(state => state.cart)
 
-    const addDecimals = (num) => {
-        return (Math.round(num *100)/100).toFixed(2)
-    }
-    cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0 ))
-
-    cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100)
-    
-    cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)))
-
-    cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
-
     const orderCreate = useSelector(state => state.orderCreate)
     const { order, success, error } = orderCreate
+
+    const user = useSelector(state => state.userLogin.userInfo)
+    const { name, email } = user
 
     useEffect(() => {
         if(success) {
@@ -50,16 +41,16 @@ const PlaceOrderScreen = ({ history }) => {
                 <Col md={8}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Shipping</h2>
-                            <p style={{color: 'lightgrey'}}>
-                                <strong>Address: </strong>
-                                {cart.shippingAddress.address}, {cart.shippingAddress.city} {' '} {cart.shippingAddress.postalCode}, {' '}, {cart.shippingAddress.country}
+                            <h2>Contact Info</h2>
+                            <p>
+                              Name: {name}
                             </p>
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                            <h2>Payment Method</h2>
-                            <strong>Method: </strong>
-                            {cart.paymentMethod}
+                            <p>
+                              Email: {email}
+                            </p>
+                            <p>
+                              Phone: 123-456-7890
+                            </p>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Order Items</h2>
@@ -68,14 +59,14 @@ const PlaceOrderScreen = ({ history }) => {
                                     {cart.cartItems.map((item, index) => (
                                         <ListGroup.Item key={index}>
                                             <Row>
-                                                <Col md={1}>
+                                                <Col md={2}>
                                                     <Image src={item.image} alt={item.name} fluid rounded />
                                                 </Col>
                                                 <Col>
-                                                <Link to={`/product/${item.product}`}>{item.name}</Link>
+                                                <h5>{item.name}</h5>
                                                 </Col>
                                                 <Col md={4}>
-                                                    {item.qty} x ${item.price} = ${item.qty * item.price}
+                                                   ${item.price}
                                                 </Col>
                                             </Row>
                                         </ListGroup.Item>
@@ -94,25 +85,19 @@ const PlaceOrderScreen = ({ history }) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Items</Col>
-                                    <Col>{cart.itemsPrice}</Col>
-                                </Row>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <Row>
-                                    <Col>Shipping</Col>
-                                    <Col>{cart.shippingPrice}</Col>
+                                    <Col>{cart.cartItems.length}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col> {cart.taxPrice}</Col>
+                                    <Col> ${(cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2)}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total Price</Col>
-                                    <Col>${cart.totalPrice}</Col>
+                                    <Col>${Number(cart.cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
