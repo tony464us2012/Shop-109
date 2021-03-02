@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { PayPalButton } from 'react-paypal-button-v2'
 import { Row, Col, ListGroup, Card, Button, Image } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -15,6 +16,10 @@ const PlaceOrderScreen = ({ history }) => {
     const user = useSelector(state => state.userLogin.userInfo)
     const { name, email } = user
 
+    const subtotal = cart.cartItems.reduce((acc, item) => acc + item.price, 0)
+    const tax = Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
+    const totalprice = Number(cart.cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
+
     useEffect(() => {
         if(success) {
             history.push(`/order/${order._id}`)
@@ -25,14 +30,14 @@ const PlaceOrderScreen = ({ history }) => {
     const placeOrderHandler = () => {
         dispatch(createOrder({
             orderItems: cart.cartItems,
-            shippingAddress: cart.shippingAddress,
-            paymentMethod: cart.paymentMethod,
-            itemsPrice: cart.itemsPrice,
-            shippingPrice: cart.shippingPrice,
-            taxPrice: cart.taxPrice,
-            totalPrice: cart.totalPrice
-
+            subtotal,
+            tax,
+            totalprice
         }))
+    }
+    const successPaymentHandler = (paymentResult) => {
+        console.log('success')
+        // dispatch(payOrder(orderId, paymentResult))
     }
 
     return (
@@ -66,8 +71,23 @@ const PlaceOrderScreen = ({ history }) => {
                                                 <h5>{item.name}</h5>
                                                 </Col>
                                                 <Col md={4}>
-                                                   ${item.price}
+                                                   Price: ${item.price}
                                                 </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col md={2}></Col>
+                                                {item.large ? <Col md={3}>Large</Col> : ''}
+                                                {item.sauce ? <Col md={3}> {item.sauce}</Col> : ''}
+                                                {item.burger ? <Col md={3}>Burger: {item.burger}</Col> : ''}
+                                                {item.extraPatty ? <Col md={3}>{item.extraPatty}</Col> : ''}
+                                                {item.pattySwap ? <Col md={3}>{item.pattySwap}</Col> : ''}
+                                                {item.extras ? <Col md={3}>{item.extras.map(extra => <p>{extra}</p>)}</Col> : ''}
+                                                {item.sideSwap ? <Col md={3}>Side: {item.sideSwap}</Col> : ''}
+                                                {item.upgradeSide ? <Col md={3}>Side: {item.upgradeSide}</Col> : ''}
+                                                {item.fryAddOn ? <Col md={3}>Side Add: {item.fryAddOn}</Col> : ''}
+                                            </Row>
+                                            <Row>
+                                                {item.instructions ? <Col style={{marginTop: '1rem'}} md={8}>Instructions: {item.instructions}</Col> : '' }
                                             </Row>
                                         </ListGroup.Item>
                                     ))}
@@ -84,27 +104,26 @@ const PlaceOrderScreen = ({ history }) => {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Items</Col>
-                                    <Col>{cart.cartItems.length}</Col>
+                                    <Col>Subtotal</Col>
+                                    <Col>${subtotal}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col> ${(cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2)}</Col>
+                                    <Col> ${tax}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total Price</Col>
-                                    <Col>${Number(cart.cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))}</Col>
+                                    <Col>${totalprice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup.Item>
-                                {error && <Message variant='danger'>{error}</Message>}
-                            </ListGroup.Item>
+                                {error && <ListGroup.Item><Message variant='danger'>{error}</Message></ListGroup.Item> }
                             <ListGroup.Item>
                                 <Button type='button' className='btn-block' disabled={cart.cartItems === 0} onClick={placeOrderHandler}>PLACE ORDER</Button>
+                                <PayPalButton amount={totalprice} onSuccess={successPaymentHandler} />
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>
