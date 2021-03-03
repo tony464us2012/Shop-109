@@ -27,12 +27,12 @@ const orderSchema = mongoose.Schema({
         type: Number,
         required: true,
         default: 0.0
-    }
-    // isPaid: {
-    //     type: Boolean,
-    //     required: true,
-    //     default: false
-    // },
+    },
+    isPaid: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
 }, {
     timestaps: true
 })

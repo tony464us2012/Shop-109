@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react'
-import { PayPalButton } from 'react-paypal-button-v2'
+import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import { Row, Col, ListGroup, Card, Button, Image } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import { createOrder } from '../actions/orderActions'
 
 const PlaceOrderScreen = ({ history }) => {
+
+    const stripe = useStripe();
+    const elements = useElements();
+
     const dispatch = useDispatch()
 
     const cart = useSelector(state => state.cart)
@@ -27,18 +31,46 @@ const PlaceOrderScreen = ({ history }) => {
         //eslint-disable-next-line
     }, [history, success])
 
-    const placeOrderHandler = () => {
-        dispatch(createOrder({
-            orderItems: cart.cartItems,
-            subtotal,
-            tax,
-            totalprice
-        }))
-    }
-    const successPaymentHandler = (paymentResult) => {
-        console.log('success')
-        // dispatch(payOrder(orderId, paymentResult))
-    }
+    const placeOrderHandler = async () => {
+
+        const cardElement = elements.getElement(CardElement)
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: cardElement
+        })
+        if (error) {
+            console.log('[error]', error)
+        } else {
+            console.log('[PaymentMethod]', paymentMethod)
+            dispatch(createOrder({
+                orderItems: cart.cartItems,
+                subtotal,
+                tax,
+                totalprice,
+                isPaid: true
+            }))
+        }
+        }
+
+        const CARD_OPTIONS = {
+            iconStyle: 'solid',
+            style: {
+              base: {
+                iconColor: '#c4f0ff',
+                color: '#fff',
+                fontWeight: 500,
+                fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
+                ':-webkit-autofill': {color: '#fce883'},
+                '::placeholder': {color: '#87bbfd'},
+              },
+              invalid: {
+                iconColor: '#ffc7ee',
+                color: '#ffc7ee',
+              },
+            },
+          };
 
     return (
         <>
@@ -122,8 +154,12 @@ const PlaceOrderScreen = ({ history }) => {
                             </ListGroup.Item>
                                 {error && <ListGroup.Item><Message variant='danger'>{error}</Message></ListGroup.Item> }
                             <ListGroup.Item>
-                                <Button type='button' className='btn-block' disabled={cart.cartItems === 0} onClick={placeOrderHandler}>PLACE ORDER</Button>
-                                <PayPalButton amount={totalprice} onSuccess={successPaymentHandler} />
+                                <form onSubmit={placeOrderHandler}>
+                                <h5>Billing Information</h5>
+                                <CardElement options={CARD_OPTIONS} />
+                                
+                                <Button type='submit' disabled={cart.cartItems === 0 || !stripe}> PLACE ORDER </Button>
+                                </form>
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>
