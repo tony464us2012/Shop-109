@@ -3,6 +3,7 @@ import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import { Row, Col, ListGroup, Card, Button, Image } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
+import CardSection from '../components/CardSection'
 import { createOrder } from '../actions/orderActions'
 
 const PlaceOrderScreen = ({ history }) => {
@@ -31,46 +32,21 @@ const PlaceOrderScreen = ({ history }) => {
         //eslint-disable-next-line
     }, [history, success])
 
-    const placeOrderHandler = async () => {
-
-        const cardElement = elements.getElement(CardElement)
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card: cardElement
-        })
-        if (error) {
-            console.log('[error]', error)
+    const placeOrderHandler = async (e) => {
+        e.preventDefault()
+        if (!stripe || !elements) {
+          return;
+        }
+        const card = elements.getElement(CardElement)
+        const result = await stripe.createToken(card);
+        if (result.error) {
+            console.log(result.error.message)
         } else {
-            console.log('[PaymentMethod]', paymentMethod)
-            dispatch(createOrder({
-                orderItems: cart.cartItems,
-                subtotal,
-                tax,
-                totalprice,
-                isPaid: true
-            }))
-        }
-        }
+            console.log(result.token)
+            console.log('passed')
 
-        const CARD_OPTIONS = {
-            iconStyle: 'solid',
-            style: {
-              base: {
-                iconColor: '#c4f0ff',
-                color: '#fff',
-                fontWeight: 500,
-                fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-                fontSize: '16px',
-                fontSmoothing: 'antialiased',
-                ':-webkit-autofill': {color: '#fce883'},
-                '::placeholder': {color: '#87bbfd'},
-              },
-              invalid: {
-                iconColor: '#ffc7ee',
-                color: '#ffc7ee',
-              },
-            },
-          };
+        }
+        }
 
     return (
         <>
@@ -156,9 +132,9 @@ const PlaceOrderScreen = ({ history }) => {
                             <ListGroup.Item>
                                 <form onSubmit={placeOrderHandler}>
                                 <h5>Billing Information</h5>
-                                <CardElement options={CARD_OPTIONS} />
+                                <CardSection />
                                 
-                                <Button type='submit' disabled={cart.cartItems === 0 || !stripe}> PLACE ORDER </Button>
+                                <Button type='submit' className='btn-pay' disabled={cart.cartItems === 0 || !stripe}> PLACE ORDER </Button>
                                 </form>
                             </ListGroup.Item>
                         </ListGroup>
