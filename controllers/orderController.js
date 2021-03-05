@@ -1,8 +1,11 @@
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
+import config from 'config'
+const secretkey = config.get('STRIPE_KEY_SECRET')
+// import stripe from ('stripe')(secretkey)
 
 const addOrderItems = asyncHandler( async(req, res) => {
-    const { orderItems, subtotal, tax, totalprice, isPaid} = req.body
+    const { orderItems, subtotal, tax, totalprice, isPaid, token} = req.body
 
     if(orderItems && orderItems.length == 0 ) {
         res.status(400)

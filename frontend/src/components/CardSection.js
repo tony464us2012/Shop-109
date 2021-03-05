@@ -8,7 +8,7 @@ const CARD_ELEMENT_OPTIONS = {
       base: {
         iconColor: "rgb(240, 57, 122)",
         color: "rgb(240, 57, 122)",
-        fontSize: "16px",
+        fontSize: "12px",
         fontFamily: '"Open Sans", sans-serif',
         fontSmoothing: "antialiased",
         "::placeholder": {

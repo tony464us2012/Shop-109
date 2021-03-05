@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
-import { Row, Col, ListGroup, Card, Button, Image } from 'react-bootstrap'
+import { Row, Col, ListGroup, Card, Button, Image, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import CardSection from '../components/CardSection'
@@ -130,12 +130,19 @@ const PlaceOrderScreen = ({ history }) => {
                             </ListGroup.Item>
                                 {error && <ListGroup.Item><Message variant='danger'>{error}</Message></ListGroup.Item> }
                             <ListGroup.Item>
-                                <form onSubmit={placeOrderHandler}>
-                                <h5>Billing Information</h5>
+                                <Form onSubmit={placeOrderHandler}>
+                                <h5 className='billingTitle'>Billing Information</h5>
+                                <Form.Group controlId="formBasicEmail">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control type="email" className='cardInfo' size='sm' name='email' placeholder="example@email.com" />
+                                </Form.Group>
+                                <Form.Group controlId="formBasicEmail">
+                                    <Form.Label>Name on Card</Form.Label>
+                                    <Form.Control type="text" className='cardInfo' size='sm' name='name' placeholder="Enter name" />
+                                </Form.Group>
                                 <CardSection />
-                                
-                                <Button type='submit' className='btn-pay' disabled={cart.cartItems === 0 || !stripe}> PLACE ORDER </Button>
-                                </form>
+                                <Button type='submit' className='pay-btn' variant='success' size='sm' disabled={cart.cartItems === 0 || !stripe}> PLACE ORDER </Button>
+                                </Form>
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>
