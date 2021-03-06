@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import { Row, Col, ListGroup, Card, Button, Image, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import {createOrder} from '../actions/orderActions'
 import Message from '../components/Message'
 import CardSection from '../components/CardSection'
-import { createOrder } from '../actions/orderActions'
 
 const PlaceOrderScreen = ({ history }) => {
 
@@ -20,6 +20,8 @@ const PlaceOrderScreen = ({ history }) => {
 
     const user = useSelector(state => state.userLogin.userInfo)
     const { name, email } = user
+
+    const [cardName, setCardName] = useState('')
 
     const subtotal = cart.cartItems.reduce((acc, item) => acc + item.price, 0)
     const tax = Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
@@ -42,9 +44,17 @@ const PlaceOrderScreen = ({ history }) => {
         if (result.error) {
             console.log(result.error.message)
         } else {
-            console.log(result.token)
-            console.log('passed')
-
+            dispatch(createOrder({
+                name: cardName,
+                email,
+                orderItems: cart.cartItems,
+                subtotal,
+                tax,
+                totalprice,
+                token: result.token.id
+            }))
+            console.log(result.token.id)
+            console.log(cardName)
         }
         }
 
@@ -132,13 +142,9 @@ const PlaceOrderScreen = ({ history }) => {
                             <ListGroup.Item>
                                 <Form onSubmit={placeOrderHandler}>
                                 <h5 className='billingTitle'>Billing Information</h5>
-                                <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>Email address</Form.Label>
-                                    <Form.Control type="email" className='cardInfo' size='sm' name='email' placeholder="example@email.com" />
-                                </Form.Group>
-                                <Form.Group controlId="formBasicEmail">
+                                <Form.Group>
                                     <Form.Label>Name on Card</Form.Label>
-                                    <Form.Control type="text" className='cardInfo' size='sm' name='name' placeholder="Enter name" />
+                                    <Form.Control type="text" className='cardInfo' size='sm' name='name' onChange={(e) => setCardName(e.target.value)} placeholder="Enter name" />
                                 </Form.Group>
                                 <CardSection />
                                 <Button type='submit' className='pay-btn' variant='success' size='sm' disabled={cart.cartItems === 0 || !stripe}> PLACE ORDER </Button>

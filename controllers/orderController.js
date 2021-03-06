@@ -2,15 +2,31 @@ import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
 import config from 'config'
 const secretkey = config.get('STRIPE_KEY_SECRET')
-// import stripe from ('stripe')(secretkey)
+import Stripe from 'stripe'
+
+const stripe = new Stripe(secretkey)
 
 const addOrderItems = asyncHandler( async(req, res) => {
-    const { orderItems, subtotal, tax, totalprice, isPaid, token} = req.body
+    const { name, email, orderItems, subtotal, tax, totalprice, isPaid, token} = req.body
 
     if(orderItems && orderItems.length == 0 ) {
         res.status(400)
         throw new Error('No order items')
     } else {
+            const charge = await stripe.charges.create({
+            amount: totalprice,
+            currency: 'usd',
+            source: token,
+            description: 'first purchase',
+            billing_details: {
+                name
+            }
+        })
+        if (charge.error) {
+           res.status(500)
+           throw new Error(charge.error.message)
+        }
+
         const order = new Order({
             orderItems, user: req.user._id, subtotal, tax, totalprice, isPaid
         })
