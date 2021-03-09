@@ -7,33 +7,36 @@ import Stripe from 'stripe'
 const stripe = new Stripe(secretkey)
 
 const addOrderItems = asyncHandler( async(req, res) => {
-    const { name, email, orderItems, subtotal, tax, totalprice, isPaid, token} = req.body
+    const { email, billingName, orderItems, subtotal, tax, totalprice, token} = req.body
 
     if(orderItems && orderItems.length == 0 ) {
         res.status(400)
         throw new Error('No order items')
     } else {
             const charge = await stripe.charges.create({
-            amount: totalprice,
+            amount: Math.trunc(totalprice * 100),
             currency: 'usd',
             source: token,
             description: 'first purchase',
-            billing_details: {
-                name
-            }
+            billing_details: billingName,
+            receipt_email: email,
         })
         if (charge.error) {
            res.status(500)
            throw new Error(charge.error.message)
         }
 
+        console.log(charge)
+
         const order = new Order({
-            orderItems, user: req.user._id, subtotal, tax, totalprice, isPaid
+           orderItems, user: req.user._id, subtotal, tax, totalprice
         })
 
-        const createdOrder = await order.save()
+         await order.save()
+         
+         console.log(req.user)
 
-        res.status(200).json(createdOrder)
+        res.status(200).json(order)
     }})
 
     const getOrderById = asyncHandler( async(req, res) => {

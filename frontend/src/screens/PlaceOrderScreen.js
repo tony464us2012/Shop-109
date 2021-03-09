@@ -21,7 +21,11 @@ const PlaceOrderScreen = ({ history }) => {
     const user = useSelector(state => state.userLogin.userInfo)
     const { name, email } = user
 
-    const [cardName, setCardName] = useState('')
+    const [processing, setProcessing] = useState(false);
+
+    const [billingDetails, setBillingDetails] = useState({
+        name: '',
+      });
 
     const subtotal = cart.cartItems.reduce((acc, item) => acc + item.price, 0)
     const tax = Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
@@ -39,22 +43,24 @@ const PlaceOrderScreen = ({ history }) => {
         if (!stripe || !elements) {
           return;
         }
+        setProcessing(true)
         const card = elements.getElement(CardElement)
-        const result = await stripe.createToken(card);
-        if (result.error) {
-            console.log(result.error.message)
+        const token = await stripe.createToken(card);
+        if (token.error) {
+            console.log(token.error)
         } else {
+      
             dispatch(createOrder({
-                name: cardName,
+                name: billingDetails.name,
                 email,
                 orderItems: cart.cartItems,
                 subtotal,
                 tax,
                 totalprice,
-                token: result.token.id
+                token: token.token.id
             }))
-            console.log(result.token.id)
-            console.log(cardName)
+            localStorage.removeItem('cartItems')
+            setProcessing(false)
         }
         }
 
@@ -144,10 +150,10 @@ const PlaceOrderScreen = ({ history }) => {
                                 <h5 className='billingTitle'>Billing Information</h5>
                                 <Form.Group>
                                     <Form.Label>Name on Card</Form.Label>
-                                    <Form.Control type="text" className='cardInfo' size='sm' name='name' onChange={(e) => setCardName(e.target.value)} placeholder="Enter name" />
+                                    <Form.Control type="text" className='cardInfo' size='sm' name='name' onChange={(e) => setBillingDetails({name: e.target.value})} placeholder="Enter name" required />
                                 </Form.Group>
                                 <CardSection />
-                                <Button type='submit' className='pay-btn' variant='success' size='sm' disabled={cart.cartItems === 0 || !stripe}> PLACE ORDER </Button>
+                                <Button type='submit' className='pay-btn' variant='success' size='sm' disabled={cart.cartItems === 0 || !stripe}>{processing? 'Processing...' : 'PLACE ORDER'} </Button>
                                 </Form>
                             </ListGroup.Item>
                         </ListGroup>

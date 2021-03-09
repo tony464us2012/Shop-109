@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button, Img } from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button, Img, Badge } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 
 
@@ -86,7 +86,7 @@ const Header = () => {
                 <Button variant="success" size='sm'>Apply</Button>
                 </Form>
                 <LinkContainer to='/cart' className='ml-2' style={{color: '#000'}}>
-                    <Nav.Link><i className="fas fa-shopping-cart"></i>{'  $'}{Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))}</Nav.Link>
+                    <Nav.Link><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='success'>{cartItems.length}</Badge> : ''}</Nav.Link>
                 </LinkContainer>
             </Navbar>
         </header>

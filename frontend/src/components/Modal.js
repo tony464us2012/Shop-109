@@ -150,7 +150,6 @@ const ProductModal = ({show, onHide, id, price}) => {
       }
       onHide()
       dispatch(addToCart(cartItem))
-      console.log(cartItem)
     }
     
     const white = {backgroundColor: 'white', color: 'grey', paddingBottom: '1rem'}
@@ -349,7 +348,7 @@ const ProductModal = ({show, onHide, id, price}) => {
                           {
                               addons.filter(addon => addon.available && addon.name === 'Loaded up with Cheese & Applewood Smoked Bacon Bits').map(addon => 
                                 <>
-                                    <input type="radio" name="fryAddOn" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                    <input type="radio" name="fryAddOn" value={`${addon.name} +${addon.price}`} onChange={radioChange} />
                                     <Form.Label htmlFor="fryAddOn">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                 </>
                                 )
@@ -365,7 +364,7 @@ const ProductModal = ({show, onHide, id, price}) => {
                           {
                               addons.filter(addon => addon.available && addon.name === 'Loaded up With Caramel & Cinnamon').map(addon => 
                                 <>
-                                    <input type="radio" name="fryAddOn" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
+                                    <input type="radio" name="fryAddOn" value={`${addon.name} +${addon.price}`} onChange={radioChange} />
                                     <Form.Label htmlFor="fryAddOn">{`${addon.name} +${addon.price}`}</Form.Label><br/>
                                 </>
                                 )

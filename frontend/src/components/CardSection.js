@@ -3,11 +3,10 @@ import { CardElement } from "@stripe/react-stripe-js";
 
 const CARD_ELEMENT_OPTIONS = {
     iconStyle: "solid",
-    hidePostalCode: true,
     style: {
       base: {
         iconColor: "rgb(240, 57, 122)",
-        color: "rgb(240, 57, 122)",
+        color: "green",
         fontSize: "12px",
         fontFamily: '"Open Sans", sans-serif',
         fontSmoothing: "antialiased",

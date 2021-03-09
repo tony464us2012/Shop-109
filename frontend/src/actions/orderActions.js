@@ -5,15 +5,13 @@ import { ORDER_CREATE_REQUEST,
         ORDER_DETAILS_REQUEST, 
         ORDER_DETAILS_SUCCESS, 
         ORDER_DETAILS_FAIL, 
-        ORDER_PAY_FAIL, 
-        ORDER_PAY_SUCCESS, 
-        ORDER_PAY_REQUEST, 
         MY_ORDERS_REQUEST, 
         MY_ORDERS_SUCCESS, 
         MY_ORDERS_FAIL, 
         GET_ORDERS_REQUEST, 
         GET_ORDERS_SUCCESS,
-         GET_ORDERS_FAIL, 
+         GET_ORDERS_FAIL,
+         CART_RESET_ITEM, 
         } from './types'
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -42,6 +40,9 @@ export const createOrder = (order) => async (dispatch, getState) => {
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
+    dispatch({
+        type: CART_RESET_ITEM
+    })
 }
 export const getOrderDetails = (id) => async (dispatch, getState) => {
     try {
@@ -65,33 +66,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: ORDER_DETAILS_FAIL, 
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
-        })
-    }
-}
-export const payOrder = (orderId, paymentResult) => async (dispatch, getState) => {
-    try {
-        dispatch({
-            type: ORDER_PAY_REQUEST
-        })
-        
-        const { userLogin: { userInfo }} = getState()
-
-        const config = {
-            'Content-Type': 'application/json', 
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-        const { data } = await axios.put(`/api/orders/${orderId}/pay`, paymentResult, config)
-
-        dispatch({
-            type: ORDER_PAY_SUCCESS,
-            payload: data
-        })
-    } catch (error) {
-        dispatch({
-            type: ORDER_PAY_FAIL, 
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
