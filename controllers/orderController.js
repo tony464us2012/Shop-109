@@ -17,7 +17,7 @@ const addOrderItems = asyncHandler( async(req, res) => {
             amount: Math.trunc(totalprice * 100),
             currency: 'usd',
             source: token,
-            description: 'first purchase',
+            description: 'Take-Out',
             billing_details: billingName,
             receipt_email: email,
         })

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button, Img, Badge } from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, Image, Badge } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 
 
@@ -15,32 +15,40 @@ const Header = () => {
     const { cartItems } = cart
 
     const [date, setDate] = useState(new Date())
+    const [loggedIn, setLoggedIn] = useState(false)
 
+    
     useEffect(() => {
+        if (userInfo) {
+            setLoggedIn(true)
+        } 
         var timerID = setInterval( () => tick(), 1000 );
         return function cleanup() {
             clearInterval(timerID);
-          }
-       })
-         function tick() {setDate(new Date())}
-
+        }
+    }, [userInfo, loggedIn])
+    function tick() {setDate(new Date())}
+    
     const logoutHandler = () => {
         dispatch(logout())
+        setLoggedIn(false)
     }
 
     return (
         <header>
-           <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+           <Navbar bg="dark" variant="dark" expand="lg" style={{padding: '0.4rem 0'}} collapseOnSelect>
+                   <h6 id='time'>{date.toLocaleTimeString()}</h6>
+                   <h6 id='time'>Order Now! We Are Open.</h6>
+
                <Container>
-                   <h6>{date.toLocaleTimeString()}</h6>
-                   <LinkContainer to='/' className='mr-auto ml-4'>
-                       <img src='/images/109_Logo.png' variant='top' width='6%' height='6%' />
+                   <LinkContainer to='/' className='ml-auto'>
+                       <Image alt='109-Logo' src='/images/109_Logo.png' variant='top' width='5%' height='5%' />
                    </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
-                        {userInfo ? (
-                            <NavDropdown title={userInfo.name} id='username'>
+                        {loggedIn ? (
+                            <NavDropdown title={userInfo.name ? userInfo.name : ''} id='username'>
                                 <LinkContainer to='/profile'>
                                     <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>
@@ -57,7 +65,7 @@ const Header = () => {
                             <Nav.Link><i className="fas fa-user-plus"></i> Sign Up</Nav.Link>
                             </LinkContainer>
                            </>)}
-                    {userInfo && userInfo.isAdmin && (
+                    {loggedIn && userInfo.isAdmin && (
                                <NavDropdown title='Admin' id='adminmenu'>
                                <LinkContainer to='/admin/userlist'>
                                    <NavDropdown.Item>Users</NavDropdown.Item>
@@ -73,21 +81,17 @@ const Header = () => {
                         </Nav>
                     </Navbar.Collapse>
                </Container>
+               <LinkContainer to='/cart' style={{display: 'flex', marginRight: '1.5rem', border: 'none'}}>
+                    <Nav.Link style={{height: '100%'}}><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge style={{height: '1.2rem', marginLeft: '.2rem', backgroundColor: 'none', color: 'yellow'}}>{cartItems.length}</Badge> : <Badge pill variant='warning' style={{fontSize: '.7rem', height: '50%', color: 'yellow'}}>0</Badge>}</Nav.Link>
+                </LinkContainer>
             </Navbar>
-            <Navbar bg="light" variant="light">
-                <Nav className="mr-auto ml-5">
+            <Navbar collapseOnSelect id='navBar2' expand='lg' bg='light' variant="light">
+                <Nav fill variant='tabs' id='navContainer2'>
                 <Nav.Link id='navItem' href='/'>HOME</Nav.Link>
                 <Nav.Link id='navItem' href='/menu'>MENU</Nav.Link>
-                <Nav.Link id='navItem' href='#'>109 REWARDS</Nav.Link>
+                <Nav.Link id='navItem' href='#'>ABOUT US</Nav.Link>
                 <Nav.Link id='navItem' href='#'>DELIVERY</Nav.Link>
                 </Nav>
-                <Form inline>
-                <FormControl type="text" placeholder='Enter a promo code' className="mr-sm-2" />
-                <Button variant="success" size='sm'>Apply</Button>
-                </Form>
-                <LinkContainer to='/cart' className='ml-2' style={{color: '#000'}}>
-                    <Nav.Link><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='success'>{cartItems.length}</Badge> : ''}</Nav.Link>
-                </LinkContainer>
             </Navbar>
         </header>
     )

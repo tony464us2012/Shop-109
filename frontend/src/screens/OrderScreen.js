@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Row, Col, ListGroup, Card, Image, Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { Row, Col, ListGroup, Card } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
-import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../actions/types'
 
 const OrderScreen = ({ match, history }) => {
     const orderId = match.params.id

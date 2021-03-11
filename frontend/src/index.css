@@ -1,5 +1,5 @@
 main {
-    min-height: 80vh;
+    min-height: 70vh;
     background-color: #fff
 }
 .card{
@@ -40,34 +40,53 @@ h2 {
 }
 
 /* Header */
-.fa-shopping-cart {
-    font-size: 1.5rem
+
+#navBar2 {
+    padding: 0 !important;
+    display: flex !important;
+    justify-content:space-between !important;
+    height: 2.5rem
 }
 
-.fa-dollar-sign {
-    font-size: .5rem;
-    color: red
+#navContainer2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    height: 100%;
+    width: 26%
+}
+
+.fa-shopping-cart {
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 15%
+    /* height: 100%; */
+
 }
 
 .menu-container {
     margin-bottom: .8rem
 }
 
-Nav:nth-child(3):hover {
+ Nav:nth-child(3):hover {
     background-color: transparent
-}
+} 
 
 #navItem {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 550;
-    border-bottom: 2px solid transparent;
-    padding: 0 .8rem
+    color: black;
+    padding: 0 1rem;
+    border: 1px solid transparent;
 }
 
+
+
 #navItem:hover {
- color: #fff;
- border-bottom: 2px solid green;
- background-color: white !important;
+ border: 1px solid black;
+ color: red;
+ background-color: whitesmoke !important;
 }
 
 .menu-link {
@@ -77,10 +96,23 @@ Nav:nth-child(3):hover {
     font-weight: 500
 }
 
-.menu-link:active {
+/* .menu-link:active {
     background-color: black;
     color: white
+} */
+
+#time {
+    color: white;
+    display: block;
+    margin: 0 1rem
 }
+
+#adminmenu,
+#username {
+    border: none;
+    margin: 0 .5rem
+}
+
 
 /* Menu */
 
