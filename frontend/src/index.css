@@ -56,12 +56,14 @@ h2 {
     height: 100%;
     width: 26%
 }
+/* 
+#navContainer2:ch */
 
 .fa-shopping-cart {
     color: white;
     font-size: 1.5rem;
-    margin-right: 15%
-    /* height: 100%; */
+    margin-right: 15%;
+    height: 100%;
 
 }
 
@@ -78,16 +80,24 @@ h2 {
     font-weight: 550;
     color: black;
     padding: 0 1rem;
-    border: 1px solid transparent;
+    border: 1.5px solid transparent
 }
-
-
 
 #navItem:hover {
- border: 1px solid black;
- color: red;
- background-color: whitesmoke !important;
+    border: 1.5px solid black
 }
+#navItem a {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+/* #navItem:hover {
+ border: 1px solid black;
+ color: white;
+ background-color: whitesmoke !important;
+} */
 
 .menu-link {
     color: black;

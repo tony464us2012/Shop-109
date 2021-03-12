@@ -58,10 +58,12 @@ const Header = () => {
                             </NavDropdown>
                         ) :  (
                             <>
-                            <LinkContainer to='/login' >
-                            <Nav.Link><i className="fas fa-sign-in-alt"></i> Log In</Nav.Link>
+                            <LinkContainer to='/login' id='username'>
+                            <Nav.Link>
+                            <i className="fas fa-sign-in-alt"></i> Log In
+                            </Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to='/register' >
+                            <LinkContainer to='/register' id='username'>
                             <Nav.Link><i className="fas fa-user-plus"></i> Sign Up</Nav.Link>
                             </LinkContainer>
                            </>)}
@@ -86,11 +88,11 @@ const Header = () => {
                 </LinkContainer>
             </Navbar>
             <Navbar collapseOnSelect id='navBar2' expand='lg' bg='light' variant="light">
-                <Nav fill variant='tabs' id='navContainer2'>
-                <Nav.Link id='navItem' href='/'>HOME</Nav.Link>
-                <Nav.Link id='navItem' href='/menu'>MENU</Nav.Link>
-                <Nav.Link id='navItem' href='#'>ABOUT US</Nav.Link>
-                <Nav.Link id='navItem' href='#'>DELIVERY</Nav.Link>
+                <Nav id='navContainer2'>
+                <Nav.Item id='navItem'><a href='/'>HOME</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='/menu'>MENU</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='#'>ABOUT</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='#'>DELIVERY</a></Nav.Item>
                 </Nav>
             </Navbar>
         </header>

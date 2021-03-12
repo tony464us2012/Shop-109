@@ -28,7 +28,7 @@ const App = () => {
       <Header />
       <main className="py-5" >
         <Elements stripe={stripePromise}>
-          <Container >
+          <Container style={{marginTop: '5%'}} >
             <Route path='/order/:id' component={OrderScreen}  />
             <Route path='/login' component={LoginScreen}  />
             <Route path='/placeorder' component={PlaceOrderScreen}  />
