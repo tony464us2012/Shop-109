@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -84,9 +83,6 @@ const ProductEditScreen = ({ match, history }) => {
 
     return (
         <>
-        <LinkContainer to='/admin/productlist' className='btn btn-light my-3'>
-        <Button variant="outline-secondary" size='lg'>Back</Button>
-        </LinkContainer>
         <FormContainer>
             <h1>Edit Product</h1>
             {loadingUpdate && <Loader />}

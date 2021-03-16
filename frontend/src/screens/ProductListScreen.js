@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ProductListHeader from '../components/ProfileListHeader'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { deleteProduct, createProduct, listProductDetails, updateProduct } from '../actions/productActions'
+import { deleteProduct, createProduct, listProducts, listProductDetails, updateProduct } from '../actions/productActions'
 import MenuItem from '../components/product-list-components/MenuItem'
 import Beers from '../components/product-list-components/Beers'
 import AddOns from '../components/product-list-components/AddOns'
@@ -30,8 +30,11 @@ const ProductListScreen = ({ history }) => {
     
     const availableHandler = (product) => {
         dispatch(updateProduct(product))
-        console.log(product)
     }
+
+    useEffect(() => {
+            dispatch(listProducts())
+        }, [dispatch])
     
     useEffect(() => {
         if(!userInfo.isAdmin) {
@@ -60,9 +63,6 @@ const ProductListScreen = ({ history }) => {
     const menuitems = products.filter(menuitem => menuitem.category !== 'Beer' && menuitem.category !== 'AddOns')
     const beers = products.filter(beer => beer.category === 'Beer')
     const addons = products.filter(addon => addon.category === 'AddOns')
-
-    console.log(menuitems)
-    console.log(beers)
 
     const tabHandler = (tab) => {
         setTab(tab)

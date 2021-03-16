@@ -34,6 +34,10 @@ const Header = () => {
         setLoggedIn(false)
     }
 
+    const pillStyle = {
+    fontSize: '.7rem', height: '50%', color: 'yellow'
+    }
+
     return (
         <header>
            <Navbar bg="dark" variant="dark" expand="lg" style={{padding: '0.4rem 0'}} collapseOnSelect>
@@ -84,7 +88,7 @@ const Header = () => {
                     </Navbar.Collapse>
                </Container>
                <LinkContainer to='/cart' style={{display: 'flex', marginRight: '1.5rem', border: 'none'}}>
-                    <Nav.Link style={{height: '100%'}}><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge style={{height: '1.2rem', marginLeft: '.2rem', backgroundColor: 'none', color: 'yellow'}}>{cartItems.length}</Badge> : <Badge pill variant='warning' style={{fontSize: '.7rem', height: '50%', color: 'yellow'}}>0</Badge>}</Nav.Link>
+                    <Nav.Link style={{height: '100%'}}><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='warning' style={pillStyle}>{cartItems.length}</Badge> : <Badge pill variant='warning' style={pillStyle}>0</Badge>}</Nav.Link>
                 </LinkContainer>
             </Navbar>
             <Navbar collapseOnSelect id='navBar2' expand='lg' bg='light' variant="light">

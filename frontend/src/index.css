@@ -196,3 +196,8 @@ textarea {
       margin: 1.2rem auto .5rem;
       padding: .3rem .9rem
   }
+  
+  /* User List */
+  .btn-sm {
+      margin: 0 15%
+  }

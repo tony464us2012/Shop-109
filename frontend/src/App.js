@@ -7,6 +7,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import MenuScreen from './screens/MenuScreen'
+import ConfirmationScreen from './screens/ConfirmationScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
@@ -29,6 +30,7 @@ const App = () => {
       <main className="py-5" >
         <Elements stripe={stripePromise}>
           <Container style={{marginTop: '5%'}} >
+            <Route path='/confirmation/:id' component={ConfirmationScreen}  />
             <Route path='/order/:id' component={OrderScreen}  />
             <Route path='/login' component={LoginScreen}  />
             <Route path='/placeorder' component={PlaceOrderScreen}  />

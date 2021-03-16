@@ -26,16 +26,12 @@ const addOrderItems = asyncHandler( async(req, res) => {
            throw new Error(charge.error.message)
         }
 
-        console.log(charge)
-
         const order = new Order({
            orderItems, user: req.user._id, subtotal, tax, totalprice
         })
 
          await order.save()
          
-         console.log(req.user)
-
         res.status(200).json(order)
     }})
 
@@ -52,12 +48,28 @@ const addOrderItems = asyncHandler( async(req, res) => {
    
     const getOrders = asyncHandler( async (req, res) => {
         const orders = await Order.find({}).populate('user', 'id name')
-        res.json(orders)
+
+        if (orders) {
+            res.json(orders)
+        } else {
+            throw new Error('Orders not found')
+        }
+    })
+
+    const getMyOrders = asyncHandler( async(req, res) => {
+        const orders = await Order.find({user: req.params.id}).populate('user', 'name email')
+        if (orders) {
+            res.json(orders)
+        } else {
+            res.status(404) 
+            throw new Error('Orders not found')
+        }
     })
 
 
     export {
         addOrderItems,
         getOrderById,
-        getOrders, 
+        getOrders,
+        getMyOrders 
     }

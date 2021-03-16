@@ -13,7 +13,6 @@ const UserEditScreen = ({ match, history }) => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [isAdmin, setIsAdmin] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -33,14 +32,13 @@ const UserEditScreen = ({ match, history }) => {
             } else {
                 setName(user.name)
                 setEmail(user.email)
-                setIsAdmin(user.isAdmin)
             }
         }
     }, [dispatch, userId, user, successUpdate, history])
 
     const submitHandler = (e) => {
         e.preventDefault()
-       dispatch(updateUser({ _id: userId, name, email, isAdmin  }))
+       dispatch(updateUser({ _id: userId, name, email, isAdmin: user.isAdmin  }))
     }
 
     return (
@@ -61,7 +59,7 @@ const UserEditScreen = ({ match, history }) => {
                     <Form.Control type='email' placeholder='Enter Email' value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='isadmin'>
-                    <Form.Check type='checkbox' label='Is Admin' value={isAdmin} checked={isAdmin} onChange={(e) => setIsAdmin(!e.target.checked)}></Form.Check>
+                    <Form.Check type='checkbox' label='Is Admin' disabled={true} checked={user.isAdmin}></Form.Check>
                 </Form.Group>
                 <Button type='submit' variant='primary'>
                     Update

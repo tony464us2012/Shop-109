@@ -112,6 +112,7 @@ const getUserById = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id)
     if (user) {
         res.json(user)
+        console.log('success')
     } else {
         res.status(404)
         throw new Error('User not found')
@@ -119,7 +120,7 @@ const getUserById = asyncHandler(async (req, res) => {
 })
 
 const updateUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(res.params.id)
+    const user = await User.findById(req.params.id)
 
     if(user) {
         user.name = req.body.name || user.name

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector  } from 'react-redux'
-import { listProducts } from '../actions/productActions'
+import React, { useState } from 'react'
+import { useSelector  } from 'react-redux'
 import BeerHeader from './BeerHeader'
 import IPA from './beer-components/IPA'
 import Lager from './beer-components/Lager'
@@ -9,18 +8,13 @@ import Sour from './beer-components/Sour'
 import Cider from './beer-components/Cider'
 import PorterandStout from './beer-components/PorterandStout'
 import Special from './beer-components/Special'
+import Loader from '../components/Loader'
 
 
 const Beer = () => {
     
     const [beerTab, setBeerTab] = useState('IPA')
     
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(listProducts())
-    }, [dispatch])
-
     const productList = useSelector(state => state.productList)
     const { loading, error, products } = productList
 
@@ -37,7 +31,7 @@ const Beer = () => {
         setBeerTab(tab)
     }
 
-    return (
+    return loading ? <Loader /> : (
         <>
             <BeerHeader beerTabHandler={beerTabHandler} beerTab={beerTab} />
             {beerTab === 'IPA' ? <IPA ipa={ipa} /> :

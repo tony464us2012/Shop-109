@@ -14,12 +14,6 @@ import Meta from '../components/Meta'
 const HomeScreen = () => {
   
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(listProducts())
-    }, [dispatch])
-
     return (
         <>
             <Meta />

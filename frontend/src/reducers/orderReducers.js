@@ -12,6 +12,7 @@ import {
     GET_ORDERS_REQUEST,
     GET_ORDERS_SUCCESS,
     GET_ORDERS_FAIL,
+    ORDER_DETAILS_RESET,
 } from '../actions/types'
 
 export const orderCreateReducer = (state= {}, action) => {
@@ -35,7 +36,7 @@ export const orderCreateReducer = (state= {}, action) => {
             return state
     }
 }
-export const orderDetailsReducer = (state= {loading: true, orderItems: [], shippingAddress: {}}, action) => {
+export const orderDetailsReducer = (state= {loading: false, order: []}, action) => {
     switch(action.type) {
         case ORDER_DETAILS_REQUEST:
             return{
@@ -51,6 +52,11 @@ export const orderDetailsReducer = (state= {loading: true, orderItems: [], shipp
             return {
                 loading: false,
                 error: action.payload
+            }
+        case ORDER_DETAILS_RESET: 
+            return {
+                loading: true,
+                orderItems: []
             }
         
          default: 
