@@ -36,6 +36,7 @@ const ProfileScreen = ({ history }) => {
         } else {
               dispatch(myOrders(userInfo._id))
               setName(userInfo.name)
+              setEmail(userInfo.email)
             }
               return () => {
                   dispatch({type: MY_ORDERS_RESET})
@@ -89,11 +90,11 @@ const ProfileScreen = ({ history }) => {
                 </Form>
             </Col>
             <Col md={9}>
+                <h2 style={{color: 'black'}}>My Orders</h2>
                 {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> :
-                 orders.length === 0 ?  <Message variant='info'>You have no orders..</Message> :
+                 orders.length === 0 ?  <Message variant='info'>No Orders..</Message> :
                  (
                   <>
-                     <h2 style={{color: 'black'}}>My Orders</h2>
                     <Table striped bordered hover responsive className='table-sm'>
                         <thead>
                             <tr>
@@ -110,9 +111,7 @@ const ProfileScreen = ({ history }) => {
                                     <td>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</td>
                                     <td>${order.totalprice}</td>
                                     <td>
-                                        <Link to={`/order/${order._id}`}>
                                             <Button className='btn-sm' variant='light'  onClick={() => orderDetailsHandler(order._id)}>Details</Button>
-                                        </Link>
                                     </td>
                                 </tr>
                          </tbody>
@@ -120,14 +119,10 @@ const ProfileScreen = ({ history }) => {
                     </Table>
                   </>
                 )}
-                { loadingDetails ? <Loader style={{marginTop:'15rem'}}/> : errorDetails ? <Message variant='danger'>{errorDetails}</Message> : order ?  (
+                { loadingDetails ? <Loader/> : errorDetails ? <Message variant='danger'>{errorDetails}</Message> : order.length !== 0 ?  (
                     <>
-                     <h1>Order #1234</h1>
+                     <h2 style={{color: 'black'}}>Order #{order._id}</h2>
                     <ListGroup variant='flush'>
-                        <ListGroup.Item>
-                            <h2>Order Placed</h2>
-                            <p>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</p>
-                        </ListGroup.Item>
                         {order.orderItems.map(item => (
                             <ListGroup.Item style={{paddingRight: '2.5rem'}}>
                                 <Row>
@@ -153,21 +148,20 @@ const ProfileScreen = ({ history }) => {
                                 </Row>
                             </ListGroup.Item>
                         ))}
-                    </ListGroup>
-                    <ListGroup variant='flush'>
                         <ListGroup.Item>
+                            <div className="myOrderTotal">
                             <h2>Subtotal</h2>
                             ${order.subtotal}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
+                            </div>
+                            <div className="myOrderTotal">
                             <h2>Tax</h2>
                             ${order.tax}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
+                            </div>
+                            <div className="myOrderTotal">
                             <h2>Total</h2>
                             ${order.totalprice}
+                            </div>
                         </ListGroup.Item>
-                     
                     </ListGroup>
                     </>
                 ) : ''}

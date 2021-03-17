@@ -13,6 +13,9 @@ const CartScreen = ({ match, location, history }) => {
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart 
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
     useEffect(() => {
         if(productId) {
             dispatch(addToCart(productId, qty))
@@ -24,14 +27,18 @@ const CartScreen = ({ match, location, history }) => {
     }
 
     const checkoutHandler = () => {
-        history.push('/placeorder')
+        if (userInfo) {
+            history.push('/placeorder')
+        } else {
+            history.push('/login')
+        }
     }
 
     return (
        <Row>
            <Col md={9}>
                <h1>Shopping Cart</h1>
-               {cartItems.length === 0 ? <Message>Your cart is empty<Link to='/'> Go Back</Link></Message> : (
+               {cartItems.length === 0 ? <Message>Your cart is empty {' '}<Link to='/menu'> Go to menu</Link></Message> : (
                    <ListGroup variant='flush'>
                        {cartItems.map(item => (
                            <ListGroup.Item style={{paddingRight: '2.5rem'}}>

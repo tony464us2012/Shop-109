@@ -55,8 +55,8 @@ export const orderDetailsReducer = (state= {loading: false, order: []}, action) 
             }
         case ORDER_DETAILS_RESET: 
             return {
-                loading: true,
-                orderItems: []
+                loading: false,
+                order: []
             }
         
          default: 
