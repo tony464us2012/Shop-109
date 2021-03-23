@@ -12,13 +12,14 @@ const Product = ({ product }) => {
     return (
         <>
             <a  onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}>
-                <Card className='my-3 p-3 rounded card' style={{width: '18rem'}} >
-                        <Card.Img src={product.image} variant='top' />
-                    <Card.Body>
-                            <Card.Title as='div'><strong className='title-text'>{product.name}</strong></Card.Title>
-                        <Card.Text as='h6'> ${product.price} </Card.Text>
-                    </Card.Body>
-                </Card>
+                <div className='product' >
+                    <img src={product.image} style={{width: '25%', height: '80%', marginTop: '2%', marginRight: '1rem'}} variant='top' />
+                    <div className='productInfo'>
+                            <h5><strong className='title-text'>{product.name}</strong></h5>
+                            <h6>{product.description}</h6>
+                            <h6> ${product.price} </h6>
+                    </div>
+                </div>
             </a>
             {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} key={product._id} id={product._id} price={product.price}/> : '' }
         </>

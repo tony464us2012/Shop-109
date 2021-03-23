@@ -1,3 +1,9 @@
+
+*, 
+body {
+    font-family: 'IM Fell DW Pica', serif;
+}
+
 main {
     min-height: 70vh;
     background-color: #fff
@@ -24,9 +30,14 @@ td a:hover {
     cursor: pointer
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 h1{
     font-size: 1.8rem;
-    padding: 1rem 0
+    padding: 0 0 1rem;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 h2 {
@@ -124,6 +135,30 @@ h2 {
 
 
 /* Menu */
+
+.menu-item-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 450px));
+    gap: 1rem 2rem;
+    margin-top: 4rem;
+}
+
+.product {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 100%;
+    padding: 14px 5px
+}
+
+.productInfo {
+    padding: 4px 4px 4px 14px;
+}
+
+.productInfo h6 {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 120%;
+}
 
 .title-text {
     text-align: center

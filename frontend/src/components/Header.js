@@ -17,6 +17,10 @@ const Header = () => {
     const [date, setDate] = useState(new Date())
     const [loggedIn, setLoggedIn] = useState(false)
 
+    const logoutHandler = () => {
+        dispatch(logout())
+        setLoggedIn(false)
+    }
     
     useEffect(() => {
         if (userInfo) {
@@ -26,16 +30,13 @@ const Header = () => {
         return function cleanup() {
             clearInterval(timerID);
         }
-    }, [userInfo, loggedIn])
+    }, [userInfo, loggedIn, logoutHandler])
+    
     function tick() {setDate(new Date())}
     
-    const logoutHandler = () => {
-        dispatch(logout())
-        setLoggedIn(false)
-    }
 
     const pillStyle = {
-    fontSize: '.7rem', height: '50%', color: 'yellow'
+    fontSize: '.7rem', height: '50%', marginLeft: '-14px'
     }
 
     return (
@@ -52,7 +53,7 @@ const Header = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
                         {loggedIn && userInfo.name ? (
-                            <NavDropdown title={userInfo.name ? userInfo.name : ''} id='username'>
+                            <NavDropdown title={userInfo.name ? `Hi ${userInfo.name}` : ''} id='username'>
                                 <LinkContainer to='/profile'>
                                     <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>
@@ -86,10 +87,10 @@ const Header = () => {
                     )}
                         </Nav>
                     </Navbar.Collapse>
-               </Container>
                <LinkContainer to='/cart' style={{display: 'flex', marginRight: '1.5rem', border: 'none'}}>
-                    <Nav.Link style={{height: '100%'}}><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='warning' style={pillStyle}>{cartItems.length}</Badge> : <Badge pill variant='warning' style={pillStyle}>0</Badge>}</Nav.Link>
+                    <Nav.Link style={{height: '100%'}}><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='danger' style={pillStyle}>{cartItems.length}</Badge> : ''}</Nav.Link>
                 </LinkContainer>
+               </Container>
             </Navbar>
             <Navbar collapseOnSelect id='navBar2' expand='lg' bg='light' variant="light">
                 <Nav id='navContainer2'>
