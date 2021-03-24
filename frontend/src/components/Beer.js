@@ -16,7 +16,7 @@ const Beer = () => {
     const [beerTab, setBeerTab] = useState('IPA')
     
     const productList = useSelector(state => state.productList)
-    const { loading, error, products } = productList
+    const { loading, products } = productList
 
     const ipa = products.filter(product => product.typeofBeer === 'IPA')
     const lager = products.filter(product => product.typeofBeer === 'Lager')

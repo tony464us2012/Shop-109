@@ -1,6 +1,5 @@
 import React from 'react'
-import { Row, CardDeck } from 'react-bootstrap'
-import Product from '../Product'
+import BeerProduct from '../BeerProduct'
 
 
 
@@ -9,13 +8,11 @@ const PorterandStout = ({ porterandstout }) => {
 
     return (
         <>
-               <Row>
+               <div className='beer-item-container'>
                     {porterandstout.map(product => (
-                        <CardDeck key={product._id} sm={12} md={6} lg={4} style={{margin: '0 .25rem'}}>
-                            <Product product={product} />
-                        </CardDeck>
+                            <BeerProduct product={product} />
                     ))}
-                </Row>
+                </div>
         </>
     )
 }
