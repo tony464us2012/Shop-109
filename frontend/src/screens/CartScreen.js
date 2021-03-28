@@ -49,10 +49,10 @@ const CartScreen = ({ match, location, history }) => {
                                 <Col md={3}>
                                    <h5>{item.name}</h5>
                                 </Col>
-                                <Col md={2}>${item.price}</Col>
+                                <Col md={2}><p>${item.price}</p></Col>
                                 <Col md={1} style={{marginLeft: 'auto'}}>
                                     <Button type='button' variant='light' onClick={() => removeFromCartHandler(item.id)}>
-                                        <i className='fas fa-trash'></i>
+                                        <i className='fas fa-trash' style={{fontSize: '1rem'}}></i>
                                     </Button>
                                 </Col>
                                </Row>
@@ -81,14 +81,14 @@ const CartScreen = ({ match, location, history }) => {
                    <ListGroup variant='flush'>
                        <ListGroup.Item>
                            <h2>Subtotal</h2>
-                           ${cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)}
+                           <p>${cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)}</p>
                            <h2>Tax</h2>
-                           ${(cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2)}
+                           <p>${(cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2)}</p>
                            <h2>Total</h2>
-                           ${Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))}
+                           <p>${Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))}</p>
                        </ListGroup.Item>
                        <ListGroup.Item>
-                           <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
+                           <Button type='button' className='btn-sm btn-success' disabled={cartItems.length === 0} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
                        </ListGroup.Item>
                    </ListGroup>
                </Card>

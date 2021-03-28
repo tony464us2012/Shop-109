@@ -10,7 +10,7 @@ const Ale = ({ ale }) => {
         <>
                <div className='beer-item-container'>
                     {ale.map(product => (
-                            <BeerProduct product={product} />
+                            <BeerProduct product={product} key={product._id} />
                     ))}
                 </div>
         </>

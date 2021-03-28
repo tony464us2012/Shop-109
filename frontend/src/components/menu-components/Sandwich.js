@@ -8,7 +8,7 @@ const Sandwich = ({ sandwiches }) => {
         <>
                <div className='menu-item-container'>
                     {sandwiches.map(product => (
-                            <Product product={product} />
+                            <Product product={product} key={product._id} />
                     ))}
                 </div>
         </>

@@ -34,13 +34,13 @@ const Beer = () => {
     return loading ? <Loader /> : (
         <>
             <BeerHeader beerTabHandler={beerTabHandler} beerTab={beerTab} />
-            {beerTab === 'IPA' ? <IPA ipa={ipa} /> :
-             beerTab === 'Lager' ? <Lager lager={lager}/> :
-             beerTab === 'PorterandStout' ?  <PorterandStout porterandstout={porterandstout} /> :
-             beerTab === 'Sour' ?  <Sour sour={sour} /> :
-             beerTab === 'Ale' ? <Ale ale={ale} /> : 
-             beerTab === 'Cider' ? <Cider cider={cider} /> :
-             <Special special={special} />
+            {beerTab === 'IPA' ? <IPA ipa={ipa} key={ipa._id} /> :
+             beerTab === 'Lager' ? <Lager lager={lager} key={lager._id}/> :
+             beerTab === 'PorterandStout' ?  <PorterandStout porterandstout={porterandstout} key={porterandstout._id}/> :
+             beerTab === 'Sour' ?  <Sour sour={sour} key={sour._id} /> :
+             beerTab === 'Ale' ? <Ale ale={ale} key={ale._id} /> : 
+             beerTab === 'Cider' ? <Cider cider={cider} key={cider._id} /> :
+             <Special special={special} key={special._id} />
             }
         </>
     )

@@ -10,7 +10,7 @@ const Lager = ({ lager }) => {
         <>
                <div className='beer-item-container'>
                     {lager.map(product => (
-                            <BeerProduct product={product} />
+                            <BeerProduct product={product} key={product._id} />
                     ))}
                 </div>
         </>

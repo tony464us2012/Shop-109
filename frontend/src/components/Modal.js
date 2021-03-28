@@ -152,7 +152,7 @@ const ProductModal = ({show, onHide, id, price}) => {
       dispatch(addToCart(cartItem))
     }
     
-    const white = {backgroundColor: 'white', color: 'grey', paddingBottom: '1rem'}
+    const white = {backgroundColor: 'white', color: 'black', padding: '1.5rem' }
 
     return (
         <>
@@ -171,22 +171,22 @@ const ProductModal = ({show, onHide, id, price}) => {
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body style={white}>
-                      {description ?<Col> <p> {description} </p></Col> : ''}
-                      {image ? <Col ><Image src={image} alt={name}/></Col> : ''}
+                      {image ? <Col ><img src={image} className='modal-img' alt={name}/></Col> : ''}
+                      {description ?<Col><h6 className='modal-description'>{description}</h6></Col> : ''}
                       <Form onSubmit={addToCartHandler}>
                         {name === 'Fry Sampler' ? 
                          <Fragment>
-                          <h6>Select Size:</h6>
-                            <input type="radio" id="frysampler" name="frysampler" value={`Small +0`} onChange={radioChange} required />
+                          <h6>Select Size:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
+                            <input type="radio" name="frysampler" value={`Small +0`} onChange={radioChange} required />
                             <label htmlFor="smallfrysampler"> Small </label><br/>
-                            {samplerAvailable ? <><input type="radio" id="frysampler" name="frysampler" value={`Large +${samplerPrice}`} onChange={radioChange} required/>
+                            {samplerAvailable ? <><input type="radio" name="frysampler" value={`Large +${samplerPrice}`} onChange={radioChange} required/>
                             <label htmlFor="largefrysampler">{`Large +${samplerPrice}`}</label></> : ''}
                          </Fragment>
                         : ''
                       }
                         {name === 'Chicken Wings 8 Piece' ? 
                          <Fragment>
-                          <h6>Select Size:</h6>
+                          <h6>Select Size:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
                             <input type="radio" name="chickenwings" value={`8 Pieces +0`} onChange={radioChange} required />
                             <label htmlFor="chickenwings"> 8 Pieces </label><br/>
                             {wingAvailable ? <><input type="radio" name='chickenwings' value={`15 Pieces +${wingPrice}`} onChange={radioChange} required/>
@@ -196,16 +196,16 @@ const ProductModal = ({show, onHide, id, price}) => {
                       }
                       {name === 'Chicken Wings 8 Piece' || name === 'Duck Wings' ? 
                       <Form.Group>
-                       <h6>Select Sauce:</h6>
-                         <input type="radio" name="sauce" value={'Asian Chili Sauce'} onChange={radioChange} required />
+                       <h6>Select Sauce:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
+                         <input type="radio" id="option-separate" name="sauce" value={'Asian Chili Sauce'} onChange={radioChange} required />
                          <Form.Label htmlFor="sauce">Asian Chili Sauce</Form.Label><br/>
-                         <input type="radio" name='sauce' value={'Blue Cheese BBQ Sauce'} onChange={radioChange} required/>
+                         <input type="radio" id="option-separate" name='sauce' value={'Blue Cheese BBQ Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>Blue Cheese BBQ Sauce</Form.Label><br/>
-                         <input type="radio" name='sauce' value={'Honey Ginger Sauce'} onChange={radioChange} required/>
+                         <input type="radio" id="option-separate" name='sauce' value={'Honey Ginger Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>Honey Ginger Sauce</Form.Label><br/>
-                         <input type="radio" name='sauce' value={'House BBQ Sauce'} onChange={radioChange} required/>
+                         <input type="radio" id="option-separate" name='sauce' value={'House BBQ Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>House BBQ Sauce</Form.Label><br/>
-                         <input type="radio" name='sauce' value={'Spicy Buffalo Sauce'} onChange={radioChange} required/>
+                         <input type="radio" id="option-separate" name='sauce' value={'Spicy Buffalo Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>Spicy Buffalo Sauce</Form.Label>
                       </Form.Group>
                      : ''
@@ -292,7 +292,7 @@ const ProductModal = ({show, onHide, id, price}) => {
                       { name === 'Burger In A Bowl' ? 
                         <Fragment>
                           <Form.Group>
-                            <h6>Select Burger</h6>
+                            <h6>Select Burger<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'BurgerInABowl').map(addon => 
                                   <>
@@ -377,7 +377,7 @@ const ProductModal = ({show, onHide, id, price}) => {
                         <Form.Text as="textarea" placeholder='allergies, etc.' width='100%' value={instructions} onChange={handleChange} rows={3} />
                       </Form.Group>
                     {available ? 
-                    <input type='submit' value={`Add To Cart $${ref.current ? ref.current : itemPrice}`}/> :
+                    <input type='submit' className='btn-success' value={`Add To Cart $${ref.current ? ref.current : itemPrice}`}/> :
                     <input type='submit' value='Out of Stock' disabled /> 
                   }
                       </Form>

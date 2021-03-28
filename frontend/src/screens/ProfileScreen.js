@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Row, Col, Table, ListGroup } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -109,7 +108,7 @@ const ProfileScreen = ({ history }) => {
                                 <tr key={order._id}>
                                     <td>{order._id}</td>
                                     <td>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</td>
-                                    <td>${order.totalprice}</td>
+                                    <td><p style={{marginTop: '.1rem'}}>${order.totalprice}</p></td>
                                     <td>
                                             <Button className='btn-sm' variant='light'  onClick={() => orderDetailsHandler(order._id)}>Details</Button>
                                     </td>
@@ -124,12 +123,12 @@ const ProfileScreen = ({ history }) => {
                      <h2 style={{color: 'black'}}>Order #{order._id}</h2>
                     <ListGroup variant='flush'>
                         {order.orderItems.map(item => (
-                            <ListGroup.Item style={{paddingRight: '2.5rem'}}>
+                            <ListGroup.Item variant='light' style={{paddingRight: '2.5rem'}}>
                                 <Row>
                                  <Col md={3}>
                                     <h5>{item.name}</h5>
                                  </Col>
-                                 <Col md={2}>${item.price}</Col>
+                                 <Col md={2}><p>${item.price}</p></Col>
                                 </Row>
                                 <Row>
                                   <Col md={2}></Col>
@@ -138,7 +137,7 @@ const ProfileScreen = ({ history }) => {
                                  {item.burger ? <Col md={3}>Burger: {item.burger}</Col> : ''}
                                  {item.extraPatty ? <Col md={3}>{item.extraPatty}</Col> : ''}
                                  {item.pattySwap ? <Col md={3}>{item.pattySwap}</Col> : ''}
-                                 {item.extras ? <Col md={3}>{item.extras.map(extra => <p>{extra}</p>)}</Col> : ''}
+                                 {item.extras ? <Col md={3}>{item.extras.map(extra => <>{extra}</>)}</Col> : ''}
                                  {item.sideSwap ? <Col md={3}>Side: {item.sideSwap}</Col> : ''}
                                  {item.upgradeSide ? <Col md={3}>Side: {item.upgradeSide}</Col> : ''}
                                  {item.fryAddOn ? <Col md={3}>Side Add: {item.fryAddOn}</Col> : ''}
@@ -148,18 +147,18 @@ const ProfileScreen = ({ history }) => {
                                 </Row>
                             </ListGroup.Item>
                         ))}
-                        <ListGroup.Item>
+                        <ListGroup.Item variant='light'>
                             <div className="myOrderTotal">
                             <h2>Subtotal</h2>
-                            ${order.subtotal}
+                            <p>${order.subtotal}</p>
                             </div>
                             <div className="myOrderTotal">
                             <h2>Tax</h2>
-                            ${order.tax}
+                            <p>${order.tax}</p>
                             </div>
                             <div className="myOrderTotal">
                             <h2>Total</h2>
-                            ${order.totalprice}
+                            <p>${order.totalprice}</p>
                             </div>
                         </ListGroup.Item>
                     </ListGroup>

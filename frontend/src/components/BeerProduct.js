@@ -10,7 +10,7 @@ const BeerProduct = ({ product }) => {
 
     return (
         <>
-            <a  onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}>
+            <div className='product-container' href="#"  onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}>
                 <div className='beer-product' >
                     <img src={product.image} variant='top' />
                     <div className='beer-product-info'>
@@ -19,7 +19,7 @@ const BeerProduct = ({ product }) => {
                             <h6> ${product.price} </h6>
                     </div>
                 </div>
-            </a>
+            </div>
             {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} key={product._id} id={product._id} price={product.price}/> : '' }
         </>
     )

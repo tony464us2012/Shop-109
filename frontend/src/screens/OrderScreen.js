@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Row, Col, ListGroup, Card, Image, Button } from 'react-bootstrap'
+import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import dateFormat from 'dateformat'
 import Message from '../components/Message'
@@ -18,7 +18,7 @@ const OrderScreen = ({ match, history }) => {
         return () => {
        dispatch({type: ORDER_DETAILS_RESET})
         }
-    }, [])
+    }, [dispatch])
   
 
         return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (

@@ -43,13 +43,13 @@ const MenuScreen = () => {
             <Meta />
             <h1 className='menu-title'>Menu</h1>
             <MenuHeader tabHandler={tabHandler} tab={tab} />
-            {tab === 'Appetizer' ? <Appetizer appetizers={appetizers} /> :
-             tab === 'Salad' ? <Salad salads={salads}/> :
-             tab === 'Burger' ?  <Burger burgers={burgers} /> :
-             tab === 'ForkandKnife' ?  <ForkandKnife forkandknifes={forkandknifes} /> :
-             tab === 'Sandwich' ? <Sandwich sandwiches={sandwiches} /> : 
-             tab === 'Slider' ? <Slider sliders={sliders} /> :
-             tab === 'Side' ? <Side sides={sides} /> : 
+            {tab === 'Appetizer' ? <Appetizer appetizers={appetizers} key={appetizers._id} /> :
+             tab === 'Salad' ? <Salad salads={salads} key={salads._id}/> :
+             tab === 'Burger' ?  <Burger burgers={burgers} key={burgers._id} /> :
+             tab === 'ForkandKnife' ?  <ForkandKnife forkandknifes={forkandknifes} key={forkandknifes._id}/> :
+             tab === 'Sandwich' ? <Sandwich sandwiches={sandwiches} key={sandwiches._id} /> : 
+             tab === 'Slider' ? <Slider sliders={sliders} key={sliders._id} /> :
+             tab === 'Side' ? <Side sides={sides} key={sides._id} /> : 
              <Beer />
             }
         </>

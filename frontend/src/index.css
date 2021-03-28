@@ -24,6 +24,10 @@ li
     color: black
 }
 
+h6 {
+    margin-top: .3rem
+}
+
 tr:hover,
 td a:hover {
     color: red !important;
@@ -38,6 +42,11 @@ h1{
     font-size: 1.8rem;
     padding: 0 0 1rem;
     font-family: 'Times New Roman', Times, serif;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: -.2rem
 }
 
 h2 {
@@ -147,6 +156,10 @@ h2 {
     margin-top: 4rem;
 }
 
+.product-container {
+    cursor: pointer;
+}
+
 .product {
     display: flex;
     border: 1px solid black;
@@ -194,10 +207,10 @@ h2 {
     display: block;
     width: 8rem;
     height: 8rem;
-
     margin: 0 auto;
-
 }
+
+
 
 /* carousel */
 .carousel-item-next, 
@@ -228,12 +241,31 @@ h2 {
 
 /* Modal */
 
+.modal-img {
+    width: 8rem;
+    height: 8rem
+}
+
+.modal-description {
+    margin: 1rem 0;
+    line-height: 145%
+}
+
 textarea {
     width: 100%;
     padding: .5rem
 }
-#frysampler {
+#option-separate {
     margin-right: .5rem
+}
+
+input[type='submit'] {
+    font-family: Arial, Helvetica, sans-serif
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+    margin-right: .3rem
 }
 
 /* Payment */
@@ -268,7 +300,8 @@ textarea {
   
   /* User List */
   .btn-sm {
-      margin: 0 15%
+      display: block;
+      margin: 0 auto;
   }
 
   /* My Order Detail*/

@@ -10,7 +10,7 @@ const IPA = ({ ipa }) => {
         <>
                <div className='beer-item-container'>
                     {ipa.map(product => (
-                            <BeerProduct product={product} />
+                            <BeerProduct product={product} key={product._id} />
                     ))}
                 </div>
         </>

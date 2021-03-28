@@ -10,7 +10,7 @@ const Appetizer = ({ appetizers }) => {
         <>
                   <div className='menu-item-container'>
                     {appetizers.map(product => (
-                            <Product product={product} />
+                            <Product product={product} key={product._id} />
                     ))}
                   </div>
         </>

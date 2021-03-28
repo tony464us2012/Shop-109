@@ -9,7 +9,7 @@ const Slider = ({ sliders }) => {
         <>
                <div className='menu-item-container'>
                     {sliders.map(product => (
-                            <Product product={product} />
+                            <Product product={product} key={product._id} />
                     ))}
                 </div>
         </>

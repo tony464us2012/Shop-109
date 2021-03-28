@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { listProductDetails } from '../actions/productActions'
 import { useDispatch} from 'react-redux'
-import {Card} from 'react-bootstrap'
 import ProductModal from './Modal'
 
 const Product = ({ product }) => {

@@ -10,7 +10,7 @@ const Special = ({ special }) => {
         <>
                <div className='beer-item-container'>
                     {special.map(product => (
-                            <BeerProduct product={product} />
+                            <BeerProduct product={product} key={product._id}/>
                     ))}
                 </div>
         </>

@@ -27,7 +27,7 @@ const PlaceOrderScreen = ({ history }) => {
         name: '',
       });
 
-    const subtotal = cart.cartItems.reduce((acc, item) => acc + item.price, 0)
+    const subtotal = cart.cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)
     const tax = Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
     const totalprice = Number(cart.cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
 
@@ -129,7 +129,7 @@ const PlaceOrderScreen = ({ history }) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Subtotal</Col>
-                                    <Col>${subtotal}</Col>
+                                    <Col><p>${subtotal}</p></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
