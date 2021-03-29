@@ -41,19 +41,17 @@ const Header = () => {
 
     return (
         <header>
-           <Navbar bg="dark" variant="dark" expand="lg" style={{padding: '0.4rem 0'}} collapseOnSelect>
-                   <h6 id='time'>{date.toLocaleTimeString()}</h6>
-                   <h6 id='time'>Order Now! We Are Open.</h6>
+           <Navbar bg="dark" variant="dark" expand="lg" style={{padding: '0.4rem 0 .1rem'}} collapseOnSelect>
+                   {/* <h6 id='time'>{date.toLocaleTimeString()}</h6>
+                   <h6 id='time'>Order Now! We Are Open.</h6> */}
 
                <Container>
-                   <LinkContainer to='/' className='ml-auto'>
-                       <Image alt='109-Logo' src='/images/109_Logo.png' variant='top' width='5%' height='5%' />
-                   </LinkContainer>
+                       <Image id='Logo' alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
                         {loggedIn && userInfo.name ? (
-                            <NavDropdown title={userInfo.name ? `Hi ${userInfo.name}` : ''} id='username'>
+                            <NavDropdown title={userInfo.name ? `Hi ${userInfo.name.split(' ')[0]}` : ''} id='username'>
                                 <LinkContainer to='/profile'>
                                     <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>
@@ -97,7 +95,7 @@ const Header = () => {
                 <Nav.Item id='navItem'><a href='/'>HOME</a></Nav.Item>
                 <Nav.Item id='navItem'><a href='/menu'>MENU</a></Nav.Item>
                 <Nav.Item id='navItem'><a href='#'>ABOUT</a></Nav.Item>
-                <Nav.Item id='navItem'><a href='#'>DELIVERY</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true'>DELIVERY</a></Nav.Item>
                 </Nav>
             </Navbar>
         </header>

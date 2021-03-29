@@ -24,7 +24,7 @@ const OrderScreen = ({ match, history }) => {
         return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <Row>
             <Col md={9}>
-                <h1>Order #{orderId}</h1>
+                <h2 style={{color: 'black'}}>Order #{orderId}</h2>
                     <ListGroup variant='flush'>
                     <ListGroup.Item>
                             <h2>Ordered By</h2>
@@ -74,15 +74,15 @@ const OrderScreen = ({ match, history }) => {
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                             <h2>Subtotal</h2>
-                            ${order.subtotal}
+                            <p>${order.subtotal}</p>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Tax</h2>
-                            ${order.tax}
+                            <p>${order.tax}</p>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Total</h2>
-                            ${order.totalprice}
+                            <p>${order.totalprice}</p>
                         </ListGroup.Item>
                         <ListGroup.Item style={{display: 'flex'}}>
                         <Button type='submit' className='pay-btn' style={{margin: '0 auto'}} variant='light' size='sm' onClick={() => history.push('/admin/orderlist')}>Back To Orders</Button>

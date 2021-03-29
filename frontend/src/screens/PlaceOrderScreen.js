@@ -95,7 +95,7 @@ const PlaceOrderScreen = ({ history }) => {
                                                 <h5>{item.name}</h5>
                                                 </Col>
                                                 <Col md={4}>
-                                                   Price: ${item.price}
+                                                   <p>${item.price}</p>
                                                 </Col>
                                             </Row>
                                             <Row>
@@ -135,13 +135,13 @@ const PlaceOrderScreen = ({ history }) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col> ${tax}</Col>
+                                    <Col><p>${tax}</p></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total Price</Col>
-                                    <Col>${totalprice}</Col>
+                                    <Col><p>${totalprice}</p></Col>
                                 </Row>
                             </ListGroup.Item>
                                 {error && <ListGroup.Item><Message variant='danger'>{error}</Message></ListGroup.Item> }
@@ -153,7 +153,7 @@ const PlaceOrderScreen = ({ history }) => {
                                     <Form.Control type="text" className='cardInfo' size='sm' name='name' onChange={(e) => setBillingDetails({name: e.target.value})} placeholder="Enter name" required />
                                 </Form.Group>
                                 <CardSection />
-                                <Button type='submit' className='pay-btn' variant='success' size='sm' disabled={cart.cartItems === 0 || !stripe}>{processing? 'Processing...' : 'PLACE ORDER'} </Button>
+                                <Button type='submit' className='pay-btn' variant='light' size='sm' disabled={cart.cartItems === 0 || !stripe}>{processing? 'Processing...' : 'PLACE ORDER'} </Button>
                                 </Form>
                             </ListGroup.Item>
                         </ListGroup>

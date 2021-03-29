@@ -51,16 +51,16 @@ const UserListScreen = ({ history }) => {
                             <tr key={user._id}>
                                 <td>{user.name}</td>
                                 <td><a href={`mailto:${user.email}`}>{user.email}</a></td>
-                                <td>{user.isAdmin ? (<i className='fas fa-check' style={{color: 'green'}}></i>) : (<i className='fas fa-times' style={{color: 'red'}}></i>)}</td>
+                                <td>{user.isAdmin ? (<i className='fas fa-check' style={{color: 'green', marginLeft: '.2rem'}}></i>) : (<i className='fas fa-times' style={{color: 'red', marginLeft: '.2rem'}}></i>)}</td>
                                 <td>
-                                    <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                                        <Button variant='light' className='btn-sm'>
+                                    <div className='user-edit-btn'>
+                                        <Button variant='light' onClick={() => history.push(`/admin/user/${user._id}/edit`)} className='btn-sm'>
                                             <i className='fas fa-edit'></i>
                                         </Button>
-                                    </LinkContainer>
-                                    <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
-                                        <i className='fas fa-trash'></i>
-                                    </Button>
+                                        <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
+                                            <i className='fas fa-trash'></i>
+                                        </Button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

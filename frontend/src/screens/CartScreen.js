@@ -80,6 +80,9 @@ const CartScreen = ({ match, location, history }) => {
                <Card>
                    <ListGroup variant='flush'>
                        <ListGroup.Item>
+                           <h2>Take-Out</h2>
+                       </ListGroup.Item>
+                       <ListGroup.Item>
                            <h2>Subtotal</h2>
                            <p>${cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)}</p>
                            <h2>Tax</h2>
@@ -88,7 +91,7 @@ const CartScreen = ({ match, location, history }) => {
                            <p>${Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))}</p>
                        </ListGroup.Item>
                        <ListGroup.Item>
-                           <Button type='button' className='btn-sm btn-success' disabled={cartItems.length === 0} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
+                           <Button type='button' variant='light' className='btn-sm' disabled={cartItems.length === 0} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
                        </ListGroup.Item>
                    </ListGroup>
                </Card>

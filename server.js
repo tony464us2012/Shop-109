@@ -8,6 +8,8 @@ import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import postsRoutes from './routes/postRoutes'
+import bottlePostsRoute from './routes/bottlePostRoutes'
 
 const app = express()
 dotenv.config()
@@ -20,14 +22,16 @@ if(process.env.NODE_ENV === 'development') {
 }
 
 app.use(cors())
-app.use(express.urlencoded({extended: false }));
-app.use(express.json());
+app.use(express.urlencoded({ limit: '50mb', extended: false }));
+app.use(express.json({ limit: '50mb' }));
 
 
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
+app.use('/api/dashboard', postsRoutes);
+app.use('/api/bottle', bottlePostsRoute);
 
 app.get('/order/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
 

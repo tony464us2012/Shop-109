@@ -16,7 +16,7 @@ const ConfirmationScreen = ({match}) => {
 
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : 
     <>
-        <h1>Order #{orderId}</h1>
+        <h2 style={{color: 'black'}}>Order #{orderId}</h2>
         <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>
@@ -37,19 +37,19 @@ const ConfirmationScreen = ({match}) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Subtotal</Col>
-                                    <Col>${order.subtotal}</Col>
+                                    <Col><p>${order.subtotal}</p></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col>${order.tax}</Col>
+                                    <Col><p>${order.tax}</p></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total Price</Col>
-                                    <Col>${order.totalprice}</Col>
+                                    <Col><p>${order.totalprice}</p></Col>
                                 </Row>
                             </ListGroup.Item>
                         </ListGroup>

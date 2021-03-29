@@ -45,7 +45,7 @@ h1{
 }
 
 p {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     margin-top: -.2rem
 }
 
@@ -54,11 +54,21 @@ h2 {
     padding: .5rem 0
 }
 
+td, h6 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
 .rating span {
     margin: 0.1rem
 }
 
 /* Header */
+
+#Logo {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+}
 
 #navBar2 {
     padding: 0 !important;
@@ -180,12 +190,21 @@ h2 {
 }
 
 .productInfo h6 {
-    font-family: 'Open Sans', sans-serif;
+    font-family:'Times New Roman', Times, serif;
     line-height: 120%;
 }
 
 .title-text {
     text-align: center
+}
+
+.advisory {
+ text-align: center;
+ margin-top: 5%
+}
+
+.advisory-text {
+    color: black
 }
 
 /* Beer */
@@ -248,7 +267,7 @@ h2 {
 
 .modal-description {
     margin: 1rem 0;
-    line-height: 145%
+    line-height: 145%;
 }
 
 textarea {
@@ -260,7 +279,7 @@ textarea {
 }
 
 input[type='submit'] {
-    font-family: Arial, Helvetica, sans-serif
+    font-family: 'Times New Roman', Times, serif;
 }
 
 input[type='radio'],
@@ -299,6 +318,10 @@ input[type='checkbox'] {
   }
   
   /* User List */
+
+  .user-edit-btn {
+      display: flex
+  }
   .btn-sm {
       display: block;
       margin: 0 auto;
