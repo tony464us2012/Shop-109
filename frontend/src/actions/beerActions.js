@@ -1,0 +1,123 @@
+import axios from 'axios';
+import {
+   BEER_REQUEST,
+   SET_MAIN_BEERS,
+   SET_SEARCHED_BEERS,
+   ADD_TAP,
+   REMOVE_BEER,
+   SET_MAIN_BOTTLES,
+   ADD_BOTTLE,
+   REMOVE_BOTTLE,
+   BEER_FAIL
+} from './types'
+
+export const getMainBeers = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: BEER_REQUEST})
+        
+        const res = await axios.get('/api/dashboard')
+        dispatch({ type: SET_MAIN_BEERS, payload: res.data})
+
+    } catch(err) {
+        dispatch({
+            type: BEER_FAIL, 
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const searchBeer = (text) => async (dispatch, getState) => {
+    try {
+        const response = await fetch(`https://api.untappd.com/v4/search/beer?q=${text}&client_id=41EF786235D5A6E859C26C7DABA2048BB19344D0&client_secret=2C5E752380284C4A141AD1066C8E688BF0A299F9`);
+        const data = await response.json()
+        dispatch({ type: SET_SEARCHED_BEERS, payload: data.response.beers.items })
+    } catch(err) {
+       console.log(err)
+    }
+}
+
+ const searchBeerInfo = (bid) => async (dispatch, getState) => {
+    try {
+        const { userLogin: { userInfo }} = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const response = await fetch(`https://api.untappd.com/v4/beer/info/${bid}?client_id=41EF786235D5A6E859C26C7DABA2048BB19344D0&client_secret=2C5E752380284C4A141AD1066C8E688BF0A299F9`);
+        const data = await response.json()
+        const beerObject = data.response.beer
+        //eslint-disable-next-line
+        const res = await axios.post('/api/dashboard', beerObject, config)
+        dispatch({ type: SET_MAIN_BEERS, payload: res.data})
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+export const addTap = (bid) => (dispatch, getState) =>  {
+    dispatch({type: ADD_TAP, payload: bid})
+    searchBeerInfo(bid)
+}
+
+export const removeBeer = (id) => async (dispatch, getState) => {
+    try {
+        const { userLogin: { userInfo }} = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        dispatch({ type: REMOVE_BEER, payload: id})
+        await axios.delete('/api/dashboard', {data: {userid: id}}, config)
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+export const getMainBottles = () => async (dispatch, getState) => {
+    try {
+        const res = await axios.get('/api/bottle');
+        dispatch({ type: SET_MAIN_BOTTLES, payload: res.data});
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+export const addBottle = (bottle) => async (dispatch, getState) => {
+    try {
+        const { userLogin: { userInfo }} = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const res = await axios.post('/api/bottle', bottle, config);
+        dispatch({ type: ADD_BOTTLE, payload: res.data});
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+export const removeBottle = (id) => async (dispatch, getState) => {
+    try {
+        const { userLogin: { userInfo }} = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        dispatch({ type: REMOVE_BOTTLE, payload: id});
+        await axios.delete('/api/bottle', {data: {userid: id}}, config);
+    } catch(err) {
+        console.log(err)
+    }
+}

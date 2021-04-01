@@ -3,8 +3,8 @@ import BottlePost from '../models/postModel'
 
 const getBottles = asyncHandler( async(req, res) => {
     try{
-        const allPost = await BottlePost.find({name: /\w/g });
-            res.json(allPost);}
+        const allPost = await BottlePost.find({name: /\w/g })
+            res.json(allPost)}
             catch (err) {
                 res.json(err)
             }
@@ -19,13 +19,11 @@ const postBottles = asyncHandler ( async(req, res) => {
     });
 
     try{
-        const repeatedBottle = await BottlePost.find({ name: req.body.name });
-        if(repeatedBottle) {
-         await BottlePost.deleteOne({ name: req.body.Name });
-        };
-        await bottle_post.save();
-        const allPost = await BottlePost.find({ name: /\w/g });
-        res.json(allPost);
+        const repeatedBottle = await BottlePost.find({ name: req.body.name })
+        if(repeatedBottle) { await BottlePost.deleteOne({ name: req.body.Name })}
+        await bottle_post.save()
+        const allPost = await BottlePost.find({ name: /\w/g })
+        res.json(allPost)
     }  catch (err) {
         res.json(err)
     };
@@ -34,8 +32,8 @@ const postBottles = asyncHandler ( async(req, res) => {
 const deleteBottle = asyncHandler( async(req, res) => {
    
     try {
-        const id = req.body.userid;
-    await BottlePost.deleteOne({_id: id });
+        const id = req.body.userid
+    await BottlePost.deleteOne({_id: id })
     }catch (err) {
         res.json(err)
     }
