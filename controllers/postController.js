@@ -1,10 +1,10 @@
 import asyncHandler from 'express-async-handler'
-import Post from '../models/postModel'
+import tapPost from '../models/postModel.js'
 
 
 const getTaps = asyncHandler( async(req, res) => {
     try{
-        const allPost = await Post.find({beerName: /\w/g });
+        const allPost = await tapPost.find({beerName: /\w/g });
             res.json(allPost);}
             catch (err) {
                 res.json(err)
@@ -13,7 +13,7 @@ const getTaps = asyncHandler( async(req, res) => {
 
 const postTap = asyncHandler( async(req, res) => {
     
-    const post = new Post({
+    const post = new tapPost({
         beerName: req.body.beer_name,
         beerLogo: req.body.beer_label_hd,
         beerABV: req.body.beer_abv,
@@ -29,10 +29,10 @@ const postTap = asyncHandler( async(req, res) => {
     try{
         const repeatedTap = await Post.find({ beerName: req.body.beerName });
         if(repeatedTap) {
-         await Post.deleteOne({ beerName: req.body.Name });
+         await tapPost.deleteOne({ beerName: req.body.Name });
         };
         await post.save();
-        const allPost = await Post.find({ beerName: /\w/g });
+        const allPost = await tapPost.find({ beerName: /\w/g });
         res.json(allPost);
     }  catch (err) {
         res.json(err)
@@ -42,7 +42,7 @@ const postTap = asyncHandler( async(req, res) => {
 const deleteTap = asyncHandler ( async(req, res) => {
     try {
         const id = req.body.userid;
-    await Post.deleteOne({_id: id });
+    await tapPost.deleteOne({_id: id });
     }catch (err) {
         res.json(err)
     }

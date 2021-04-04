@@ -7,6 +7,8 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import MenuScreen from './screens/MenuScreen'
+import BeerScreen from './screens/BeerScreen'
+import BeerListScreen from './screens/BeerListScreen'
 import ConfirmationScreen from './screens/ConfirmationScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
@@ -38,12 +40,14 @@ const App = () => {
             <Route path='/profile' component={ProfileScreen}  />
             <Route path='/product/:id' component={ProductScreen}  />
             <Route path='/cart' component={CartScreen}  />
-            <Route path='/admin/userList' component={UserListScreen} />
+            <Route path='/admin/beerlist' component={BeerListScreen} />
+            <Route path='/admin/userlist' component={UserListScreen} />
             <Route path='/admin/user/:id/edit' component={UserEditScreen} />
             <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
             <Route path='/admin/productlist' component={ProductListScreen} exact />
             <Route path='/admin/productlist/:pageNumber' component={ProductListScreen} exact />
             <Route path='/admin/orderlist' component={OrderListScreen} />
+            <Route path='/beers' component={BeerScreen} exact />
             <Route path='/menu' component={MenuScreen} exact />
             <Route path='/' component={HomeScreen} exact />
           </Container>

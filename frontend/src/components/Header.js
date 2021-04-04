@@ -78,6 +78,9 @@ const Header = () => {
                                <LinkContainer to='/admin/productlist'>
                                    <NavDropdown.Item>Products</NavDropdown.Item>
                                </LinkContainer>
+                               <LinkContainer to='/admin/beerlist'>
+                                   <NavDropdown.Item>Beers</NavDropdown.Item>
+                               </LinkContainer>
                                <LinkContainer to='/admin/orderlist'>
                                    <NavDropdown.Item>Orders</NavDropdown.Item>
                                </LinkContainer>
@@ -94,7 +97,8 @@ const Header = () => {
                 <Nav id='navContainer2'>
                 <Nav.Item id='navItem'><a href='/'>HOME</a></Nav.Item>
                 <Nav.Item id='navItem'><a href='/menu'>MENU</a></Nav.Item>
-                <Nav.Item id='navItem'><a href='#'>ABOUT</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='/beers'>BEERS</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='/about'>ABOUT</a></Nav.Item>
                 <Nav.Item id='navItem'><a href='https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true'>DELIVERY</a></Nav.Item>
                 </Nav>
             </Navbar>

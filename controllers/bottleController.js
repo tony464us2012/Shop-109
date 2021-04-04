@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import BottlePost from '../models/postModel'
+import BottlePost from '../models/postModel.js'
 
 const getBottles = asyncHandler( async(req, res) => {
     try{

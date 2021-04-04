@@ -7,8 +7,7 @@ import {
    REMOVE_BEER,
    SET_MAIN_BOTTLES,
    ADD_BOTTLE,
-   REMOVE_BOTTLE,
-   BEER_FAIL
+   REMOVE_BOTTLE
 } from './types'
 
 export const getMainBeers = () => async (dispatch, getState) => {
@@ -18,11 +17,11 @@ export const getMainBeers = () => async (dispatch, getState) => {
         const res = await axios.get('/api/dashboard')
         dispatch({ type: SET_MAIN_BEERS, payload: res.data})
 
+        const res2 = await axios.get('/api/bottle');
+        dispatch({ type: SET_MAIN_BOTTLES, payload: res2.data});
+
     } catch(err) {
-        dispatch({
-            type: BEER_FAIL, 
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
-        })
+            console.log(err)
     }
 }
 
@@ -74,15 +73,6 @@ export const removeBeer = (id) => async (dispatch, getState) => {
         }
         dispatch({ type: REMOVE_BEER, payload: id})
         await axios.delete('/api/dashboard', {data: {userid: id}}, config)
-    } catch(err) {
-        console.log(err)
-    }
-}
-
-export const getMainBottles = () => async (dispatch, getState) => {
-    try {
-        const res = await axios.get('/api/bottle');
-        dispatch({ type: SET_MAIN_BOTTLES, payload: res.data});
     } catch(err) {
         console.log(err)
     }
