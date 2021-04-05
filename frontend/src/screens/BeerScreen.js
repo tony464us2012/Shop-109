@@ -6,7 +6,6 @@ import FrontTap from '../components/ontap-components/FrontTap'
 import FrontBottle from '../components/ontap-components/FrontBottle'
 import Loader from '../components/Loader'
 import { getMainBeers } from '../actions/beerActions'
-import Meta from '../components/Meta'
 
 
 const BeerScreen = () => {
@@ -22,11 +21,6 @@ const BeerScreen = () => {
         dispatch(getMainBeers())
     }, [dispatch])
 
-    const tap_btn = {
-        backgroundColor: 'orange',
-        fontWeight: '600'
-    }
-    
     const tabHandler = (tab) => {
         setTab(tab)
     }

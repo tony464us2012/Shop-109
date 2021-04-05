@@ -35,7 +35,7 @@ export const searchBeer = (text) => async (dispatch, getState) => {
     }
 }
 
- const searchBeerInfo = (bid) => async (dispatch, getState) => {
+ export const searchBeerInfo = (bid) => async (dispatch, getState) => {
     try {
         const { userLogin: { userInfo }} = getState()
 
@@ -48,6 +48,7 @@ export const searchBeer = (text) => async (dispatch, getState) => {
         const response = await fetch(`https://api.untappd.com/v4/beer/info/${bid}?client_id=41EF786235D5A6E859C26C7DABA2048BB19344D0&client_secret=2C5E752380284C4A141AD1066C8E688BF0A299F9`);
         const data = await response.json()
         const beerObject = data.response.beer
+        console.log(beerObject)
         //eslint-disable-next-line
         const res = await axios.post('/api/dashboard', beerObject, config)
         dispatch({ type: SET_MAIN_BEERS, payload: res.data})
