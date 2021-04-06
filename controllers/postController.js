@@ -27,7 +27,7 @@ const postTap = asyncHandler( async(req, res) => {
     });
 
     try{
-        const repeatedTap = await Post.find({ beerName: req.body.beerName });
+        const repeatedTap = await tapPost.find({ beerName: req.body.beerName });
         if(repeatedTap) {
          await tapPost.deleteOne({ beerName: req.body.Name });
         };
