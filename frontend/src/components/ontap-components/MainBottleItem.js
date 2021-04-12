@@ -3,9 +3,9 @@ import React from 'react'
 const MainBottleItem = ({ name, price }) => {
 
     return (
-        <div>
-           {name} | ${price} 
-        </div>
+            <div>
+            {name} | ${price} 
+            </div>
     )
 }
 

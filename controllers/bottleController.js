@@ -30,12 +30,13 @@ const postBottles = asyncHandler ( async(req, res) => {
 })
 
 const deleteBottle = asyncHandler( async(req, res) => {
+    const id = req.body.userid
+    console.log(id)
    
     try {
-        const id = req.body.userid
     await BottlePost.deleteOne({_id: id })
     }catch (err) {
-        res.json(err)
+      console.log(err)
     }
 })
 

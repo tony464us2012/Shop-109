@@ -6,6 +6,7 @@ import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
+import AboutScreen from './screens/AboutScreen'
 import MenuScreen from './screens/MenuScreen'
 import BeerScreen from './screens/BeerScreen'
 import BeerListScreen from './screens/BeerListScreen'
@@ -48,6 +49,7 @@ const App = () => {
             <Route path='/admin/productlist/:pageNumber' component={ProductListScreen} exact />
             <Route path='/admin/orderlist' component={OrderListScreen} />
             <Route path='/beers' component={BeerScreen} exact />
+            <Route path='/about' component={AboutScreen} exact />
             <Route path='/menu' component={MenuScreen} exact />
             <Route path='/' component={HomeScreen} exact />
           </Container>

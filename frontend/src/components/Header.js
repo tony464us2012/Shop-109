@@ -99,7 +99,7 @@ const Header = () => {
                 <Nav.Item id='navItem'><a href='/menu'>MENU</a></Nav.Item>
                 <Nav.Item id='navItem'><a href='/beers'>BEERS</a></Nav.Item>
                 <Nav.Item id='navItem'><a href='/about'>ABOUT</a></Nav.Item>
-                <Nav.Item id='navItem'><a href='https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true'>DELIVERY</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true' target='_blank'>DELIVERY</a></Nav.Item>
                 </Nav>
             </Navbar>
         </header>

@@ -171,7 +171,7 @@
   }
   
   .beer-section1{
-    background-color: rgba(148, 177, 212);
+    background-color: rgb(184, 184, 184);
     padding: 5%;
     position: relative
   }
@@ -243,7 +243,7 @@
     .logo-cont1 {
       width: 100px;
       margin-bottom: 4%;
-   margin-left: 24%;
+      margin-left: 24%;
     }
     
     .logo-cont > img {
@@ -276,17 +276,17 @@
     }
    
     .dashtap {
-      position: absolute;
-       display: block;
+     position: absolute;
+     display: block;
      width: 35px;
-        height: 35px;
-        background-color: rgb(233, 236, 234);
-        border-radius: 50%;
-        text-align: center;
-        color: black;
-        padding: .5em .3em;
-        margin-left: 75%;
-        margin-top: 2%;
+     height: 35px;
+     background-color: rgb(233, 236, 234);
+     border-radius: 50%;
+     text-align: center;
+     color: black;
+     padding: .5em .3em;
+     margin-left: 75%;
+     margin-top: 2%;
    }
   
    .dashtap p {
@@ -304,10 +304,41 @@
     }
   
     .remove-btn {
-      display: block;
-      margin-top: 1%;
+      display: flex;
+      margin: 0 auto;
       height: 40px;
-      margin: .5rem auto
+    }
+    
+    .about-description {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      color: black;
+      font-family: 'IM Fell DW Pica', serif;
+      text-indent: 1rem;
+    }
+
+    .press-container {
+      border-top: 2px solid rgb(184, 184, 184);
+      margin-top: 2rem;
+      padding-top: 2rem
+    }
+    .press-container h1 {
+      text-transform: uppercase;
+    }
+    .press-item {
+      margin: 1rem 0;
+    }
+    .press-item a {
+      color: black;
+      text-decoration: underline;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .press-item h5 {
+      margin: .3rem 0 -.1rem
+    }
+    .star {
+      color: yellow;
     }
   
    @media (max-width:600px) {
@@ -384,13 +415,12 @@
 }
 
 .bottle-item {
-    width: 450px;
     text-align: center;
 }
 .bottle-item div {
     text-align: center;
     margin-bottom: .5rem;
-    font-weight: 600
+    font-weight: 600;
 }
 .wine-container h3 {
     text-align: center;

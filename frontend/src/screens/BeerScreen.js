@@ -33,7 +33,6 @@ const BeerScreen = () => {
 
     return loading ? <Loader /> : (
         <>
-            <h1 className='menu-title'>Our Beers</h1>
             <Nav as="ul" className='menu-container' style={{marginBottom: '1.5rem'}}>
                 <Nav.Item as="li">
                     <Nav.Link className='menu-link' style={selectHandler('onTap')} onClick={() => tabHandler('onTap')}>On Tap</Nav.Link>

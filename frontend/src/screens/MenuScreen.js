@@ -52,8 +52,12 @@ const MenuScreen = () => {
              tab === 'Side' ? <Side sides={sides} key={sides._id} /> : 
              <Beer />
             }
-            <h6 className='advisory'>CONSUMER ADVISORY</h6>
-            <p className='advisory-text'>*Consuming raw or undercooked, meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness especially if you have certain medical conditions.</p>
+            {tab !== 'Beer' ? 
+                <>
+                    <h6 className='advisory'>CONSUMER ADVISORY</h6>
+                    <p className='advisory-text'>*Consuming raw or undercooked, meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness especially if you have certain medical conditions.</p>
+                </> : ''
+            }
         </>
     )
 }

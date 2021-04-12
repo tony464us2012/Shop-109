@@ -200,11 +200,12 @@ td, h6 {
 
 .advisory {
  text-align: center;
- margin-top: 5%
+ margin-top: 7rem
 }
 
 .advisory-text {
-    color: black
+    color: black;
+    margin-top: .5rem
 }
 
 /* Beer */
