@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, Container, NavDropdown, Image, Badge } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
+import { set } from 'mongoose'
 
 
 const Header = () => {
@@ -14,6 +15,7 @@ const Header = () => {
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
+    const [day, setDay] = useState(new Date().getDay() )
     const [date, setDate] = useState(new Date())
     const [loggedIn, setLoggedIn] = useState(false)
 
@@ -33,17 +35,37 @@ const Header = () => {
     }, [userInfo, loggedIn, logoutHandler])
     
     function tick() {setDate(new Date())}
-    
 
     const pillStyle = {
     fontSize: '.7rem', height: '50%', marginLeft: '-14px'
     }
 
+
+    // const dayOfWeek = () => {
+    //     if (date.getDay() === 0) {
+    //        setDay('Sunday')
+    //     } else if (date.getDay() === 1) {
+    //         setDay('Monday')
+    //     } else if (date.getDay() === 2) {
+    //         setDay('Tuesday')
+    //     } else if (date.getDay() === 3) {
+    //         setDay('Wednesday')
+    //     } else if (date.getDay() === 4) {
+    //         setDay('Thursday')
+    //     } else if (date.getDay() === 5) {
+    //         setDay('Friday')
+    //     } else {setDay('Saturday')}
+    // }
+
+    // dayOfWeek()
+
     return (
         <header>
            <Navbar bg="dark" variant="dark" expand="lg" style={{padding: '0.4rem 0 .1rem'}} collapseOnSelect>
-                   {/* <h6 id='time'>{date.toLocaleTimeString()}</h6>
-                   <h6 id='time'>Order Now! We Are Open.</h6> */}
+                   <h5>{day === 0 ? 'Sunday' : day === 1 ? 'Monday' : day === 2 ? 'Tuesday' : day === 3 ? 'Wednesday' : day === 4 ? 'Thursday' : day === 5 ? 'Friday' : 'Saturday'}
+                   </h5>
+                   <h6 id='time'>{date.toLocaleTimeString()}</h6>
+                   <h6 id='time'>Order Now! We Are Open.</h6>
 
                <Container>
                        <Image id='Logo' alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/>
