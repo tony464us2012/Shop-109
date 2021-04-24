@@ -1,8 +1,7 @@
-import React, { useState, useRef, Fragment, useEffect } from 'react'
+import React, { useState, useRef, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, Image, Col, Form } from 'react-bootstrap'
+import { Modal, Col, Form } from 'react-bootstrap'
 import { addToCart } from '../actions/cartActions'
-import { PRODUCT_DETAILS_RESET } from '../actions/types'
 import Loader from './Loader'
 
 
@@ -16,7 +15,7 @@ const ProductModal = ({show, onHide, id, price}) => {
       const productList = useSelector(state => state.productList)
       const { products } = productList
 
-      const [itemPrice, setItemPrice] = useState(price)
+      const itemPrice = price
       const [extraPatty, setExtraPatty] = useState('')
       const [pattySwap, setPattySwap] = useState('')
       const [sideSwap, setSideSwap] = useState('')
@@ -97,11 +96,11 @@ const ProductModal = ({show, onHide, id, price}) => {
             ref.current = ref.current - prevPrice + (extractPrice(value))
           }
         }
-        if (name === 'Extras' && e.target.checked || name === 'bacon' && e.target.checked || name === 'chicken' && e.target.checked) {
+        if ((name === 'Extras' || name === 'bacon' || name === 'chicken') && e.target.checked) {
           setExtras([...extras, value])
           ref.current = ref.current + newValue
         }
-        if (name === 'Extras' && !e.target.checked || name === 'bacon' && !e.target.checked || name === 'chicken' && !e.target.checked) {
+        if ((name === 'Extras' || name === 'bacon' || name === 'chicken') && !e.target.checked ) {
          const newArray = extras.filter(x => x !== value)
          setExtras(newArray)
          ref.current = ref.current - newValue 

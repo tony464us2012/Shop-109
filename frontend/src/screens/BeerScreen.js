@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector  } from 'react-redux'
-import { Row, Col, Nav } from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
 import FrontTap from '../components/ontap-components/FrontTap'
 import FrontBottle from '../components/ontap-components/FrontBottle'
 import Loader from '../components/Loader'

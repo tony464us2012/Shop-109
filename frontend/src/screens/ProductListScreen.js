@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ProductListHeader from '../components/ProfileListHeader'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { deleteProduct, createProduct, listProducts, listProductDetails, updateProduct } from '../actions/productActions'
+import { deleteProduct, createProduct, listProducts, listProductDetails } from '../actions/productActions'
 import MenuItem from '../components/product-list-components/MenuItem'
 import Beers from '../components/product-list-components/Beers'
 import AddOns from '../components/product-list-components/AddOns'
@@ -27,10 +27,6 @@ const ProductListScreen = ({ history }) => {
     
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-    
-    const availableHandler = (product) => {
-        dispatch(updateProduct(product))
-    }
 
     useEffect(() => {
             dispatch(listProducts())
@@ -41,9 +37,10 @@ const ProductListScreen = ({ history }) => {
             history.push('/login')
         } 
         if(successCreate) {
+            // eslint-disable-next-line
             history.push(`/admin/product/${createdProduct._id}/edit`)
         }
-    }, [dispatch, history, products,  userInfo, successDelete, successCreate, availableHandler])
+    }, [dispatch, history, products,  userInfo, successDelete, successCreate, createdProduct._id])
     
 
     const deleteHandler = (id) => {

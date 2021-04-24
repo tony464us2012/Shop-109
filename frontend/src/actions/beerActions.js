@@ -107,7 +107,7 @@ export const removeBottle = (id) => async (dispatch, getState) => {
             }
         }
         dispatch({ type: REMOVE_BOTTLE, payload: id});
-       const res = await axios.delete('/api/bottle', {data: {userid: id}}, config);
+        await axios.delete('/api/bottle', {data: {userid: id}}, config);
     } catch(err) {
         console.log(err)
     }

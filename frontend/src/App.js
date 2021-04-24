@@ -23,6 +23,8 @@ import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import AccessibilityScreen from './screens/AccessibilityScreen'
+import TermsScreen from './screens/TermsScreen'
 
 const stripePromise = loadStripe('pk_test_51IQjuZL3CskvbasWBMNfrSLPF2xBP9mietcH9gbwH7SkVgGMAWIC8dM2V0XnN0U9e9BhVH48Uvu59RCBkImcOAdi00PyTPUtjp')
 
@@ -48,6 +50,8 @@ const App = () => {
             <Route path='/admin/productlist' component={ProductListScreen} exact />
             <Route path='/admin/productlist/:pageNumber' component={ProductListScreen} exact />
             <Route path='/admin/orderlist' component={OrderListScreen} />
+            <Route path='/terms' component={TermsScreen} exact />
+            <Route path='/accessibility' component={AccessibilityScreen} exact />
             <Route path='/beers' component={BeerScreen} exact />
             <Route path='/about' component={AboutScreen} exact />
             <Route path='/menu' component={MenuScreen} exact />

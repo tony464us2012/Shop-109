@@ -28,15 +28,15 @@ const OrderScreen = ({ match, history }) => {
                     <ListGroup variant='flush'>
                     <ListGroup.Item>
                             <h2>Ordered By</h2>
-                            <p>
+                            <h5>
                               Name: {order.user.name}
-                            </p>
-                            <p>
+                            </h5>
+                            <h5>
                               Email: {order.user.email}
-                            </p>
-                            <p>
+                            </h5>
+                            <h5>
                               Phone: 123-456-7890
-                            </p>
+                            </h5>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Order Placed</h2>

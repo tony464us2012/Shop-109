@@ -44,7 +44,7 @@ const ProductEditScreen = ({ match, history }) => {
                     setAvailable(product.available)
                 }
             }
-    }, [dispatch, productId, product, successUpdate])
+    }, [dispatch, productId, product, successUpdate, history])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -97,20 +97,12 @@ const ProductEditScreen = ({ match, history }) => {
                     <Form.Label>Price</Form.Label>
                     <Form.Control type='number' placeholder='Enter Price' value={price} onChange={(e) => setPrice(e.target.value)}></Form.Control>
                 </Form.Group>
-                <div className="mb-3">
-                    <Form.File id="formcheck-api-custom" custom>
-                    <Form.File.Input isValid />
-                    <Form.File.Label data-browse="Choose File">
-                        ...
-                    </Form.File.Label>
-                    </Form.File>
-                </div>
-                {/* <Form.Group controlId='image'>
+                <Form.Group controlId='image'>
                     <Form.Label>Image</Form.Label>
                     <Form.Control type='text' placeholder='Enter image url' value={image} onChange={(e) => setImage(e.target.value)}></Form.Control>
                     <Form.File id='image-file' label='Choose File' custom onChange={uploadFileHandler}></Form.File>
                     {uploading && <Loader />}
-                </Form.Group> */}
+                </Form.Group>
                 <Form.Group controlId='brand'>
                     <Form.Label>Category</Form.Label>
                     <Form.Control as='select' placeholder='Enter category' value={category} onChange={(e) => setCategory(e.target.value)}>

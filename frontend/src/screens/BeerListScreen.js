@@ -23,7 +23,7 @@ const BeerListScreen = ({ history }) => {
             history.push('/login')
         } 
         dispatch(getMainBeers())
-    }, [dispatch, history])
+    }, [dispatch, history, userInfo.isAdmin])
 
 return (
     <div className="dashboard1">

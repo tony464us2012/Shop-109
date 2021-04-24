@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
 import Meta from '../components/Meta'
 
 const AboutScreen = () => {
@@ -13,7 +12,7 @@ const AboutScreen = () => {
             <div className="press-container">
                 <h1>Press Release</h1>
                 <div className="press-item">
-                    <a href="https://www.miaminewtimes.com/restaurants/109-burger-serves-eclectic-burger-mash-ups-11246981" target="_blank">"109 Burger Joint Serves Eclectic Burger Mashups"</a>
+                    <a href="https://www.miaminewtimes.com/restaurants/109-burger-serves-eclectic-burger-mash-ups-11246981" target="_blank" rel="noreferrer">"109 Burger Joint Serves Eclectic Burger Mashups"</a>
                     <h5>By Miami New Times</h5>
                     <i class="material-icons star"> star </i>
                     <i class="material-icons star"> star </i>
@@ -22,7 +21,7 @@ const AboutScreen = () => {
                     <i class="material-icons star"> star </i>
                 </div>
                 <div className="press-item">
-                    <a href="https://wsvn.com/entertainment/eat-burgers-with-all-kinds-of-different-toppings-at-109-burger-joint-in-sweetwater/" target="_blank">"A burger is a blank canvas, and their creation are edible works of art"</a>
+                    <a href="https://wsvn.com/entertainment/eat-burgers-with-all-kinds-of-different-toppings-at-109-burger-joint-in-sweetwater/" target="_blank" rel="noreferrer">"A burger is a blank canvas, and their creation are edible works of art"</a>
                     <h5>By 7 News Miami</h5>
                     <i class="material-icons star"> star </i>
                     <i class="material-icons star"> star </i>
@@ -31,7 +30,7 @@ const AboutScreen = () => {
                     <i class="material-icons star"> star </i>
                 </div>
                 <div className="press-item">
-                    <a href="https://bigseventravel.com/cheat-meal-miami/" target="_blank">"One of the best places for a cheat meal in Miami"</a>
+                    <a href="https://bigseventravel.com/cheat-meal-miami/" target="_blank" rel="noreferrer">"One of the best places for a cheat meal in Miami"</a>
                     <h5>By Big 7 Travel</h5>
                     <i class="material-icons star"> star </i>
                     <i class="material-icons star"> star </i>

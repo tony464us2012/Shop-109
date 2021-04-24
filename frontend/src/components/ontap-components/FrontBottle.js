@@ -1,5 +1,4 @@
 import React from 'react'
-import Message from '../Message'
 import MainBottleItem from './MainBottleItem'
 import MainWineItem from './MainWineItem'
 
