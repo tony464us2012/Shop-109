@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown, Image, Badge, Button } from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, Image, Badge } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 
 
@@ -34,7 +34,7 @@ const Header = () => {
             if (hour >= 12 && hour < 22 ) {
                 setOpen(true)
             } else { setOpen(false) }
-        } else if (day == 5 || day == 6) {
+        } else if (day === 5 || day === 6) {
             if (hour >= 12 ) {
                 setOpen(true)
             } else {setOpen(false)}
@@ -47,9 +47,7 @@ const Header = () => {
         return function cleanup() {
             clearInterval(timerID);
         }
-
-     
-    }, [userInfo, loggedIn, open, logoutHandler])
+    }, [userInfo, loggedIn, open, logoutHandler, day, hour])
     
     function tick() {setDate(new Date()); setDay(new Date().getDay()); setHour(new Date().getHours())}
 
@@ -60,10 +58,10 @@ const Header = () => {
     return (
         <header>
            <Navbar bg="dark" variant="dark" expand="lg" style={{padding: '0.4rem 0 .1rem'}} collapseOnSelect>
-                   <h5>{day === 0 ? 'Sunday' : day === 1 ? 'Monday' : day === 2 ? 'Tuesday' : day === 3 ? 'Wednesday' : day === 4 ? 'Thursday' : day === 5 ? 'Friday' : 'Saturday'}
-                   </h5>
-                   <h6 id='time'>{date.toLocaleTimeString()}</h6>
                    <h6 id='time'>{open ? <h2><Badge variant='success' >Open</Badge></h2> : <h2><Badge variant='danger' >Closed</Badge></h2>}</h6>
+                   <h5 id='time2'>{day === 0 ? 'Sunday 12:00pm - 8pm' : day === 1 ? 'Monday 12:00pm - 10pm' : day === 2 ? 'Tuesday 12:00pm - 10pm' : day === 3 ? 'Wednesday 12:00pm - 10pm' : day === 4 ? 'Thursday 12:00pm - 10pm' : day === 5 ? 'Friday 12:00pm - 12am' : 'Saturday 12:00pm - 12pm'} <br/>
+                   {date.toLocaleTimeString()} 
+                   </h5>
 
                <Container>
                        <Image id='Logo' alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/>

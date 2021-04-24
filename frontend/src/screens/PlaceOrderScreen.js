@@ -27,6 +27,10 @@ const PlaceOrderScreen = ({ history }) => {
         name: '',
       });
 
+    const [day, setDay] = useState(new Date().getDay())
+    const [hour, setHour] = useState(new Date().getHours())
+    const [open, setOpen] = useState(null)
+
     const subtotal = cart.cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)
     const tax = Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
     const totalprice = Number(cart.cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
@@ -35,8 +39,26 @@ const PlaceOrderScreen = ({ history }) => {
         if(success) {
             history.push(`/confirmation/${order._id}`)
         }
+        if (day >= 1 && day <= 4) {
+            if (hour >= 12 && hour < 22 ) {
+                setOpen(true)
+            } else { setOpen(false) }
+        } else if (day === 5 || day === 6) {
+            if (hour >= 12 ) {
+                setOpen(true)
+            } else {setOpen(false)}
+         } else {
+             if (hour >= 12 && hour < 20) {
+                 setOpen(true)
+             }
+         }
+        var timerID = setInterval( () => tick(), 1000 );
+        return function cleanup() {
+            clearInterval(timerID);}
         //eslint-disable-next-line
     }, [history, success])
+   
+    function tick() {setDay(new Date().getDay()); setHour(new Date().getHours())}
 
     const placeOrderHandler = async (e) => {
         e.preventDefault()
@@ -154,6 +176,7 @@ const PlaceOrderScreen = ({ history }) => {
                                 </Form.Group>
                                 <CardSection />
                                 <Button type='submit' className='pay-btn' variant='light' size='sm' disabled={cart.cartItems === 0 || !stripe}>{processing? 'Processing...' : 'PLACE ORDER'} </Button>
+                                {!open ? <h5 style={{textAlign: 'center', marginTop: '.5rem'}}>We are currently closed</h5> : ''}
                                 </Form>
                             </ListGroup.Item>
                         </ListGroup>

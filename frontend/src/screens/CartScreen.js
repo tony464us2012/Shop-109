@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Button, Card } from 'react-bootstrap'
@@ -15,16 +15,38 @@ const CartScreen = ({ match, location, history }) => {
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
+    
+    const [day, setDay] = useState(new Date().getDay())
+    const [hour, setHour] = useState(new Date().getHours())
+    const [open, setOpen] = useState(null)
 
     useEffect(() => {
         if(productId) {
             dispatch(addToCart(productId, qty))
         }
-    }, [dispatch, productId, qty])
+        if (day >= 1 && day <= 4) {
+            if (hour >= 12 && hour < 22 ) {
+                setOpen(true)
+            } else { setOpen(false) }
+        } else if (day === 5 || day === 6) {
+            if (hour >= 12 ) {
+                setOpen(true)
+            } else {setOpen(false)}
+         } else {
+             if (hour >= 12 && hour < 20) {
+                 setOpen(true)
+             }
+         }
+        var timerID = setInterval( () => tick(), 1000 );
+        return function cleanup() {
+            clearInterval(timerID);}
+               },[dispatch, productId, qty, day, hour])
 
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id))
     }
+
+    function tick() {setDay(new Date().getDay()); setHour(new Date().getHours())}
 
     const checkoutHandler = () => {
         if (userInfo) {
@@ -91,7 +113,8 @@ const CartScreen = ({ match, location, history }) => {
                            <p>${Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))}</p>
                        </ListGroup.Item>
                        <ListGroup.Item>
-                           <Button type='button' variant='light' className='btn-sm' disabled={cartItems.length === 0} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
+                           <Button type='button' variant='light' className='btn-sm' disabled={cartItems.length === 0 || !open} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
+                           {!open ? <h5 style={{textAlign: 'center', marginTop: '.5rem'}}>We are currently closed</h5> : ''}
                        </ListGroup.Item>
                    </ListGroup>
                </Card>
