@@ -6,7 +6,12 @@ body {
 
 main {
     background-color: #fff;
-    min-height: 75vh
+    background-image: url(./images/app-background1.png);
+    background-size: auto;
+	background-repeat: repeat;
+	background-position: 50% 50%;
+	margin: 0 auto;
+    min-height: 80vh
 }
 .card{
     background-color: #fff
@@ -68,10 +73,11 @@ td, h6 {
     display: block;
     width: 4rem;
     height: 4rem;
+    margin: .2rem 35%
 }
 
 #navBar2 {
-    padding: 0 !important;
+    padding: 0 1re, !important;
     display: flex !important;
     justify-content:space-between !important;
     height: 2.5rem
@@ -83,8 +89,9 @@ td, h6 {
     align-items: center;
     margin: 0 auto;
     height: 100%;
-    width: 26%
+    width: 20%
 }
+
 /* 
 #navContainer2:ch */
 
@@ -172,14 +179,16 @@ td, h6 {
 
 .product-container {
     cursor: pointer;
+    background-color: white;
+    min-height: 12vh;
 }
 
 .product {
     display: flex;
-    border: 1px solid black;
+    border: 1px solid lightgrey;
     border-radius: 10px;
     height: 100%;
-    padding: 14px 10px
+    padding: 14px 10px;
 }
 
 .product:hover {
@@ -198,8 +207,9 @@ td, h6 {
 }
 
 .productInfo h6 {
-    font-family: 'IM Fell DW Pica', serif;
-    line-height: 120%;
+    /* font-family: 'IM Fell DW Pica', serif; */
+    font-family: 'Barlow';
+    line-height: 130%;
 }
 
  h5 .title-text {
@@ -277,6 +287,7 @@ td, h6 {
 .modal-description {
     margin: 1rem 0;
     line-height: 145%;
+    font-family: 'Barlow';
 }
 
 textarea {
@@ -341,6 +352,10 @@ input[type='checkbox'] {
   .myOrderTotal {
       display: inline-block;
       margin-right: 8%;
+  }
+
+  footer {
+      padding-top: 2rem
   }
 
   /* Accessibility */

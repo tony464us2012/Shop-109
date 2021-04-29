@@ -41,7 +41,6 @@ const MenuScreen = () => {
     return loading ? <Loader /> : (
         <>
             <Meta />
-            <h1 className='menu-title'>Menu</h1>
             <MenuHeader tabHandler={tabHandler} tab={tab} />
             {tab === 'Appetizer' ? <Appetizer appetizers={appetizers} key={appetizers._id} /> :
              tab === 'Salad' ? <Salad salads={salads} key={salads._id}/> :

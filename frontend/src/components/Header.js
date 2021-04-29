@@ -119,6 +119,11 @@ const Header = () => {
                 <Nav.Item id='navItem'><a href="/about">ABOUT</a></Nav.Item>
                 <Nav.Item id='navItem'><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noreferrer" target="_blank">DELIVERY</a></Nav.Item>
                 </Nav>
+                <Nav id='navContainer3'>
+                  <Nav.Item id='navItem'><a href="https://twitter.com/109burgerjoint?lang=en" target='_blank' rel='noreferrer'><i className="fab fa-twitter"></i></a></Nav.Item>
+                  <Nav.Item id='navItem'><a href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-facebook-f"></i></a></Nav.Item>
+                  <Nav.Item id='navItem'><a href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-instagram"></i></a></Nav.Item>
+                </Nav>
             </Navbar>
         </header>
     )

@@ -32,7 +32,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main className="py-5" >
+      <main className="py-5 app" >
         <Elements stripe={stripePromise}>
           <Container style={{marginTop: '5%'}} >
             <Route path='/confirmation/:id' component={ConfirmationScreen}  />
