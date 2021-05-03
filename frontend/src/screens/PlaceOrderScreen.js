@@ -69,7 +69,9 @@ const PlaceOrderScreen = ({ history }) => {
         const card = elements.getElement(CardElement)
         const token = await stripe.createToken(card);
         if (token.error) {
+            setProcessing(false);
             console.log(token.error)
+            return;
         } else {
       
             dispatch(createOrder({
@@ -110,10 +112,7 @@ const PlaceOrderScreen = ({ history }) => {
                                     {cart.cartItems.map((item, index) => (
                                         <ListGroup.Item key={index}>
                                             <Row>
-                                                <Col md={2}>
-                                                    <Image src={item.image} alt={item.name} fluid rounded />
-                                                </Col>
-                                                <Col>
+                                                <Col md={5}>
                                                 <h5>{item.name}</h5>
                                                 </Col>
                                                 <Col md={4}>
@@ -166,7 +165,7 @@ const PlaceOrderScreen = ({ history }) => {
                                     <Col><p>${totalprice}</p></Col>
                                 </Row>
                             </ListGroup.Item>
-                                {error && <ListGroup.Item><Message variant='danger'>{error}</Message></ListGroup.Item> }
+                                {error && <ListGroup.Item><Message variant='danger'>Card Declined</Message></ListGroup.Item> }
                             <ListGroup.Item>
                                 <Form onSubmit={placeOrderHandler}>
                                 <h5 className='billingTitle'>Billing Information</h5>
@@ -175,7 +174,7 @@ const PlaceOrderScreen = ({ history }) => {
                                     <Form.Control type="text" className='cardInfo' size='sm' name='name' onChange={(e) => setBillingDetails({name: e.target.value})} placeholder="Enter name" required />
                                 </Form.Group>
                                 <CardSection />
-                                <Button type='submit' className='pay-btn' variant='light' size='sm' disabled={cart.cartItems === 0 || !stripe}>{processing? 'Processing...' : 'PLACE ORDER'} </Button>
+                                <Button type='submit' className='pay-btn' variant='light' size='sm' disabled={cart.cartItems === 0 || !stripe || !open}>{processing? 'Processing...' : 'PLACE ORDER'} </Button>
                                 {!open ? <h5 style={{textAlign: 'center', marginTop: '.5rem'}}>We are currently closed</h5> : ''}
                                 </Form>
                             </ListGroup.Item>

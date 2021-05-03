@@ -63,12 +63,12 @@ const CartScreen = ({ match, location, history }) => {
                {cartItems.length === 0 ? <Message>Your cart is empty {' '}<Link to='/menu'> Go to menu</Link></Message> : (
                    <ListGroup variant='flush'>
                        {cartItems.map(item => (
-                           <ListGroup.Item style={{paddingRight: '2.5rem'}}>
+                           <ListGroup.Item style={{padding: '1rem 2.5rem'}}>
                                <Row>
                                    <Col md={2}>
                                        <Image src={item.image} alt={item.name} fluid rounded />
                                    </Col>
-                                <Col md={3}>
+                                <Col md={5}>
                                    <h5>{item.name}</h5>
                                 </Col>
                                 <Col md={2}><p>${item.price}</p></Col>

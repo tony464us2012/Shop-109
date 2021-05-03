@@ -187,8 +187,7 @@ td, h6 {
     display: flex;
     border: 1px solid lightgrey;
     border-radius: 10px;
-    height: 100%;
-    padding: 14px 10px;
+    padding-right: 10px;
 }
 
 .product:hover {
@@ -196,20 +195,19 @@ td, h6 {
 }
 
 .product img {
-    width: 6rem;
-    height: 6rem;
-    margin-top: 3%;
-    margin-right: 1rem
+    width: 8rem;
+    height: 10rem;
 }
 
 .productInfo {
-    padding: 4px 4px 4px 14px;
+    padding: 14px 4px 4px 18px;
 }
 
 .productInfo h6 {
     /* font-family: 'IM Fell DW Pica', serif; */
-    font-family: 'Barlow';
+    font-family: 'Times New Roman', Times, serif;
     line-height: 130%;
+    font-weight: 100
 }
 
  h5 .title-text {
@@ -244,7 +242,7 @@ td, h6 {
 .beer-product img {
     display: block;
     width: 8rem;
-    height: 8rem;
+    height: 10rem;
     margin: 0 auto;
 }
 
@@ -279,15 +277,17 @@ td, h6 {
 
 /* Modal */
 
+
+
 .modal-img {
-    width: 8rem;
-    height: 8rem
+   width: 10rem;
+   height: 10rem
 }
 
 .modal-description {
     margin: 1rem 0;
     line-height: 145%;
-    font-family: 'Barlow';
+
 }
 
 textarea {
@@ -304,7 +304,10 @@ input[type='submit'] {
 
 input[type='radio'],
 input[type='checkbox'] {
-    margin-right: .3rem
+    margin-right: .3rem;
+    font-family: 'Barlow' !important;
+    line-height: 130%;
+    font-weight: 100
 }
 
 /* Payment */
@@ -366,5 +369,6 @@ input[type='checkbox'] {
       margin-bottom: 1rem
   }
   .accessibility a {
-      color: black
+      color: black;
+    
   }

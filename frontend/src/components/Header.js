@@ -67,7 +67,7 @@ const Header = () => {
                        <Image id='Logo' alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ml-auto">
+                        <Nav className="ml-auto" fill>
                         {loggedIn && userInfo.name ? (
                             <NavDropdown title={userInfo.name ? `Hi ${userInfo.name.split(' ')[0]}` : ''} id='username'>
                                 <LinkContainer to='/profile'>
@@ -87,7 +87,8 @@ const Header = () => {
                             <LinkContainer to='/register' id='username'>
                             <Nav.Link><i className="fas fa-user-plus"></i> Sign Up</Nav.Link>
                             </LinkContainer>
-                           </>)}
+                            </>
+                           )}
                     {loggedIn && userInfo.isAdmin && (
                                <NavDropdown title='Admin' id='adminmenu'>
                                <LinkContainer to='/admin/userlist'>

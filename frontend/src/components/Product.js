@@ -12,7 +12,7 @@ const Product = ({ product }) => {
         <>
             <div className='product-container' onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}>
                 <div className='product' >
-                    <img src={product.image} variant='top' alt='product'/>
+                    <img src={product.image}  alt='product'/>
                     <div className='productInfo'>
                             <h5><strong className='title-text'>{product.name}</strong></h5>
                             <h6>{product.description}</h6>

@@ -31,7 +31,7 @@ const TapItem = ({name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingS
                 <p>{ ratingCount } <br/>Rating Count</p>
                 <p>{ ratingScore.toPrecision(2) }/4 <br/>Rating Score</p>
             </div>
-            <Button className="remove-btn" variant='dark' onClick={()=> {dispatch(removeBeer(id))}}>Remove</Button>
+            <Button className="remove-btn" variant='danger' onClick={()=> {dispatch(removeBeer(id))}}>Remove</Button>
         </div>
         )
     }

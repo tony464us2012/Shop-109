@@ -376,7 +376,7 @@ const ProductModal = ({show, onHide, id, price}) => {
                         <Form.Text as="textarea" placeholder='allergies, etc.' width='100%' value={instructions} onChange={handleChange} rows={3} />
                       </Form.Group>
                     {available ? 
-                    <input type='submit' className='btn-light' value={`Add To Cart $${ref.current ? ref.current : itemPrice}`}/> :
+                    <input type='submit' className='btn-success' value={`Add To Cart $${ref.current ? ref.current : itemPrice}`}/> :
                     <input type='submit' value='Out of Stock' disabled /> 
                   }
                       </Form>
