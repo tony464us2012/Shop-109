@@ -11,7 +11,8 @@ main {
 	background-repeat: repeat;
 	background-position: 50% 50%;
 	margin: 0 auto;
-    min-height: 80vh
+    min-height: 80vh;
+    width: 100%
 }
 .card{
     background-color: #fff
@@ -68,6 +69,9 @@ td, h6 {
 }
 
 /* Header */
+.first-nav {
+    display: flex;
+}
 
 #Logo {
     display: block;
@@ -77,7 +81,7 @@ td, h6 {
 }
 
 #navBar2 {
-    padding: 0 1re, !important;
+    padding: 0 1rem, !important;
     display: flex !important;
     justify-content:space-between !important;
     height: 2.5rem
@@ -92,15 +96,11 @@ td, h6 {
     width: 20%
 }
 
-/* 
-#navContainer2:ch */
-
 .fa-shopping-cart {
     color: white;
     font-size: 1.5rem;
     margin-right: 15%;
     height: 100%;
-
 }
 
 .menu-container {
@@ -131,25 +131,12 @@ td, h6 {
     text-decoration: none;
 }
 
-
-
-/* #navItem:hover {
- border: 1px solid black;
- color: white;
- background-color: whitesmoke !important;
-} */
-
 .menu-link {
     color: black;
     border: 2px solid black;
     margin-right: 1rem;
     font-weight: 500
 }
-
-/* .menu-link:active {
-    background-color: black;
-    color: white
-} */
 
 #time {
     color: white;
@@ -158,7 +145,7 @@ td, h6 {
 }
 
 #time2 {
-    font-family:'Times New Roman', Times, serif
+    font-family:'Times New Roman', Times, serif;
 }
 
 #adminmenu,
@@ -166,8 +153,6 @@ td, h6 {
     border: none;
     margin: 0 .5rem
 }
-
-
 /* Menu */
 
 .menu-item-container {
@@ -204,7 +189,6 @@ td, h6 {
 }
 
 .productInfo h6 {
-    /* font-family: 'IM Fell DW Pica', serif; */
     font-family: 'Times New Roman', Times, serif;
     line-height: 130%;
     font-weight: 100
@@ -277,8 +261,6 @@ td, h6 {
 
 /* Modal */
 
-
-
 .modal-img {
    width: 10rem;
    height: 10rem
@@ -303,7 +285,8 @@ input[type='submit'] {
 }
 
 input[type='radio'],
-input[type='checkbox'] {
+input[type='checkbox'],
+input[type='number'] {
     margin-right: .3rem;
     font-family: 'Barlow' !important;
     line-height: 130%;

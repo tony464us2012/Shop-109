@@ -25,6 +25,9 @@ const ProductListScreen = ({ history }) => {
     const productCreate = useSelector(state => state.productCreate)
     const { loading:loadingCreate, error:errorCreate, success:successCreate, product:createdProduct } = productCreate
     
+    const productDetails = useSelector(state => state.productDetails)
+    const {product} = productDetails
+    
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
@@ -40,7 +43,7 @@ const ProductListScreen = ({ history }) => {
             // eslint-disable-next-line
             history.push(`/admin/product/${createdProduct._id}/edit`)
         }
-    }, [dispatch, history, products,  userInfo, successDelete, successCreate, createdProduct._id])
+    }, [dispatch, history, products,  userInfo, successDelete, successCreate])
     
 
     const deleteHandler = (id) => {

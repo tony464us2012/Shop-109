@@ -57,17 +57,13 @@ const Header = () => {
 
     return (
         <header>
-           <Navbar bg="dark" variant="dark" expand="lg" style={{padding: '0.4rem 0 .1rem'}} collapseOnSelect>
-                   <h6 id='time'>{open ? <h2><Badge variant='success' >Open</Badge></h2> : <h2><Badge variant='danger' >Closed</Badge></h2>}</h6>
-                   <h5 id='time2'>{day === 0 ? 'Sunday 12:00pm - 8pm' : day === 1 ? 'Monday 12:00pm - 10pm' : day === 2 ? 'Tuesday 12:00pm - 10pm' : day === 3 ? 'Wednesday 12:00pm - 10pm' : day === 4 ? 'Thursday 12:00pm - 10pm' : day === 5 ? 'Friday 12:00pm - 12am' : 'Saturday 12:00pm - 12pm'} <br/>
+           <Navbar bg="dark"  variant="dark" expand="lg" style={{padding: '0.4rem 1rem .1rem'}} collapseOnSelect>
+                   <div id='time'>{open ? <h2><Badge variant='success' >Open</Badge></h2> : <h2><Badge variant='danger' >Closed</Badge></h2>}</div>
+                   <div id='time2'>{day === 0 ? 'Sunday 12:00pm - 8pm' : day === 1 ? 'Monday 12:00pm - 10pm' : day === 2 ? 'Tuesday 12:00pm - 10pm' : day === 3 ? 'Wednesday 12:00pm - 10pm' : day === 4 ? 'Thursday 12:00pm - 10pm' : day === 5 ? 'Friday 12:00pm - 12am' : 'Saturday 12:00pm - 12pm'} <br/>
                    {date.toLocaleTimeString()} 
-                   </h5>
-
-               <Container>
+                   </div>
                        <Image id='Logo' alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ml-auto" fill>
+                        <Nav className="ml-auto first-nav">
                         {loggedIn && userInfo.name ? (
                             <NavDropdown title={userInfo.name ? `Hi ${userInfo.name.split(' ')[0]}` : ''} id='username'>
                                 <LinkContainer to='/profile'>
@@ -105,15 +101,13 @@ const Header = () => {
                                </LinkContainer>
                            </NavDropdown>
                     )}
+                        <LinkContainer to='/cart' style={{display: 'flex', marginRight: '5%', border: 'none'}}>
+                                <Nav.Link><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='danger' style={pillStyle}>{cartItems.length}</Badge> : ''}</Nav.Link>
+                            </LinkContainer>
                         </Nav>
-                    </Navbar.Collapse>
-               <LinkContainer to='/cart' style={{display: 'flex', marginRight: '1.5rem', border: 'none'}}>
-                    <Nav.Link style={{height: '100%'}}><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='danger' style={pillStyle}>{cartItems.length}</Badge> : ''}</Nav.Link>
-                </LinkContainer>
-               </Container>
             </Navbar>
-            <Navbar collapseOnSelect id='navBar2' expand='lg' bg='light' variant="light">
-                <Nav id='navContainer2'>
+            <Navbar bg="light" variant="light" expand="lg" style={{padding: '0.4rem 0 .1rem'}} collapseOnSelect>
+            <Nav className='m-auto' >
                 <Nav.Item id='navItem'><a href="/">HOME</a></Nav.Item>
                 <Nav.Item id='navItem'><a href= "/menu">MENU</a ></Nav.Item>
                 <Nav.Item id='navItem'><a href="/beers">BEERS</a></Nav.Item>
