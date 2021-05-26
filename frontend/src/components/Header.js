@@ -59,8 +59,9 @@ const Header = () => {
         <header>
            <Navbar bg="dark"  variant="dark" expand="lg" style={{padding: '0.4rem 1rem .1rem'}} collapseOnSelect>
                    <div id='time'>{open ? <h2><Badge variant='success' >Open</Badge></h2> : <h2><Badge variant='danger' >Closed</Badge></h2>}</div>
-                   <div id='time2'>{day === 0 ? 'Sunday 12:00pm - 8pm' : day === 1 ? 'Monday 12:00pm - 10pm' : day === 2 ? 'Tuesday 12:00pm - 10pm' : day === 3 ? 'Wednesday 12:00pm - 10pm' : day === 4 ? 'Thursday 12:00pm - 10pm' : day === 5 ? 'Friday 12:00pm - 12am' : 'Saturday 12:00pm - 12pm'} <br/>
-                   {date.toLocaleTimeString()} 
+                   <div id='time2'><p>{day === 0 ? 'Sunday' : day === 1 ? 'Monday' : day === 2 ? 'Tuesday' : day === 3 ? 'Wednesday' : day === 4 ? 'Thursday' : day === 5 ? 'Friday' : 'Saturday'}</p><br/>
+                   <p>{day === 0 ? '12:00pm - 8pm' : day === 1 ? '12:00pm - 10pm' : day === 2 ? '12:00pm - 10pm' : day === 3 ? '12:00pm - 10pm' : day === 4 ? '12:00pm - 10pm' : day === 5 ? '12:00pm - 12am' : '12:00pm - 12pm'}</p><br/>
+                   {/* <div>{date.toLocaleTimeString()} </div> */}
                    </div>
                        <Image id='Logo' alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/>
                         <Nav className="ml-auto first-nav">
@@ -107,7 +108,7 @@ const Header = () => {
                         </Nav>
             </Navbar>
             <Navbar bg="light" variant="light" expand="lg" style={{padding: '0.4rem 0 .1rem'}} collapseOnSelect>
-            <Nav className='m-auto' >
+            <Nav className='m-auto'>
                 <Nav.Item id='navItem'><a href="/">HOME</a></Nav.Item>
                 <Nav.Item id='navItem'><a href= "/menu">MENU</a ></Nav.Item>
                 <Nav.Item id='navItem'><a href="/beers">BEERS</a></Nav.Item>

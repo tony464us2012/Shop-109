@@ -144,8 +144,9 @@ td, h6 {
     margin: 0 1rem
 }
 
-#time2 {
+#time2 > *{
     font-family:'Times New Roman', Times, serif;
+    margin-bottom: -.8rem
 }
 
 #adminmenu,
