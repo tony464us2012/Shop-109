@@ -58,12 +58,14 @@ const Header = () => {
     return (
         <header>
            <Navbar bg="dark"  variant="dark" expand="lg" style={{padding: '0.4rem 1rem .1rem'}} collapseOnSelect>
-                   <div id='time'>{open ? <h2><Badge variant='success' >Open</Badge></h2> : <h2><Badge variant='danger' >Closed</Badge></h2>}</div>
+                <Navbar.Brand href="#home"> <Image id='Logo' className="d-inline-block align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
+                   {/* <div id='time'>{open ? <h2><Badge variant='success' >Open</Badge></h2> : <h2><Badge variant='danger' >Closed</Badge></h2>}</div>
                    <div id='time2'><p>{day === 0 ? 'Sunday' : day === 1 ? 'Monday' : day === 2 ? 'Tuesday' : day === 3 ? 'Wednesday' : day === 4 ? 'Thursday' : day === 5 ? 'Friday' : 'Saturday'}</p><br/>
-                   <p>{day === 0 ? '12:00pm - 8pm' : day === 1 ? '12:00pm - 10pm' : day === 2 ? '12:00pm - 10pm' : day === 3 ? '12:00pm - 10pm' : day === 4 ? '12:00pm - 10pm' : day === 5 ? '12:00pm - 12am' : '12:00pm - 12pm'}</p><br/>
+                   <p>{day === 0 ? '12:00pm - 8pm' : day === 1 ? '12:00pm - 10pm' : day === 2 ? '12:00pm - 10pm' : day === 3 ? '12:00pm - 10pm' : day === 4 ? '12:00pm - 10pm' : day === 5 ? '12:00pm - 12am' : '12:00pm - 12pm'}</p><br/> */}
                    {/* <div>{date.toLocaleTimeString()} </div> */}
-                   </div>
-                       <Image id='Logo' alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/>
+                   {/* </div> */}
+                   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                   <Navbar.Collapse id="responsive-navbar-nav" className="nav-collapse">
                         <Nav className="ml-auto first-nav">
                         {loggedIn && userInfo.name ? (
                             <NavDropdown title={userInfo.name ? `Hi ${userInfo.name.split(' ')[0]}` : ''} id='username'>
@@ -106,8 +108,11 @@ const Header = () => {
                                 <Nav.Link><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='danger' style={pillStyle}>{cartItems.length}</Badge> : ''}</Nav.Link>
                             </LinkContainer>
                         </Nav>
+                   </Navbar.Collapse>
             </Navbar>
-            <Navbar bg="light" variant="light" expand="lg" style={{padding: '0.4rem 0 .1rem'}} collapseOnSelect>
+            <Navbar bg="light" variant="light" expand="lg" style={{padding: '0.4rem 0 .1rem', marginBottom: '1rem'}} collapseOnSelect>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav2" />
+            <Navbar.Collapse id="responsive-navbar-nav2" className="nav-collapse2">
             <Nav className='m-auto'>
                 <Nav.Item id='navItem'><a href="/">HOME</a></Nav.Item>
                 <Nav.Item id='navItem'><a href= "/menu">MENU</a ></Nav.Item>
@@ -115,11 +120,12 @@ const Header = () => {
                 <Nav.Item id='navItem'><a href="/about">ABOUT</a></Nav.Item>
                 <Nav.Item id='navItem'><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noreferrer" target="_blank">DELIVERY</a></Nav.Item>
                 </Nav>
-                <Nav id='navContainer3'>
+            </Navbar.Collapse>
+                {/* <Nav id='navContainer3'>
                   <Nav.Item id='navItem'><a href="https://twitter.com/109burgerjoint?lang=en" target='_blank' rel='noreferrer'><i className="fab fa-twitter"></i></a></Nav.Item>
                   <Nav.Item id='navItem'><a href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-facebook-f"></i></a></Nav.Item>
                   <Nav.Item id='navItem'><a href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-instagram"></i></a></Nav.Item>
-                </Nav>
+                </Nav> */}
             </Navbar>
         </header>
     )

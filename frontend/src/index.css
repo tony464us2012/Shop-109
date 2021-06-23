@@ -69,8 +69,13 @@ td, h6 {
 }
 
 /* Header */
-.first-nav {
+/* .first-nav {
     display: flex;
+} */
+
+.nav-collapse {
+    display: flex;
+    justify-content: right;
 }
 
 #Logo {
