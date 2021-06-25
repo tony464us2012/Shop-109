@@ -78,6 +78,11 @@ td, h6 {
     justify-content: right;
 }
 
+.nav-collapse2 {
+    display: flex;
+    justify-content: center;
+}
+
 #Logo {
     display: block;
     width: 4rem;
@@ -172,12 +177,12 @@ td, h6 {
     cursor: pointer;
     background-color: white;
     min-height: 12vh;
+    border: 1px solid black;
 }
 
 .product {
     display: flex;
     border: 1px solid lightgrey;
-    border-radius: 10px;
     padding-right: 10px;
 }
 
@@ -360,4 +365,13 @@ input[type='number'] {
   .accessibility a {
       color: black;
     
+  }
+
+  @media (max-width: 768px) {
+      .menu-container {
+          margin-bottom: 1rem
+      }
+      .menu-container .menu-link {
+          margin-bottom: 1rem
+      }
   }

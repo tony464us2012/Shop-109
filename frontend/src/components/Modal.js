@@ -373,11 +373,11 @@ const ProductModal = ({show, onHide, id, price}) => {
                       }
                       <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>List Any Preferences</Form.Label>
-                        <Form.Text as="textarea" placeholder='allergies, etc.' width='100%' value={instructions} onChange={handleChange} rows={3} />
+                        <Form.Text as="textarea" placeholder='allergies, etc.' width='90%' value={instructions} onChange={handleChange} rows={3} />
                       </Form.Group>
                     {available ? 
-                    <input type='submit' className='btn-success' value={`Add To Cart $${ref.current ? ref.current : itemPrice}`}/> :
-                    <input type='submit' value='Out of Stock' disabled /> 
+                    <input type='submit' className='btn btn-sm btn-success' value={`Add To Cart $${ref.current ? ref.current : itemPrice}`}/> :
+                    <input type='submit' className='btn btn-sm' value='Out of Stock' disabled /> 
                   }
                       </Form>
                   </Modal.Body>
