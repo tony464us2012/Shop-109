@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
-import { Row, Col, ListGroup, Card, Button, Image, Form } from 'react-bootstrap'
+import { Row, Col, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import {createOrder} from '../actions/orderActions'
 import Message from '../components/Message'

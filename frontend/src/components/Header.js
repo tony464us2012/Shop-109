@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown, Image, Badge } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Image, Badge } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 
 
@@ -110,22 +110,17 @@ const Header = () => {
                         </Nav>
                    </Navbar.Collapse>
             </Navbar>
-            <Navbar bg="light" variant="light" expand="lg" style={{padding: '0.4rem 0 .1rem', marginBottom: '1rem'}} collapseOnSelect>
+            <Navbar bg="light" variant="light" expand="lg" style={{padding: '0.4rem .6rem .5rem'}} collapseOnSelect>
             <Navbar.Toggle aria-controls="responsive-navbar-nav2" />
             <Navbar.Collapse id="responsive-navbar-nav2" className="nav-collapse2">
-            <Nav className='m-auto'>
-                <Nav.Item id='navItem'><a href="/">HOME</a></Nav.Item>
-                <Nav.Item id='navItem'><a href= "/menu">MENU</a ></Nav.Item>
-                <Nav.Item id='navItem'><a href="/beers">BEERS</a></Nav.Item>
-                <Nav.Item id='navItem'><a href="/about">ABOUT</a></Nav.Item>
-                <Nav.Item id='navItem'><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noreferrer" target="_blank">DELIVERY</a></Nav.Item>
+            <Nav className='m-auto margintop'>
+                <Nav.Item id='navItem' className='borderbottom'><a href="/">HOME</a></Nav.Item>
+                <Nav.Item id='navItem' className='borderbottom'><a href= "/menu">MENU</a ></Nav.Item>
+                <Nav.Item id='navItem' className='borderbottom'><a href="/beers">BEERS</a></Nav.Item>
+                <Nav.Item id='navItem' className='borderbottom'><a href="/about">ABOUT</a></Nav.Item>
+                <Nav.Item id='navItem' ><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noreferrer" target="_blank">DELIVERY</a></Nav.Item>
                 </Nav>
             </Navbar.Collapse>
-                {/* <Nav id='navContainer3'>
-                  <Nav.Item id='navItem'><a href="https://twitter.com/109burgerjoint?lang=en" target='_blank' rel='noreferrer'><i className="fab fa-twitter"></i></a></Nav.Item>
-                  <Nav.Item id='navItem'><a href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-facebook-f"></i></a></Nav.Item>
-                  <Nav.Item id='navItem'><a href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-instagram"></i></a></Nav.Item>
-                </Nav> */}
             </Navbar>
         </header>
     )

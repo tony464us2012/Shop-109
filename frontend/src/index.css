@@ -164,6 +164,23 @@ td, h6 {
     border: none;
     margin: 0 .5rem
 }
+
+
+@media (max-width: 768px) {
+#navItem {
+    border-bottom: 1px solid black;
+    width: 90vw;
+    padding: 0 auto
+}
+#navItem:first-child {
+    margin-top: 1rem
+}
+#navItem:last-child {
+    border-bottom: 1px solid transparent
+}
+
+}
+
 /* Menu */
 
 .menu-item-container {
@@ -367,6 +384,11 @@ input[type='number'] {
     
   }
 
+  /* Footer */
+  .socials {
+      margin-right: .8rem
+  }
+
   @media (max-width: 768px) {
       .menu-container {
           margin-bottom: 1rem
@@ -375,3 +397,4 @@ input[type='number'] {
           margin-bottom: 1rem
       }
   }
+
