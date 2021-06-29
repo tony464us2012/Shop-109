@@ -78,12 +78,12 @@ const Header = () => {
                             </NavDropdown>
                         ) :  (
                             <>
-                            <LinkContainer to='/login' id='username'>
+                            <LinkContainer to='/login' id='username' className='login'>
                             <Nav.Link>
                             <i className="fas fa-sign-in-alt"></i> Log In
                             </Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to='/register' id='username'>
+                            <LinkContainer to='/register' id='username' className='register'>
                             <Nav.Link><i className="fas fa-user-plus"></i> Sign Up</Nav.Link>
                             </LinkContainer>
                             </>

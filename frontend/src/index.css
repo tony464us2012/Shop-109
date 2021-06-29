@@ -162,9 +162,19 @@ td, h6 {
 #adminmenu,
 #username {
     border: none;
-    margin: 0 .5rem
+    margin: 0 .5rem;
+
 }
 
+.login, 
+.register {
+    width: 7rem;
+}
+
+.cart-price h2 {
+    margin-bottom: -.5rem;
+    margin-top: 2rem
+}
 
 @media (max-width: 768px) {
 #navItem {
@@ -178,7 +188,9 @@ td, h6 {
 #navItem:last-child {
     border-bottom: 1px solid transparent
 }
-
+.marginTop {
+    margin-top: 2rem
+}
 }
 
 /* Menu */

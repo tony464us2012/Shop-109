@@ -104,7 +104,7 @@ const CartScreen = ({ match, location, history }) => {
                        <ListGroup.Item>
                            <h2>Take-Out</h2>
                        </ListGroup.Item>
-                       <ListGroup.Item>
+                       <ListGroup.Item className='cart-price'>
                            <h2>Subtotal</h2>
                            <p>${cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)}</p>
                            <h2>Tax</h2>
