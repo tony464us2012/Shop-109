@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import PropTypes from 'prop-types';
 
 const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingScore, description, logo2 }) => {
 
     return (
-    <Fragment>
+    <>
         <Flippy  flipOnClick={true} className='main-section' style={{backgroundColor: 'white'}}>
             <FrontSide className='front' >
                 { logo ?  <div className="logo-container">
@@ -33,7 +33,7 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
                 </div>
             </BackSide>
         </Flippy>
-    </Fragment>
+    </>
 )};
     MainDisplayBeers.propTypes = {
     name: PropTypes.string.isRequired,

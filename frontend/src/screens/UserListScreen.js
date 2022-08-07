@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Table, Button } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -32,11 +32,11 @@ const UserListScreen = ({ history }) => {
     }
 
     return (
-        <>
-            <h1>Users</h1>
+        <div className='padding'>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
-            (
-                <Table striped bordered hover responsive className='table-sm'>
+            (<>
+                <h1 className='text-center'>Users</h1>
+                <Table striped bordered hover responsive id='table' className='table-sm'>
                     <thead>
                         <tr>
                             <th>NAME</th>
@@ -48,25 +48,24 @@ const UserListScreen = ({ history }) => {
                     <tbody>
                         {users.filter((a, b) => (a.name > b.name) ? 1 : -1).map(user => (
                             <tr key={user._id}>
-                                <td>{user.name}</td>
+                                <td><button>{user.name}</button></td>
                                 <td><a href={`mailto:${user.email}`}>{user.email}</a></td>
-                                <td>{user.isAdmin ? (<i className='fas fa-check' style={{color: 'green', marginLeft: '.2rem'}}></i>) : (<i className='fas fa-times' style={{color: 'red', marginLeft: '.2rem'}}></i>)}</td>
-                                <td>
-                                    <div className='user-edit-btn'>
-                                        <Button variant='light' onClick={() => history.push(`/admin/user/${user._id}/edit`)} className='btn-sm'>
+                                <td style={{textAlign: 'center'}}>{user.isAdmin ? (<i className='fas fa-check' style={{color: 'green'}}></i>) : (<i className='fas fa-times' style={{color: 'red'}}></i>)}</td>
+                                <td style={{display: 'flex', justifyContent: 'space-around'}}>
+                                        <button variant='light' className='btn-sm' onClick={() => history.push(`/admin/user/${user._id}/edit`)} 
+                                        >
                                             <i className='fas fa-edit'></i>
-                                        </Button>
-                                        <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
+                                        </button>
+                                        <button style={{color:'red'}} onClick={() => deleteHandler(user._id)}>
                                             <i className='fas fa-trash'></i>
-                                        </Button>
-                                    </div>
+                                        </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </Table>
-            )}
-        </>
+           </> )}
+        </div>
     )
 }
 

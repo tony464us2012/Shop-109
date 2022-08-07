@@ -2,7 +2,6 @@ import React from 'react'
 import {Elements} from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
@@ -32,9 +31,8 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main className="py-5 app" >
+      <main className="app" >
         <Elements stripe={stripePromise}>
-          <Container style={{marginTop: '5%'}} >
             <Route path='/confirmation/:id' component={ConfirmationScreen}  />
             <Route path='/order/:id' component={OrderScreen}  />
             <Route path='/login' component={LoginScreen}  />
@@ -56,10 +54,9 @@ const App = () => {
             <Route path='/about' component={AboutScreen} exact />
             <Route path='/menu' component={MenuScreen} exact />
             <Route path='/' component={HomeScreen} exact />
-          </Container>
         </Elements>
         </main>
-      <Footer />
+        <Footer />
     </Router>
   );
 }

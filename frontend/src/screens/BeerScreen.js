@@ -31,7 +31,7 @@ const BeerScreen = () => {
       }
 
     return loading ? <Loader /> : (
-        <>
+        <div className='padding'>
             <Nav as="ul" className='menu-container' style={{marginBottom: '1.5rem'}}>
                 <Nav.Item as="li">
                     <Nav.Link className='menu-link' style={selectHandler('onTap')} onClick={() => tabHandler('onTap')}>On Tap</Nav.Link>
@@ -41,7 +41,7 @@ const BeerScreen = () => {
                 </Nav.Item>
             </Nav>
             {tab === 'onTap' ? <FrontTap displayBeers={displayBeers} /> : <FrontBottle bottleBeer={bottleBeer} /> }
-        </>
+        </div>
     )
 }
 

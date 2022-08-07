@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector  } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
-import Message from '../components/Message'
+import { useDispatch } from 'react-redux'
 import Loader from '../components/Loader'
 import { listProducts } from '../actions/productActions'
 import { getMainBeers } from '../actions/beerActions'
-import ProductCarousel from '../components/ProductCarousel'
+import MainPicture from '../components/MainPicture'
 import Meta from '../components/Meta'
 
 const HomeScreen = () => {
@@ -20,7 +18,7 @@ const HomeScreen = () => {
     return (
         <>
             <Meta />
-            <ProductCarousel />
+            <MainPicture />
             {/* {!keyword ? (<ProductCarousel />) : (<Link to='/' className='btn btn-light'>Go Back</Link>) } */}
         </>
     )

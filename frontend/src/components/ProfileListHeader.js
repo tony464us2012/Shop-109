@@ -9,12 +9,30 @@ const ProfileListHeader = ({tabHandler, tab}) => {
     }
   }
     return (
-        <Nav as="ul" className='menu-container'>
+        <Nav as="ul" className='menu-container text-center'>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('MenuItems')} onClick={() => tabHandler('MenuItems')}>Menu Items</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('Appetizer')} onClick={() => tabHandler('Appetizer')}>Appetizers</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('Beers')}  onClick={() => tabHandler('Beers')}>Beers</Nav.Link>
+            <Nav.Link className='menu-link' style={selectHandler('Burger')} onClick={() => tabHandler('Burger')}>Burgers</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link className='menu-link' style={selectHandler('ForkandKnife')} onClick={() => tabHandler('ForkandKnife')}>Fork and Knife</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link className='menu-link' style={selectHandler('Salad')} onClick={() => tabHandler('Salad')}>Salads</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link className='menu-link' style={selectHandler('Sandwich')} onClick={() => tabHandler('Sandwich')}>Sandwiches</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link className='menu-link' style={selectHandler('Side')} onClick={() => tabHandler('Side')}>Sides</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link className='menu-link' style={selectHandler('Slider')} onClick={() => tabHandler('Slider')}>Sliders</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link className='menu-link' style={selectHandler('Taco')} onClick={() => tabHandler('Taco')}>Tacos</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
             <Nav.Link className='menu-link' style={selectHandler('AddOns')}  onClick={() => tabHandler('AddOns')}>Add Ons</Nav.Link>

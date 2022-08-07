@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, NavDropdown, Image, Badge } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 
 
@@ -16,7 +16,6 @@ const Header = () => {
 
     const [day, setDay] = useState(new Date().getDay())
     const [hour, setHour] = useState(new Date().getHours())
-    const [date, setDate] = useState(new Date())
     const [loggedIn, setLoggedIn] = useState(false)
     const [open, setOpen] = useState(null)
 
@@ -49,24 +48,23 @@ const Header = () => {
         }
     }, [userInfo, loggedIn, open, logoutHandler, day, hour])
     
-    function tick() {setDate(new Date()); setDay(new Date().getDay()); setHour(new Date().getHours())}
+    function tick() { setDay(new Date().getDay()); setHour(new Date().getHours())}
 
-    const pillStyle = {
-    fontSize: '.7rem', height: '50%', marginLeft: '-14px'
-    }
+    const noborder = {border: 'none'}
 
     return (
-        <header>
-           <Navbar bg="dark"  variant="dark" expand="lg" style={{padding: '0.4rem 1rem .1rem'}} collapseOnSelect>
-                <Navbar.Brand href="#home"> <Image id='Logo' className="d-inline-block align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
-                   {/* <div id='time'>{open ? <h2><Badge variant='success' >Open</Badge></h2> : <h2><Badge variant='danger' >Closed</Badge></h2>}</div>
-                   <div id='time2'><p>{day === 0 ? 'Sunday' : day === 1 ? 'Monday' : day === 2 ? 'Tuesday' : day === 3 ? 'Wednesday' : day === 4 ? 'Thursday' : day === 5 ? 'Friday' : 'Saturday'}</p><br/>
-                   <p>{day === 0 ? '12:00pm - 8pm' : day === 1 ? '12:00pm - 10pm' : day === 2 ? '12:00pm - 10pm' : day === 3 ? '12:00pm - 10pm' : day === 4 ? '12:00pm - 10pm' : day === 5 ? '12:00pm - 12am' : '12:00pm - 12pm'}</p><br/> */}
-                   {/* <div>{date.toLocaleTimeString()} </div> */}
-                   {/* </div> */}
-                   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                   <Navbar.Collapse id="responsive-navbar-nav" className="nav-collapse">
-                        <Nav className="ml-auto first-nav">
+        <div>
+           <Navbar id='navContainer' bg="light"  variant="light" expand="lg" style={{padding: '0 2%', display: 'flex', border: 'none', }}>
+                <Navbar.Brand href="#home" style={noborder}> <Image id='Logo' className="align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
+                   <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                   <Navbar.Collapse  className='me-auto justify-content-end'>
+                        <Nav.Item>
+                          
+                            <Nav.Link eventKey="disabled" style={noborder} className='address' disabled>
+                            <span className="material-symbols-outlined pindrop">pin_drop</span>   
+                            CARRYOUT FROM 646 SW 109 Avenue
+                            </Nav.Link>
+                        </Nav.Item>
                         {loggedIn && userInfo.name ? (
                             <NavDropdown title={userInfo.name ? `Hi ${userInfo.name.split(' ')[0]}` : ''} id='username'>
                                 <LinkContainer to='/profile'>
@@ -104,25 +102,29 @@ const Header = () => {
                                </LinkContainer>
                            </NavDropdown>
                     )}
-                        <LinkContainer to='/cart' style={{display: 'flex', marginRight: '5%', border: 'none'}}>
-                                <Nav.Link><i className="fas fa-shopping-cart"></i>{' '}{cartItems.length > 0 ? <Badge pill variant='danger' style={pillStyle}>{cartItems.length}</Badge> : ''}</Nav.Link>
-                            </LinkContainer>
-                        </Nav>
                    </Navbar.Collapse>
             </Navbar>
-            <Navbar bg="light" variant="light" expand="lg" style={{padding: '0.4rem .6rem .5rem'}} collapseOnSelect>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav2" />
-            <Navbar.Collapse id="responsive-navbar-nav2" className="nav-collapse2">
-            <Nav className='m-auto margintop'>
+            <Navbar bg="light" variant="light" expand="lg" style={{display: 'flex', borderTop: '1px solid lightgrey', borderBottom: 'none'}} collapseOnSelect>
+            {/* <Navbar.Toggle aria-controls="responsive-navbar-nav2" /> */}
+            {/* <Navbar.Collapse id="responsive-navbar-nav2" className="nav-collapse2"> */}
+            <div id='navContainer2'>
                 <Nav.Item id='navItem' className='borderbottom'><a href="/">HOME</a></Nav.Item>
                 <Nav.Item id='navItem' className='borderbottom'><a href= "/menu">MENU</a ></Nav.Item>
                 <Nav.Item id='navItem' className='borderbottom'><a href="/beers">BEERS</a></Nav.Item>
                 <Nav.Item id='navItem' className='borderbottom'><a href="/about">ABOUT</a></Nav.Item>
                 <Nav.Item id='navItem' ><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noreferrer" target="_blank">DELIVERY</a></Nav.Item>
-                </Nav>
-            </Navbar.Collapse>
+                {cartItems.length == 0 ? 
+                 <a href="/cart" className="material-symbols-outlined cart" style={{marginRight: '2rem'}}>shopping_cart_checkout</a> : 
+                <>
+                     <a href="/cart" className="material-symbols-outlined cart">shopping_cart_checkout</a>
+                    <a className="price" href="/cart">&#36;{Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)) }</a>
+                </>}
+
+
+                </div>
+            {/* </Navbar.Collapse> */}
             </Navbar>
-        </header>
+        </div>
     )
 }
 

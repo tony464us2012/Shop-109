@@ -1,28 +1,26 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Navbar, Nav, Row, Col } from 'react-bootstrap'
 
 const Footer = () => {
     return (
-        <footer>
-            <Container>
-                <Row>
-                    <Col className="text-center py-3">
-                        Copyright &copy; Shop 109
-                    </Col>
-                    <Col className="text-center py-3">
-                        <a href="/accessibility">Accessibility</a>
-                    </Col>
-                    <Col className="text-center py-3">
-                        <a href="terms">Term and Conditions</a>
-                    </Col>
-                    <Col className="text-center py-3">
-                        <a href="https://twitter.com/109burgerjoint?lang=en" target='_blank' rel='noreferrer'><i className="fab fa-twitter socials"></i></a>
-                        <a href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-facebook-f socials"></i></a>
-                        <a href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-instagram socials"></i></a>
-                    </Col>
-                </Row>
-            </Container>
-        </footer>
+        <Navbar bg='light' variant='light' expand='lg' className='footer' >
+                {/* <Nav className="social-container"> */}
+                    <Nav.Item className="text-center">
+                        <Nav.Link href='/' style={{borderRight: 'none'}}>Copyright &copy; Shop 109</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="text-center">
+                        <Nav.Link href="/accessibility">Accessibility</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="text-center">
+                        <Nav.Link href="/terms">Term and Conditions</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="text-center" style={{display: 'flex'}}>
+                        <Nav.Link href="https://twitter.com/109burgerjoint?lang=en" target='_blank' rel='noreferrer'><i className="fab fa-twitter socials"></i></Nav.Link>
+                        <Nav.Link href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-facebook-f socials"></i></Nav.Link>
+                        <Nav.Link href="https://www.facebook.com/109burgerjoint/"><i className="fab fa-instagram socials"></i></Nav.Link>
+                    </Nav.Item>
+                {/* </Nav> */}
+        </Navbar>
     )
 }
 

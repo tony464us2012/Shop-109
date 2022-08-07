@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap'
+import { Row, Col, ListGroup, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import dateFormat from 'dateformat'
 import Message from '../components/Message'
@@ -22,11 +22,14 @@ const OrderScreen = ({ match, history }) => {
   
 
         return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-        <Row>
-            <Col md={9}>
+        <div className='padding'>
+            <Row>
+                <Button type='submit' className='pay-btn' style={{marginLeft: 'auto', marginBottom: '2rem'}} variant='light' size='sm' onClick={() => history.push('/admin/orderlist')}>Back To Orders</Button>
+            </Row>
+            <Col>
                 <h2 style={{color: 'black'}}>Order #{orderId}</h2>
                     <ListGroup variant='flush'>
-                    <ListGroup.Item>
+                    <ListGroup.Item variant='light'>
                             <h2>Ordered By</h2>
                             <h5>
                               Name: {order.user.name}
@@ -38,12 +41,12 @@ const OrderScreen = ({ match, history }) => {
                               Phone: 123-456-7890
                             </h5>
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        <ListGroup.Item variant='light'>
                             <h2>Order Placed</h2>
                             <p>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</p>
                         </ListGroup.Item>
                         {order.orderItems.map(item => (
-                            <ListGroup.Item style={{paddingRight: '2.5rem'}}>
+                            <ListGroup.Item style={{paddingRight: '2.5rem'}} variant='light'>
                                 <Row>
                                  <Col md={3}>
                                     <h5>{item.name}</h5>
@@ -67,30 +70,30 @@ const OrderScreen = ({ match, history }) => {
                                 </Row>
                             </ListGroup.Item>
                         ))}
+                         <ListGroup.Item variant='light'>
+                             <Row>
+                                <Col md={2}>
+                                    <h2>Subtotal</h2>
+                                    <p>${order.subtotal}</p>
+                                </Col>
+                                <Col md={2}>
+                                    <h2>Tax</h2>
+                                    <p>${order.tax}</p>
+                                </Col>
+                                <Col md={2}>
+                                    <h2>Total</h2>
+                                    <p>${order.totalprice}</p>
+                                </Col>
+                             </Row>
+                        </ListGroup.Item>
                     </ListGroup>
             </Col>
-            <Col md={3}>
-                <Card>
-                    <ListGroup variant='flush'>
-                        <ListGroup.Item>
-                            <h2>Subtotal</h2>
-                            <p>${order.subtotal}</p>
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                            <h2>Tax</h2>
-                            <p>${order.tax}</p>
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                            <h2>Total</h2>
-                            <p>${order.totalprice}</p>
-                        </ListGroup.Item>
-                        <ListGroup.Item style={{display: 'flex'}}>
+            <Col>
+                        {/* <ListGroup.Item style={{display: 'flex'}} variant='light'>
                         <Button type='submit' className='pay-btn' style={{margin: '0 auto'}} variant='light' size='sm' onClick={() => history.push('/admin/orderlist')}>Back To Orders</Button>
-                        </ListGroup.Item>
-                    </ListGroup>
-                </Card>
+                        </ListGroup.Item> */}
             </Col>
-        </Row>
+        </div>
      )
 }
 

@@ -37,12 +37,11 @@ const deleteProduct = asyncHandler( async(req, res) => {
 const createProduct = asyncHandler( async(req, res) => {
 
     const product = new Product({
-        name: 'Sample Name',
+        name: 'Enter Name',
         price: 0,
         user: req.body.id,
-        image: '/images/sample.jpg',
         category: 'Burger',
-        description: 'Sample description',
+        description: '',
         available: true
     })
 
@@ -50,15 +49,15 @@ const createProduct = asyncHandler( async(req, res) => {
     res.status(201).json(createdProduct)
 })
 const updateProduct = asyncHandler( async(req, res) => {
-    const {name, price, image, category, description, available} = req.body
+    const {name, price, category, tacoCategory, description, available} = req.body
     const product = await Product.findById(req.params.id)
 
     if(product) {
         product.name = name
         product.price = price
         product.description = description
-        product.image = image
         product.category = category
+        product.tacoCategory = tacoCategory
         product.available = available
     } else {
         res.status(404)

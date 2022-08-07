@@ -10,7 +10,7 @@ import ForkandKnife from '../components/menu-components/ForkandKnife'
 import Sandwich from '../components/menu-components/Sandwich'
 import Slider from '../components/menu-components/Slider'
 import Side from '../components/menu-components/Side'
-import Beer from '../components/Beer'
+import TacoRico from '../components/TacoRico'
 import Loader from '../components/Loader'
 
 const MenuScreen = () => {
@@ -33,6 +33,7 @@ const MenuScreen = () => {
     const sandwiches = products.filter(sandwich => sandwich.category === 'Sandwich')
     const sliders = products.filter(slider => slider.category === 'Slider')
     const sides = products.filter(side => side.category === 'Side')
+    const tacos = products.filter(taco => taco.category === 'Taco')
 
     const tabHandler = (tab) => {
         setTab(tab)
@@ -48,15 +49,13 @@ const MenuScreen = () => {
              tab === 'ForkandKnife' ?  <ForkandKnife forkandknifes={forkandknifes} key={forkandknifes._id}/> :
              tab === 'Sandwich' ? <Sandwich sandwiches={sandwiches} key={sandwiches._id} /> : 
              tab === 'Slider' ? <Slider sliders={sliders} key={sliders._id} /> :
-             tab === 'Side' ? <Side sides={sides} key={sides._id} /> : 
-             <Beer />
+             tab === 'Side' ? <Side sides={sides} key={sides._id} /> :
+            <TacoRico tacos={tacos} key={tacos._id} /> 
             }
-            {tab !== 'Beer' ? 
-                <>
-                    <h6 className='advisory'>CONSUMER ADVISORY</h6>
+                <div className='advisory'>
+                    <div>CONSUMER ADVISORY</div>
                     <p className='advisory-text'>*Consuming raw or undercooked, meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness especially if you have certain medical conditions.</p>
-                </> : ''
-            }
+                </div> : ''
         </>
     )
 }

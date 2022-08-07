@@ -26,7 +26,7 @@ const BeerListScreen = ({ history }) => {
     }, [dispatch, history, userInfo.isAdmin])
 
 return (
-    <div className="dashboard1">
+    <div className="padding">
         {!displayBeers ? <Message>No Beers On Tap</Message> :  <BackTap displayBeers={displayBeers} />}
         {!bottleBeer ? <Message>No Bottles In Stock</Message> :   <BackBottle bottleBeer={bottleBeer}/>}
         <AddBottle />

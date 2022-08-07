@@ -89,11 +89,11 @@ const PlaceOrderScreen = ({ history }) => {
         }
 
     return (
-        <>
-            <Row>
+        <div className='padding'>
+            <Row style={{marginTop: '2rem'}}>
                 <Col md={8}>
-                    <ListGroup variant='flush'>
-                        <ListGroup.Item>
+                    <ListGroup className='border'>
+                        <ListGroup.Item variant='light' className='black'>
                             <h2>Contact Info</h2>
                             <h5>
                               Name: {name}
@@ -105,12 +105,12 @@ const PlaceOrderScreen = ({ history }) => {
                               Phone: 123-456-7890
                             </h5>
                         </ListGroup.Item>
-                        <ListGroup.Item>
-                            <h2>Order Items</h2>
+                        <ListGroup.Item variant='light'  className='black border'>
+                            <h2>Your Order</h2>
                             {cart.cartItems.length === 0 ? <Message>Your cart is empty</Message> : (
                                 <ListGroup variant='flush'>
                                     {cart.cartItems.map((item, index) => (
-                                        <ListGroup.Item key={index}>
+                                        <ListGroup.Item key={index} variant='light' className='black' >
                                             <Row>
                                                 <Col md={5}>
                                                 <h5>{item.name}</h5>
@@ -143,38 +143,38 @@ const PlaceOrderScreen = ({ history }) => {
                 </Col>
                 <Col md={4}>
                     <Card>
-                        <ListGroup variant='flush'>
-                            <ListGroup.Item>
+                        <ListGroup>
+                            <ListGroup.Item variant='light'  className='black center'>
                                 <h2>Order Summary</h2>
                             </ListGroup.Item>
-                            <ListGroup.Item>
+                            <ListGroup.Item variant='light'  className='black'>
                                 <Row>
                                     <Col>Subtotal</Col>
                                     <Col><p>${subtotal}</p></Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup.Item>
+                            <ListGroup.Item variant='light'  className='black'>
                                 <Row>
                                     <Col>Tax</Col>
                                     <Col><p>${tax}</p></Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup.Item>
+                            <ListGroup.Item variant='light'  className='black'>
                                 <Row>
                                     <Col>Total Price</Col>
                                     <Col><p>${totalprice}</p></Col>
                                 </Row>
                             </ListGroup.Item>
                                 {error && <ListGroup.Item><Message variant='danger'>Card Declined</Message></ListGroup.Item> }
-                            <ListGroup.Item>
+                            <ListGroup.Item variant='light'  className='black'>
                                 <Form onSubmit={placeOrderHandler}>
                                 <h5 className='billingTitle'>Billing Information</h5>
                                 <Form.Group>
                                     <Form.Label>Name on Card</Form.Label>
-                                    <Form.Control type="text" className='cardInfo' size='sm' name='name' onChange={(e) => setBillingDetails({name: e.target.value})} placeholder="Enter name" required />
+                                    <Form.Control type="text" className='cardInfo' variant='light' size='sm' name='name' onChange={(e) => setBillingDetails({name: e.target.value})} placeholder="Enter name" required />
                                 </Form.Group>
                                 <CardSection />
-                                <Button type='submit' className='pay-btn' variant='light' size='sm' disabled={cart.cartItems === 0 || !stripe || !open}>{processing? 'Processing...' : 'PLACE ORDER'} </Button>
+                                <Button type='submit' className='pay-btn' variant='success' size='sm' disabled={cart.cartItems === 0 || !stripe || !open}>{processing? 'Processing...' : 'PLACE ORDER'} </Button>
                                 {!open ? <h5 style={{textAlign: 'center', marginTop: '.5rem'}}>We are currently closed</h5> : ''}
                                 </Form>
                             </ListGroup.Item>
@@ -182,7 +182,7 @@ const PlaceOrderScreen = ({ history }) => {
                     </Card>
                 </Col>
             </Row>
-        </>
+        </div>
     )
 }
 

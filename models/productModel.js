@@ -11,12 +11,12 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-    },
     category: {
         type: String,
         required: true,
+    },
+    tacoCategory: {
+        type: String
     },
     description: {
         type: String,
@@ -25,10 +25,6 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: true, 
         default: 0
-    },
-    typeofBeer: {
-        type: String,
-
     },
     addOnType: {
         type: String

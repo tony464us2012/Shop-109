@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Button, Row, Col } from 'react-bootstrap'
+import { Table, Button, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductListHeader from '../components/ProfileListHeader'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { deleteProduct, createProduct, listProducts, listProductDetails } from '../actions/productActions'
-import MenuItem from '../components/product-list-components/MenuItem'
-import Beers from '../components/product-list-components/Beers'
+import Appetizers from '../components/product-list-components/Appetizers'
+import Burgers from '../components/product-list-components/Burgers'
+import Forkandknives from '../components/product-list-components/Forkandknives'
+import Salads from '../components/product-list-components/Salads'
+import Sandwiches from '../components/product-list-components/Sandwiches'
+import Sides from '../components/product-list-components/Sides'
+import Sliders from '../components/product-list-components/Sliders'
+import Tacos from '../components/product-list-components/Tacos'
 import AddOns from '../components/product-list-components/AddOns'
 
 
 const ProductListScreen = ({ history }) => {
 
-    const [tab, setTab] = useState('MenuItems')
+    const [tab, setTab] = useState('Appetizer')
     
     const dispatch = useDispatch()
     
@@ -24,9 +30,6 @@ const ProductListScreen = ({ history }) => {
     
     const productCreate = useSelector(state => state.productCreate)
     const { loading:loadingCreate, error:errorCreate, success:successCreate, product:createdProduct } = productCreate
-    
-    const productDetails = useSelector(state => state.productDetails)
-    const {product} = productDetails
     
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -60,8 +63,14 @@ const ProductListScreen = ({ history }) => {
         dispatch(listProductDetails(id))
     }
 
-    const menuitems = products.filter(menuitem => menuitem.category !== 'Beer' && menuitem.category !== 'AddOns')
-    const beers = products.filter(beer => beer.category === 'Beer')
+    const appetizers = products.filter(appertizer => appertizer.category === 'Appetizer')
+    const burgers = products.filter(burger => burger.category === 'Burger')
+    const forkandknives = products.filter(forkandknife => forkandknife.category === 'ForkandKnife')
+    const salads = products.filter(salad => salad.category === 'Salad')
+    const sandwiches = products.filter(sandwich => sandwich.category === 'Sandwich')
+    const sides = products.filter(side => side.category === 'Side')
+    const sliders = products.filter(slider => slider.category === 'Slider')
+    const tacos = products.filter(taco => taco.category === 'Taco')
     const addons = products.filter(addon => addon.category === 'AddOns')
 
     const tabHandler = (tab) => {
@@ -69,39 +78,43 @@ const ProductListScreen = ({ history }) => {
     }
 
     return (
-        <>
-            <Row className='align-items-center'>
-                <Col>
-                <ProductListHeader tabHandler={tabHandler} tab={tab}/>
-                </Col>
-                <Col className='text-right'>
-                    <Button className='my-3' onClick={createProductHandler}>
-                        <i className='fas fa-plus'></i> Create Item
-                    </Button>
-                </Col>
-            </Row>
+        <div className='padding'>
             {loadingDelete && <Loader />}
             {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
             {loadingCreate && <Loader />}
             {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
             (<>
-                <Table striped bordered hover responsive className='table-sm'>
+                <ProductListHeader tabHandler={tabHandler} tab={tab}/>
+                <Col className='text-right'>
+                    <Button className='my-3' onClick={createProductHandler}>
+                        <i className='fas fa-plus'></i> Create Item
+                    </Button>
+                </Col>
+                <Table striped bordered hover responsive id='table' className='table-sm'>
                     <thead>
                         <tr>
                             <th>NAME</th>
                             <th>PRICE</th>
-                            <th>CATEGORY</th>
+                            <th>AVAILABILITY</th>
+                            {tab === 'Taco' ? <th>TACO CATEGORY</th> : ''}
+                            <th></th>
                         </tr>
                     </thead>
-                        {tab === 'MenuItems' ? <MenuItem menuitems={menuitems} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
-                        tab === 'Beers' ? <Beers beers={beers} getProductHandler={getProductHandler} deleteHandler={deleteHandler}/> :
+                        {tab === 'Appetizer' ? <Appetizers appetizers={appetizers} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
+                         tab === 'Burger' ? <Burgers burgers={burgers} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
+                         tab === 'ForkandKnife' ? <Forkandknives forkandknives={forkandknives} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
+                         tab === 'Salad' ? <Salads salads={salads} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
+                         tab === 'Sandwich' ? <Sandwiches sandwiches={sandwiches} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
+                         tab === 'Side' ? <Sides sides={sides} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
+                         tab === 'Slider' ? <Sliders sliders={sliders} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
+                         tab === 'Taco' ? <Tacos tacos={tacos} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
                         <AddOns addons={addons} getProductHandler={getProductHandler} deleteHandler={deleteHandler}/> 
                         }
                 </Table>
             </>
             )}
-        </>
+        </div>
     )
 }
 

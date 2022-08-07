@@ -1,5 +1,5 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -15,6 +15,7 @@ const ProductEditScreen = ({ match, history }) => {
     const [price, setPrice] = useState(0)
     const [image, setImage] = useState('')
     const [category, setCategory] = useState('')
+    const [tacoCategory, setTacoCategory] = useState('')
     const [description, setDescription] = useState('')
     const [uploading, setUploading] = useState(false)
     const [available, setAvailable] = useState(true)
@@ -38,8 +39,8 @@ const ProductEditScreen = ({ match, history }) => {
                 } else {
                     setName(product.name)
                     setPrice(product.price)
-                    setImage(product.image)
                     setCategory(product.category)
+                    setTacoCategory(product.tacoCategory)
                     setDescription(product.description)
                     setAvailable(product.available)
                 }
@@ -54,6 +55,7 @@ const ProductEditScreen = ({ match, history }) => {
             price,
             image,
             category,
+            tacoCategory,
             description,
             available
         }))
@@ -97,12 +99,12 @@ const ProductEditScreen = ({ match, history }) => {
                     <Form.Label>Price</Form.Label>
                     <Form.Control type='number' placeholder='Enter Price' value={price} onChange={(e) => setPrice(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Form.Group controlId='image'>
+                {/* <Form.Group controlId='image'>
                     <Form.Label>Image</Form.Label>
                     <Form.Control type='text' placeholder='Enter image url' value={image} onChange={(e) => setImage(e.target.value)}></Form.Control>
                     <Form.File id='image-file' label='Choose File' custom onChange={uploadFileHandler}></Form.File>
                     {uploading && <Loader />}
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group controlId='brand'>
                     <Form.Label>Category</Form.Label>
                     <Form.Control as='select' placeholder='Enter category' value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -113,8 +115,26 @@ const ProductEditScreen = ({ match, history }) => {
                         <option value='Sandwich'>Sandwich</option>
                         <option value='Slider'>Slider</option>
                         <option value='Side'>Side</option>
+                        <option value='AddOns'>AddOns</option>
+                        <option value='Taco'><a onClick={() => setTacoCategory('Tacos')}>Taco</a></option>
                     </Form.Control>
                 </Form.Group>
+                {category === 'Taco' ?  
+                     <Form.Group controlId='brand'>
+                     <Form.Label>Taco Type</Form.Label>
+                     <Form.Control as='select' placeholder='Enter category' value={tacoCategory} onChange={(e) => setTacoCategory(e.target.value)}>
+                         <option value=''>Select Type</option>
+                         <option value='Tacos'>Tacos</option>
+                         <option value='SingleTacos'>Single Tacos</option>
+                         <option value='Quesadillas'>Quesadilla</option>
+                         <option value='SideOrders'>Side Orders</option>
+                         <option value='BowlsandSalads'>Bowls and Salads</option>
+                         <option value='Fajitas'>Fajitas</option>
+                         <option value='Burritos'>Burritos</option>
+                         <option value='LunchSpecials'>Lunch Specials</option>
+                     </Form.Control>
+                 </Form.Group> : ''
+            }
                 <Form.Group controlId='description'>
                     <Form.Label>Description</Form.Label>
                     <Form.Control type='text' placeholder='Enter description' value={description} onChange={(e) => setDescription(e.target.value)}></Form.Control>

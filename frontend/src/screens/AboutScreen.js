@@ -4,7 +4,7 @@ import Meta from '../components/Meta'
 const AboutScreen = () => {
 
     return (
-        <>
+        <div className='padding'>
             <Meta />
             <h1>Our Story</h1>
             <img className='' src='/images/owners.jpg' width='250px' height='250px' alt='pic of owners' />
@@ -39,7 +39,7 @@ const AboutScreen = () => {
                     <i class="material-icons star"> star </i>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

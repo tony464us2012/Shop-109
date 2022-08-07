@@ -58,12 +58,15 @@ const ProfileScreen = ({ history }) => {
     }
 
     return (
-        <Row>
-            <Col md={3}>
-            <h1>User Profile</h1>
-            {errorOrders && <Message variant='danger'>{errorOrders}</Message>}
+        <>
+        <div className="padding row profile">
             {success && <Message variant='success'>Profile Updated</Message>}
-            {loadingOrders && <Loader/>}
+            { message ? <Message variant='danger'>{message}</Message> : ''}
+            {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> :
+             orders.length === 0 ?  <Message variant='info'>No Orders..</Message> :
+                 (<>
+            <Col md={3} >
+            <h1>User Profile</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
                     <Form.Label>Name</Form.Label>
@@ -82,44 +85,38 @@ const ProfileScreen = ({ history }) => {
                     <Form.Control type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
                 </Form.Group>
 
-                { message ? <Message variant='danger'>{message}</Message> : ''}
                 <Button type='submit' variant='primary'>
                     Update
                 </Button>
                 </Form>
             </Col>
-            <Col md={9}>
-                <h2 style={{color: 'black'}}>My Orders</h2>
-                {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> :
-                 orders.length === 0 ?  <Message variant='info'>No Orders..</Message> :
-                 (
-                  <>
+            <Col md={7}>
+                <h1>My Orders</h1>
+              
                     <Table striped bordered hover responsive className='table-sm'>
                         <thead>
                             <tr>
                                 <th>ORDER #</th>
                                 <th>ORDER DATE</th>
                                 <th>TOTAL PRICE</th>
-                                <th></th>
                             </tr>
                         </thead>
                           {orders.map(order => (
                             <tbody>
                                 <tr key={order._id}>
-                                    <td>{order._id}</td>
-                                    <td>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</td>
-                                    <td><p style={{marginTop: '.1rem'}}>${order.totalprice}</p></td>
-                                    <td>
-                                            <Button className='btn-sm' variant='light'  onClick={() => orderDetailsHandler(order._id)}>Details</Button>
-                                    </td>
+                                    <td><button  onClick={() => orderDetailsHandler(order._id)}>{order._id}</button></td>
+                                    <td><button onClick={() => orderDetailsHandler(order._id)}>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</button></td>
+                                    <td><button onClick={() => orderDetailsHandler(order._id)}>${order.totalprice}</button></td>
                                 </tr>
                          </tbody>
                           ))}
                     </Table>
+                    </Col>
                   </>
                 )}
+                </div>
                 { loadingDetails ? <Loader/> : errorDetails ? <Message variant='danger'>{errorDetails}</Message> : order.length !== 0 ?  (
-                    <>
+                    <div className='padding'>
                      <h2 style={{color: 'black'}}>Order #{order._id}</h2>
                     <ListGroup variant='flush'>
                         {order.orderItems.map(item => (
@@ -162,10 +159,9 @@ const ProfileScreen = ({ history }) => {
                             </div>
                         </ListGroup.Item>
                     </ListGroup>
-                    </>
+                    </div>
                 ) : ''}
-            </Col>
-        </Row>
+        </>
     )
 }
 

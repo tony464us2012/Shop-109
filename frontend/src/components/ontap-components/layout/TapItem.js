@@ -12,13 +12,11 @@ const TapItem = ({name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingS
     const dispatch = useDispatch()
 
     return (
-        <div variant='dark' className="beer-section beer-section1">
+        <div variant='light' className="beer-section beer-section1">
             { logo ?  <div className="logo-container">
                 <img src= {logo} alt='beer-logo' />
             </div> : 
-            <div className="logo-container">
-            <img src= {logo2} alt='beer-logo' />
-        </div>
+            ''
             }
             <div className="details details1">
                 <h1>{ name }</h1>
@@ -31,7 +29,7 @@ const TapItem = ({name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingS
                 <p>{ ratingCount } <br/>Rating Count</p>
                 <p>{ ratingScore.toPrecision(2) }/4 <br/>Rating Score</p>
             </div>
-            <Button className="remove-btn" variant='danger' onClick={()=> {dispatch(removeBeer(id))}}>Remove</Button>
+            <Button className="remove-btn" size='sm' variant='danger' onClick={()=> {dispatch(removeBeer(id))}}>Remove</Button>
         </div>
         )
     }

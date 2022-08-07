@@ -29,8 +29,8 @@ const OrderListScreen = ({ history }) => {
     }
 
     return (
-        <>
-            <h1>Orders</h1>
+        <div className='padding'>
+            <h1 style={{textAlign:'center'}}>Orders</h1>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
             (
                 <Table striped bordered hover responsive className='table-sm'>
@@ -47,14 +47,14 @@ const OrderListScreen = ({ history }) => {
                     <tbody>
                         {orders.map(order => (
                             <tr key={order._id}>
-                                <td>{order._id}</td>
-                                <td>{order.user && order.user.name}</td>
-                                <td>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</td>
-                                <td>${order.totalprice}</td>
-                                <td>{order.isDelivered ? (order.deliveredAt.substring(0, 10)) : (<i className='fas fa-check' style={{color: 'green'}}></i>)}</td>
+                                <td><button>{order._id}</button></td>
+                                <td><button>{order.user && order.user.name}</button></td>
+                                <td><button>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</button></td>
+                                <td><button>${order.totalprice}</button></td>
+                                <td style={{textAlign:'center'}}><button>{order.isDelivered ? (order.deliveredAt.substring(0, 10)) : (<i className='fas fa-check' style={{color: 'green'}}></i>)}</button></td>
                                 <td>
                                     <LinkContainer to={`/order/${order._id}/`}>
-                                        <Button variant='light' className='btn-sm' onClick={() => orderDetails(order._id)}>
+                                        <Button variant='light' className='btn-sm' style={{display:'flex', margin: '0 auto'}} onClick={() => orderDetails(order._id)}>
                                            Details
                                         </Button>
                                     </LinkContainer>
@@ -64,7 +64,7 @@ const OrderListScreen = ({ history }) => {
                     </tbody>
                 </Table>
             )}
-        </>
+        </div>
     )
 }
 
