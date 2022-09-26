@@ -14,18 +14,15 @@ import { ORDER_CREATE_REQUEST,
          CART_RESET_ITEM, 
         } from './types'
 
-export const createOrder = (order) => async (dispatch, getState) => {
+export const createOrder = (order) => async (dispatch) => {
     try {
         dispatch({
             type: ORDER_CREATE_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
-
         const config = {
             headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                'Content-Type': 'application/json'
             }
         }
         const { data } = await axios.post(`/api/orders`, order, config)

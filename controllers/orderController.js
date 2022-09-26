@@ -7,7 +7,7 @@ import Stripe from 'stripe'
 const stripe = new Stripe(secretkey)
 
 const addOrderItems = asyncHandler( async(req, res) => {
-    const { email, billingName, orderItems, subtotal, tax, totalprice, token} = req.body
+    const { firstName, lastName, phone, email, billingName, orderItems, subtotal, tax, totalprice, token} = req.body
 
     if(orderItems && orderItems.length == 0 ) {
         res.status(400)
@@ -27,7 +27,15 @@ const addOrderItems = asyncHandler( async(req, res) => {
         }
 
         const order = new Order({
-           orderItems, user: req.user._id, subtotal, tax, totalprice
+            firstName,
+            lastName,
+            phone,
+            email,
+            orderItems, 
+            user: req.user._id, 
+            subtotal, 
+            tax, 
+            totalprice
         })
 
          await order.save()
@@ -36,7 +44,7 @@ const addOrderItems = asyncHandler( async(req, res) => {
     }})
 
     const getOrderById = asyncHandler( async(req, res) => {
-        const order = await Order.findById(req.params.id).populate('user', 'name email')
+        const order = await Order.findById(req.params.id).populate('user', 'firstName email')
 
         if(order) {
             res.json(order)

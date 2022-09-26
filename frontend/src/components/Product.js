@@ -15,31 +15,45 @@ const Product = ({ product }) => {
           id: product._id,
           name: product.name,
           price: product.price,
+          description: product.description
         }
         dispatch(addToCart(cartItem))
       }
       
     return (
         <>
-            {/* <div className='product-container' onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}> */}
                 <Card>
-                    <div id={product._id} className="food-image">{product._id}</div>
+                    <div id={product._id} className="food-image"></div>
                     <Card.Body className='productInfo'>
                             <Card.Title>{product.name}</Card.Title>
-                            <Card.Text>{product.description}</Card.Text>
-                            <Card.Text className='card-price'> ${product.price} </Card.Text>
+                            <Card.Text className='text'>{product.description}</Card.Text>
+                            { product.tacoCategory !== "Burritos" &&
+                              product.tacoCategory !== "Fajitas" && 
+                              product.tacoCategory !== "BowlsandSalads" &&
+                              product.tacoCategory !== "LunchSpecials" &&
+                              product.name !== "Loaded Tacos" ?
+                              <Card.Text className='card-price'> ${(product.price).toFixed(2)} </Card.Text>
+                           : ''}
                             <div className="btn-container">
                                 { product.tacoCategory !== "SingleTacos" &&
-                                product.tacoCategory !== "LunchSpecials" &&
                                 product.tacoCategory !== "Quesadillas" && 
                                 product.tacoCategory !== "SideOrders" ? 
                                 <Button variant="outline-dark" size='sm'  onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}>Customize</Button>
                             : ''}
-                                <Button variant="dark" size='sm' onClick={() => addToCartHandler()}>Add To Cart</Button>
+                            { product.tacoCategory !== "Burritos" &&
+                              product.tacoCategory !== "Fajitas" && 
+                              product.tacoCategory !== "BowlsandSalads" &&
+                              product.tacoCategory !== "LunchSpecials" &&
+                              product.name !== "Loaded Tacos" && 
+                              product.name !== "Fry Sampler" &&
+                              product.name !== "Duck Wings" &&
+                              product.name !== "Chicken Wings 8 Piece" &&
+                              product.name !== "Burger In A Bowl" ?
+                              <Button variant="dark" size='sm' onClick={() => addToCartHandler()}>Add To Cart</Button>
+                            : ''}
                             </div>
                     </Card.Body>
                 </Card>
-            {/* </div> */}
             {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} key={product._id} id={product._id} price={product.price}/> : '' }
         </>
     )

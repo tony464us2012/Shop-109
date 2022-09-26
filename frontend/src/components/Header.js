@@ -8,8 +8,8 @@ import { logout } from '../actions/userActions'
 const Header = () => {
     const dispatch = useDispatch()
 
-    const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+    const userLogin = useSelector(state => state.userLogin.userInfo)
+    
   
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
@@ -25,7 +25,7 @@ const Header = () => {
     }
     
     useEffect(() => {
-        if (userInfo) {
+        if (userLogin) {
             setLoggedIn(true)
         } 
         
@@ -46,7 +46,7 @@ const Header = () => {
         return function cleanup() {
             clearInterval(timerID);
         }
-    }, [userInfo, loggedIn, open, logoutHandler, day, hour])
+    }, [ loggedIn, logout, open, day, hour])
     
     function tick() { setDay(new Date().getDay()); setHour(new Date().getHours())}
 
@@ -58,15 +58,12 @@ const Header = () => {
                 <Navbar.Brand href="#home" style={noborder}> <Image id='Logo' className="align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                    <Navbar.Collapse  className='me-auto justify-content-end'>
-                        <Nav.Item>
-                          
                             <Nav.Link eventKey="disabled" style={noborder} className='address' disabled>
-                            <span className="material-symbols-outlined pindrop">pin_drop</span>   
-                            CARRYOUT FROM 646 SW 109 Avenue
+                            <span className="material-icons pindrop">pin_drop</span>   
+                           646 SW 109 Avenue  Miami, FL
                             </Nav.Link>
-                        </Nav.Item>
-                        {loggedIn && userInfo.name ? (
-                            <NavDropdown title={userInfo.name ? `Hi ${userInfo.name.split(' ')[0]}` : ''} id='username'>
+                        {loggedIn ? (
+                            <NavDropdown title={userLogin.firstName ? `Hi ${userLogin.firstName.split(' ')[0]}` : ''} id='username'>
                                 <LinkContainer to='/profile'>
                                     <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>
@@ -86,7 +83,7 @@ const Header = () => {
                             </LinkContainer>
                             </>
                            )}
-                    {loggedIn && userInfo.isAdmin && (
+                    {loggedIn && userLogin.isAdmin && (
                                <NavDropdown title='Admin' id='adminmenu'>
                                <LinkContainer to='/admin/userlist'>
                                    <NavDropdown.Item>Users</NavDropdown.Item>
@@ -105,8 +102,6 @@ const Header = () => {
                    </Navbar.Collapse>
             </Navbar>
             <Navbar bg="light" variant="light" expand="lg" style={{display: 'flex', borderTop: '1px solid lightgrey', borderBottom: 'none'}} collapseOnSelect>
-            {/* <Navbar.Toggle aria-controls="responsive-navbar-nav2" /> */}
-            {/* <Navbar.Collapse id="responsive-navbar-nav2" className="nav-collapse2"> */}
             <div id='navContainer2'>
                 <Nav.Item id='navItem' className='borderbottom'><a href="/">HOME</a></Nav.Item>
                 <Nav.Item id='navItem' className='borderbottom'><a href= "/menu">MENU</a ></Nav.Item>
@@ -114,15 +109,12 @@ const Header = () => {
                 <Nav.Item id='navItem' className='borderbottom'><a href="/about">ABOUT</a></Nav.Item>
                 <Nav.Item id='navItem' ><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noreferrer" target="_blank">DELIVERY</a></Nav.Item>
                 {cartItems.length == 0 ? 
-                 <a href="/cart" className="material-symbols-outlined cart" style={{marginRight: '2rem'}}>shopping_cart_checkout</a> : 
+                 <a href="/cart" className="material-icons cart" style={{marginRight: '2rem'}}>shopping_cart_checkout</a> : 
                 <>
                      <a href="/cart" className="material-symbols-outlined cart">shopping_cart_checkout</a>
-                    <a className="price" href="/cart">&#36;{Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)) }</a>
+                    <a className="price" href="/cart">&#36;{Number(cartItems.reduce((acc, item) => acc + item.price, 0)).toFixed(2) }</a>
                 </>}
-
-
                 </div>
-            {/* </Navbar.Collapse> */}
             </Navbar>
         </div>
     )

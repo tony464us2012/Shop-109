@@ -26,7 +26,7 @@ main {
     padding-bottom: .4rem
 }
 .card-price {
-    margin-top: .4rem;
+    margin-top: .6rem;
     font-weight: 700
 }
 
@@ -83,6 +83,7 @@ button:checked {
 .profile {
     display: flex;
     justify-content: space-around;
+    padding-top: 10%
 }
 #table {
     width: 75% !important;
@@ -144,6 +145,7 @@ button:checked {
 }
 .pindrop {
     margin-right: .5rem;
+    color: red
 }
 
 .price {
@@ -190,13 +192,12 @@ button:checked {
 }
 .menu-container {
  justify-content: center;
- margin-bottom: 1rem
 }
 
 .menu-link {
     color: black;
     border: 2px solid black;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     margin-right: 1rem;
     font-weight: 500
 }
@@ -221,20 +222,65 @@ button:checked {
 }
 
 .taco-header {
-    margin-top: -2rem;
-    margin-bottom: 2rem
+    margin-bottom: 2rem;
+    padding-top: -1rem
 }
 .tacotitle {
     text-align: center;
     font-weight: 200;
-    font-size: .9rem;
-    text-transform: uppercase;
+    font-size: 1.1rem;
+    /* text-transform: uppercase; */
+}
+.checkout-btn {
+    display: flex;
+    margin: 2rem auto;
+    justify-content: center;
+}
+.place-order-title {
+    font-size: 1.75rem
+}
+.order-info {
+    width: 30%
+}
+.order-pay {
+    width: 45%
 }
 
 /* .cart-price h2 {
     margin-bottom: -.5rem;
     margin-top: 2rem
 } */
+.basket {
+    display: block;
+    color: green;
+    font-size: 3rem;
+}
+.security {
+    font-size: 2.5rem;
+    margin-right: .5rem
+}
+.payment-cont {
+    background-color: #e9ecef;
+    margin-top: 1.5rem;
+    padding: 1.2rem
+}
+.secure-payment {
+    display: flex;
+    margin-bottom: 1rem
+}
+.secure-payment-text div {
+    font-size: 1.5rem !important
+}
+.confirmation-text {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto
+}
+.confirmation-text div {
+    font-size: 1.1rem;
+    color: black
+}
+
 .footer {
     justify-content: space-around !important;
     border: none !important;
@@ -280,6 +326,10 @@ button:checked {
 #table {
     width: 100% !important;
 }
+
+.order-info, .order-pay {
+    width: 50%
+}
 }
 @media (max-width: 415px) {
     #navItem {
@@ -289,6 +339,9 @@ button:checked {
     }  
     .menu-container {
         font-size: .6rem
+    }
+    .order-info, .order-pay {
+        width: 100%
     }
 }
 
@@ -308,6 +361,12 @@ button:checked {
     gap: 1rem 2rem;
     justify-content: center;
     margin-top: 2rem
+}
+.cart-item-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 350px));
+    gap: 1rem 2rem;
+    justify-content: center;
 }
 
 .product-container {
@@ -330,6 +389,10 @@ button:checked {
 .productInfo {
     position: relative;
     padding: 14px 4px 4px 18px;
+}
+
+.text {
+    margin-bottom: .8rem
 }
 
 .productInfo h6 {

@@ -48,7 +48,7 @@ const UserListScreen = ({ history }) => {
                     <tbody>
                         {users.filter((a, b) => (a.name > b.name) ? 1 : -1).map(user => (
                             <tr key={user._id}>
-                                <td><button>{user.name}</button></td>
+                                <td><button>{`${user.firstName} ${user.lastName}`}</button></td>
                                 <td><a href={`mailto:${user.email}`}>{user.email}</a></td>
                                 <td style={{textAlign: 'center'}}>{user.isAdmin ? (<i className='fas fa-check' style={{color: 'green'}}></i>) : (<i className='fas fa-times' style={{color: 'red'}}></i>)}</td>
                                 <td style={{display: 'flex', justifyContent: 'space-around'}}>

@@ -478,10 +478,10 @@
     width: 20px;
     padding: 0
 }
-.material-icons{
+/* .material-icons{
     position: relative;
     top: .4rem;
-}
+} */
 @media (max-width: 768px) {
     .bottle-container {
         grid-template-columns: 1fr;

@@ -11,7 +11,9 @@ import { USER_UPDATE_RESET } from '../actions/types'
 const UserEditScreen = ({ match, history }) => {
     const userId = match.params.id
 
-    const [name, setName] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
 
     const dispatch = useDispatch()
@@ -27,10 +29,12 @@ const UserEditScreen = ({ match, history }) => {
             dispatch({ type: USER_UPDATE_RESET })
             history.push('/admin/userlist')
         } else {
-            if(!user.name || user._id !== userId) {
+            if(!user.firstName || user._id !== userId) {
                 dispatch(getUserDetails(userId))
             } else {
-                setName(user.name)
+                setFirstName(user.firstName)
+                setLastName(user.lastName)
+                setPhone(user.phone)
                 setEmail(user.email)
             }
         }
@@ -38,7 +42,7 @@ const UserEditScreen = ({ match, history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-       dispatch(updateUser({ _id: userId, name, email, isAdmin: user.isAdmin  }))
+       dispatch(updateUser({ _id: userId, firstName, lastName, email, phone, isAdmin: user.isAdmin  }))
     }
 
     return (
@@ -51,8 +55,16 @@ const UserEditScreen = ({ match, history }) => {
             {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type='name' placeholder='Enter Name' value={name} onChange={(e) => setName(e.target.value)}></Form.Control>
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control type='name' placeholder='Enter First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}></Form.Control>
+                </Form.Group>
+                <Form.Group controlId='name'>
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control type='name' placeholder='Enter Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}></Form.Control>
+                </Form.Group>
+                <Form.Group controlId='name'>
+                    <Form.Label>Phone Number</Form.Label>
+                    <Form.Control type='phone' placeholder='Enter Name' value={phone} onChange={(e) => setPhone(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='email'>
                     <Form.Label>Email Address</Form.Label>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Table, Button } from 'react-bootstrap'
+import { Table, Button, ButtonGroup, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrderDetails, getOrders } from '../actions/orderActions'
 import dateFormat from 'dateformat'
@@ -64,6 +64,19 @@ const OrderListScreen = ({ history }) => {
                     </tbody>
                 </Table>
             )}
+             <div className='operations-cont'>
+                <Card style={{ width: '35%' }}>
+                <Card.Title>Operations</Card.Title>
+                <Card.Body>
+                    <Card.Text>Cart?</Card.Text>
+                <ButtonGroup aria-label="Basic example">
+                    <Button variant="success">ON</Button>
+                    <Button variant="danger">OFF</Button>
+                </ButtonGroup>
+                <Card.Text>Wait Time</Card.Text>
+                </Card.Body>
+                </Card>
+           </div>
         </div>
     )
 }

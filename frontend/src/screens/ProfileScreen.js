@@ -3,22 +3,26 @@ import { Form, Button, Row, Col, Table, ListGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { updateUserProfile } from '../actions/userActions'
+import { updateUserProfile, getUserDetails } from '../actions/userActions'
 import { myOrders, getOrderDetails } from '../actions/orderActions'
 import dateFormat from 'dateformat'
 import { MY_ORDERS_RESET, ORDER_DETAILS_RESET } from '../actions/types'
 
 const ProfileScreen = ({ history }) => {
-    const [name, setName] = useState('')
+    
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
 
     const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
+   
+    const userDetail = useSelector(state => state.userDetails)
+    const { user } = userDetail
 
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
@@ -34,8 +38,11 @@ const ProfileScreen = ({ history }) => {
             history.push('/login')
         } else {
               dispatch(myOrders(userInfo._id))
-              setName(userInfo.name)
-              setEmail(userInfo.email)
+              dispatch(getUserDetails(userInfo._id))
+              setFirstName(user.firstName)
+              setLastName(user.lastName)
+              setPhone(user.phone)
+              setEmail(user.email)
             }
               return () => {
                   dispatch({type: MY_ORDERS_RESET})
@@ -46,11 +53,7 @@ const ProfileScreen = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if(password !== confirmPassword) {
-            setMessage('Passwords do not match')
-        } else {
-            dispatch(updateUserProfile({ id: userInfo._id, name, email, password}))
-        }
+            dispatch(updateUserProfile({ id: userInfo._id, firstName, lastName, email, phone}))
     }
 
     const orderDetailsHandler = (id) => {
@@ -62,34 +65,33 @@ const ProfileScreen = ({ history }) => {
         <div className="padding row profile">
             {success && <Message variant='success'>Profile Updated</Message>}
             { message ? <Message variant='danger'>{message}</Message> : ''}
-            {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> :
-             orders.length === 0 ?  <Message variant='info'>No Orders..</Message> :
-                 (<>
             <Col md={3} >
-            <h1>User Profile</h1>
+            <h1>Profile</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type='name' placeholder='Enter Name' value={name} onChange={(e) => setName(e.target.value)}></Form.Control>
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control type='text' value={firstName} onChange={(e) => setFirstName(e.target.value)}></Form.Control>
+                </Form.Group>
+                <Form.Group controlId='name'>
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control type='name' value={lastName} onChange={(e) => setLastName(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='email'>
                     <Form.Label>Email Address</Form.Label>
-                    <Form.Control type='email' placeholder='Enter Email' value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
+                    <Form.Control type='email' value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Form.Group controlId='password'>
-                    <Form.Label>New Password</Form.Label>
-                    <Form.Control type='password' placeholder='Enter Password' value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
+                <Form.Group controlId='phone'>
+                    <Form.Label>Phone Number</Form.Label>
+                    <Form.Control type='phone' value={phone} onChange={(e) => setPhone(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Form.Group controlId='confirmPassword'>
-                    <Form.Label>Confirm New Password</Form.Label>
-                    <Form.Control type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
-                </Form.Group>
-
                 <Button type='submit' variant='primary'>
                     Update
                 </Button>
                 </Form>
             </Col>
+            {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> :
+             orders.length === 0 ?  <Col md={3}><Message variant='info'>No Orders..</Message></Col> :
+                 (<>
             <Col md={7}>
                 <h1>My Orders</h1>
               

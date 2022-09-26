@@ -2,7 +2,7 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM } from './types'
 
 export const addToCart = (cartItem) => async (dispatch, getState) => {
  
-    const { id, name, image, price, extraPatty, pattySwap, sideSwap, upgradeSide, extras, large, sauce, burger, fryAddOn, instructions } = cartItem
+    const { id, name, image, price, description, extraPatty, pattySwap, sideSwap, upgradeSide, extras, large, sauce, burger, fryAddOn, taco, tacoText, instructions } = cartItem
 
     dispatch({
         type: CART_ADD_ITEM,
@@ -11,6 +11,7 @@ export const addToCart = (cartItem) => async (dispatch, getState) => {
             name,
             image,
             price,
+            description,
             extraPatty, 
             pattySwap,
             sideSwap,
@@ -19,6 +20,8 @@ export const addToCart = (cartItem) => async (dispatch, getState) => {
             large,
             sauce, 
             burger,
+            taco,
+            tacoText,
             fryAddOn,
             instructions
         }
