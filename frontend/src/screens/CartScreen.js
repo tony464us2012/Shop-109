@@ -4,7 +4,7 @@ import { Row, Col, ListGroup, Image, Button, Card, Nav, Form } from 'react-boots
 import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
-const CartScreen = ({ match, location, history }) => {
+const CartScreen = ({ history, match, location }) => {
     const productId = match.params.id
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
     const dispatch = useDispatch()
@@ -33,9 +33,9 @@ const CartScreen = ({ match, location, history }) => {
             <Nav.Link className='menu-link' style={{ backgroundColor: 'black', color: '#fff'}}>Your Order</Nav.Link>
           </Nav.Item>
         </Nav>
-       <div className='cart-item-container'>
-               {cartItems.length === 0 ? <Message>Your cart is empty.</Message> : (
-                       cartItems.map(item => (
+               {cartItems.length === 0 ? <Message variant={'danger'}>Your cart is empty.</Message> : (
+                    <div className='cart-item-container'>
+                       {cartItems.map(item => (
                            <Card variant='light'>
                                 <Card.Body className='productInfo'>
                                     <Card.Title>{item.name}</Card.Title>
@@ -58,11 +58,12 @@ const CartScreen = ({ match, location, history }) => {
                                             delete
                                         </button>
                            </Card>
-                       )))}
+                       ))}
                     </div>
-            <Col className="checkout-btn" >
+                       )}
+            {cartItems.length > 0 ? <Col className="checkout-btn" >
                     <Button type='button' variant='success' className='btn' onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
-            </Col>
+            </Col> : ''}
       </>
     )
 }

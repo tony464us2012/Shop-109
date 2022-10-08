@@ -30,9 +30,23 @@ const OrderListScreen = ({ history }) => {
 
     return (
         <div className='padding'>
+            <div className='operations-cont'>
+                <Card>
+                <Card.Title>Operations</Card.Title>
+                <Card.Body>
+                    <Card.Text>Cart?</Card.Text>
+                <ButtonGroup aria-label="Basic example">
+                    <Button variant="success">ON</Button>
+                    <Button variant="danger">OFF</Button>
+                </ButtonGroup>
+                <Card.Text>Wait Time</Card.Text>
+                </Card.Body>
+                </Card>
+           </div>
             <h1 style={{textAlign:'center'}}>Orders</h1>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
             (
+                
                 <Table striped bordered hover responsive className='table-sm'>
                     <thead>
                         <tr>
@@ -64,19 +78,6 @@ const OrderListScreen = ({ history }) => {
                     </tbody>
                 </Table>
             )}
-             <div className='operations-cont'>
-                <Card style={{ width: '35%' }}>
-                <Card.Title>Operations</Card.Title>
-                <Card.Body>
-                    <Card.Text>Cart?</Card.Text>
-                <ButtonGroup aria-label="Basic example">
-                    <Button variant="success">ON</Button>
-                    <Button variant="danger">OFF</Button>
-                </ButtonGroup>
-                <Card.Text>Wait Time</Card.Text>
-                </Card.Body>
-                </Card>
-           </div>
         </div>
     )
 }

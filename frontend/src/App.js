@@ -1,7 +1,7 @@
 import React from 'react'
 import {Elements} from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
@@ -24,6 +24,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import AccessibilityScreen from './screens/AccessibilityScreen'
 import TermsScreen from './screens/TermsScreen'
+// import { Switch } from 'react-router-dom'
 
 const stripePromise = loadStripe('pk_test_51IQjuZL3CskvbasWBMNfrSLPF2xBP9mietcH9gbwH7SkVgGMAWIC8dM2V0XnN0U9e9BhVH48Uvu59RCBkImcOAdi00PyTPUtjp')
 
@@ -33,27 +34,29 @@ const App = () => {
       <Header />
       <main className="app" >
         <Elements stripe={stripePromise}>
-            <Route path='/confirmation/:id' component={ConfirmationScreen}  />
-            <Route path='/order/:id' component={OrderScreen}  />
-            <Route path='/login' component={LoginScreen}  />
-            <Route path='/placeorder' component={PlaceOrderScreen}  />
-            <Route path='/register' component={RegisterScreen}  />
-            <Route path='/profile' component={ProfileScreen}  />
-            <Route path='/product/:id' component={ProductScreen}  />
-            <Route path='/cart' component={CartScreen}  />
-            <Route path='/admin/beerlist' component={BeerListScreen} />
-            <Route path='/admin/userlist' component={UserListScreen} />
-            <Route path='/admin/user/:id/edit' component={UserEditScreen} />
-            <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
-            <Route path='/admin/productlist' component={ProductListScreen} exact />
-            <Route path='/admin/productlist/:pageNumber' component={ProductListScreen} exact />
-            <Route path='/admin/orderlist' component={OrderListScreen} />
-            <Route path='/terms' component={TermsScreen} exact />
-            <Route path='/accessibility' component={AccessibilityScreen} exact />
-            <Route path='/beers' component={BeerScreen} exact />
-            <Route path='/about' component={AboutScreen} exact />
-            <Route path='/menu' component={MenuScreen} exact />
-            <Route path='/' component={HomeScreen} exact />
+          <Routes>
+            <Route path='/confirmation/:id'element={<ConfirmationScreen />} />
+            <Route path='/order/:id'element={<OrderScreen />} />
+            <Route path='/login'element={<LoginScreen />} />
+            <Route path='/placeorder'element={<PlaceOrderScreen />} />
+            <Route path='/register'element={<RegisterScreen />} />
+            <Route path='/profile'element={<ProfileScreen />} />
+            <Route path='/product/:id'element={<ProductScreen />} />
+            <Route path='/cart'element={<CartScreen />} />
+            <Route path='/admin/beerlist'element={<BeerListScreen />} />
+            <Route path='/admin/userlist'element={<UserListScreen />} />
+            <Route path='/admin/user/:id/edit'element={<UserEditScreen />} />
+            <Route path='/admin/product/:id/edit'element={<ProductEditScreen />} />
+            <Route path='/admin/productlist'element={<ProductListScreen />} />
+            <Route path='/admin/productlist/:pageNumber'element={<ProductListScreen />} />
+            <Route path='/admin/orderlist'element={<OrderListScreen />} />
+            <Route path='/terms'element={<TermsScreen />} />
+            <Route path='/accessibility'element={<AccessibilityScreen />} />
+            <Route path='/beers'element={<BeerScreen />} />
+            <Route path='/about'element={<AboutScreen />} />
+            <Route path='/menu' element={<MenuScreen />} />
+            <Route path='/' element={<HomeScreen/>} />
+          </Routes>
         </Elements>
         </main>
         <Footer />

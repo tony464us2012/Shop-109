@@ -3,7 +3,7 @@ import { Alert } from 'react-bootstrap'
 
 const Message = ({ variant, children }) => {
     return (
-        <Alert variant={variant} style={{marginTop: '3rem', textAlign:'center'}}>
+        <Alert variant={variant} style={{marginTop: '3rem', textAlign:'center', width: '100%'}}>
             {children}
         </Alert>
     )
