@@ -3,14 +3,14 @@ import {
    BEER_REQUEST,
    SET_MAIN_BEERS,
    SET_SEARCHED_BEERS,
-   ADD_TAP,
    REMOVE_BEER,
    SET_MAIN_BOTTLES,
    ADD_BOTTLE,
-   REMOVE_BOTTLE
+   REMOVE_BOTTLE,
+   CLEAR_SEARCHED_BEERS
 } from './types'
 
-export const getMainBeers = () => async (dispatch, getState) => {
+export const getMainBeers = () => async (dispatch) => {
     try {
         dispatch({ type: BEER_REQUEST})
         
@@ -25,7 +25,7 @@ export const getMainBeers = () => async (dispatch, getState) => {
     }
 }
 
-export const searchBeer = (text) => async (dispatch, getState) => {
+export const searchBeer = (text) => async (dispatch) => {
     try {
         const response = await fetch(`https://api.untappd.com/v4/search/beer?q=${text}&client_id=41EF786235D5A6E859C26C7DABA2048BB19344D0&client_secret=2C5E752380284C4A141AD1066C8E688BF0A299F9`);
         const data = await response.json()
@@ -48,18 +48,12 @@ export const searchBeer = (text) => async (dispatch, getState) => {
         const response = await fetch(`https://api.untappd.com/v4/beer/info/${bid}?client_id=41EF786235D5A6E859C26C7DABA2048BB19344D0&client_secret=2C5E752380284C4A141AD1066C8E688BF0A299F9`);
         const data = await response.json()
         const beerObject = data.response.beer
-        console.log(beerObject)
-        //eslint-disable-next-line
         const res = await axios.post('/api/dashboard', beerObject, config)
         dispatch({ type: SET_MAIN_BEERS, payload: res.data})
+        dispatch({ type: CLEAR_SEARCHED_BEERS })
     } catch(err) {
         console.log(err)
     }
-}
-
-export const addTap = (bid) => (dispatch, getState) =>  {
-    dispatch({type: ADD_TAP, payload: bid})
-    searchBeerInfo(bid)
 }
 
 export const removeBeer = (id) => async (dispatch, getState) => {

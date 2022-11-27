@@ -18,7 +18,7 @@ const BeerScreen = () => {
 
     useEffect(() => {
         dispatch(getMainBeers())
-    }, [dispatch])
+    }, [])
 
     const tabHandler = (tab) => {
         setTab(tab)

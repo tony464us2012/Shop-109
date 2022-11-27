@@ -18,13 +18,13 @@ import { PRODUCT_LIST_SUCCESS,
          PRODUCT_UPDATE_RESET, 
          SET_MAIN_BEERS, 
          SET_SEARCHED_BEERS, 
-         ADD_TAP, 
          REMOVE_BEER, 
          SET_MAIN_BOTTLES, 
          ADD_BOTTLE, 
          REMOVE_BOTTLE,
          BEER_REQUEST,
-         BEER_FAIL } from '../actions/types'
+         BEER_FAIL, 
+         CLEAR_SEARCHED_BEERS} from '../actions/types'
 
 export const productListReducer = (state = { products: [] }, action) => {
     switch (action.type) {
@@ -83,7 +83,7 @@ export const productUpdateReducer = (state = { product: {}}, action) => {
         case PRODUCT_UPDATE_REQUEST:
             return { loading: true }
         case PRODUCT_UPDATE_SUCCESS:
-            return { loading: false, success: true, product: action.payload }
+            return { loading: false, success: true }
         case PRODUCT_UPDATE_FAIL:
         return { loading: false, error: action.payload}
         case PRODUCT_UPDATE_RESET: 
@@ -101,8 +101,8 @@ export const beerReducer = (state = { displayBeers: [], searchedBeers: [], searc
             return { ...state, loading: false, displayBeers: action.payload };
         case SET_SEARCHED_BEERS:
             return { ...state, loading: false, searchedBeers: action.payload };
-        case ADD_TAP:
-            return { ...state, loading: false, searchedBeers: state.searchedBeers.filter(x => x.beer.bid !== action.payload) };
+        case CLEAR_SEARCHED_BEERS: 
+            return { ...state, loading: false, searchedBeers: []}
         case REMOVE_BEER:
             return { ...state, loading: false, displayBeers: state.displayBeers.filter(x => x._id !== action.payload) }
         case SET_MAIN_BOTTLES: 

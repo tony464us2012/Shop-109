@@ -6,8 +6,8 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
 
     return (
     <>
-        <Flippy  flipOnClick={true} className='main-section' style={{backgroundColor: 'white'}}>
-            <FrontSide className='front' >
+        <Flippy  flipOnClick={true}>
+            <FrontSide className='front main-section' >
                 { logo ?  <div className="logo-container">
                     <img src= {logo} alt='beer-logo' />
                 </div> : 

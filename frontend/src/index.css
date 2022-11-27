@@ -4,7 +4,8 @@ body {
     font-family: 'Oswald', serif;
     box-sizing: border-box;
     margin: 0;
-    padding: 0
+    padding: 0;
+    line-height: 1.2;
 }
 
 #root {
@@ -15,15 +16,13 @@ main {
     background-color: #fff;
     min-height: 87vh;
     width: 100%;
+    /* background-image: url(./images/app-background1.png); */
+    /* background-repeat: repeat; */
+    /* background-position: 50% 50%; */
+    /* background-size: cover; */
 }
 .padding {
     padding: 3rem
-}
-.card{
-    background-color: #fff;
-    border: 1px solid black;
-    color: black;
-    padding-bottom: .4rem
 }
 .card-price {
     margin-top: .6rem;
@@ -42,6 +41,10 @@ a,
 .black
 {
     color: black
+}
+
+i {
+    margin-top: -.5rem !important
 }
 
 h6 {
@@ -76,6 +79,15 @@ button:hover {
 }
 button:checked {
     border: none
+}
+.title {
+    background-color: black;
+    color: white;
+    padding-top: .2rem;
+}
+.gap {
+    display: block;
+    padding-bottom: 3rem
 }
 .border {
     border: 1px black solid !important;
@@ -192,6 +204,7 @@ button:checked {
 }
 .menu-container {
  justify-content: center;
+ padding: 2rem 0 0
 }
 
 .menu-link {
@@ -223,12 +236,16 @@ button:checked {
 
 .taco-header {
     margin-bottom: 2rem;
-    padding-top: -1rem
+    padding-top: -1rem;
+    justify-content: center;
 }
 .tacotitle {
     text-align: center;
-    font-weight: 200;
     font-size: 1.1rem;
+    background-color: black;
+    color: white;
+    margin: 3rem 0;
+    padding: .4rem 0
     /* text-transform: uppercase; */
 }
 .checkout-btn {
@@ -250,7 +267,8 @@ button:checked {
     margin-bottom: -.5rem;
     margin-top: 2rem
 } */
-.basket {
+.basket,
+.material-symbols-outlined {
     display: block;
     color: green;
     font-size: 3rem;
@@ -261,7 +279,7 @@ button:checked {
 }
 .payment-cont {
     background-color: #e9ecef;
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
     padding: 1.2rem
 }
 .secure-payment {
@@ -279,6 +297,46 @@ button:checked {
 .confirmation-text div {
     font-size: 1.1rem;
     color: black
+}
+#watermark
+{
+ position:absolute;
+ bottom:30%;
+ right: 40%;
+ opacity:0.3;
+ z-index:99;
+ color:green;
+ font-family: Teko;
+ font-size: 4rem;
+ font-weight: 600;
+ text-transform: uppercase;
+ transform: rotate(-20deg);
+}
+#watermark2
+{
+ position:absolute;
+ bottom:44%;
+ right: 40%;
+ opacity:0.3;
+ z-index:99;
+ color:green;
+ font-family: Teko;
+ font-size: 4rem;
+ font-weight: 600;
+ text-transform: uppercase;
+ transform: rotate(-20deg);
+}
+.required-title {
+    font-size: 1rem;
+    margin-bottom: .5rem;
+    margin-right: .5rem
+}
+.required {
+    display: inline-block;
+    background: yellow;
+}
+.mt {
+    margin-top: .5rem
 }
 
 .footer {
@@ -321,7 +379,7 @@ button:checked {
     margin-top: 1rem
 }
 .padding {
-    padding: .5rem
+    padding: .2rem
 }
 #table {
     width: 100% !important;
@@ -330,16 +388,26 @@ button:checked {
 .order-info, .order-pay {
     width: 50%
 }
+.MainPicture {
+    padding: 30% 10% !important
+}
+.main-text {
+    font-size: 2.2rem !important;
+    padding: 0;
+}
+.MainPicture span:first-child {
+    font-size: 1rem !important;
+    background-color: red;
+    padding: 0 .2rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+}
 }
 @media (max-width: 415px) {
     #navItem {
-        font-size: 60%;
         border-bottom: none;
         margin-right: 1rem
     }  
-    .menu-container {
-        font-size: .6rem
-    }
     .order-info, .order-pay {
         width: 100%
     }
@@ -347,26 +415,120 @@ button:checked {
 
 /* Homepage */
 .MainPicture {
-    background-image: url(./images/109background.jpg);
+    position: relative;
+    background-image: -moz-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
+	background-image: -webkit-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
+	background-image: -ms-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
+	background-image: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
+    /* background-image: url(./images/109background.jpg), linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); */
     background-size: cover;
     background-position: 50% 10%;
-    height: 45vh
+    width: 90vw;
+    height: 45vh;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 15%;
+}
+
+.MainPicture span {
+    color: #fff;
+    display: inline-block;
+    position: relative;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.main-text {
+    font-size: 3rem;
+}
+
+.MainPicture span:first-child {
+    font-weight: 500;
+    font-size: 1.5rem;
+    background-color: red;
+    padding: 0 .4rem;
+    border-radius: 5px;
+    margin-bottom: .7rem;
+}
+
+
+/* .MainPicture:nth-child(2) {
+
+} */
+
+.ban-pic {
+   height: 250px;
+   background-size: cover;
+   background-position: 50% 10%;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+}
+
+.ban-pic1 {
+    background-image: url(./images/nica_burger.jpg);
+}
+
+.ban-pic2 {
+    background-image: url(./images/beer-tap2.jpg)
+}
+
+.ban-pic3 {
+    background-image: url(./images/taco_rico.jpg);
+}
+
+.ban-title {
+    font-size: 2rem;
+    font-family: Teko;
+    text-align: center;
+    text-shadow: 1px 1px gray;
+    margin-top: .50rem;
+}
+
+.card{
+    background-color: #fff;
+    color: black;
+    border-radius: 2px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
 }
 
 /* Menu */
 
-.menu-item-container {
+.menu-item-container,
+.cart-item-container
+ {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 350px));
-    gap: 1rem 2rem;
-    justify-content: center;
-    margin-top: 2rem
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 1.5rem 3rem;
+    padding: 1rem;
+    margin: 2rem 1rem;
+    justify-content: space-evenly;
 }
-.cart-item-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 350px));
-    gap: 1rem 2rem;
+
+.banner-item-container {
+    display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.banner-item {
+    width: 300px;
+    color: black;
+    margin: 1rem;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.food-item {
+    padding: .5rem 
+}
+
+.menu {
+    position: relative;
+    min-height: 80vh;
 }
 
 .product-container {
@@ -406,11 +568,14 @@ button:checked {
 }
 
 .advisory {
- margin-top: 10%;
+ position:relative;
+ bottom: 0;
+ width: 100vw;
+ margin-top: 2rem;
  padding-bottom: 3rem;
  text-align: center;
  font-size: .7rem;
- color: black
+ color: black;
 }
 .advisory-text {
     color: black;
@@ -426,6 +591,19 @@ button:checked {
 .btn-dark:hover {
     background-color: white;
     color: black
+}
+.empty-cart {
+    background-color: #ee5f5b;
+    color: #fff;
+    width: 50%;
+    margin: 6rem auto;
+    height: 20%;
+    text-align: center;
+    border-radius: 6px;
+    font-size: large;
+    padding: 10% 0;
+    max-width: 800px;
+    max-height: 600px;
 }
 
 /* Beer */
@@ -489,6 +667,7 @@ button:checked {
 
 .modal-description {
     margin: 1rem 0;
+    font-size: 1rem;
     line-height: 145%;
 
 }
@@ -561,6 +740,15 @@ input[type='number'] {
       padding: 2rem;
   }
 
+  /* Setup/Orderlist */
+
+  .operations-cont {
+    width: 30%;
+  }
+  @media (max-width: 768px) {
+    .operations-cont {
+      width: 50%
+    }}
 
   /* Accessibility */
   .accessibility {
@@ -587,9 +775,42 @@ input[type='number'] {
       .menu-container .menu-link {
           margin-top: 1rem
       }
-      .menu-container {
-        margin-left: 10% !important
-      
-      }
+     
   }
 
+  /* Loader */
+  .lds-hourglass {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 1rem 45% 2rem;
+    justify-content: center;
+    /* margin-bottom: 2rem */
+  }
+  .lds-hourglass:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    box-sizing: border-box;
+    border: 24px solid black;
+    border-color: #000 transparent #000 transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
+  @keyframes lds-hourglass {
+    0% {
+      transform: rotate(0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+      transform: rotate(900deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+      transform: rotate(1800deg);
+    }
+  }
+  
+/* # sourceMappingURL=index.css.map */

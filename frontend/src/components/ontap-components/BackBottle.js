@@ -7,7 +7,7 @@ const BackBottle = ({ bottleBeer }) => {
 
     return (
         <>
-        <h1 style={{marginTop: '2rem'}} className='text-center'>Beers on Bottles</h1>
+        <h1 style={{marginTop: '2rem'}} className='text-center title'>Beers on Bottles</h1>
         <div className="bottle-container">
             <div className="bottle-item">
                 <h3>IPA</h3>

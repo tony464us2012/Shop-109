@@ -12,18 +12,18 @@ const TapItem = ({name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingS
     const dispatch = useDispatch()
 
     return (
-        <div variant='light' className="beer-section beer-section1">
+        <div variant='light' className="main-section">
             { logo ?  <div className="logo-container">
                 <img src= {logo} alt='beer-logo' />
             </div> : 
             ''
             }
-            <div className="details details1">
+            <div className="main-details">
                 <h1>{ name }</h1>
                 <h3>{ brewery }</h3>
                 <p style={{color: 'white'}}>{ beerstyle }</p>
             </div>
-            <div className="bottom bottom1" style={{marginTop: '2%', marginLeft: '2%', marginBottom:'1rem'}}>
+            <div className="main-bottom" style={{marginTop: '2%', marginLeft: '2%', marginBottom:'1rem'}}>
                 <p>{ abv }<br/> ABV</p>
                 <p>{ ibu } <br/> IBU</p>
                 <p>{ ratingCount } <br/>Rating Count</p>

@@ -10,8 +10,8 @@ const MainPicture = () => {
 
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <div className='MainPicture'>
-           <p>Carousel goes here</p>
-           <p>Carousel goes here2</p>
+           <span>New</span><br></br>
+           <span className='main-text'>Unique Burgers</span>
         </div>
     )
 }

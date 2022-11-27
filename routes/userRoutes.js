@@ -6,6 +6,6 @@ import { protect, admin } from '../middleware/authMiddleware.js'
 router.route('/').post(registerUser).get(getUsers)
 router.route('/login').post(authUser)
 router.route('/profile').get(protect, getUserProfile).put(protect,updateUserProfile)
-router.route('/:id').delete(protect, admin, deleteUser).get(protect, admin, getUserById).put(protect, admin, updateUser)
+router.route('/:id').delete(protect, admin, deleteUser).get(protect, getUserById).put(protect, updateUser)
 
 export default router

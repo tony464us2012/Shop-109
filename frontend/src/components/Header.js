@@ -1,55 +1,44 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap'
-import { logout } from '../actions/userActions'
-
+import { getUserDetails, logout } from '../actions/userActions'
+import { render } from 'react-dom'
+import { getSetup, myOrders } from '../actions/orderActions'
+import { listProducts } from '../actions/productActions'
+import { getMainBeers } from '../actions/beerActions'
 
 const Header = () => {
-    const dispatch = useDispatch()
-
-    const userLogin = useSelector(state => state.userLogin.userInfo)
     
-  
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const { userInfo } = useSelector(state => state.userLogin)
+   
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
-    const [day, setDay] = useState(new Date().getDay())
-    const [hour, setHour] = useState(new Date().getHours())
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [open, setOpen] = useState(null)
-
     const logoutHandler = () => {
         dispatch(logout())
-        setLoggedIn(false)
+        navigate('/')
+        render()
     }
     
     useEffect(() => {
-        if (userLogin) {
-            setLoggedIn(true)
-        } 
-        
-        if (day >= 1 && day <= 4) {
-            if (hour >= 12 && hour < 22 ) {
-                setOpen(true)
-            } else { setOpen(false) }
-        } else if (day === 5 || day === 6) {
-            if (hour >= 12 ) {
-                setOpen(true)
-            } else {setOpen(false)}
-         } else {
-             if (hour >= 12 && hour < 20) {
-                 setOpen(true)
-             }
-         }
-        var timerID = setInterval( () => tick(), 1000 );
-        return function cleanup() {
-            clearInterval(timerID);
-        }
-    }, [ loggedIn, logout, open, day, hour])
-    
-    function tick() { setDay(new Date().getDay()); setHour(new Date().getHours())}
 
+        dispatch(getSetup())
+        dispatch(listProducts())
+        dispatch(getMainBeers())
+
+    setTimeout(() => {
+            if (userInfo) {
+                dispatch(getUserDetails(userInfo._id))
+                dispatch(myOrders(userInfo._id))
+                }
+        }, 1000)
+    }, [userInfo])
+    
     const noborder = {border: 'none'}
 
     return (
@@ -62,31 +51,31 @@ const Header = () => {
                             <span className="material-icons pindrop">pin_drop</span>   
                            646 SW 109 Avenue  Miami, FL
                             </Nav.Link>
-                        {loggedIn ? (
-                            <NavDropdown title={userLogin.firstName ? `Hi ${userLogin.firstName.split(' ')[0]}` : ''} id='username'>
-                                <LinkContainer to='/profile'>
-                                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                                </LinkContainer>
-                                <LinkContainer to='/'>
-                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-                                </LinkContainer>
-                            </NavDropdown>
-                        ) :  (
+                        {userInfo ? (
+                                <NavDropdown title={userInfo.firstName ? `Hi ${userInfo.firstName.split(' ')[0]}` : ''} id='username'>
+                                    <LinkContainer to='/profile'>
+                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/'>
+                                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                    </LinkContainer> 
+                                    </NavDropdown>
+                        ) : (
                             <>
-                            <LinkContainer to='/login' id='username' className='login'>
-                            <Nav.Link>
-                            <i className="fas fa-sign-in-alt"></i> Log In
-                            </Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to='/register' id='username' className='register'>
-                            <Nav.Link><i className="fas fa-user-plus"></i> Sign Up</Nav.Link>
-                            </LinkContainer>
+                                <LinkContainer to='/login' id='username' className='login'>
+                                    <Nav.Link>
+                                        <i className="fas fa-sign-in-alt"></i> Log In
+                                    </Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to='/register' id='username' className='register'>
+                                    <Nav.Link><i className="fas fa-user-plus"></i> Sign Up</Nav.Link>
+                                </LinkContainer>
                             </>
                            )}
-                    {loggedIn && userLogin.isAdmin && (
+                    {userInfo && userInfo.isAdmin && (
                                <NavDropdown title='Admin' id='adminmenu'>
                                <LinkContainer to='/admin/userlist'>
-                                   <NavDropdown.Item>Users</NavDropdown.Item>
+                                   <NavDropdown.Item>Accounts</NavDropdown.Item>
                                </LinkContainer>
                                <LinkContainer to='/admin/productlist'>
                                    <NavDropdown.Item>Products</NavDropdown.Item>
@@ -107,11 +96,12 @@ const Header = () => {
                 <Nav.Item id='navItem' className='borderbottom'><a href= "/menu">MENU</a ></Nav.Item>
                 <Nav.Item id='navItem' className='borderbottom'><a href="/beers">BEERS</a></Nav.Item>
                 <Nav.Item id='navItem' className='borderbottom'><a href="/about">ABOUT</a></Nav.Item>
-                <Nav.Item id='navItem' ><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noreferrer" target="_blank">DELIVERY</a></Nav.Item>
-                {cartItems.length == 0 ? 
+                <Nav.Item id='navItem' ><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noopener noreferrer" target="_blank">DELIVERY</a></Nav.Item>
+                {cartItems.length === 0 ? 
                  <a href="/cart" className="material-icons cart" style={{marginRight: '2rem'}}>shopping_cart_checkout</a> : 
                 <>
-                     <a href="/cart" className="material-symbols-outlined cart">shopping_cart_checkout</a>
+                     <a href="/cart" className="material-icons cart" style={{ color: 'green'}}>shopping_cart_checkout</a>
+                     {/* <a href="/cart" className="material-symbols-outlined cart">shopping_cart_checkout</a> */}
                     <a className="price" href="/cart">&#36;{Number(cartItems.reduce((acc, item) => acc + item.price, 0)).toFixed(2) }</a>
                 </>}
                 </div>

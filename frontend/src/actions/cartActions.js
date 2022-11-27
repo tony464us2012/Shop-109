@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from './types'
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_RESET_ITEM } from './types'
 
 export const addToCart = (cartItem) => async (dispatch, getState) => {
  
@@ -37,4 +37,11 @@ export const removeFromCart = (id) => (dispatch, getState) => {
         payload: id
     })
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+export const clearCart = () => (dispatch, getState) => {
+    dispatch({
+        type: CART_RESET_ITEM
+    })
+    localStorage.removeItem('cartItem')
 }

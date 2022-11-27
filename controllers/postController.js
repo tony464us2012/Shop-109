@@ -12,7 +12,7 @@ const getTaps = asyncHandler( async(req, res) => {
     })
 
 const postTap = asyncHandler( async(req, res) => {
-    
+
     const post = new tapPost({
         beerName: req.body.beer_name,
         beerLogo: req.body.beer_label_hd,

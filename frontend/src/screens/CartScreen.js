@@ -1,42 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Button, Card, Nav, Form } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { Col, Button, Card, Nav } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import { removeFromCart } from '../actions/cartActions'
 
-const CartScreen = ({ history, match, location }) => {
-    const productId = match.params.id
-    const qty = location.search ? Number(location.search.split('=')[1]) : 1
+const CartScreen = () => {
+    
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart 
-
-    useEffect(() => {
-        if(productId) {
-            dispatch(addToCart(productId, qty))
-        }
-               },[dispatch, productId, qty])
 
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id))
     }
 
     const checkoutHandler = () => {
-            history.push('/placeorder')
+            navigate('/placeorder')
     }
 
     return (
     <>
-       <Nav as="ul" className='menu-container' style={{marginBottom: '2rem'}}>
-          <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={{ backgroundColor: 'black', color: '#fff'}}>Your Order</Nav.Link>
-          </Nav.Item>
-        </Nav>
-               {cartItems.length === 0 ? <Message variant={'danger'}>Your cart is empty.</Message> : (
+            <div className='gap'></div>
+            <h1 className='text-center title'>Shopping Cart</h1>
+               {cartItems.length === 0 ? <div className='empty-cart'>Your cart is empty.</div> : (
                     <div className='cart-item-container'>
                        {cartItems.map(item => (
-                           <Card variant='light'>
+                           <Card variant='light' key={item.id}>
                                 <Card.Body className='productInfo'>
                                     <Card.Title>{item.name}</Card.Title>
                                     <Card.Text className='text'>{item.description}</Card.Text>
@@ -54,15 +46,13 @@ const CartScreen = ({ history, match, location }) => {
                                         {item.instructions ? <div style={{marginTop: '1rem'}} md={8}>Instructions: {item.instructions}</div> : '' }
                                         <Card.Text className='text'><div>${item.price}</div></Card.Text>
                                 </Card.Body>
-                               <button variant='danger' size='sm' style={{width: '30%', marginLeft: 'auto'}} onClick={() => removeFromCartHandler(item.id)}>
-                                            delete
-                                        </button>
+                                        <Button variant='danger' size='sm' style={{width: '25%', marginLeft: 'auto', marginRight: '.3rem', marginBottom:'.3rem', padding: '.1rem .4rem'}} onClick={() => removeFromCartHandler(item.id)}>delete</Button>
                            </Card>
                        ))}
                     </div>
                        )}
             {cartItems.length > 0 ? <Col className="checkout-btn" >
-                    <Button type='button' variant='success' className='btn' onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
+                    <Button type='button' variant='success' className='btn' style={{marginTop: '2rem', padding: '.5rem 1rem'}} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
             </Col> : ''}
       </>
     )

@@ -9,7 +9,7 @@ const TacoHeader = ({tacoTabHandler, tacoTab}) => {
     }
   }
     return (
-        <Nav as="ul" className='menu-container taco-header'>
+        <Nav as="ul" className='taco-header'>
           <Nav.Item as="li">
             <Nav.Link className='menu-link' style={selectHandler('Tacos')} onClick={() => tacoTabHandler('Tacos')}>Tacos</Nav.Link>
           </Nav.Item>

@@ -26,7 +26,7 @@ const AddBottle = () => {
     };    
     return (
         <>
-            <form className="bottle-form" onSubmit={onSubmit}>
+            <form className="bottle-form" style={{marginTop: '1rem'}} onSubmit={onSubmit}>
                 <div className="form-row">
                     <div className="form-group col-md-4">
                         <label htmlFor="name">Add Bottle</label>

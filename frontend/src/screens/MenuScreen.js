@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector  } from 'react-redux'
-import { listProducts } from '../actions/productActions'
+import React, { useState } from 'react'
+import {  useSelector  } from 'react-redux'
 import Meta from '../components/Meta'
 import MenuHeader from '../components/MenuHeader'
 import Burger from '../components/menu-components/Burger'
@@ -17,12 +16,6 @@ const MenuScreen = () => {
 
     const [tab, setTab] = useState('Appetizer')
     
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(listProducts())
-    }, [dispatch])
-
     const productList = useSelector(state => state.productList)
     const { products, loading } = productList
 
@@ -40,23 +33,23 @@ const MenuScreen = () => {
     }
 
     return loading ? <Loader /> : (
-        <>
+        <div className='menu'>
             <Meta />
             <MenuHeader tabHandler={tabHandler} tab={tab} />
-            {tab === 'Appetizer' ? <Appetizer appetizers={appetizers} key={appetizers._id} /> :
-             tab === 'Salad' ? <Salad salads={salads} key={salads._id}/> :
-             tab === 'Burger' ?  <Burger burgers={burgers} key={burgers._id} /> :
-             tab === 'ForkandKnife' ?  <ForkandKnife forkandknifes={forkandknifes} key={forkandknifes._id}/> :
-             tab === 'Sandwich' ? <Sandwich sandwiches={sandwiches} key={sandwiches._id} /> : 
-             tab === 'Slider' ? <Slider sliders={sliders} key={sliders._id} /> :
-             tab === 'Side' ? <Side sides={sides} key={sides._id} /> :
-            <TacoRico tacos={tacos} key={tacos._id} /> 
+            {tab === 'Appetizer' ? <Appetizer appetizers={appetizers}  /> :
+             tab === 'Salad' ? <Salad salads={salads}/> :
+             tab === 'Burger' ?  <Burger burgers={burgers} /> :
+             tab === 'ForkandKnife' ?  <ForkandKnife forkandknifes={forkandknifes} /> :
+             tab === 'Sandwich' ? <Sandwich sandwiches={sandwiches} /> : 
+             tab === 'Slider' ? <Slider sliders={sliders} /> :
+             tab === 'Side' ? <Side sides={sides} /> :
+            <TacoRico tacos={tacos} /> 
             }
                 <div className='advisory'>
                     <div>CONSUMER ADVISORY</div>
                     <p className='advisory-text'>*Consuming raw or undercooked, meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness especially if you have certain medical conditions.</p>
                 </div> : ''
-        </>
+        </div>
     )
 }
 

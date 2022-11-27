@@ -1,52 +1,64 @@
 import React, { useEffect } from 'react'
-import { Row, Col, ListGroup, Button } from 'react-bootstrap'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Row, Col, ListGroup, Button, Spinner } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import dateFormat from 'dateformat'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { ORDER_DETAILS_RESET } from '../actions/types'
+import { ORDER_DETAILS_RESET, ORDER_REFUND_RESET } from '../actions/types'
+import { refundOrder, getOrderDetails } from '../actions/orderActions'
 
-const OrderScreen = ({ match, history }) => {
-    const orderId = match.params.id
+const OrderScreen = () => {
+
+    const { id } = useParams()
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
    
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails
 
+    const refunds = useSelector(state => state.refund)
+    const { refund, error:refundError } = refunds
+
+
     useEffect(() => {
+        dispatch(getOrderDetails(id))
         return () => {
        dispatch({type: ORDER_DETAILS_RESET})
+       dispatch({type: ORDER_REFUND_RESET})
         }
-    }, [dispatch])
+    }, [dispatch, refund])
+
+    const refundHandler = () => {
+        dispatch(refundOrder({
+            orderId: order._id,
+            chargeId: order.chargeId
+    }))
+    }
   
 
         return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <div className='padding'>
             <Row>
-                <Button type='submit' className='pay-btn' style={{marginLeft: 'auto', marginBottom: '2rem'}} variant='light' size='sm' onClick={() => history.push('/admin/orderlist')}>Back To Orders</Button>
+                <Button type='submit' className='pay-btn' style={{marginLeft: 'auto', marginBottom: '2rem'}} variant='light' size='sm' onClick={() => navigate('/admin/orderlist')}>Back To Orders</Button>
             </Row>
             <Col>
-                <h2 style={{color: 'black'}}>Order #{orderId}</h2>
-                    <ListGroup variant='flush'>
+                <ListGroup variant='flush' style={{position: 'relative'}}>
+                { order.refunded ? <div id='watermark2'>Refund Issued</div> : '' }
+                {refundError ? <Message variant={'danger'}>{refundError}</Message> : ''}
                     <ListGroup.Item variant='light'>
-                            <h2>Ordered By</h2>
-                            <h5>
-                              Name: {order.user.name}
-                            </h5>
-                            <h5>
-                              Email: {order.user.email}
-                            </h5>
-                            <h5>
-                              Phone: 123-456-7890
-                            </h5>
+                            <h5>Ordered By</h5>
+                            <p>{`${order.firstName} ${order.lastName}`}</p>
+                            <p>{order.phone}</p>
+                            <p>{order.email}</p>
                         </ListGroup.Item>
                         <ListGroup.Item variant='light'>
-                            <h2>Order Placed</h2>
+                            <h5>Order Placed</h5>
                             <p>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</p>
                         </ListGroup.Item>
                         {order.orderItems.map(item => (
-                            <ListGroup.Item style={{paddingRight: '2.5rem'}} variant='light'>
+                            <ListGroup.Item key={item._id} style={{paddingRight: '2.5rem'}} variant='light'>
                                 <Row>
                                  <Col md={3}>
                                     <h5>{item.name}</h5>
@@ -73,25 +85,29 @@ const OrderScreen = ({ match, history }) => {
                          <ListGroup.Item variant='light'>
                              <Row>
                                 <Col md={2}>
-                                    <h2>Subtotal</h2>
+                                    <h5>Subtotal</h5>
                                     <p>${order.subtotal}</p>
                                 </Col>
                                 <Col md={2}>
-                                    <h2>Tax</h2>
+                                    <h5>Tax</h5>
                                     <p>${order.tax}</p>
                                 </Col>
                                 <Col md={2}>
-                                    <h2>Total</h2>
+                                    <h5>Total</h5>
                                     <p>${order.totalprice}</p>
                                 </Col>
+                             </Row>
+                        </ListGroup.Item>
+                        <ListGroup.Item variant='light'>
+                             <Row>
+                                <Button type='button' variant='success' className='btn' disabled={order.refunded} style={{margin: '2rem auto'}} onClick={refundHandler}> 
+                                    {!loading ? 'Issue A Refund' : <><Spinner as='span' animation='border' size='sm' role='status'></Spinner><span className="visually-hidden">Loading...</span></> }
+                                </Button> 
                              </Row>
                         </ListGroup.Item>
                     </ListGroup>
             </Col>
             <Col>
-                        {/* <ListGroup.Item style={{display: 'flex'}} variant='light'>
-                        <Button type='submit' className='pay-btn' style={{margin: '0 auto'}} variant='light' size='sm' onClick={() => history.push('/admin/orderlist')}>Back To Orders</Button>
-                        </ListGroup.Item> */}
             </Col>
         </div>
      )

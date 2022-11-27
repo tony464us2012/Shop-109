@@ -1,11 +1,14 @@
 import mongoose from 'mongoose'
 
+
 const orderSchema = mongoose.Schema({
+    // _id: Schema.Types.ObjectId,
+    
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
+        ref: 'User',
     },
+ 
     firstName: {
         type: String,
         required: true
@@ -53,13 +56,21 @@ const orderSchema = mongoose.Schema({
         required: true,
         default: 0.0
     },
+    refunded: {
+        type: Boolean,
+        required: true, 
+       
+    },
+    chargeId: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
-        default: Date.now()
+        immutable: true,
+        default: () => Date.now()
     }
-}, {
-    timestaps: true
-})
+},)
 
 const Order = mongoose.model('Order', orderSchema)
 

@@ -9,7 +9,7 @@ const MenuHeader = ({tabHandler, tab}) => {
     }
   }
     return (
-        <Nav as="ul" className='menu-container'>
+        <Nav as="ul" className= 'menu-container'>
           <Nav.Item as="li">
             <Nav.Link className='menu-link' style={selectHandler('Appetizer')} onClick={() => tabHandler('Appetizer')}>Appetizers</Nav.Link>
           </Nav.Item>

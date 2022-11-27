@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {useNavigate } from 'react-router-dom'
 import { Table, Button, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductListHeader from '../components/ProfileListHeader'
@@ -16,49 +17,43 @@ import Tacos from '../components/product-list-components/Tacos'
 import AddOns from '../components/product-list-components/AddOns'
 
 
-const ProductListScreen = ({ history }) => {
+const ProductListScreen = () => {
 
     const [tab, setTab] = useState('Appetizer')
     
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     
     const productList = useSelector(state => state.productList)
     const { loading, error, products } = productList
     
     const productDelete = useSelector(state => state.productDelete)
-    const { loading:loadingDelete, error:errorDelete, success:successDelete } = productDelete
+    const { loading:loadingDelete, error:errorDelete } = productDelete
     
     const productCreate = useSelector(state => state.productCreate)
     const { loading:loadingCreate, error:errorCreate, success:successCreate, product:createdProduct } = productCreate
     
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-
-    useEffect(() => {
-            dispatch(listProducts())
-        }, [dispatch])
     
     useEffect(() => {
-        if(!userInfo.isAdmin) {
-            history.push('/login')
+        if(userInfo && userInfo.isAdmin) {
+            dispatch(listProducts())
         } 
         if(successCreate) {
             // eslint-disable-next-line
-            history.push(`/admin/product/${createdProduct._id}/edit`)
+            navigate(`/admin/product/${createdProduct._id}/edit`)
         }
-    }, [dispatch, history, products,  userInfo, successDelete, successCreate])
-    
+    }, [createdProduct])
 
     const deleteHandler = (id) => {
         if(window.confirm('Are you sure?')) {
            dispatch(deleteProduct(id))
         }
     }
-
     const createProductHandler = () => {
         dispatch(createProduct())
     }
-
     const getProductHandler = (id) => {
         dispatch(listProductDetails(id))
     }

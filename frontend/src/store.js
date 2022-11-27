@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { combineReducers, applyMiddleware } from 'redux'
+import { combineReducers} from 'redux'
 import thunk from 'redux-thunk'
+import Cookies from 'universal-cookie'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { productListReducer, productDetailsReducer, productDeleteReducer, productCreateReducer, productUpdateReducer, beerReducer } from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducers'
+import { setupReducer } from './reducers/setupReducers'
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userDeleteReducer, userUpdateReducer } from './reducers/userReducers'
-import { myOrdersReducer, orderCreateReducer, orderDetailsReducer, getOrdersReducer } from './reducers/orderReducers'
+import { myOrdersReducer, orderCreateReducer, orderDetailsReducer, getOrdersReducer, refundReducer } from './reducers/orderReducers'
 
 const reducers = combineReducers({
     productList: productListReducer,
@@ -25,16 +27,23 @@ const reducers = combineReducers({
     orderDetails: orderDetailsReducer,
     myOrders: myOrdersReducer,
     orders: getOrdersReducer,
-    beers: beerReducer
+    beers: beerReducer,
+    setup: setupReducer,
+    refund: refundReducer
 })
 
+const cookies = new Cookies()
+
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
-const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+const userInfoFromStorage = cookies.get('user') ? cookies.get('user') : null
+const userDetailFromStorage = cookies.get('userDetails') ? cookies.get('userDetails') : null
+
 
 const preloadedState = {
     cart: { cartItems: cartItemsFromStorage,
     },
-    userLogin: { userInfo: userInfoFromStorage }
+    userLogin: { userInfo: userInfoFromStorage },
+    userDetails: {user: userDetailFromStorage }
 }
 
 

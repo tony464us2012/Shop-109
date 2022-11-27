@@ -1,7 +1,7 @@
 import React from 'react'
 import {Elements} from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import { BrowserRouter as Router, Routes, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
@@ -24,11 +24,12 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import AccessibilityScreen from './screens/AccessibilityScreen'
 import TermsScreen from './screens/TermsScreen'
-// import { Switch } from 'react-router-dom'
 
 const stripePromise = loadStripe('pk_test_51IQjuZL3CskvbasWBMNfrSLPF2xBP9mietcH9gbwH7SkVgGMAWIC8dM2V0XnN0U9e9BhVH48Uvu59RCBkImcOAdi00PyTPUtjp')
 
+
 const App = () => {
+
   return (
     <Router>
       <Header />

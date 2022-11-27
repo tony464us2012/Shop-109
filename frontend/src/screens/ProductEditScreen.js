@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { listProductDetails, updateProduct } from '../actions/productActions'
-import { PRODUCT_UPDATE_RESET } from '../actions/types'
+import { clearCreate, listProductDetails, updateProduct } from '../actions/productActions'
 
-const ProductEditScreen = ({ match, history }) => {
-    const productId = match.params.id
+const ProductEditScreen = () => {
+
+    const { id } = useParams()
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
-    const [image, setImage] = useState('')
     const [category, setCategory] = useState('')
     const [tacoCategory, setTacoCategory] = useState('')
     const [description, setDescription] = useState('')
-    const [uploading, setUploading] = useState(false)
     const [available, setAvailable] = useState(true)
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const productDetails = useSelector(state => state.productDetails)
     const { loading, error, product} = productDetails
@@ -31,11 +30,10 @@ const ProductEditScreen = ({ match, history }) => {
     
     useEffect(() => {
             if(successUpdate) {
-                history.push('/admin/productlist')
-                dispatch({type: PRODUCT_UPDATE_RESET})
+                navigate('/admin/productlist')
             } else {
-                if(!product.name || product._id !== productId) {
-                    dispatch(listProductDetails(productId))
+                if(!product.name || product._id !== id) {
+                    dispatch(listProductDetails(id))
                 } else {
                     setName(product.name)
                     setPrice(product.price)
@@ -45,24 +43,24 @@ const ProductEditScreen = ({ match, history }) => {
                     setAvailable(product.available)
                 }
             }
-    }, [dispatch, productId, product, successUpdate, history])
+        return () => {
+            dispatch(clearCreate())
+        }              
+    }, [successUpdate])
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(updateProduct({
-            _id: productId,
+            _id: id,
             name,
             price,
-            image,
             category,
             tacoCategory,
             description,
             available
-        }))
-    }
+        }))}
     
     return (
-        <>
         <FormContainer>
             <h1>Edit Product</h1>
             {loadingUpdate && <Loader />}
@@ -75,14 +73,8 @@ const ProductEditScreen = ({ match, history }) => {
                 </Form.Group>
                 <Form.Group controlId='price'>
                     <Form.Label>Price</Form.Label>
-                    <Form.Control type='number' placeholder='Enter Price' value={price} onChange={(e) => setPrice(e.target.value)}></Form.Control>
+                    <Form.Control type='number' placeholder='Enter Price' value={price} disabled={tacoCategory ? true : false} onChange={(e) => setPrice(e.target.value)}></Form.Control>
                 </Form.Group>
-                {/* <Form.Group controlId='image'>
-                    <Form.Label>Image</Form.Label>
-                    <Form.Control type='text' placeholder='Enter image url' value={image} onChange={(e) => setImage(e.target.value)}></Form.Control>
-                    <Form.File id='image-file' label='Choose File' custom onChange={uploadFileHandler}></Form.File>
-                    {uploading && <Loader />}
-                </Form.Group> */}
                 <Form.Group controlId='brand'>
                     <Form.Label>Category</Form.Label>
                     <Form.Control as='select' placeholder='Enter category' value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -94,7 +86,7 @@ const ProductEditScreen = ({ match, history }) => {
                         <option value='Slider'>Slider</option>
                         <option value='Side'>Side</option>
                         <option value='AddOns'>AddOns</option>
-                        <option value='Taco'><a onClick={() => setTacoCategory('Tacos')}>Taco</a></option>
+                        <option value='Taco' onClick={() => setTacoCategory('Tacos')}>Taco</option>
                     </Form.Control>
                 </Form.Group>
                 {category === 'Taco' ?  
@@ -130,7 +122,6 @@ const ProductEditScreen = ({ match, history }) => {
             </Form>
             )}
         </FormContainer>
-      </>  
     )
 }
 

@@ -5,7 +5,7 @@ import { addToCart } from '../actions/cartActions'
 import Loader from './Loader'
 
 
-const ProductModal = ({show, onHide, id, price}) => {
+const ProductModal = ({ show, onHide, id, price }) => {
     const dispatch = useDispatch()
    
     const productDetail = useSelector(state => state.productDetails)
@@ -173,7 +173,7 @@ const ProductModal = ({show, onHide, id, price}) => {
         <>
             { 
               loading ? <Loader /> :
-                <Modal
+                <Modal key={id}
                   size="lg"
                   aria-labelledby="contained-modal-title-vcenter"
                   centered
@@ -182,16 +182,16 @@ const ProductModal = ({show, onHide, id, price}) => {
                   animation
                 >
                   <Card>
-                  <div id={id} className="food-image"></div>
+                  <div id={id} key={id} className="food-image"></div>
                     <Card.Body>
                       <Card.Title>{name}</Card.Title>
                       <Card.Text>
-                      {description ? <h6 className='modal-description'>{description}</h6> : ''}
+                      {description ? <div className='modal-description'>{description}</div> : ''}
                       <Form onSubmit={addToCartHandler}>
                         {name === 'Fry Sampler' ? 
                          <Fragment>
-                          <h6>Select Size:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                            <input type="radio" name="frysampler" value={`Small +0`} onChange={radioChange} required />
+                          <span className='required-title'>Select Size:</span><span className='required'>Required</span><br/>
+                            <input className='mt' type="radio" name="frysampler" value={`Small +0`} onChange={radioChange} required />
                             <label htmlFor="smallfrysampler"> Small </label><br/>
                             {samplerAvailable ? <><input type="radio" name="frysampler" value={`Large +${samplerPrice}`} onChange={radioChange} required/>
                             <label htmlFor="largefrysampler">{`Large +${samplerPrice}`}</label></> : ''}
@@ -200,8 +200,8 @@ const ProductModal = ({show, onHide, id, price}) => {
                       }
                         {name === 'Chicken Wings 8 Piece' ? 
                          <Fragment>
-                          <h6>Select Size:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                            <input type="radio" name="chickenwings" value={`8 Pieces +0`} onChange={radioChange} required />
+                          <span className='required-title'>Select Size:</span><span className='required'>Required</span><br/>
+                            <input className='mt' type="radio" name="chickenwings" value={`8 Pieces +0`} onChange={radioChange} required />
                             <label htmlFor="chickenwings"> 8 Pieces </label><br/>
                             {wingAvailable ? <><input type="radio" name='chickenwings' value={`15 Pieces +${wingPrice}`} onChange={radioChange} required/>
                             <label htmlFor='chickenwings'>{`15 Pieces +${wingPrice}`}</label></> : ''}
@@ -210,8 +210,8 @@ const ProductModal = ({show, onHide, id, price}) => {
                       }
                       {name === 'Chicken Wings 8 Piece' || name === 'Duck Wings' ? 
                       <Form.Group>
-                       <h6>Select Sauce:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                         <input type="radio" id="option-separate" name="sauce" value={'Asian Chili Sauce'} onChange={radioChange} required />
+                       <span className='required-title'>Select Sauce:</span><span className='required'>Required</span><br/>
+                         <input className='mt' type="radio" id="option-separate" name="sauce" value={'Asian Chili Sauce'} onChange={radioChange} required />
                          <Form.Label htmlFor="sauce">Asian Chili Sauce</Form.Label><br/>
                          <input type="radio" id="option-separate" name='sauce' value={'Blue Cheese BBQ Sauce'} onChange={radioChange} required/>
                          <Form.Label htmlFor='sauce'>Blue Cheese BBQ Sauce</Form.Label><br/>
@@ -306,13 +306,13 @@ const ProductModal = ({show, onHide, id, price}) => {
                       { name === 'Burger In A Bowl' ? 
                         <Fragment>
                           <Form.Group>
-                            <h6>Select Burger<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
+                            <span className='required-title'>Select Burger</span><span className='required'>Required</span><br/>
                               {
                                 addons.filter(addon => addon.available && addon.addOnType === 'BurgerInABowl').map(addon => 
-                                  <>
+                                  <div className='mt'>
                                       <input type="radio" name="burger" value={`${addon.name} +${addon.price}`} onChange={radioChange} required />
                                       <Form.Label htmlFor="burger">{`${addon.name} +${addon.price}`}</Form.Label><br/>
-                                  </>
+                                  </div>
                                   )
                               }
                           </Form.Group>
@@ -390,15 +390,15 @@ const ProductModal = ({show, onHide, id, price}) => {
                         tacoCategory === "Tacos" && name === "Loaded Tacos" ? 
                         <>
                           <Form.Group>
-                          <h6>Type:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                            <input type="radio" id="option-separate" name="tacoText" value={"Hard"} onChange={radioChange} required />
+                          <span className='required-title'>Type:</span><span className='required'>Required</span><br/>
+                            <input className='mt' type="radio" id="option-separate" name="tacoText" value={"Hard"} onChange={radioChange} required />
                             <Form.Label htmlFor="meats">Hard</Form.Label><br/>
                             <input type="radio" id="option-separate" name='tacoText' value={"Soft"} onChange={radioChange} required/>
                             <Form.Label htmlFor='meats'>Soft</Form.Label><br/>
                         </Form.Group>
                           <Form.Group>
-                          <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                            <input type="radio" id="option-separate" name="taco" value={'Chicken +9.50'} onChange={radioChange} required />
+                          <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                            <input className='mt' type="radio" id="option-separate" name="taco" value={'Chicken +9.50'} onChange={radioChange} required />
                             <Form.Label htmlFor="meats">Chicken - $9.50</Form.Label><br/>
                             <input type="radio" id="option-separate" name='taco' value={'Beef +9.50'} onChange={radioChange} required/>
                             <Form.Label htmlFor='meats'>Beef - $9.50</Form.Label><br/>
@@ -414,8 +414,8 @@ const ProductModal = ({show, onHide, id, price}) => {
                       { 
                         tacoCategory === "BowlsandSalads" && name !== "Fajita Salad"   ?
                         <Form.Group>
-                        <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                          <input type="radio" id="option-separate" name="taco" value={'Chicken +10'} onChange={radioChange} required />
+                        <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                          <input className='mt' type="radio" id="option-separate" name="taco" value={'Chicken +10'} onChange={radioChange} required />
                           <Form.Label htmlFor="meats">Chicken - $10</Form.Label><br/>
                           <input type="radio" id="option-separate" name='taco' value={'Steak +13'} onChange={radioChange} required/>
                           <Form.Label htmlFor='meats'>Steak - $13</Form.Label><br/>
@@ -431,8 +431,8 @@ const ProductModal = ({show, onHide, id, price}) => {
                          { 
                         tacoCategory === "BowlsandSalads" && name === "Fajita Salad"   ?
                         <Form.Group>
-                        <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                          <input type="radio" id="option-separate" name="taco" value={'Chicken +10'} onChange={radioChange} required />
+                        <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                          <input className='mt' type="radio" id="option-separate" name="taco" value={'Chicken +10'} onChange={radioChange} required />
                           <Form.Label htmlFor="meats">Chicken - $10</Form.Label><br/>
                           <input type="radio" id="option-separate" name='taco' value={'Steak +13'} onChange={radioChange} required/>
                           <Form.Label htmlFor='meats'>Steak - $13</Form.Label><br/>
@@ -444,34 +444,35 @@ const ProductModal = ({show, onHide, id, price}) => {
                       : ''
                       }
                        {
-                        tacoCategory === "Fajitas" && name === "Chicken" ||
-                        tacoCategory === "Fajitas" && name === "Veggies" ?
+                        (tacoCategory === "Fajitas" && name === "Chicken") ||
+                        (tacoCategory === "Fajitas" && name === "Veggies") ?
                         <Form.Group>
-                        <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                          <input type="radio" id="option-separate" name="taco" value={'One Serving +11.50'} onChange={radioChange} required />
+                        <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                          <input className='mt' type="radio" id="option-separate" name="taco" value={'One Serving +11.50'} onChange={radioChange} required />
                           <Form.Label htmlFor="meats">One Serving - $11.50</Form.Label><br/>
                           <input type="radio" id="option-separate" name='taco' value={'Two Servings +20'} onChange={radioChange} required/>
                           <Form.Label htmlFor='meats'>Two Serving - $20</Form.Label><br/>
                        </Form.Group>
                       : ''
                       } {
-                        tacoCategory === "Fajitas" && name === "Steak" ||
-                        tacoCategory === "Fajitas" && name === "Steak and Chicken" ?
+                        (tacoCategory === "Fajitas" && name === "Steak") ||
+                        (tacoCategory === "Fajitas" && name === "Steak and Chicken") ?
                         <Form.Group>
-                        <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                          <input type="radio" id="option-separate" name="taco" value={'One Serving +13'} onChange={radioChange} required />
+                        <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                          <input className='mt' type="radio" id="option-separate" name="taco" value={'One Serving +13'} onChange={radioChange} required />
                           <Form.Label htmlFor="meats">One Serving - $13</Form.Label><br/>
                           <input type="radio" id="option-separate" name='taco' value={'Two Serving +24'} onChange={radioChange} required/>
                           <Form.Label htmlFor='meats'>Two Serving - $24</Form.Label><br/>
                        </Form.Group>
                       : ''
                       }
-                       { tacoCategory === "Fajitas" && name === "Shrimp" ||
-                       tacoCategory === "Fajitas" && name === "Shrimp and Chicken" ||
-                       tacoCategory === "Fajitas" && name === "Shrimp and Steak" ?
+                       { 
+                       (tacoCategory === "Fajitas" && name === "Shrimp") ||
+                       (tacoCategory === "Fajitas" && name === "Shrimp and Chicken") ||
+                       (tacoCategory === "Fajitas" && name === "Shrimp and Steak") ?
                         <Form.Group>
-                        <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                          <input type="radio" id="option-separate" name="taco" value={'One Serving +14'} onChange={radioChange} required />
+                        <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                          <input className='mt' type="radio" id="option-separate" name="taco" value={'One Serving +14'} onChange={radioChange} required />
                           <Form.Label htmlFor="meats">One Serving - $14</Form.Label><br/>
                           <input type="radio" id="option-separate" name='taco' value={'Two Serving +25'} onChange={radioChange} required/>
                           <Form.Label htmlFor='meats'>Two Serving - $25</Form.Label><br/>
@@ -481,8 +482,8 @@ const ProductModal = ({show, onHide, id, price}) => {
                       {
                         tacoCategory === "Burritos" && name === "Chimichanga" ?
                         <Form.Group>
-                        <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                          <input type="radio" id="option-separate" name="taco" value={'Chicken +9.50'} onChange={radioChange} required />
+                        <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                          <input className='mt' type="radio" id="option-separate" name="taco" value={'Chicken +9.50'} onChange={radioChange} required />
                           <Form.Label htmlFor="meats">Chicken - $9.50</Form.Label><br/>
                           <input type="radio" id="option-separate" name='taco' value={'Beef +9.50'} onChange={radioChange} required/>
                           <Form.Label htmlFor='meats'>Beef - $9.50</Form.Label><br/>
@@ -493,16 +494,16 @@ const ProductModal = ({show, onHide, id, price}) => {
                        </Form.Group> : 
                          tacoCategory === "Burritos" && name === "Steak or Shrimp" ? 
                         <Form.Group>
-                        <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                          <input type="radio" id="option-separate" name="taco" value={'Regular +10'} onChange={radioChange} required />
+                        <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                          <input className='mt' type="radio" id="option-separate" name="taco" value={'Regular +10'} onChange={radioChange} required />
                           <Form.Label htmlFor="meats">Regular - $10</Form.Label><br/>
                           <input type="radio" id="option-separate" name='taco' value={'Ultra +14'} onChange={radioChange} required/>
                           <Form.Label htmlFor='meats'>Ultra - $14</Form.Label><br/>
                        </Form.Group> : 
                        tacoCategory === "Burritos" && name === "Chicken, Pork, Beef, Bean, or Vegan" ? 
                          <Form.Group>
-                         <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                           <input type="radio" id="option-separate" name="taco" value={'Regular +8'} onChange={radioChange} required />
+                         <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                           <input className='mt' type="radio" id="option-separate" name="taco" value={'Regular +8'} onChange={radioChange} required />
                            <Form.Label htmlFor="meats">Regular - $8</Form.Label><br/>
                            <input type="radio" id="option-separate" name='taco' value={'Ultra +11'} onChange={radioChange} required/>
                            <Form.Label htmlFor='meats'>Ultra - $11</Form.Label><br/>
@@ -511,8 +512,8 @@ const ProductModal = ({show, onHide, id, price}) => {
                       {
                         tacoCategory === "LunchSpecials" ? 
                         <Form.Group>
-                        <h6>Select:<span style={{backgroundColor: 'yellow', marginLeft: '.5rem'}}>Required</span></h6>
-                          <input type="radio" id="option-separate" name="taco" value={'Chicken +0'} onChange={radioChange} required />
+                        <span className='required-title'>Select:</span><span className='required'>Required</span><br/>
+                          <input className='mt' type="radio" id="option-separate" name="taco" value={'Chicken +0'} onChange={radioChange} required />
                           <Form.Label htmlFor="meats">Chicken</Form.Label><br/>
                           <input type="radio" id="option-separate" name='taco' value={'Beef +0'} onChange={radioChange} required/>
                           <Form.Label htmlFor='meats'>Beef</Form.Label><br/>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useDispatch  } from 'react-redux'
 import { searchBeer } from '../../../actions/beerActions'
 import { Form } from 'react-bootstrap'
@@ -7,15 +7,11 @@ const Search = () => {
 
     const dispatch = useDispatch()
 
-    const[text, setText] = useState('');
-    const onChange = (e) => {
-    setText(e.target.value)
-     }
-
+    const searchRef = useRef()
+   
      const onSubmit = e => {
          e.preventDefault()
-         dispatch(searchBeer(text))
-         setText('')
+         dispatch(searchBeer(searchRef.current.value))
      }
 
     return (
@@ -23,9 +19,9 @@ const Search = () => {
             <Form onSubmit={onSubmit} style={{display:'block', margin: '.5rem 0 1rem'}}>
                 <Form.Group controlId='text'>
                     <Form.Label>Search Beers</Form.Label>
-                    <Form.Control type='text' placeholder='What beer are you looking for?' value={text} onChange={onChange}></Form.Control>
+                    <Form.Control type='text' placeholder='What beer are you looking for?'></Form.Control>
                 </Form.Group>
-                <input type='submit' className='btn btn-primary' value='Search'/>
+                <input type='submit' ref={searchRef} className='btn btn-primary' value='Search'/>
             </Form>
         </>
     )

@@ -11,6 +11,15 @@ import { ORDER_CREATE_REQUEST,
         GET_ORDERS_REQUEST, 
         GET_ORDERS_SUCCESS,
          GET_ORDERS_FAIL,
+         GET_SETUP_SUCCESS,
+         UPDATE_SETUP_SUCCESS,
+         UPDATE_SETUP_FAIL,
+         UPDATE_SETUP_REQUEST,
+         GET_SETUP_REQUEST,
+         GET_SETUP_FAIL,
+         ORDER_REFUND_REQUEST,
+         ORDER_REFUND_SUCCESS,
+         ORDER_REFUND_FAIL,
          CART_RESET_ITEM, 
         } from './types'
 
@@ -31,16 +40,42 @@ export const createOrder = (order) => async (dispatch) => {
             type: ORDER_CREATE_SUCCESS,
             payload: data
         })
+        localStorage.removeItem('cartItems')
     } catch (error) {
         dispatch({
             type: ORDER_CREATE_FAIL, 
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: error.response.data.msg
         })
+        
     }
-    dispatch({
-        type: CART_RESET_ITEM
-    })
 }
+export const guestOrder = (order) => async (dispatch) => {
+    try {
+        dispatch({
+            type: ORDER_CREATE_REQUEST
+        })
+        
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const { data } = await axios.post(`/api/orders`, order, config)
+
+        dispatch({
+            type: ORDER_CREATE_SUCCESS,
+            payload: data
+        })
+        localStorage.removeItem('cartItems')
+    } catch (error) {
+        dispatch({
+            type: ORDER_CREATE_FAIL, 
+            payload: error.response.data.msg
+        })
+        
+    }
+}
+// error.response && error.response.data.message ? error.response.data.message : error.message
 export const getOrderDetails = (id) => async (dispatch, getState) => {
     try {
         dispatch({
@@ -60,6 +95,13 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
             type: ORDER_DETAILS_SUCCESS,
             payload: data
         })
+        
+        dispatch({
+            type: CART_RESET_ITEM,
+        })
+        
+        localStorage.removeItem('cartItems')
+
     } catch (error) {
         dispatch({
             type: ORDER_DETAILS_FAIL, 
@@ -119,3 +161,77 @@ export const getOrders = () => async (dispatch, getState) => {
         })
     }
 }
+export const getSetup = () => async (dispatch) => {
+    try {
+        dispatch({ type: GET_SETUP_REQUEST })
+
+        const { data } = await axios.get(`/api/setup`)
+
+        dispatch({
+            type: GET_SETUP_SUCCESS, 
+            payload: data
+        })
+      
+    } catch (error) {
+        dispatch({
+            type: GET_SETUP_FAIL, 
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+export const updateSetup = (setup) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: UPDATE_SETUP_REQUEST
+        })
+        
+        const { userLogin: { userInfo }} = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.put(`/api/setup`, setup, config)
+
+
+        dispatch({
+            type: UPDATE_SETUP_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_SETUP_FAIL, 
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }}
+
+export const refundOrder = (refund) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: ORDER_REFUND_REQUEST
+        })
+        
+        const { userLogin: { userInfo }} = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.put(`/api/orders/refund`, refund, config)
+
+
+        dispatch({
+            type: ORDER_REFUND_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        console.log(error)
+        dispatch({
+            type: ORDER_REFUND_FAIL, 
+            payload: 'Refund Fail'
+        })
+    }}

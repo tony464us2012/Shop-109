@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -8,8 +8,9 @@ import FormContainer from '../components/FormContainer'
 import { getUserDetails, updateUser } from '../actions/userActions'
 import { USER_UPDATE_RESET } from '../actions/types'
 
-const UserEditScreen = ({ match, history }) => {
-    const userId = match.params.id
+const UserEditScreen = () => {
+    
+    const { id } = useParams
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -17,6 +18,7 @@ const UserEditScreen = ({ match, history }) => {
     const [email, setEmail] = useState('')
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const userDetails = useSelector(state => state.userDetails)
     const { loading, error, user} = userDetails
@@ -25,24 +27,25 @@ const UserEditScreen = ({ match, history }) => {
     const { loading:loadingUpdate, error:errorUpdate, success:successUpdate} = userUpdate
 
     useEffect(() => {
+        
+        if(!user.firstName || user._id !== id) {
+            dispatch(getUserDetails(id))
+        } else {
+            setFirstName(user.firstName)
+            setLastName(user.lastName)
+            setPhone(user.phone)
+            setEmail(user.email)
+        }
+
         if(successUpdate) {
             dispatch({ type: USER_UPDATE_RESET })
-            history.push('/admin/userlist')
-        } else {
-            if(!user.firstName || user._id !== userId) {
-                dispatch(getUserDetails(userId))
-            } else {
-                setFirstName(user.firstName)
-                setLastName(user.lastName)
-                setPhone(user.phone)
-                setEmail(user.email)
-            }
-        }
-    }, [dispatch, userId, user, successUpdate, history])
+            navigate('/admin/userlist')
+        } 
+    }, [])
 
     const submitHandler = (e) => {
         e.preventDefault()
-       dispatch(updateUser({ _id: userId, firstName, lastName, email, phone, isAdmin: user.isAdmin  }))
+       dispatch(updateUser({ _id: id, firstName, lastName, email, phone, isAdmin: user.isAdmin  }))
     }
 
     return (
@@ -56,19 +59,19 @@ const UserEditScreen = ({ match, history }) => {
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
                     <Form.Label>First Name</Form.Label>
-                    <Form.Control type='name' placeholder='Enter First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)}></Form.Control>
+                    <Form.Control type='text' value={firstName} onChange={(e) => setFirstName(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='name'>
                     <Form.Label>Last Name</Form.Label>
-                    <Form.Control type='name' placeholder='Enter Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}></Form.Control>
+                    <Form.Control type='text' value={lastName} onChange={(e) => setLastName(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='name'>
                     <Form.Label>Phone Number</Form.Label>
-                    <Form.Control type='phone' placeholder='Enter Name' value={phone} onChange={(e) => setPhone(e.target.value)}></Form.Control>
+                    <Form.Control type='phone' value={phone} onChange={(e) => setPhone(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='email'>
                     <Form.Label>Email Address</Form.Label>
-                    <Form.Control type='email' placeholder='Enter Email' value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
+                    <Form.Control type='email' value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='isadmin'>
                     <Form.Check type='checkbox' label='Is Admin' disabled={true} checked={user.isAdmin}></Form.Check>

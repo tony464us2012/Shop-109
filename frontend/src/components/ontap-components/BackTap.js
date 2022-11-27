@@ -6,7 +6,7 @@ const BackTap = ({ displayBeers }) => {
 
     return (
         <>
-            <h1 className='text-center'>Beers on Tap</h1>
+            <h1 className='text-center title'>Beers on Tap</h1>
             <div className='menu-item-container'>
                 {displayBeers.sort((a, b) => a.beerName > b.beerName ? 1 : -1).map((x, index) => <TapItem
                 name={x.beerName} 

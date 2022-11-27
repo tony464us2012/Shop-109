@@ -49,6 +49,7 @@ const createProduct = asyncHandler( async(req, res) => {
     res.status(201).json(createdProduct)
 })
 const updateProduct = asyncHandler( async(req, res) => {
+   
     const {name, price, category, tacoCategory, description, available} = req.body
     const product = await Product.findById(req.params.id)
 

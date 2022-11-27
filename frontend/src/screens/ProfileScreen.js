@@ -3,18 +3,17 @@ import { Form, Button, Row, Col, Table, ListGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { updateUserProfile, getUserDetails } from '../actions/userActions'
-import { myOrders, getOrderDetails } from '../actions/orderActions'
+import { updateUserProfile } from '../actions/userActions'
+import {  getOrderDetails } from '../actions/orderActions'
 import dateFormat from 'dateformat'
-import { MY_ORDERS_RESET, ORDER_DETAILS_RESET } from '../actions/types'
+import { ORDER_DETAILS_RESET } from '../actions/types'
 
-const ProfileScreen = ({ history }) => {
+const ProfileScreen = () => {
     
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
-    const [message, setMessage] = useState('')
 
     const dispatch = useDispatch()
 
@@ -34,22 +33,18 @@ const ProfileScreen = ({ history }) => {
     const { order, loading:loadingDetails, error:errorDetails } = orderDetails
     
     useEffect(() => {
-        if(!userInfo) {
-            history.push('/login')
-        } else {
-              dispatch(myOrders(userInfo._id))
-              dispatch(getUserDetails(userInfo._id))
-              setFirstName(user.firstName)
-              setLastName(user.lastName)
-              setPhone(user.phone)
-              setEmail(user.email)
+        if(user) {
+                setFirstName(user.firstName)
+                setLastName(user.lastName)
+                setPhone(user.phone)
+                setEmail(user.email)
             }
+
               return () => {
-                  dispatch({type: MY_ORDERS_RESET})
                   dispatch({type: ORDER_DETAILS_RESET})
               }
 
-    }, [dispatch, history, userInfo])
+    }, [userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -64,7 +59,7 @@ const ProfileScreen = ({ history }) => {
         <>
         <div className="padding row profile">
             {success && <Message variant='success'>Profile Updated</Message>}
-            { message ? <Message variant='danger'>{message}</Message> : ''}
+            { errorOrders ? <Message variant='danger'>{errorOrders}</Message> : ''}
             <Col md={3} >
             <h1>Profile</h1>
             <Form onSubmit={submitHandler}>
@@ -84,7 +79,7 @@ const ProfileScreen = ({ history }) => {
                     <Form.Label>Phone Number</Form.Label>
                     <Form.Control type='phone' value={phone} onChange={(e) => setPhone(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Button type='submit' variant='primary'>
+                <Button type='submit' variant='primary' style={{marginTop: '.5rem'}}>
                     Update
                 </Button>
                 </Form>
@@ -104,9 +99,9 @@ const ProfileScreen = ({ history }) => {
                             </tr>
                         </thead>
                           {orders.map(order => (
-                            <tbody>
-                                <tr key={order._id}>
-                                    <td><button  onClick={() => orderDetailsHandler(order._id)}>{order._id}</button></td>
+                            <tbody key={order._id}>
+                                <tr>
+                                    <td><button  onClick={() => orderDetailsHandler(order._id)}>{order._id.slice(21)}</button></td>
                                     <td><button onClick={() => orderDetailsHandler(order._id)}>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</button></td>
                                     <td><button onClick={() => orderDetailsHandler(order._id)}>${order.totalprice}</button></td>
                                 </tr>
@@ -119,9 +114,10 @@ const ProfileScreen = ({ history }) => {
                 </div>
                 { loadingDetails ? <Loader/> : errorDetails ? <Message variant='danger'>{errorDetails}</Message> : order.length !== 0 ?  (
                     <div className='padding'>
-                     <h2 style={{color: 'black'}}>Order #{order._id}</h2>
-                    <ListGroup variant='flush'>
-                        {order.orderItems.map(item => (
+                     <h2 style={{color: 'black', textAlign: 'center'}}>Order #{order._id.slice(21)}</h2>
+                    <ListGroup variant='flush' style={{position: 'relative'}}>
+                        { order.refunded ? <div id='watermark'>Refund Issued</div> : '' }
+                        { order.orderItems.map(item => (
                             <ListGroup.Item variant='light' style={{paddingRight: '2.5rem'}}>
                                 <Row>
                                  <Col md={3}>
@@ -146,17 +142,17 @@ const ProfileScreen = ({ history }) => {
                                 </Row>
                             </ListGroup.Item>
                         ))}
-                        <ListGroup.Item variant='light'>
+                        <ListGroup.Item variant='light' >
                             <div className="myOrderTotal">
-                            <h2>Subtotal</h2>
+                            <h5>Subtotal</h5>
                             <p>${order.subtotal}</p>
                             </div>
                             <div className="myOrderTotal">
-                            <h2>Tax</h2>
+                            <h5>Tax</h5>
                             <p>${order.tax}</p>
                             </div>
                             <div className="myOrderTotal">
-                            <h2>Total</h2>
+                            <h5>Total</h5>
                             <p>${order.totalprice}</p>
                             </div>
                         </ListGroup.Item>

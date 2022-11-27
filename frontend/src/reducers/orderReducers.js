@@ -13,6 +13,11 @@ import {
     GET_ORDERS_SUCCESS,
     GET_ORDERS_FAIL,
     ORDER_DETAILS_RESET,
+    ORDER_REFUND_REQUEST,
+    ORDER_REFUND_SUCCESS,
+    ORDER_REFUND_FAIL,
+    ORDER_REFUND_RESET,
+    ORDER_CREATE_CLEAR,
 } from '../actions/types'
 
 export const orderCreateReducer = (state= {}, action) => {
@@ -31,6 +36,10 @@ export const orderCreateReducer = (state= {}, action) => {
             return {
                 loading: false,
                 error: action.payload
+            }
+        case ORDER_CREATE_CLEAR: 
+            return {
+                order: []
             }
          default: 
             return state
@@ -105,5 +114,27 @@ export const getOrdersReducer = (state= { orders: []}, action) => {
             }
          default: 
             return state
+    }
+}
+
+export const refundReducer = (state = {}, action) => {
+    switch(action.type) {
+        case ORDER_REFUND_REQUEST: 
+        return {
+            loading: true
+        }
+        case ORDER_REFUND_SUCCESS: 
+        return {
+            loading: false,
+            refund: action.payload
+        }
+        case ORDER_REFUND_FAIL: 
+        return {
+            loading: false,
+            error: action.payload
+        }
+        case ORDER_REFUND_RESET: 
+        return {}
+        default: return state
     }
 }

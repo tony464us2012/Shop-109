@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { addTap, searchBeerInfo } from '../../../actions/beerActions'
+import { searchBeerInfo } from '../../../actions/beerActions'
 import PropTypes from 'prop-types'
 import '../../../tap.css'
 
@@ -9,7 +9,6 @@ const SearchedBeerItem = ({ name, company, abv, ibu, style, img, id }) => {
     const dispatch = useDispatch()
 
     const addToTap = () => {
-        dispatch(addTap(id))
         dispatch(searchBeerInfo(id))
     }
     
@@ -29,7 +28,7 @@ const SearchedBeerItem = ({ name, company, abv, ibu, style, img, id }) => {
                     <p>{ ibu } <br/> IBU</p>
                 </div>
                 <div className="beerInput">         
-                    <button type="button" style={{ width:'auto' }} className="btn btn-success" onClick={() =>  addToTap()}>Add To Tap</button>
+                    <button type="button" style={{ width:'auto' }} className="btn btn-success" onClick={addToTap}>Add To Tap</button>
                 </div>
             </div>
         </div>

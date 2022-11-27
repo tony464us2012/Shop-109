@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Message from '../components/Message'
 import { getMainBeers} from '../actions/beerActions'
 import BackTap from '../components/ontap-components/BackTap'
@@ -8,9 +9,10 @@ import AddBottle from '../components/ontap-components/layout/AddBottle'
 import Search from '../components/ontap-components/layout/Search'
 import SearchedBeerItem from '../components/ontap-components/layout/SearchedBeerItem'
 
-const BeerListScreen = ({ history }) => {
+const BeerListScreen = () => {
     
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -20,10 +22,10 @@ const BeerListScreen = ({ history }) => {
 
     useEffect(() => {
         if(!userInfo.isAdmin) {
-            history.push('/login')
+            navigate('/login')
         } 
         dispatch(getMainBeers())
-    }, [dispatch, history, userInfo.isAdmin])
+    }, [])
 
 return (
     <div className="padding">
@@ -32,7 +34,7 @@ return (
         <AddBottle />
         <div className="dashboard-container">
             <Search />
-            {!searchedBeers ? <Message>No Searched Beers</Message> : 
+            {!searchedBeers ? '' : 
                 <div className='searchedBeerItems'>
                 {searchedBeers.map((x, index) => <SearchedBeerItem 
                 name={x.beer.beer_name} 

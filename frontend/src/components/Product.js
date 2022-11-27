@@ -10,7 +10,7 @@ const Product = ({ product }) => {
     const dispatch = useDispatch()
 
 
-    const addToCartHandler = (e) => {
+    const addToCartHandler = () => {
         const cartItem = {
           id: product._id,
           name: product.name,
@@ -22,8 +22,8 @@ const Product = ({ product }) => {
       
     return (
         <>
-                <Card>
-                    <div id={product._id} className="food-image"></div>
+                <Card className='food-item'>
+                    <div key={product._id} id={product._id} className="food-image"></div>
                     <Card.Body className='productInfo'>
                             <Card.Title>{product.name}</Card.Title>
                             <Card.Text className='text'>{product.description}</Card.Text>
@@ -54,7 +54,7 @@ const Product = ({ product }) => {
                             </div>
                     </Card.Body>
                 </Card>
-            {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} key={product._id} id={product._id} price={product.price}/> : '' }
+            {modalShow ? <ProductModal show={modalShow} onHide={() => setModalShow(false)} id={product._id} price={product.price}/> : '' }
         </>
     )
 }
