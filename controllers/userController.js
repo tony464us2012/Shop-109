@@ -39,7 +39,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 const registerUser = asyncHandler(async (req, res) => {
     const { firstName, lastName, phone, email, password } = req.body
-
+  
     const userExists = await User.findOne({ email })
 
    if(userExists) {
@@ -106,7 +106,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     
     if(user) {
         await user.remove()
-        res.json({ message: 'User removed'})
+        res.status(200)
     } else {
         res.status(404)
         throw new Error('User not found')

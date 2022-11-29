@@ -34,6 +34,7 @@ const RegisterScreen = () => {
         e.preventDefault()
         if(passwordRef.current.value !== confirmPasswordRef.current.value) {
             setMessage('Passwords do not match')
+            setTimeout(() => setMessage(''), 3000)
         } else {
             dispatch(register({
                 firstName: firstNameRef.current.value, 

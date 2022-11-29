@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Row, Col, Table, ListGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { updateUserProfile } from '../actions/userActions'
+import { render } from 'react-dom'
+import { updateUserProfile, deleteUser2 } from '../actions/userActions'
 import {  getOrderDetails } from '../actions/orderActions'
 import dateFormat from 'dateformat'
 import { ORDER_DETAILS_RESET } from '../actions/types'
@@ -16,6 +18,7 @@ const ProfileScreen = () => {
     const [email, setEmail] = useState('')
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -39,12 +42,20 @@ const ProfileScreen = () => {
                 setPhone(user.phone)
                 setEmail(user.email)
             }
+        if (!userInfo) {
+            navigate('/')
+        }
 
               return () => {
                   dispatch({type: ORDER_DETAILS_RESET})
               }
 
     }, [userInfo])
+
+    const deleteHandler = (id) => {
+        if(window.confirm('Are you sure you want to delete your account?')) {
+            dispatch(deleteUser2(id))
+    }}
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -57,7 +68,7 @@ const ProfileScreen = () => {
 
     return (
         <>
-        <div className="padding row profile">
+        <div className="padding row profile" style={{position: 'relative'}}>
             {success && <Message variant='success'>Profile Updated</Message>}
             { errorOrders ? <Message variant='danger'>{errorOrders}</Message> : ''}
             <Col md={3} >
@@ -159,6 +170,7 @@ const ProfileScreen = () => {
                     </ListGroup>
                     </div>
                 ) : ''}
+            {/* <Button className='delete-account' size='sm' onClick={() => deleteHandler(userInfo._id)} variant='danger'>Delete Account</Button> */}
         </>
     )
 }

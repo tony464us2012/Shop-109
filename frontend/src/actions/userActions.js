@@ -67,7 +67,7 @@ export const register = ({firstName, lastName, phone, email, password}) => async
     } catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL, 
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: 'Account Already Exists'
         })
     }
 }
@@ -169,6 +169,25 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         await axios.delete(`/api/users/${id}`, config)
 
         dispatch({ type: USER_DELETE_SUCCESS })
+    } catch (error) {
+        dispatch({
+            type: USER_DELETE_FAIL, 
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+export const deleteUser2 = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: USER_DELETE_REQUEST
+        })
+        
+        await axios.delete(`/api/users/${id}`)
+
+        dispatch(logout())
+
+        dispatch({ type: USER_DELETE_SUCCESS })
+
     } catch (error) {
         dispatch({
             type: USER_DELETE_FAIL, 
