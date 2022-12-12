@@ -416,13 +416,12 @@ button:checked {
 /* Homepage */
 .MainPicture {
     position: relative;
-    background-image: -moz-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
-	background-image: -webkit-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
-	background-image: -ms-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
-	background-image: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
+    background-image: -moz-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/sequence.gif");
+	background-image: -webkit-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/sequence.gif");
+	background-image: -ms-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/sequence.gif");
+	background-image: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/sequence.gif");
     /* background-image: url(./images/109background.jpg), linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); */
-    background-size: cover;
-    background-position: 50% 10%;
+    background-size:contain;
     width: 90vw;
     height: 45vh;
     border-radius: 10px;
@@ -488,9 +487,9 @@ button:checked {
     background-color: #fff;
     color: black;
     border-radius: 2px;
-    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
 }
 
 /* Menu */
