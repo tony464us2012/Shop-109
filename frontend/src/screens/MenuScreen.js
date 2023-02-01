@@ -9,7 +9,6 @@ import ForkandKnife from '../components/menu-components/ForkandKnife'
 import Sandwich from '../components/menu-components/Sandwich'
 import Slider from '../components/menu-components/Slider'
 import Side from '../components/menu-components/Side'
-import TacoRico from '../components/TacoRico'
 import Loader from '../components/Loader'
 
 const MenuScreen = () => {
@@ -26,7 +25,6 @@ const MenuScreen = () => {
     const sandwiches = products.filter(sandwich => sandwich.category === 'Sandwich')
     const sliders = products.filter(slider => slider.category === 'Slider')
     const sides = products.filter(side => side.category === 'Side')
-    const tacos = products.filter(taco => taco.category === 'Taco')
 
     const tabHandler = (tab) => {
         setTab(tab)
@@ -42,8 +40,7 @@ const MenuScreen = () => {
              tab === 'ForkandKnife' ?  <ForkandKnife forkandknifes={forkandknifes} /> :
              tab === 'Sandwich' ? <Sandwich sandwiches={sandwiches} /> : 
              tab === 'Slider' ? <Slider sliders={sliders} /> :
-             tab === 'Side' ? <Side sides={sides} /> :
-            <TacoRico tacos={tacos} /> 
+            <Side sides={sides} /> 
             }
                 <div className='advisory'>
                     <div>CONSUMER ADVISORY</div>

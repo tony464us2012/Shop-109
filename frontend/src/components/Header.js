@@ -42,12 +42,12 @@ const Header = () => {
     const noborder = {border: 'none'}
 
     return (
-        <div>
-           <Navbar id='navContainer' bg="light"  variant="light" expand="lg" style={{padding: '0 2%', display: 'flex', border: 'none', }}>
+        <>
+           <Navbar id='navContainer' bg="light"  variant="light" expand="lg" style={{padding: '0 2rem', display: 'flex', border: 'none', }}>
                 <Navbar.Brand href="#home" style={noborder}> <Image id='Logo' className="align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                    <Navbar.Collapse  className='me-auto justify-content-end'>
-                            <Nav.Link eventKey="disabled" style={noborder} className='address' disabled>
+                            <Nav.Link eventKey="disabled" style={noborder} className='address mb-2' disabled>
                             <span className="material-icons pindrop">pin_drop</span>   
                            646 SW 109 Avenue  Miami, FL
                             </Nav.Link>
@@ -62,12 +62,12 @@ const Header = () => {
                                     </NavDropdown>
                         ) : (
                             <>
-                                <LinkContainer to='/login' id='username' className='login'>
+                                <LinkContainer to='/login' id='username' className='login mb-2'>
                                     <Nav.Link>
                                         <i className="fas fa-sign-in-alt"></i> Log In
                                     </Nav.Link>
                                 </LinkContainer>
-                                <LinkContainer to='/register' id='username' className='register'>
+                                <LinkContainer to='/register' id='username' className='register mb-2'>
                                     <Nav.Link><i className="fas fa-user-plus"></i> Sign Up</Nav.Link>
                                 </LinkContainer>
                             </>
@@ -90,7 +90,7 @@ const Header = () => {
                     )}
                    </Navbar.Collapse>
             </Navbar>
-            <Navbar bg="light" variant="light" expand="lg" style={{display: 'flex', borderTop: '1px solid lightgrey', borderBottom: 'none'}} collapseOnSelect>
+            <Navbar bg="light" variant="light" expand="lg" style={{display: 'flex', borderTop: '1px solid lightgrey', borderBottom: 'none', padding: '0 2rem'}} collapseOnSelect>
             <div id='navContainer2'>
                 <Nav.Item id='navItem' className='borderbottom'><a href="/">HOME</a></Nav.Item>
                 <Nav.Item id='navItem' className='borderbottom'><a href= "/menu">MENU</a ></Nav.Item>
@@ -106,7 +106,7 @@ const Header = () => {
                 </>}
                 </div>
             </Navbar>
-        </div>
+        </>
     )
 }
 

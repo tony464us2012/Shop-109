@@ -31,9 +31,6 @@ const MenuHeader = ({tabHandler, tab}) => {
           <Nav.Item as="li">
             <Nav.Link className='menu-link' style={selectHandler('Side')}  onClick={() => tabHandler('Side')}>Sides</Nav.Link>
           </Nav.Item>
-          <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('TacoRico')}  onClick={() => tabHandler('TacoRico')}>Taco Rico</Nav.Link>
-          </Nav.Item>
         </Nav>
     )
 }

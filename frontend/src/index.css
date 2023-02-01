@@ -450,42 +450,6 @@ button:checked {
     margin-bottom: .7rem;
 }
 
-.ban-pic {
-   height: 250px;
-   background-size: cover;
-   background-position: 50% 10%;
-   border-top-left-radius: 10px;
-   border-top-right-radius: 10px;
-}
-
-.ban-pic1 {
-    background-image: url(./images/nica_burger.jpg);
-}
-
-.ban-pic2 {
-    background-image: url(./images/beer-tap2.jpg)
-}
-
-.ban-pic3 {
-    background-image: url(./images/taco_rico.jpg);
-}
-
-.ban-title {
-    font-size: 2rem;
-    font-family: Teko;
-    text-align: center;
-    text-shadow: 1px 1px gray;
-    margin-top: .50rem;
-}
-
-.card{
-    background-color: #fff;
-    color: black;
-    border-radius: 2px;
-    -moz-box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
-    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.75);
-}
 
 /* Menu */
 
@@ -497,24 +461,13 @@ button:checked {
     grid-gap: 1.5rem 3rem;
     padding: 1rem;
     margin: 2rem 1rem;
+}
+
+.menu-item-container,
+.cart-item-container {
     justify-content: space-evenly;
 }
 
-.banner-item-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 5rem;
-    padding-bottom: 5rem;
-}
-
-.banner-item {
-    width: 300px;
-    color: black;
-    margin: 1rem;
-    border-radius: 10px;
-    border: 2px solid black;
-}
 
 .food-item {
     padding: .5rem 

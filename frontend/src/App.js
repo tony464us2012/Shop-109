@@ -24,43 +24,55 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import AccessibilityScreen from './screens/AccessibilityScreen'
 import TermsScreen from './screens/TermsScreen'
+import { ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react'
+import chakraTheme from '@chakra-ui/theme'
 
 const stripePromise = loadStripe('pk_test_51IQjuZL3CskvbasWBMNfrSLPF2xBP9mietcH9gbwH7SkVgGMAWIC8dM2V0XnN0U9e9BhVH48Uvu59RCBkImcOAdi00PyTPUtjp')
+
+const { Card } = chakraTheme.components
+
+const theme = extendBaseTheme({
+  components: {
+    Card,
+  },
+})
 
 
 const App = () => {
 
   return (
     <Router>
-      <Header />
-      <main className="app" >
-        <Elements stripe={stripePromise}>
-          <Routes>
-            <Route path='/confirmation/:id'element={<ConfirmationScreen />} />
-            <Route path='/order/:id'element={<OrderScreen />} />
-            <Route path='/login'element={<LoginScreen />} />
-            <Route path='/placeorder'element={<PlaceOrderScreen />} />
-            <Route path='/register'element={<RegisterScreen />} />
-            <Route path='/profile'element={<ProfileScreen />} />
-            <Route path='/product/:id'element={<ProductScreen />} />
-            <Route path='/cart'element={<CartScreen />} />
-            <Route path='/admin/beerlist'element={<BeerListScreen />} />
-            <Route path='/admin/userlist'element={<UserListScreen />} />
-            <Route path='/admin/user/:id/edit'element={<UserEditScreen />} />
-            <Route path='/admin/product/:id/edit'element={<ProductEditScreen />} />
-            <Route path='/admin/productlist'element={<ProductListScreen />} />
-            <Route path='/admin/productlist/:pageNumber'element={<ProductListScreen />} />
-            <Route path='/admin/orderlist'element={<OrderListScreen />} />
-            <Route path='/terms'element={<TermsScreen />} />
-            <Route path='/accessibility'element={<AccessibilityScreen />} />
-            <Route path='/beers'element={<BeerScreen />} />
-            <Route path='/about'element={<AboutScreen />} />
-            <Route path='/menu' element={<MenuScreen />} />
-            <Route path='/' element={<HomeScreen/>} />
-          </Routes>
-        </Elements>
-        </main>
-        <Footer />
+      <ChakraBaseProvider theme={theme}>
+        <Header />
+          <main className="app" >
+            <Elements stripe={stripePromise}>
+              <Routes>
+                <Route path='/confirmation/:id'element={<ConfirmationScreen />} />
+                <Route path='/order/:id'element={<OrderScreen />} />
+                <Route path='/login'element={<LoginScreen />} />
+                <Route path='/placeorder'element={<PlaceOrderScreen />} />
+                <Route path='/register'element={<RegisterScreen />} />
+                <Route path='/profile'element={<ProfileScreen />} />
+                <Route path='/product/:id'element={<ProductScreen />} />
+                <Route path='/cart'element={<CartScreen />} />
+                <Route path='/admin/beerlist'element={<BeerListScreen />} />
+                <Route path='/admin/userlist'element={<UserListScreen />} />
+                <Route path='/admin/user/:id/edit'element={<UserEditScreen />} />
+                <Route path='/admin/product/:id/edit'element={<ProductEditScreen />} />
+                <Route path='/admin/productlist'element={<ProductListScreen />} />
+                <Route path='/admin/productlist/:pageNumber'element={<ProductListScreen />} />
+                <Route path='/admin/orderlist'element={<OrderListScreen />} />
+                <Route path='/terms'element={<TermsScreen />} />
+                <Route path='/accessibility'element={<AccessibilityScreen />} />
+                <Route path='/beers'element={<BeerScreen />} />
+                <Route path='/about'element={<AboutScreen />} />
+                <Route path='/menu' element={<MenuScreen />} />
+                <Route path='/' element={<HomeScreen/>} />
+              </Routes>
+            </Elements>
+            </main>
+            <Footer />
+      </ChakraBaseProvider>
     </Router>
   );
 }
