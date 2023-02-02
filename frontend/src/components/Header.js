@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Image, Container } from 'react-bootstrap'
 import { getUserDetails, logout } from '../actions/userActions'
 import { render } from 'react-dom'
 import { getSetup, myOrders } from '../actions/orderActions'
@@ -43,60 +43,51 @@ const Header = () => {
 
     return (
         <>
-           <Navbar id='navContainer' bg="light"  variant="light" expand="lg" style={{padding: '0 2rem', display: 'flex', border: 'none', }}>
-                <Navbar.Brand href="#home" style={noborder}> <Image id='Logo' className="align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
-                   <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                   <Navbar.Collapse  className='me-auto justify-content-end'>
-                            <Nav.Link eventKey="disabled" style={noborder} className='address mb-2' disabled>
-                            <span className="material-icons pindrop">pin_drop</span>   
-                           646 SW 109 Avenue  Miami, FL
-                            </Nav.Link>
-                        {userInfo ? (
+         <Navbar>
+            <Container>
+                <Navbar.Brand href="#home" bg="light" style={noborder}><Image id='Logo' className="align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse className="me-auto justify-content-end">
+                <Nav.Item id='navItem' className='borderbottom'><a href="/">Home</a></Nav.Item>
+                <Nav.Item id='navItem' className='borderbottom'><a href= "/menu">Menu</a ></Nav.Item>
+                <Nav.Item id='navItem' className='borderbottom'><a href="/beers">Beers</a></Nav.Item>
+                <Nav.Item id='navItem' className='borderbottom'><a href="/about">About</a></Nav.Item>
+                <Nav.Item id='navItem' ><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noopener noreferrer" target="_blank">Delivery</a></Nav.Item>
+                {userInfo ? (
                                 <NavDropdown title={userInfo.firstName ? `Hi ${userInfo.firstName.split(' ')[0]}` : ''} id='username'>
-                                    <LinkContainer to='/profile'>
-                                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/'>
-                                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-                                    </LinkContainer> 
+                                        <NavDropdown.Item id='navItem'><a href="/profile">Profile</a></NavDropdown.Item>
+                                        <NavDropdown.Item onClick={logoutHandler}><a href="/">Log Out</a></NavDropdown.Item>
                                     </NavDropdown>
                         ) : (
                             <>
-                                <LinkContainer to='/login' id='username' className='login mb-2'>
-                                    <Nav.Link>
-                                        <i className="fas fa-sign-in-alt"></i> Log In
-                                    </Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to='/register' id='username' className='register mb-2'>
-                                    <Nav.Link><i className="fas fa-user-plus"></i> Sign Up</Nav.Link>
-                                </LinkContainer>
+                                <Nav.Item id='navItem' className='borderbottom'>
+                                    <i className="fas fa-sign-in-alt"></i>&nbsp;
+                                    <a href="/login">Login</a>
+                                </Nav.Item>
+                                <Nav.Item id='navItem' className='borderbottom'>
+                                    <i className="fas fa-user-plus"></i>&nbsp;
+                                    <a href="/register">Sign Up</a>
+                                </Nav.Item>
                             </>
                            )}
-                    {userInfo && userInfo.isAdmin && (
+                {userInfo && userInfo.isAdmin && (
                                <NavDropdown title='Admin' id='adminmenu'>
-                               <LinkContainer to='/admin/userlist'>
-                                   <NavDropdown.Item>Accounts</NavDropdown.Item>
-                               </LinkContainer>
-                               <LinkContainer to='/admin/productlist'>
-                                   <NavDropdown.Item>Products</NavDropdown.Item>
-                               </LinkContainer>
-                               <LinkContainer to='/admin/beerlist'>
-                                   <NavDropdown.Item>Beers</NavDropdown.Item>
-                               </LinkContainer>
-                               <LinkContainer to='/admin/orderlist'>
-                                   <NavDropdown.Item>Orders</NavDropdown.Item>
-                               </LinkContainer>
-                           </NavDropdown>
+                                   <NavDropdown.Item><a href="/admin/userlist">Accounts</a></NavDropdown.Item>
+                                   <NavDropdown.Item><a href="/admin/productlist">Products</a></NavDropdown.Item>
+                                   <NavDropdown.Item><a href="/admin/beerlist">Beers</a></NavDropdown.Item>
+                                   <NavDropdown.Item><a href="/admin/orderlist">Orders</a></NavDropdown.Item>
+                            </NavDropdown>
                     )}
-                   </Navbar.Collapse>
-            </Navbar>
-            <Navbar bg="light" variant="light" expand="lg" style={{display: 'flex', borderTop: '1px solid lightgrey', borderBottom: 'none', padding: '0 2rem'}} collapseOnSelect>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+           
+            <Navbar bg="light" variant="light" expand="lg" style={{display: 'flex', borderTop: '1px solid lightgrey', borderBottom: 'none', padding: '0 2rem 0 45%'}} collapseOnSelect>
             <div id='navContainer2'>
-                <Nav.Item id='navItem' className='borderbottom'><a href="/">HOME</a></Nav.Item>
-                <Nav.Item id='navItem' className='borderbottom'><a href= "/menu">MENU</a ></Nav.Item>
-                <Nav.Item id='navItem' className='borderbottom'><a href="/beers">BEERS</a></Nav.Item>
-                <Nav.Item id='navItem' className='borderbottom'><a href="/about">ABOUT</a></Nav.Item>
-                <Nav.Item id='navItem' ><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noopener noreferrer" target="_blank">DELIVERY</a></Nav.Item>
+            <Nav.Link eventKey="disabled" style={{textAlign:'center'}} className='address' disabled>
+                            <span className="material-icons pindrop">pin_drop</span>   
+                           646 SW 109 Avenue  Miami, FL
+                            </Nav.Link>
                 {cartItems.length === 0 ? 
                  <a href="/cart" className="material-icons cart" style={{marginRight: '2rem'}}>shopping_cart_checkout</a> : 
                 <>

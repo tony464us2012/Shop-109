@@ -2,9 +2,6 @@
 
 .App {
     text-align: center;
-    background-image: url(./images/app-background1.png);
-    background-repeat: repeat;
-    background-size: cover;
   }
   
   .displayDash {

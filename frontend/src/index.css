@@ -16,10 +16,7 @@ main {
     background-color: #fff;
     min-height: 87vh;
     width: 100%;
-    /* background-image: url(./images/app-background1.png); */
-    /* background-repeat: repeat; */
-    /* background-position: 50% 50%; */
-    /* background-size: cover; */
+
 }
 .padding {
     padding: 3rem
@@ -119,6 +116,14 @@ button:checked {
 #Logo {
     width: 4rem;
 }
+@media  (min-width: 600px ) {
+    #Logo {
+        display: block
+    }
+    #navItem {
+        font-size: .8rem
+    }
+}
 
 .address {
     color: black !important
@@ -188,7 +193,7 @@ button:checked {
 } 
 
 #navItem {
-    font-size: 1.2rem;
+    font-size: 1.2rem !important;
     font-weight: 550;
     color: black;
     margin-right: 2rem;

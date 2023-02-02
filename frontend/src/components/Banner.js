@@ -12,7 +12,6 @@ const Banner = () => {
             alt='Nica Burger'
             borderRadius='lg'
             objectFit='cover'
-           
           />
         <CardBody>
           <Stack mt='3' spacing='5'>
@@ -29,8 +28,6 @@ const Banner = () => {
             alt='Tap Beers'
             borderRadius='lg'
             objectFit='cover'
-        
-
           />
         <CardBody>
           <Stack mt='1' spacing='5'>
