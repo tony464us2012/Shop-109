@@ -38,7 +38,7 @@ const UserListScreen = () => {
         <div className='padding'>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
             (<>
-                <h1 className='text-center title'>Accounts</h1>
+                <h1 className='text-center title fs-4'>Accounts</h1>
                 <Table striped bordered hover responsive id='table' className='table-sm'>
                     <thead>
                         <tr>

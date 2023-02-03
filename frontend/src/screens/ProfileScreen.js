@@ -71,7 +71,7 @@ const ProfileScreen = () => {
             {success && <Message variant='success'>Profile Updated</Message>}
             { errorOrders ? <Message variant='danger'>{errorOrders}</Message> : ''}
             <Col md={3} >
-            <h1>Profile</h1>
+            <h1 className='text-center fs-4'>Profile</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
                     <Form.Label>First Name</Form.Label>
@@ -98,7 +98,7 @@ const ProfileScreen = () => {
              orders.length === 0 ?  <Col md={3}><Message variant='info'>No Orders..</Message></Col> :
                  (<>
             <Col md={7}>
-                <h1>My Orders</h1>
+                <h1 className='text-center fs-4'>My Orders</h1>
               
                     <Table striped bordered hover responsive className='table-sm'>
                         <thead>

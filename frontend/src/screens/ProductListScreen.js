@@ -13,7 +13,6 @@ import Salads from '../components/product-list-components/Salads'
 import Sandwiches from '../components/product-list-components/Sandwiches'
 import Sides from '../components/product-list-components/Sides'
 import Sliders from '../components/product-list-components/Sliders'
-import Tacos from '../components/product-list-components/Tacos'
 import AddOns from '../components/product-list-components/AddOns'
 
 
@@ -65,7 +64,6 @@ const ProductListScreen = () => {
     const sandwiches = products.filter(sandwich => sandwich.category === 'Sandwich')
     const sides = products.filter(side => side.category === 'Side')
     const sliders = products.filter(slider => slider.category === 'Slider')
-    const tacos = products.filter(taco => taco.category === 'Taco')
     const addons = products.filter(addon => addon.category === 'AddOns')
 
     const tabHandler = (tab) => {
@@ -103,7 +101,6 @@ const ProductListScreen = () => {
                          tab === 'Sandwich' ? <Sandwiches sandwiches={sandwiches} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
                          tab === 'Side' ? <Sides sides={sides} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
                          tab === 'Slider' ? <Sliders sliders={sliders} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
-                         tab === 'Taco' ? <Tacos tacos={tacos} getProductHandler={getProductHandler} deleteHandler={deleteHandler} /> :
                         <AddOns addons={addons} getProductHandler={getProductHandler} deleteHandler={deleteHandler}/> 
                         }
                 </Table>

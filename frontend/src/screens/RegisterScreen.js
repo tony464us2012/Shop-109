@@ -48,7 +48,7 @@ const RegisterScreen = () => {
 
     return (
         <FormContainer>
-            <h1>Sign Up</h1>
+            <h1 className='text-center fs-3'>Sign Up</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader/>}

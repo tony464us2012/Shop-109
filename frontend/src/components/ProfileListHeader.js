@@ -32,9 +32,6 @@ const ProfileListHeader = ({tabHandler, tab}) => {
             <Nav.Link className='menu-link' style={selectHandler('Slider')} onClick={() => tabHandler('Slider')}>Sliders</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link className='menu-link' style={selectHandler('Taco')} onClick={() => tabHandler('Taco')}>Tacos</Nav.Link>
-          </Nav.Item>
-          <Nav.Item as="li">
             <Nav.Link className='menu-link' style={selectHandler('AddOns')}  onClick={() => tabHandler('AddOns')}>Add Ons</Nav.Link>
           </Nav.Item>
         </Nav>

@@ -62,7 +62,7 @@ const ProductEditScreen = () => {
     
     return (
         <FormContainer>
-            <h1>Edit Product</h1>
+            <h1 className='text-center fs-4'>Edit Product</h1>
             {loadingUpdate && <Loader />}
             {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
             {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
@@ -86,25 +86,8 @@ const ProductEditScreen = () => {
                         <option value='Slider'>Slider</option>
                         <option value='Side'>Side</option>
                         <option value='AddOns'>AddOns</option>
-                        <option value='Taco' onClick={() => setTacoCategory('Tacos')}>Taco</option>
                     </Form.Control>
                 </Form.Group>
-                {category === 'Taco' ?  
-                     <Form.Group controlId='brand'>
-                     <Form.Label>Taco Type</Form.Label>
-                     <Form.Control as='select' placeholder='Enter category' value={tacoCategory} onChange={(e) => setTacoCategory(e.target.value)}>
-                         <option value=''>Select Type</option>
-                         <option value='Tacos'>Tacos</option>
-                         <option value='SingleTacos'>Single Tacos</option>
-                         <option value='Quesadillas'>Quesadilla</option>
-                         <option value='SideOrders'>Side Orders</option>
-                         <option value='BowlsandSalads'>Bowls and Salads</option>
-                         <option value='Fajitas'>Fajitas</option>
-                         <option value='Burritos'>Burritos</option>
-                         <option value='LunchSpecials'>Lunch Specials</option>
-                     </Form.Control>
-                 </Form.Group> : ''
-            }
                 <Form.Group controlId='description'>
                     <Form.Label>Description</Form.Label>
                     <Form.Control type='text' placeholder='Enter description' value={description} onChange={(e) => setDescription(e.target.value)}></Form.Control>

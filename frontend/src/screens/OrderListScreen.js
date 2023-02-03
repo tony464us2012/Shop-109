@@ -77,7 +77,7 @@ const OrderListScreen = () => {
                 </Button>
             </Form>
            </div>
-                <h1 className='title' style={{textAlign:'center', margin: '2rem 0 .4rem'}}>Orders</h1>
+                <h1 className='text-center fs-4'>Orders</h1>
                 
                 <Table striped bordered hover responsive className='table-sm'>
                     <thead>

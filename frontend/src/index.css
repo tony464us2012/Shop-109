@@ -18,6 +18,10 @@ main {
     width: 100%;
 
 }
+
+.form-group {
+    margin-bottom: 1rem
+}
 .padding {
     padding: 3rem
 }
@@ -80,7 +84,7 @@ button:checked {
 .title {
     background-color: black;
     color: white;
-    padding-top: .2rem;
+    padding-top: .5rem;
 }
 .gap {
     display: block;
@@ -127,21 +131,6 @@ button:checked {
 
 .address {
     color: black !important
-}
-
-#navBar2 {
-    padding: 0 1rem, !important;
-    display: flex !important;
-    justify-content:space-between !important;
-    height: 2.5rem
-}
-
-#navContainer2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: .5rem
 }
 .social-container {
    display: flex;
@@ -192,17 +181,14 @@ button:checked {
     background-color: transparent
 } 
 
-#navItem {
+#navItem,
+.dropdown {
     font-size: 1.2rem !important;
     font-weight: 550;
     color: black;
     margin-right: 2rem;
-    border-bottom: 4px solid transparent
 }
 
-#navItem:hover {
-    border-bottom: 4px solid red
-}
 #navItem a {
     color: black;
     text-decoration: none;
@@ -358,13 +344,16 @@ button:checked {
     border: none !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
 #navContainer {
-    font: 1.2rem
+    padding: .5rem 2rem;
+    align-items: center;
 }
 #navItem {
     font-size: 70%;
     border-bottom: none;
+    text-align: center;
+    margin-bottom: .5rem;
 }
 .marginTop {
     margin-top: 2rem
@@ -394,7 +383,8 @@ button:checked {
     width: 50%
 }
 .MainPicture {
-    padding: 30% 10% !important
+    padding: 30% 10% !important;
+    height: 30vh
 }
 .main-text {
     font-size: 2.2rem !important;
@@ -422,14 +412,13 @@ button:checked {
 .MainPicture {
     position: relative;
     background-image: -moz-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
-	background-image: -webkit-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
-	background-image: -ms-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
-	background-image: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
-    /* background-image: url(./images/109background.jpg), linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); */
-    background-size: cover;
-    width: 90vw;
+    background-image: -webkit-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
+    background-image: -ms-linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
+    background-image: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url("./images/109background.jpg");
+    /*background-image: url(./images/109background.jpg), linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    */background-size: cover;
+    width: 100vw;
     height: 45vh;
-    border-radius: 10px;
     margin: 0 auto;
     padding: 15%;
 }
