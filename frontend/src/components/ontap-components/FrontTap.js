@@ -5,7 +5,7 @@ import Message from '../Message'
 const FrontTap = ({ displayBeers }) => {
     return (
         <>
-           { displayBeers.length === 0 ? <Message>No Beers To Show</Message> : 
+           { !displayBeers ? <Message>No Beers To Show</Message> : 
            <div className='menu-item-container'>
                 {   displayBeers.sort((a, b) => a.beerName > b.beerName ? 1 : -1).map((x) =>  <MainDisplayBeers 
                     name={x.beerName} 

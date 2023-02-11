@@ -17,6 +17,7 @@ const getProductById = asyncHandler( async(req, res) => {
 
     if (product) {
         res.json(product)
+        console.log('it passed')
     } else {
         res.status(404)
         throw new Error('Product Not Found')
@@ -50,7 +51,7 @@ const createProduct = asyncHandler( async(req, res) => {
 })
 const updateProduct = asyncHandler( async(req, res) => {
    
-    const {name, price, category, tacoCategory, description, available} = req.body
+    const {name, price, category, description, available} = req.body
     const product = await Product.findById(req.params.id)
 
     if(product) {
@@ -58,7 +59,6 @@ const updateProduct = asyncHandler( async(req, res) => {
         product.price = price
         product.description = description
         product.category = category
-        product.tacoCategory = tacoCategory
         product.available = available
     } else {
         res.status(404)

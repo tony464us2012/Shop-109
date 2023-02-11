@@ -18,45 +18,45 @@ const FrontBottle = ({ bottleBeer }) => {
                  <div className="bottle-container">
                      {ipa.length ? 
                      <div className="bottle-item">
-                        <h3>IPA</h3>
+                        <h1>IPA</h1>
                         {ipa.sort((a, b) => a.name > b.name ? 1 : -1).map((beer, index) => <MainBottleItem name={beer.name} price={beer.price} key={index}  /> )}
                     </div> : ''}
                     {lager.length ? 
                     <div className="bottle-item">
-                        <h3>Lager</h3>
+                        <h1>Lager</h1>
                         {lager.sort((a, b) => a.name > b.name ? 1 : -1).map((beer, index) => <MainBottleItem name={beer.name} price={beer.price} key={index}  /> )}
                     </div> : ''
                     }
                     {sour.length ? 
                     <div className="bottle-item">
-                        <h3>Sour</h3>
+                        <h1>Sour</h1>
                         {sour.sort((a, b) => a.name > b.name ? 1 : -1).map((beer, index) => <MainBottleItem name={beer.name} price={beer.price} key={index} /> )}
                     </div> : '' }
                     {porterandstout.length ? 
                     <div className="bottle-item">
-                        <h3>Porter and Stout</h3>
+                        <h1>Porter and Stout</h1>
                         {porterandstout.sort((a, b) => a.name > b.name ? 1 : -1).map((beer, index) => <MainBottleItem name={beer.name} price={beer.price} key={index} /> )}
                     </div> : ''}
                     {ale.length ? 
                     <div className="bottle-item">
-                        <h3>Ale</h3>
+                        <h1>Ale</h1>
                     {ale.sort((a, b) => a.name > b.name ? 1 : -1).map((beer, index) => <MainBottleItem name={beer.name} price={beer.price} key={index} /> )}
                     </div> : ''
                     }
                     {cider.length ? 
                     <div className="bottle-item">
-                        <h3>Ciders</h3>
+                        <h1>Ciders</h1>
                         {cider.sort((a, b) => a.name > b.name ? 1 : -1).map((beer, index) => <MainBottleItem name={beer.name} price={beer.price} key={index} id={beer._id} /> )}
                     </div> : ''}
                     {special.length ? 
                     <div className="bottle-item">
-                        <h3>Special</h3>
+                        <h1>Special</h1>
                         {special.sort((a, b) => a.name > b.name ? 1 : -1).map((beer, index) => <MainBottleItem name={beer.name} price={beer.price} key={index} /> )}
                     </div> : ''
                     }
                  </div>
                  <div className="wine-container">
-                     <h3>Wines</h3>
+                     <h1>Wines</h1>
                      <div className="wine-item-container">
                      <div className="wine-item">
                          {wine.sort((a, b) => a.name > b.name ? 1 : -1).filter((x, index) => index <= 10).map((beer, index) => <MainWineItem name={beer.name} price={beer.price} key={index} id={beer._id} /> )}

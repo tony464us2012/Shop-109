@@ -13,8 +13,7 @@ const ProductEditScreen = () => {
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
-    const [category, setCategory] = useState('')
-    const [tacoCategory, setTacoCategory] = useState('')
+    const [category, setCategory] = useState('Burger')
     const [description, setDescription] = useState('')
     const [available, setAvailable] = useState(true)
 
@@ -27,26 +26,23 @@ const ProductEditScreen = () => {
     const productUpdate = useSelector(state => state.productUpdate)
     const { loadingUpdate, error:errorUpdate, success:successUpdate} = productUpdate
 
-    
     useEffect(() => {
+            if(product){
+                setName(product.name)
+                setPrice(product.price)
+                setCategory(product.category)
+                setDescription(product.description)
+                setAvailable(product.available)
+            } else {
+                dispatch(listProductDetails(id))
+            }
             if(successUpdate) {
                 navigate('/admin/productlist')
-            } else {
-                if(!product.name || product._id !== id) {
-                    dispatch(listProductDetails(id))
-                } else {
-                    setName(product.name)
-                    setPrice(product.price)
-                    setCategory(product.category)
-                    setTacoCategory(product.tacoCategory)
-                    setDescription(product.description)
-                    setAvailable(product.available)
-                }
-            }
+            } 
         return () => {
             dispatch(clearCreate())
         }              
-    }, [successUpdate])
+    }, [successUpdate, id, dispatch, navigate, product])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -55,7 +51,6 @@ const ProductEditScreen = () => {
             name,
             price,
             category,
-            tacoCategory,
             description,
             available
         }))}
@@ -73,11 +68,12 @@ const ProductEditScreen = () => {
                 </Form.Group>
                 <Form.Group controlId='price'>
                     <Form.Label>Price</Form.Label>
-                    <Form.Control type='number' placeholder='Enter Price' value={price} disabled={tacoCategory ? true : false} onChange={(e) => setPrice(e.target.value)}></Form.Control>
+                    <Form.Control type='number' placeholder='Enter Price' value={price} onChange={(e) => setPrice(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='brand'>
                     <Form.Label>Category</Form.Label>
                     <Form.Control as='select' placeholder='Enter category' value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <option value=''>Select Category</option>
                         <option value='Burger'>Burger</option>
                         <option value='Salad'>Salad</option>
                         <option value='Appetizer'>Appetizer</option>
@@ -93,10 +89,11 @@ const ProductEditScreen = () => {
                     <Form.Control type='text' placeholder='Enter description' value={description} onChange={(e) => setDescription(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='brand'>
-                    <Form.Label>Available?</Form.Label>
+                    <Form.Label>Availability</Form.Label>
                     <Form.Control as='select' value={available} onChange={(e) => setAvailable(e.target.value)}>
-                        <option value={true}>True</option>
-                        <option value={false}>False</option>
+                        <option value=''>In Stock?</option>
+                        <option value='true'>True</option>
+                        <option value='false'>False</option>
                     </Form.Control>
                 </Form.Group>
                 <Button type='submit' variant='primary'>

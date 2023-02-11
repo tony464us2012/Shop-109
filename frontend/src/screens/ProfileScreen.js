@@ -6,6 +6,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { updateUserProfile, deleteUser2 } from '../actions/userActions'
 import {  getOrderDetails } from '../actions/orderActions'
+import { logout } from '../actions/userActions'
 import dateFormat from 'dateformat'
 import { ORDER_DETAILS_RESET } from '../actions/types'
 
@@ -49,11 +50,13 @@ const ProfileScreen = () => {
                   dispatch({type: ORDER_DETAILS_RESET})
               }
 
-    }, [userInfo])
+    }, [userInfo, navigate, dispatch, user])
 
     const deleteHandler = (id) => {
         if(window.confirm('Are you sure you want to delete your account?')) {
             dispatch(deleteUser2(id))
+            dispatch(logout())
+            navigate('/')
     }}
 
     const submitHandler = (e) => {
@@ -68,7 +71,7 @@ const ProfileScreen = () => {
     return (
         <>
         <div className="padding row profile" style={{position: 'relative'}}>
-            {success && <Message variant='success'>Profile Updated</Message>}
+            {success && <Message variant='success'>Profile Updated: updates will be reflected in the next login.</Message>}
             { errorOrders ? <Message variant='danger'>{errorOrders}</Message> : ''}
             <Col md={3} >
             <h1 className='text-center fs-4'>Profile</h1>
@@ -113,7 +116,7 @@ const ProfileScreen = () => {
                                 <tr>
                                     <td><button  onClick={() => orderDetailsHandler(order._id)}>{order._id.slice(21)}</button></td>
                                     <td><button onClick={() => orderDetailsHandler(order._id)}>{dateFormat(order.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</button></td>
-                                    <td><button onClick={() => orderDetailsHandler(order._id)}>${order.totalprice}</button></td>
+                                    <td><button onClick={() => orderDetailsHandler(order._id)}>${(order.totalprice).toFixed(2)}</button></td>
                                 </tr>
                          </tbody>
                           ))}
@@ -133,7 +136,7 @@ const ProfileScreen = () => {
                                  <Col md={3}>
                                     <h5>{item.name}</h5>
                                  </Col>
-                                 <Col md={2}><p>${item.price}</p></Col>
+                                 <Col md={2}><p>${(item.price).toFixed(2)}</p></Col>
                                 </Row>
                                 <Row>
                                   <Col md={2}></Col>
@@ -155,21 +158,21 @@ const ProfileScreen = () => {
                         <ListGroup.Item variant='light' >
                             <div className="myOrderTotal">
                             <h5>Subtotal</h5>
-                            <p>${order.subtotal}</p>
+                            <p>${(order.subtotal).toFixed(2)}</p>
                             </div>
                             <div className="myOrderTotal">
                             <h5>Tax</h5>
-                            <p>${order.tax}</p>
+                            <p>${(order.tax).toFixed(2)}</p>
                             </div>
                             <div className="myOrderTotal">
                             <h5>Total</h5>
-                            <p>${order.totalprice}</p>
+                            <p>${(order.totalprice).toFixed(2)}</p>
                             </div>
                         </ListGroup.Item>
                     </ListGroup>
                     </div>
                 ) : ''}
-            {/* <Button className='delete-account' size='sm' onClick={() => deleteHandler(userInfo._id)} variant='danger'>Delete Account</Button> */}
+            <Button className='delete-account' size='sm' onClick={() => deleteHandler(userInfo._id)} variant='danger'>Delete Account</Button>
         </>
     )
 }

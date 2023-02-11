@@ -5,12 +5,7 @@ import Setup from '../models/setupModel.js'
 import config from 'config'
 const secretkey = config.get('STRIPE_KEY_SECRET')
 import Stripe from 'stripe'
-const accountSid = config.get("ACCOUNT_SID");
-const authToken = config.get("AUTH_TOKEN");
-import pkg from 'twilio'
-const {Twilio} = pkg
 import nodemailer from 'nodemailer'
-import Product from '../models/productModel.js'
 
 const stripe = new Stripe(secretkey)
 
@@ -18,8 +13,6 @@ const addOrderItems = asyncHandler( async(req, res) => {
 
     const { firstName, lastName, phone, email, id, billingName, orderItems, subtotal, tax, totalprice, token} = req.body
     
-    const client = new Twilio(accountSid, authToken)
-
     const message = `
     <style>
     td, th {
@@ -82,7 +75,7 @@ const addOrderItems = asyncHandler( async(req, res) => {
     });
     const mailOptions = {
         from: '109burgerbusiness@gmail.com',
-        to: 'tony464us2013@gmail.com',
+        to: '109burgerjoint@gmail.com',
         subject: 'New Order',
         html: message,
     }
@@ -121,18 +114,6 @@ const addOrderItems = asyncHandler( async(req, res) => {
 
      await order.save()
      
-//      client.messages.create({
-//      body: 'A new order has been placed.',
-//      to: '+17863014234',
-//      from: '+19789589040'
-//    })
-     
-    // const callres = await client.calls.create({
-    //     twiml: '<Response><Say>You ate?</Say></Response>',
-    //     to: '+17863952177',
-    //     from: '+19789589040'
-    //  })
-
        sendEmail();
         res.status(200).json(order)
 } catch (error) {
@@ -144,8 +125,6 @@ const guestOrder = asyncHandler( async(req, res) => {
     const { firstName:first, lastName:last, phone:guestPhone, email, guestEmail, billingName, orderItems, subtotal, tax, totalprice, token} = req.body
     
     const user = await User.findOne({ email })
-
-    const client = new Twilio(accountSid, authToken)
 
     const message = `
     <style>
@@ -209,7 +188,7 @@ const guestOrder = asyncHandler( async(req, res) => {
     });
     const mailOptions = {
         from: '109burgerbusiness@gmail.com',
-        to: 'tony464us2013@gmail.com',
+        to: '109burgerjoint@gmail.com',
         subject: 'New Order',
         html: message,
     }
@@ -247,18 +226,6 @@ const guestOrder = asyncHandler( async(req, res) => {
     })
 
      await order.save()
-     
-//      client.messages.create({
-//      body: 'A new order has been placed.',
-//      to: '+17863014234',
-//      from: '+19789589040'
-//    })
-     
-    // const callres = await client.calls.create({
-    //     twiml: '<Response><Say>You ate?</Say></Response>',
-    //     to: '+17863952177',
-    //     from: '+19789589040'
-    //  })
 
        sendEmail();
         res.status(200).json(order)

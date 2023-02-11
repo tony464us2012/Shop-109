@@ -15,9 +15,6 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    tacoCategory: {
-        type: String
-    },
     description: {
         type: String,
     },

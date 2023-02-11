@@ -406,25 +406,26 @@
     background-color: rgba(211, 211, 211, 0.26);
 }
 .wine-container {
-    margin-top: 1.5rem;
     background-color: rgba(211, 211, 211, 0.26);
     padding: 1rem 3rem;
 }
-
-.wine-container h3 {
-    text-align: center;
-    margin-bottom: .4rem
-}
 .bottle-item {
     text-align: center;
+}
+.bottle-item h1 {
+  text-decoration: underline;
 }
 .bottle-item div,
 .wine-container div {
   color: black;
     margin-bottom: .5rem;
 }
-.wine-container h3 {
+.wine-container h1 {
     text-align: center;
+    text-decoration: underline;
+}
+.wine-container {
+  border-top: 1px solid grey;
 }
 .wine-item-container {
     display: grid;

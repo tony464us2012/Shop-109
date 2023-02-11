@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Col, Button, Card, Nav } from 'react-bootstrap'
-import Message from '../components/Message'
+import { Col, Button, Card } from 'react-bootstrap'
 import { removeFromCart } from '../actions/cartActions'
+import { Text } from '@chakra-ui/react'
 
 const CartScreen = () => {
     
@@ -24,11 +24,11 @@ const CartScreen = () => {
     return (
     <>
             <div className='gap'></div>
-            <h1 className='text-center title'>Shopping Cart</h1>
+            <Text fontSize='2xl' className='text-center title'>Shopping Cart</Text>
                {cartItems.length === 0 ? <div className='empty-cart'>Your cart is empty.</div> : (
                     <div className='cart-item-container'>
                        {cartItems.map(item => (
-                           <Card variant='light' key={item.id}>
+                           <Card variant='light' key={item.id} style={{boxShadow:'1px 1px 3px black', padding: '.5rem'}}>
                                 <Card.Body className='productInfo'>
                                     <Card.Title>{item.name}</Card.Title>
                                     <Card.Text className='text'>{item.description}</Card.Text>

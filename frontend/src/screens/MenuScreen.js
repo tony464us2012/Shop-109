@@ -43,7 +43,7 @@ const MenuScreen = () => {
             <Side sides={sides} /> 
             }
                 <div className='advisory'>
-                    <div>CONSUMER ADVISORY</div>
+                    <h4>CONSUMER ADVISORY</h4>
                     <p className='advisory-text'>*Consuming raw or undercooked, meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness especially if you have certain medical conditions.</p>
                 </div> : ''
         </div>

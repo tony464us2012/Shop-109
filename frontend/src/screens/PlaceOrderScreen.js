@@ -26,22 +26,27 @@ const PlaceOrderScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const cart = useSelector(state => state.cart)
-
-
+    const cartItem = useSelector(state => state.cart)
+    const { cartItems } = cartItem
+    
     const userDetail = useSelector(state => state.userDetails)
     const { user } = userDetail
 
     const orderCreate = useSelector(state => state.orderCreate)
     const { order, success, error } = orderCreate
 
+    const setUp = useSelector(state => state.setup)
+    const { setup: {cart} } = setUp
+
     const [processing, setProcessing] = useState(false);
  
-    const subtotal = Number(cart.cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))
-    const tax = Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
-    const totalprice = Number(cart.cartItems.reduce((acc, item) => acc + item.price, 0))  + Number((cart.cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
+    const subtotal = Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))
+    const tax = Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
+    const totalprice = Number(cartItems.reduce((acc, item) => acc + item.price, 0))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
 
     const email2 = '109burgerbusiness@gmail.com';
+
+    console.log(cart)
 
     useEffect(() => {
         if(user) {
@@ -85,7 +90,6 @@ const PlaceOrderScreen = () => {
         const token = await stripe.createToken(card);
 
         if(!user && token.token) {
-            console.log('NO USER')
             dispatch(guestOrder({
                         firstName,
                         lastName,
@@ -93,7 +97,7 @@ const PlaceOrderScreen = () => {
                         email: email2,
                         guestEmail: email,
                         name: billingDetails.name,
-                        orderItems: cart.cartItems,
+                        orderItems: cartItems,
                         subtotal,
                         tax,
                         totalprice,
@@ -107,7 +111,7 @@ const PlaceOrderScreen = () => {
                         id,
                         name: billingDetails.name,
                         email,
-                        orderItems: cart.cartItems,
+                        orderItems: cartItems,
                         subtotal,
                         tax,
                         totalprice,
@@ -127,7 +131,7 @@ const PlaceOrderScreen = () => {
                     <Col md={7}>
                         <ListGroup className='black' style={{zIndex: '1'}}>
                         <ListGroup.Item variant='light'>
-                            <div className="material-icons basket text-center">shopping_basket</div>
+                            <div className="material-icons basket text-center" style={{fontSize: '3rem'}}>shopping_basket</div>
                             <div className='place-order-title black text-center'>Submit Your Order</div>
                         </ListGroup.Item>
                             <ListGroup.Item variant='light' className='black'>
@@ -184,7 +188,7 @@ const PlaceOrderScreen = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {cart.cartItems.map((item, index) => (
+                            {cartItems.map((item, index) => (
                                 <tr key={index.id}>
                                     <td style={{padding: '.6rem .2rem'}}>
                                         <p style={{marginBottom: '.5rem'}}>{item.name}</p>
@@ -225,7 +229,7 @@ const PlaceOrderScreen = () => {
                                     <p>Total</p>
                                 </td>
                                 <td>
-                                    <p>{(totalprice)}</p>
+                                    <p>{(totalprice).toFixed(2)}</p>
                                 </td>
                             </tr>
                         </tbody>

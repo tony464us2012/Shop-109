@@ -20,7 +20,7 @@ const ConfirmationScreen = () => {
   
    useLayoutEffect(() => {
        dispatch(clearCart())
-   }, [order])
+   }, [order, dispatch])
 
         return loading ? <Loader /> : (
         <div className='padding'>
@@ -37,7 +37,7 @@ const ConfirmationScreen = () => {
                             </p>
                             <p>Confirmation #{id.slice(20)}.</p>
                             <p> Your order will be ready for pickup in about {setup.minutes} minutes.</p>
-                         <Form>
+                         <Form className='mt-3'>
                              <Form.Group className="mb-3 order-info" controlId="formGroupEmail">
                                  <Form.Label>First Name</Form.Label>
                                  <Form.Control type="text" value={order.firstName} size='sm' disabled required />
