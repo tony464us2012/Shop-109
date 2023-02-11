@@ -28,7 +28,7 @@ const OrderScreen = () => {
        dispatch({type: ORDER_DETAILS_RESET})
        dispatch({type: ORDER_REFUND_RESET})
         }
-    }, [dispatch, refund])
+    }, [dispatch, refund, id])
 
     const refundHandler = () => {
         dispatch(refundOrder({

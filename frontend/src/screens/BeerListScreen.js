@@ -25,7 +25,7 @@ const BeerListScreen = () => {
             navigate('/login')
         } 
         dispatch(getMainBeers())
-    }, [])
+    }, [dispatch, navigate, userInfo.isAdmin])
 
 return (
     <div className="padding">

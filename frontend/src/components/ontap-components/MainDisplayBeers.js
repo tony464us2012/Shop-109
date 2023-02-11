@@ -7,7 +7,11 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
 
     return (
     <>
-        <Flippy  flipOnClick={true}>
+      <div className='card'>
+        <div className='front'>Click to flip</div>
+        <div className='back'>Yo, whats up</div>
+      </div>
+        {/* <Flippy  flipOnClick={true}>
             <FrontSide className='front main-section' >
             <Image
                 src= {logo}
@@ -55,7 +59,7 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
                     <p>{description}</p>
                 </div>
             </BackSide>
-        </Flippy>
+        </Flippy> */}
     </>
 )};
     MainDisplayBeers.propTypes = {

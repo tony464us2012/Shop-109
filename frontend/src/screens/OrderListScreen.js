@@ -34,7 +34,7 @@ const OrderListScreen = () => {
                 setTime(setup.minutes)
                 setStore(setup.cart)
             }
-    }, [setup])
+    }, [setup, dispatch, success, userInfo.isAdmin])
 
     const orderDetails = (id) => {
         dispatch(getOrderDetails(id))

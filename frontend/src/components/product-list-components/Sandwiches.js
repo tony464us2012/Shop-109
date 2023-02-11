@@ -1,5 +1,4 @@
 import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
 
 const Sandwiches = ({ sandwiches, getProductHandler, deleteHandler }) => {
     return (

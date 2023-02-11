@@ -41,7 +41,7 @@ const UserEditScreen = () => {
             dispatch({ type: USER_UPDATE_RESET })
             navigate('/admin/userlist')
         } 
-    }, [])
+    }, [dispatch, user._id, navigate, successUpdate, user.email, user.firstName, user.lastName, user.phone, id ])
 
     const submitHandler = (e) => {
         e.preventDefault()

@@ -24,7 +24,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import AccessibilityScreen from './screens/AccessibilityScreen'
 import TermsScreen from './screens/TermsScreen'
-import { ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react'
+import { ChakraProvider, extendBaseTheme } from '@chakra-ui/react'
 import chakraTheme from '@chakra-ui/theme'
 
 const stripePromise = loadStripe('pk_test_51IQjuZL3CskvbasWBMNfrSLPF2xBP9mietcH9gbwH7SkVgGMAWIC8dM2V0XnN0U9e9BhVH48Uvu59RCBkImcOAdi00PyTPUtjp')
@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <Router>
-      <ChakraBaseProvider theme={theme}>
+      <ChakraProvider theme={theme}>
         <Header />
           <main className="app" >
             <Elements stripe={stripePromise}>
@@ -72,7 +72,7 @@ const App = () => {
             </Elements>
             </main>
             <Footer />
-      </ChakraBaseProvider>
+      </ChakraProvider>
     </Router>
   );
 }

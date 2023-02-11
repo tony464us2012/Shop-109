@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import { useDispatch  } from 'react-redux'
 import { searchBeer } from '../../../actions/beerActions'
 import { Form } from 'react-bootstrap'

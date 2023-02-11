@@ -10,7 +10,7 @@ const ProductModal = ({ show, onHide, id, price }) => {
    
     const productDetail = useSelector(state => state.productDetails)
     const { loading, product:productInfo } = productDetail
-    const { name, image, description, category, available, tacoCategory } = productInfo
+    const { name, image, description, category, available } = productInfo
     
       const productList = useSelector(state => state.productList)
       const { products } = productList
@@ -25,7 +25,7 @@ const ProductModal = ({ show, onHide, id, price }) => {
       const [sauce, setSauce] = useState('')
       const [burger, setBurger] = useState('')
       const [fryAddOn, setFryAddOn] = useState('')
-      const [taco, setTaco] = useState('')
+      const [taco] = useState('')
       const [tacoText, setTacoText] = useState('')
       const [instructions, setInstructions] = useState('')
       const ref = useRef(price)
@@ -385,7 +385,6 @@ const ProductModal = ({ show, onHide, id, price }) => {
                       </Card.Text>
                     </Card.Body>
                   </Card>
-          
                 </Modal>
             }
         </>
