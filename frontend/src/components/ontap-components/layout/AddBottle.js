@@ -29,7 +29,7 @@ const AddBottle = () => {
             <form className="bottle-form" style={{marginTop: '1rem'}} onSubmit={onSubmit}>
                 <div className="form-row">
                     <div className="form-group col-md-4">
-                        <label htmlFor="name">Add Bottle</label>
+                        <label htmlFor="name" className='mb-2'>Add Bottle</label>
                         <input type="text"  name="name" className="form-control" id="bottleName" onChange={onChange} value={bottle.name} required/>
                     </div>
                     <div className="form-group col-md-1">
@@ -37,7 +37,7 @@ const AddBottle = () => {
                         <input type="number" name="price" className="form-control" id="price" onChange={onChange} value={bottle.price} required/>
                     </div>
                     <div className="form-group col-md-3">
-                        <label htmlFor="type">Beer Type</label>
+                        <label htmlFor="type" className='mb-2'>Beer Type</label><br></br>
                         <select id="type" className="custom-select" name="type" onChange={onChange} value={bottle.type}>
                                             <option value="0">Select Type</option>
                                             <option value="Ale">Ale</option>

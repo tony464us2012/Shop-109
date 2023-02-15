@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie'
 import { productListReducer, productDetailsReducer, productDeleteReducer, productCreateReducer, productUpdateReducer, beerReducer } from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducers'
 import { setupReducer } from './reducers/setupReducers'
-import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userDeleteReducer, userUpdateReducer } from './reducers/userReducers'
+import { userLoginReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userDeleteReducer, userUpdateReducer } from './reducers/userReducers'
 import { myOrdersReducer, orderCreateReducer, orderDetailsReducer, getOrdersReducer, refundReducer } from './reducers/orderReducers'
 
 const reducers = combineReducers({
@@ -16,7 +16,6 @@ const reducers = combineReducers({
     productUpdate: productUpdateReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
-    userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
     userList: userListReducer,
@@ -37,11 +36,9 @@ const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(loca
 const userInfoFromStorage = cookies.get('user') ? cookies.get('user') : null
 const userDetailFromStorage = cookies.get('userDetails') ? cookies.get('userDetails') : null
 
-
 const preloadedState = {
-    cart: { cartItems: cartItemsFromStorage,
-    },
-    userLogin: { userInfo: userInfoFromStorage },
+    cart: { cartItems: cartItemsFromStorage},
+    userLogin: { user: userInfoFromStorage },
     userDetails: {user: userDetailFromStorage }
 }
 

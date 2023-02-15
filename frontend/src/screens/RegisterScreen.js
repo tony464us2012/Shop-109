@@ -21,14 +21,13 @@ const RegisterScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const userRegister = useSelector(state => state.userRegister)
-    const { loading, error, userInfo } = userRegister
+    const { user, loading } = useSelector(state => state.userLogin)
 
     useEffect(() => {
-        if(userInfo) {
-           navigate('/')
+        if(user) {
+           navigate('/menu')
         }
-    }, [userInfo, navigate])
+    }, [user, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -50,7 +49,6 @@ const RegisterScreen = () => {
         <FormContainer>
             <h1 className='text-center fs-3'>Sign Up</h1>
             {message && <Message variant='danger'>{message}</Message>}
-            {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader/>}
             <Form onSubmit={submitHandler}>
                 <Form.Group>

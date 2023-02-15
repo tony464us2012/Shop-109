@@ -15,7 +15,6 @@ const HomeScreen = () => {
             <div style={{paddingBottom: '4rem'}}></div>
             <MainPicture />
             <Banner/>
-            {/* {!keyword ? (<ProductCarousel />) : (<Link to='/' className='btn btn-light'>Go Back</Link>) } */}
         </>
     )
 }

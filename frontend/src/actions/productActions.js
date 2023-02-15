@@ -41,11 +41,11 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
             type: PRODUCT_DELETE_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
        const { data } = await axios.delete(`/api/products/${id}`, config)
@@ -70,15 +70,15 @@ export const createProduct = () => async (dispatch, getState) => {
             type: PRODUCT_CREATE_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
-        const { data } = await axios.post(`/api/products`, {id: userInfo._id}, config)
+        const { data } = await axios.post(`/api/products`, {id: user._id}, config)
 
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
@@ -97,12 +97,12 @@ export const updateProduct = (product) => async (dispatch, getState) => {
             type: PRODUCT_UPDATE_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
         const { data } = await axios.put(`/api/products/${product._id}`, product, config)

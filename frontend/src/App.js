@@ -27,7 +27,7 @@ import TermsScreen from './screens/TermsScreen'
 import { ChakraProvider, extendBaseTheme } from '@chakra-ui/react'
 import chakraTheme from '@chakra-ui/theme'
 
-const stripePromise = loadStripe('pk_test_51IQjuZL3CskvbasWBMNfrSLPF2xBP9mietcH9gbwH7SkVgGMAWIC8dM2V0XnN0U9e9BhVH48Uvu59RCBkImcOAdi00PyTPUtjp')
+const stripePromise = loadStripe('pk_live_R1kD1z6rIIVgf0Kj3xmDwEVI')
 
 const { Card } = chakraTheme.components
 

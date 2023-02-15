@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Cookies from 'universal-cookie'
-import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LIST_RESET, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS, MY_ORDERS_RESET, USER_LIST_FAIL, USER_LIST_SUCCESS, USER_LIST_REQUEST, USER_DELETE_REQUEST, USER_DELETE_SUCCESS, USER_DELETE_FAIL, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL } from "./types"
+import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LIST_RESET, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS, MY_ORDERS_RESET, USER_LIST_FAIL, USER_LIST_SUCCESS, USER_LIST_REQUEST, USER_DELETE_REQUEST, USER_DELETE_SUCCESS, USER_DELETE_FAIL, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL } from "./types"
 
 export const login = ({email, password}) => async (dispatch) => {
     try {
@@ -42,8 +42,9 @@ export const logout = () => (dispatch) => {
 
 export const register = ({firstName, lastName, phone, email, password}) => async (dispatch) => {
     try {
+
         dispatch({
-            type: USER_REGISTER_REQUEST
+            type: USER_LOGIN_REQUEST
         })
 
         const config = {
@@ -54,10 +55,6 @@ export const register = ({firstName, lastName, phone, email, password}) => async
         const { data } = await axios.post('/api/users', { firstName, lastName, phone, email, password }, config)
 
         dispatch({
-            type: USER_REGISTER_SUCCESS,
-            payload: data
-        })
-        dispatch({
             type: USER_LOGIN_SUCCESS,
             payload: data
         })
@@ -65,7 +62,7 @@ export const register = ({firstName, lastName, phone, email, password}) => async
         cookies.set('user', data)
     } catch (error) {
         dispatch({
-            type: USER_REGISTER_FAIL, 
+            type: USER_LOGIN_FAIL, 
             payload: 'Account Already Exists'
         })
     }
@@ -76,11 +73,11 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             type: USER_DETAILS_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
         const { data } = await axios.get(`/api/users/${id}`, config)
@@ -105,12 +102,12 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_PROFILE_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user:user1 }} = getState()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user1.token}`
             }
         }
         const { data } = await axios.put(`/api/users/profile`, user, config)
@@ -132,11 +129,11 @@ export const listUsers = () => async (dispatch, getState) => {
             type: USER_LIST_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
         const { data } = await axios.get(`/api/users`, config)
@@ -158,11 +155,11 @@ export const deleteUser = (id) => async (dispatch, getState) => {
             type: USER_DELETE_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
         await axios.delete(`/api/users/${id}`, config)
@@ -200,15 +197,15 @@ export const updateUser = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_REQUEST
         })
         
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user:user1 }} = getState()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user1.token}`
             }
         }
-        const { data } = await axios.put(`/api/users/${user._id}`, user, config)
+        const { data } = await axios.put(`/api/users/${user1._id}`, user, config)
 
         dispatch({ type: USER_UPDATE_SUCCESS })
         dispatch({ type: USER_DETAILS_SUCCESS, payload: data })

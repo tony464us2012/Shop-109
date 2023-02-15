@@ -122,10 +122,10 @@ const addOrderItems = asyncHandler( async(req, res) => {
 })
 const guestOrder = asyncHandler( async(req, res) => {
 
-    const { firstName:first, lastName:last, phone:guestPhone, email, guestEmail, billingName, orderItems, subtotal, tax, totalprice, token} = req.body
-    
-    const user = await User.findOne({ email })
+    const user = await User.findOne({email: '109burgerbusiness@gmail.com'})
 
+    const { firstName:first, lastName:last, phone, email, guestEmail, billingName, orderItems, subtotal, tax, totalprice, token} = req.body
+    
     const message = `
     <style>
     td, th {
@@ -136,7 +136,7 @@ const guestOrder = asyncHandler( async(req, res) => {
     </style>
         <p>
             ${first}  ${last}<br>
-            ${phone2}<br>
+            ${phone}<br>
             ${email}
         </p>
         <table>
@@ -214,8 +214,8 @@ const guestOrder = asyncHandler( async(req, res) => {
     const order = new Order({
         firstName: first,
         lastName: last,
-        phone: guestPhone,
-        email: guestEmail,
+        phone,
+        email,
         orderItems, 
         user: user._id, 
         subtotal, 

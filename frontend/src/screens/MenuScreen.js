@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import {  useSelector  } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import {  useDispatch, useSelector  } from 'react-redux'
 import Meta from '../components/Meta'
 import MenuHeader from '../components/MenuHeader'
 import Burger from '../components/menu-components/Burger'
@@ -10,8 +10,15 @@ import Sandwich from '../components/menu-components/Sandwich'
 import Slider from '../components/menu-components/Slider'
 import Side from '../components/menu-components/Side'
 import Loader from '../components/Loader'
+import { listProducts } from '../actions/productActions'
 
 const MenuScreen = () => {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(listProducts())
+    }, [dispatch])
 
     const [tab, setTab] = useState('Appetizer')
     

@@ -15,14 +15,17 @@ const LoginScreen = () => {
     const dispatch = useDispatch()
     let navigate = useNavigate();
 
-    const userLogin = useSelector(state => state.userLogin)
-    const { loading, error, userInfo } = userLogin
+    const { user, loading, error } = useSelector(state => state.userLogin)
 
     useEffect(() => {
-        if(userInfo) {
-            navigate('/menu')
-        }
-    }, [userInfo, navigate])
+        if(user) {
+            if (user.isAdmin) {
+                navigate('/admin/orderlist')
+            } else {
+                navigate('/menu')
+            }}
+       
+    }, [user, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -32,7 +35,6 @@ const LoginScreen = () => {
     return (
         <FormContainer>
             <h1 className='text-center fs-3'>Sign In</h1>
-            {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader/>}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>
@@ -52,6 +54,7 @@ const LoginScreen = () => {
                 New Customer? <Link to={'/register'} style={{color:'black'}}>Register</Link>
                 </Col>
             </Row>
+            {error && <Message variant='danger'>{error}</Message>}
         </FormContainer>
     )
 }

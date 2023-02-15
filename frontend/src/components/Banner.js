@@ -5,8 +5,8 @@ import { Card, Image, CardBody, Text, Stack, Flex, } from '@chakra-ui/react'
 const Banner = () => {
   return (
     
-    <Flex justifyContent='space-around' margin='6rem auto' flexWrap='wrap'>
-      <Card maxW='sm'>
+    <Flex className='banner-container' justifyContent='space-around' margin='6rem auto' flexWrap='wrap'>
+      <Card className='banner' maxW='sm' marginBottom='2rem'>
         <Image
             src='/images/nica_burger.jpg'
             alt='Nica Burger'
@@ -17,12 +17,12 @@ const Banner = () => {
           <Stack mt='3' spacing='5'>
           <Text as='b' fontSize='2rem' textAlign='center'>Artisan Burgers</Text>
             <Text textAlign='center'>
-              Creative and great tasting artisan burgers.
+              One of the best burgers you'll try. 
             </Text>
           </Stack>
         </CardBody>
       </Card>
-      <Card maxW='sm'>
+      <Card className='banner' maxW='sm' marginBottom='2rem'>
           <Image
             src='/images/beer-tap2.jpg'
             alt='Tap Beers'

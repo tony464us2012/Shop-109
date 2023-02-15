@@ -36,17 +36,13 @@ const PlaceOrderScreen = () => {
     const { order, success, error } = orderCreate
 
     const setUp = useSelector(state => state.setup)
-    const { setup: {cart} } = setUp
+    const { setup } = setUp
 
     const [processing, setProcessing] = useState(false);
  
     const subtotal = Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))
     const tax = Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
     const totalprice = Number(cartItems.reduce((acc, item) => acc + item.price, 0))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
-
-    const email2 = '109burgerbusiness@gmail.com';
-
-    console.log(cart)
 
     useEffect(() => {
         if(user) {
@@ -75,8 +71,8 @@ const PlaceOrderScreen = () => {
         var timerID = setInterval( () => tick(), 1000 );
         return () => {
             clearInterval(timerID);}
-        },[success])
-   
+        },[success, day, hour, navigate, order._id, user])
+
     function tick() {setDay(new Date().getDay()); setHour(new Date().getHours())}
 
     const placeOrderHandler = async (e) => {
@@ -94,8 +90,7 @@ const PlaceOrderScreen = () => {
                         firstName,
                         lastName,
                         phone,
-                        email: email2,
-                        guestEmail: email,
+                        email: email,
                         name: billingDetails.name,
                         orderItems: cartItems,
                         subtotal,
@@ -131,7 +126,7 @@ const PlaceOrderScreen = () => {
                     <Col md={7}>
                         <ListGroup className='black' style={{zIndex: '1'}}>
                         <ListGroup.Item variant='light'>
-                            <div className="material-icons basket text-center" style={{fontSize: '3rem'}}>shopping_basket</div>
+                            <div className="material-icons basket text-center" style={{fontSize: '3rem', color:'red'}}>shopping_basket</div>
                             <div className='place-order-title black text-center'>Submit Your Order</div>
                         </ListGroup.Item>
                             <ListGroup.Item variant='light' className='black'>
@@ -171,7 +166,7 @@ const PlaceOrderScreen = () => {
                                 </Form.Group>
                                    { processing ? 
                                    <div className= 'lds-hourglass'></div> : 
-                                   <Button type='submit' className='pay-btn' variant='success' size='sm'>PLACE ORDER</Button>
+                                   <Button type='submit' className='pay-btn' disabled={!setup.cart || !open} variant={setup.cart && open ? 'success' : 'danger'} size='sm'>{setup.cart && open ? 'PLACE ORDER' : 'CLOSED'}</Button>
                                 }
                                     {/* {!open || !cart ? <h5 style={{textAlign: 'center', marginTop: '.5rem'}}>We are currently closed</h5> : ''} */}
                             </Form>

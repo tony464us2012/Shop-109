@@ -9,7 +9,7 @@ import { Card,  CardBody, CardFooter, Text, Divider, Image, Stack, Flex, Box } f
 
 
 
-const TapItem = ({name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingScore, id, logo2}) => {
+const TapItem = ({name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingScore, id}) => {
   
     const dispatch = useDispatch()
 
@@ -64,25 +64,7 @@ const TapItem = ({name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingS
                 </Button>
             </CardFooter>
         </Card>
-        // <div variant='light' className="main-section">
-        //     { logo ?  <div className="logo-container">
-        //         <img src= {logo} alt='beer-logo' />
-        //     </div> : 
-        //     ''
-        //     }
-        //     <div className="main-details">
-        //         <h1>{ name }</h1>
-        //         <h3>{ brewery }</h3>
-        //         <p style={{color: 'white'}}>{ beerstyle }</p>
-        //     </div>
-        //     <div className="main-bottom" style={{marginTop: '2%', marginLeft: '2%', marginBottom:'1rem'}}>
-        //         <p>{ abv }<br/> ABV</p>
-        //         <p>{ ibu } <br/> IBU</p>
-        //         <p>{ ratingCount } <br/>Rating Count</p>
-        //         <p>{ ratingScore.toPrecision(2) }/4 <br/>Rating Score</p>
-        //     </div>
-        //     <Button className="remove-btn" size='sm' variant='danger' onClick={()=> {dispatch(removeBeer(id))}}>Remove</Button>
-        // </div>
+
         )
     }
 

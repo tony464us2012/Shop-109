@@ -14,7 +14,7 @@
   .main-cont {
       position: relative; 
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
       grid-gap: 25px;
       margin-top: 2.5rem
   }
@@ -31,7 +31,6 @@
   .logo-container {
         width: 40%;
         max-height: 50%;
-        /* margin-left: 29%;  */
         margin: 0 auto
   }
   
@@ -115,11 +114,15 @@
   
   .card-back {
     position: absolute;
-    transform: rotateY(180deg);
     display: grid;
     place-items: center;
     padding: 1rem;
-  }
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
   
   .flipped .card {
     transform: rotateY(180deg);

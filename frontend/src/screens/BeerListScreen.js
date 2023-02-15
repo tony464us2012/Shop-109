@@ -15,17 +15,17 @@ const BeerListScreen = () => {
     const navigate = useNavigate()
 
     const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+    const { user } = userLogin
     
     const beers = useSelector(state => state.beers)
     const { displayBeers, bottleBeer, searchedBeers } = beers
 
     useEffect(() => {
-        if(!userInfo.isAdmin) {
+        if(!user.isAdmin) {
             navigate('/login')
         } 
         dispatch(getMainBeers())
-    }, [dispatch, navigate, userInfo.isAdmin])
+    }, [dispatch, navigate, user.isAdmin])
 
 return (
     <div className="padding">

@@ -21,7 +21,7 @@ const ProfileScreen = () => {
     const navigate = useNavigate()
 
     const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+    const { user:userInfo } = userLogin
    
     const userDetail = useSelector(state => state.userDetails)
     const { user } = userDetail
@@ -41,11 +41,7 @@ const ProfileScreen = () => {
                 setLastName(user.lastName)
                 setPhone(user.phone)
                 setEmail(user.email)
-            }
-        if (!userInfo) {
-            navigate('/')
-        }
-
+            } 
               return () => {
                   dispatch({type: ORDER_DETAILS_RESET})
               }

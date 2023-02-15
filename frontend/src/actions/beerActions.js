@@ -37,12 +37,12 @@ export const searchBeer = (text) => async (dispatch) => {
 
  export const searchBeerInfo = (bid) => async (dispatch, getState) => {
     try {
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
         const response = await fetch(`https://api.untappd.com/v4/beer/info/${bid}?client_id=41EF786235D5A6E859C26C7DABA2048BB19344D0&client_secret=2C5E752380284C4A141AD1066C8E688BF0A299F9`);
@@ -58,12 +58,12 @@ export const searchBeer = (text) => async (dispatch) => {
 
 export const removeBeer = (id) => async (dispatch, getState) => {
     try {
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
         dispatch({ type: REMOVE_BEER, payload: id})
@@ -75,12 +75,12 @@ export const removeBeer = (id) => async (dispatch, getState) => {
 
 export const addBottle = (bottle) => async (dispatch, getState) => {
     try {
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
         const res = await axios.post('/api/bottle', bottle, config);
@@ -92,12 +92,12 @@ export const addBottle = (bottle) => async (dispatch, getState) => {
 
 export const removeBottle = (id) => async (dispatch, getState) => {
     try {
-        const { userLogin: { userInfo }} = getState()
+        const { userLogin: { user }} = getState()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
         dispatch({ type: REMOVE_BOTTLE, payload: id});

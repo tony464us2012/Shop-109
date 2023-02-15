@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Card,  CardBody, CardFooter, Text, Divider, Image, Stack, Flex, Box } from '@chakra-ui/react'
+import { Card,  CardBody, Text, Image, Stack, Flex, Box } from '@chakra-ui/react'
 import PropTypes from 'prop-types';
 
 const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingScore, description, logo2 }) => {
@@ -10,8 +10,8 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
       className={`card-container ${isFlipped ? "flipped" : ""}`}
       onClick={() => setIsFlipped(!isFlipped)}
     >
-      <div className='card'  >
-        <div className="face card-front main-section">
+      <Card className='card' maxW='sm'>
+        <CardBody className="face card-front main-section">
             <Image
                     src= {logo}
                     alt={name}
@@ -20,7 +20,7 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
                     margin='0 auto'
                     />
                     <Stack mt='6' spacing='3'>
-                        <Text fontSize='1.5rem' textAlign='center'>{name}</Text>
+                        <Text fontSize='1.2rem' fontWeight='500' textAlign='center'>{name}</Text>
                         <Text textAlign='center'>{brewery}</Text>
                         <Text textAlign='center'>{beerstyle}</Text>
                     </Stack>
@@ -52,13 +52,13 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
                         Score
                         </Box>
                     </Flex>
-        </div>
+        </CardBody>
         <div className="face card-back">
         <div className="main-description" >
                     <p>{description}</p>
                 </div>
         </div>
-      </div>
+      </Card>
     </div>
         {/* <Flippy  flipOnClick={true}>
             <FrontSide className='front main-section' >

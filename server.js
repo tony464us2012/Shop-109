@@ -9,6 +9,7 @@ import orderRoutes from './routes/orderRoutes.js'
 import setupRoutes from './routes/setupRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import bottlePostsRoute from './routes/bottlePostRoutes.js'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 dotenv.config()
@@ -16,9 +17,7 @@ dotenv.config()
 //Connect to DB
 connectDB();
 
-// if(process.env.NODE_ENV === 'development') {
-//     app.use(morgan('dev'))
-// }
+app.use(cookieParser())
 
 app.use(cors())
 app.use(express.urlencoded({ limit: '50mb', extended: false }));

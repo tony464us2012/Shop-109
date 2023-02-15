@@ -21,20 +21,20 @@ const OrderListScreen = () => {
     const { loading, error, orders } = orderList
   
     const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+    const { user } = userLogin
 
     const setupstate = useSelector(state => state.setup)
     const { success, setup } = setupstate
 
     useEffect(() => {
-        if(userInfo.isAdmin){
+        if(user.isAdmin){
             dispatch(getOrders())
         }
             if (success) {
                 setTime(setup.minutes)
                 setStore(setup.cart)
             }
-    }, [setup, dispatch, success, userInfo.isAdmin])
+    }, [setup, dispatch, success, user.isAdmin])
 
     const orderDetails = (id) => {
         dispatch(getOrderDetails(id))
@@ -59,17 +59,17 @@ const OrderListScreen = () => {
             {loading  ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : success ? 
             (
             <>
-                <div className='operations-cont'>
+                <div className='operations-cont m-3'>
                 <Form onSubmit={submitHandler}>
                 <Form.Group controlId='price'>
                     <Form.Label>Wait Time</Form.Label>
                     <Form.Control type='text' value={time}  onChange={(e) => setTime(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Form.Group controlId='brand'>
-                    <Form.Label>Cart</Form.Label>
+                    <Form.Label>Store</Form.Label>
                     <Form.Control as='select' value={store} onChange={(e) => setStore(e.target.value)}>
-                        <option value={true}>True</option>
-                        <option value={false}>False</option>
+                        <option value={true}>Open</option>
+                        <option value={false}>Closed</option>
                     </Form.Control>
                 </Form.Group>
                 <Button type='submit' variant='primary'>

@@ -9,12 +9,10 @@ const authUser = asyncHandler(async (req, res) => {
 
     if(user && (await user.matchPassword(password))) {
         res.json({
-            _id: user._id,
+            _id: user._id, 
             firstName: user.firstName,
-            email: user.email,
             isAdmin: user.isAdmin,
-            token: generateToken(user._id)
-        })
+            token: generateToken(user._id)})
     } else {
         res.status(401)
         throw new Error('Email or Password Wrong')
@@ -23,7 +21,6 @@ const authUser = asyncHandler(async (req, res) => {
 
 const getUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(res.body.user._id)
-    console.log(req.body.user)
     if(user) {
         res.json({
             _id: user._id,
@@ -56,15 +53,11 @@ const registerUser = asyncHandler(async (req, res) => {
    })
 
    if(user) {
-       res.status(201).json({
-           _id: user._id,
-           firstName: user.firstName,
-           lastName: user.lastName,
-           phone: user.phone,
-           email: user.email,
-           isAdmin: user.isAdmin,
-           token: generateToken(user._id)
-       })
+    res.json({
+        _id: user._id, 
+        firstName: user.firstName,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id)})
    } else {
     res.status(404)
     throw new Error('User not found')
@@ -72,6 +65,8 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const updateUserProfile = asyncHandler(async (req, res) => {
+
+    console.log(req.body)
     const user = await User.findById(req.body.id)
 
     if(user) {

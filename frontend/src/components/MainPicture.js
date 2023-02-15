@@ -2,31 +2,32 @@ import React, { useState } from 'react'
 import Loader from './Loader'
 import Message from './Message'
 import { Badge, Box, Image } from '@chakra-ui/react'
+import { Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router'
 
 const MainPicture = () => {
 
     const [loading] = useState(false)
     const [error] = useState(false)
 
+    const navigate = useNavigate()
+
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-        <Box >
+        <Box style={{position: 'relative', maxWidth:'1000px', margin: '0 auto'}} >
             <Image
             loading='lazy'
             src='/images/blue_moon.jpg'
             alt='Burger'
             borderRadius='lg'
             objectFit='cover'
-            maxWidth='1024px'
-            margin='0 auto'
-            fluid='true'
+            width= '100%'
           />
-          <Badge ml='1' fontSize='2rem' variant='subtle' colorScheme='red'>New</Badge>
-          <h1 className='main-text'>Artisan</h1>
-          <h2 className='main-text2'>Burgers</h2>
+          <div className='frontpage-text'>
+            <Badge ml='1' fontSize='1.5rem' variant='danger' color='red'>New</Badge>
+            <h1 className='main-text'>Great Tasting Burgers</h1>
+            <Button variant='danger' onClick={() => navigate('/menu')} style={{marginLeft: '2rem', marginTop:'1rem'}}>Order Now</Button>
+          </div>
         </Box>
-        //    {/* <Badge ml='1' fontSize='2rem' variant='subtle' colorScheme='red'>New</Badge> */}
-        //    {/* <h1 className='main-text'>Artisan</h1> */}
-        //    {/* <h2 className='main-text2'>Burgers</h2> */}
     )
 }
 

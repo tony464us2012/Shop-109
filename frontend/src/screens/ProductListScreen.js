@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ProductListHeader from '../components/ProfileListHeader'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { deleteProduct, createProduct, listProductDetails } from '../actions/productActions'
+import { deleteProduct, createProduct, listProducts, listProductDetails } from '../actions/productActions'
 import Appetizers from '../components/product-list-components/Appetizers'
 import Burgers from '../components/product-list-components/Burgers'
 import Forkandknives from '../components/product-list-components/Forkandknives'
@@ -22,6 +22,9 @@ const ProductListScreen = () => {
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { user } = userLogin
     
     const productList = useSelector(state => state.productList)
     const { loading, products } = productList
@@ -30,12 +33,16 @@ const ProductListScreen = () => {
     const { loading:loadingCreate, error:errorCreate, success:successCreate, product:createdProduct } = productCreate
     
     useEffect(() => {
-       
+        
+        if(user && user.isAdmin) {
+            dispatch(listProducts())
+        }
+
         if(successCreate) {
             // eslint-disable-next-line
             navigate(`/admin/product/edit/${createdProduct._id}`)
         }
-    }, [successCreate, dispatch, navigate, createdProduct._id])
+    }, [successCreate, dispatch, navigate, user, createdProduct._id])
 
     const deleteHandler = (id) => {
         if(window.confirm('Are you sure?')) {
