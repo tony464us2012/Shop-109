@@ -71,7 +71,7 @@ const PlaceOrderScreen = () => {
         var timerID = setInterval( () => tick(), 1000 );
         return () => {
             clearInterval(timerID);}
-        },[success, day, hour, navigate, order._id, user])
+        },[success, day, hour, navigate, order, user])
 
     function tick() {setDay(new Date().getDay()); setHour(new Date().getHours())}
 
