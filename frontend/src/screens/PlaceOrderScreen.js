@@ -56,15 +56,15 @@ const PlaceOrderScreen = () => {
             navigate(`/confirmation/${order._id}`)
         }
         if (day >= 1 && day <= 4) {
-            if (hour >= 12 && hour < 22 ) {
+            if (hour >= 12 && hour < 21 ) {
                 setOpen(true)
             } else { setOpen(false) }
         } else if (day === 5 || day === 6) {
-            if (hour >= 12 ) {
+            if (hour >= 11 ) {
                 setOpen(true)
             } else {setOpen(false)}
          } else {
-             if (hour >= 12 && hour < 20) {
+             if (hour >= 12 && hour < 19) {
                  setOpen(true)
              }
          }
@@ -168,7 +168,6 @@ const PlaceOrderScreen = () => {
                                    <div className= 'lds-hourglass'></div> : 
                                    <Button type='submit' className='pay-btn' disabled={!setup.cart || !open} variant={setup.cart && open ? 'success' : 'danger'} size='sm'>{setup.cart && open ? 'PLACE ORDER' : 'CLOSED'}</Button>
                                 }
-                                    {/* {!open || !cart ? <h5 style={{textAlign: 'center', marginTop: '.5rem'}}>We are currently closed</h5> : ''} */}
                             </Form>
                             </ListGroup.Item>
                         
