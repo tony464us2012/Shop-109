@@ -116,7 +116,8 @@
     position: absolute;
     display: grid;
     place-items: center;
-    padding: 1rem;
+    padding: 1rem; 
+    color: black;
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -ms-transform: rotateY(180deg);
@@ -474,19 +475,17 @@
 .add-bottle-title {
     margin-bottom: -1px
 }
-#beer_type,
-#price {
-    height: 50px
-}
+
 #bottle-btn {
     height: 21px;
     width: 20px;
     padding: 0
 }
-/* .material-icons{
-    position: relative;
-    top: .4rem;
-} */
+
+.form-control {
+  line-height: 1 !important;
+}
+
 @media (max-width: 768px) {
     .bottle-container {
         grid-template-columns: 1fr;

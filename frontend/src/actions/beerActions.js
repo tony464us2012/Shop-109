@@ -29,6 +29,7 @@ export const searchBeer = (text) => async (dispatch) => {
     try {
         const response = await fetch(`https://api.untappd.com/v4/search/beer?q=${text}&client_id=41EF786235D5A6E859C26C7DABA2048BB19344D0&client_secret=2C5E752380284C4A141AD1066C8E688BF0A299F9`);
         const data = await response.json()
+        console.log(data.response)
         dispatch({ type: SET_SEARCHED_BEERS, payload: data.response.beers.items })
     } catch(err) {
        console.log(err)

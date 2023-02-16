@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { listProductDetails } from '../actions/productActions'
-import { useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Card, Button } from 'react-bootstrap'
 import { addToCart } from '../actions/cartActions'
 import ProductModal from './Modal'
 
 const Product = ({ product }) => {
+
     const [modalShow, setModalShow] = useState(false);
     const dispatch = useDispatch()
 
@@ -19,7 +20,7 @@ const Product = ({ product }) => {
         }
         dispatch(addToCart(cartItem))
       }
-      
+
     return (
         <>
                 <Card className='food-item'>
@@ -27,29 +28,16 @@ const Product = ({ product }) => {
                     <Card.Body className='productInfo'>
                             <Card.Title>{product.name}</Card.Title>
                             <Card.Text className='text'>{product.description}</Card.Text>
-                            { product.tacoCategory !== "Burritos" &&
-                              product.tacoCategory !== "Fajitas" && 
-                              product.tacoCategory !== "BowlsandSalads" &&
-                              product.tacoCategory !== "LunchSpecials" &&
-                              product.name !== "Loaded Tacos" ?
                               <Card.Text className='card-price'> ${(product.price).toFixed(2)} </Card.Text>
-                           : ''}
                             <div className="btn-container">
-                                { product.tacoCategory !== "SingleTacos" &&
-                                product.tacoCategory !== "Quesadillas" && 
-                                product.tacoCategory !== "SideOrders" ? 
-                                <Button variant="outline-dark" size='sm'  onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}>Customize</Button>
-                            : ''}
-                            { product.tacoCategory !== "Burritos" &&
-                              product.tacoCategory !== "Fajitas" && 
-                              product.tacoCategory !== "BowlsandSalads" &&
-                              product.tacoCategory !== "LunchSpecials" &&
+                                <Button variant="outline-dark" size='sm' disabled={!product.available} onClick={() => {setModalShow(true); dispatch(listProductDetails(product._id))}}>Customize</Button>
+                            { 
                               product.name !== "Loaded Tacos" && 
                               product.name !== "Fry Sampler" &&
                               product.name !== "Duck Wings" &&
                               product.name !== "Chicken Wings 8 Piece" &&
                               product.name !== "Burger In A Bowl" ?
-                              <Button variant="dark" size='sm' onClick={() => addToCartHandler()}>Add To Cart</Button>
+                              <Button variant="dark" size='sm' disabled={!product.available} onClick={() => addToCartHandler()}>{product.available ? 'Add To Cart' : 'Unavailable'}</Button>
                             : ''}
                             </div>
                     </Card.Body>

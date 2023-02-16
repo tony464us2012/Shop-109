@@ -37,7 +37,7 @@ const AddBottle = () => {
                         <input type="number" name="price" className="form-control" id="price" onChange={onChange} value={bottle.price} required/>
                     </div>
                     <div className="form-group col-md-3">
-                        <label htmlFor="type" className='mb-2'>Beer Type</label><br></br>
+                        <label htmlFor="type" className='mb-2'>Beer</label><br></br>
                         <select id="type" className="custom-select" name="type" onChange={onChange} value={bottle.type}>
                                             <option value="0">Select Type</option>
                                             <option value="Ale">Ale</option>

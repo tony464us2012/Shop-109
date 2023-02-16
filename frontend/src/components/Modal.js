@@ -1,6 +1,6 @@
 import React, { useState, useRef, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, Form, Card } from 'react-bootstrap'
+import { Modal, Form, Card, Button } from 'react-bootstrap'
 import { addToCart } from '../actions/cartActions'
 import Loader from './Loader'
 
@@ -25,7 +25,6 @@ const ProductModal = ({ show, onHide, id, price }) => {
       const [sauce, setSauce] = useState('')
       const [burger, setBurger] = useState('')
       const [fryAddOn, setFryAddOn] = useState('')
-      const [taco] = useState('')
       const [tacoText, setTacoText] = useState('')
       const [instructions, setInstructions] = useState('')
       const ref = useRef(price)
@@ -151,8 +150,6 @@ const ProductModal = ({ show, onHide, id, price }) => {
         large,
         sauce, 
         burger,
-        taco,
-        tacoText,
         fryAddOn,
         instructions
       }
@@ -377,10 +374,7 @@ const ProductModal = ({ show, onHide, id, price }) => {
                         <Form.Label>List Any Preferences</Form.Label>
                         <Form.Text as="textarea" placeholder='allergies, etc.' style={{border: '1px solid black', padding: '.4rem'}} width='90%' value={instructions} onChange={handleChange} rows={3} />
                       </Form.Group>
-                    {available ? 
-                    <input type='submit' className='btn btn-sm btn-dark' value={`Add To Cart $${ref.current ? (ref.current).toFixed(2) : (itemPrice).toFixed(2)}`}/> :
-                    <input type='submit' className='btn btn-sm' value='Out of Stock' disabled /> 
-                  }
+                      <Button type='submit' variant="success" size='sm' disabled={!available}>{available ? 'Add To Cart' : 'Unavailable'}</Button>
                       </Form>
                       </Card.Text>
                     </Card.Body>
