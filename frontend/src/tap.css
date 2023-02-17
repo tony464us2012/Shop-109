@@ -93,10 +93,8 @@
   
   .card {
     position: relative;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    -webkit-perspective: 1000px;
-    -moz-perspective: 1000px;
-    perspective: 1000px;
     -webkit-transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     -moz-transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     -ms-transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -126,7 +124,7 @@
       display: grid;
       place-items: center;
       visibility: visible;
-    padding: 1rem; 
+      padding: 1rem; 
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -ms-transform: rotateY(180deg);
