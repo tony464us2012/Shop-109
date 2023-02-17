@@ -99,18 +99,23 @@
     -ms-transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     -o-transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+  }
   
   .face {
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-  
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 1rem .6rem;
+      background:  linear-gradient(90deg, rgba(229,235,242,1) 0%, rgba(255,255,255,1) 24%, rgba(250,250,250,1) 74%, rgba(229,235,242,1) 100%);
+      box-shadow: 3px 3px 10px black ;
+      -webkit-backface-visibility: hidden !important;
+      -moz-backface-visibility: hidden !important;
+      backface-visibility: hidden !important;
+  }
+
   .card-front {
     background-color: lightblue;
-  }
+}
   
   .card-back {
     position: absolute;

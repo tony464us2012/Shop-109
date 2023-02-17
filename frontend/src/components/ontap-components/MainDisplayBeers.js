@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Card,  CardBody, Text, Image, Stack, Flex, Box } from '@chakra-ui/react'
+import { Card, Text, Image, Stack, Flex, Box } from '@chakra-ui/react'
 import PropTypes from 'prop-types';
 
 const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCount, ratingScore, description, logo2 }) => {
@@ -11,7 +11,7 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
       onClick={() => setIsFlipped(!isFlipped)}
     >
       <Card className='card' maxW='sm'>
-        <CardBody className="face card-front main-section">
+        <div className="face card-front">
             <Image
                     src= {logo}
                     alt={name}
@@ -52,7 +52,7 @@ const MainDisplayBeers = ({ name, logo, abv, ibu, beerstyle, brewery, ratingCoun
                         Score
                         </Box>
                     </Flex>
-        </CardBody>
+        </div>
         <div className="face card-back">
         <div className="main-description" >
                     <p>{description}</p>
