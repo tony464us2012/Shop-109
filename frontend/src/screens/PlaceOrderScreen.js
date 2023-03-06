@@ -19,6 +19,7 @@ const PlaceOrderScreen = () => {
     const [id, setId] = useState('')
     const [billingDetails, setBillingDetails] = useState('')
     const [message, setMessage] = useState('')
+    const [promoCode, setPromoCode] = useState('');
 
     const stripe = useStripe();
     const elements = useElements();
@@ -44,6 +45,17 @@ const PlaceOrderScreen = () => {
     const tax = Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
     const totalprice = Number(cartItems.reduce((acc, item) => acc + item.price, 0))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
 
+    const handlePromoCode = (e) => {
+        e.preventDefault()
+        // if (promoCode === '10off') {
+        //     setTotalPrice(totalprice - 10)
+        // } else if (promoCode === '20off') {
+        //     setTotalPrice(totalprice - 20)
+        // } else if (promoCode === '30off') {
+        //     setTotalPrice(totalprice - 30)
+        // }
+        console.log(promoCode)
+    }
     useEffect(() => {
         if(user) {
             setFirstName(user.firstName)
@@ -174,6 +186,11 @@ const PlaceOrderScreen = () => {
                         </ListGroup>
                     </Col>
                     <Col md={4}>
+                            <Form.Group className="m-3" controlId="formGroupEmail">
+                                <Form.Label>Enter Promo Code</Form.Label>
+                                <Form.Control type="text" className='mb-2' value={promoCode} onChange={(e) => setPromoCode(e.target.value)} size='sm'/>
+                                <button className='btn btn-success' size='sm' onClick={handlePromoCode}>Apply</button>
+                            </Form.Group>
                         <Table striped bordered responsive id='table' className='table-sm'>
                         <thead>
                             <tr style={{backgroundColor: '#e9ecef'}}>

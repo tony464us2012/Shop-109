@@ -14,6 +14,9 @@ const OrderListScreen = () => {
     const [store, setStore] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)
     const [ordersPerPage] = useState(10)
+    const [promoCodes, setPromoCodes] = useState([{}])
+    const [promo, setPromo] = useState('')
+    const [discount, setDiscount] = useState(0)
     
     const dispatch = useDispatch()
 
@@ -33,6 +36,7 @@ const OrderListScreen = () => {
             if (success) {
                 setTime(setup.minutes)
                 setStore(setup.cart)
+                setPromoCodes(setup.promoCodes)
             }
     }, [setup, dispatch, success, user.isAdmin])
 
@@ -44,7 +48,8 @@ const OrderListScreen = () => {
         e.preventDefault()
         dispatch(updateSetup({
             minutes: time,
-             cart: store
+             cart: store,
+            promoCodes: [...promoCodes, {promo, discount}]
         }))}
 
         const indexOfLastOrder = currentPage * ordersPerPage;
@@ -72,11 +77,42 @@ const OrderListScreen = () => {
                         <option value={false}>Closed</option>
                     </Form.Control>
                 </Form.Group>
+                <div className='promo-btns'>
+                    <Form.Group controlId='promo' className='mr-2'>
+                        <Form.Label>Promo Code</Form.Label>
+                        <Form.Control type='text' value={promo} onChange={(e) => setPromo(e.target.value)}></Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Discount</Form.Label>
+                        <Form.Control type='number' min='0' max='50' value={discount} onChange={(e) => setDiscount(e.target.value)}></Form.Control>
+                    </Form.Group>
+                </div>
                 <Button type='submit' variant='primary'>
                     Update
                 </Button>
             </Form>
            </div>
+           {promoCodes && (
+                <div className='promo-codes'>
+                    <h1 className='text-center fs-4'>Promo Codes</h1>
+                    <Table striped bordered hover responsive className='table-sm'>
+                        <thead>
+                            <tr>
+                                <th>PROMO CODE</th>
+                                <th>DISCOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {promoCodes.map(code => (
+                                <tr key={code.promo}>
+                                    <td><button>{code.promo}</button></td>
+                                    <td><button>{code.discount}</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>)
+        }
                 <h1 className='text-center fs-4'>Orders</h1>
                 
                 <Table striped bordered hover responsive className='table-sm'>
