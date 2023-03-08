@@ -156,8 +156,8 @@ const PlaceOrderScreen = () => {
     
     return (
         <div className='padding'>
-                <Row style={{ marginTop: '3rem', paddingRight: '1rem', justifyContent: 'center'}}>
-                <Col md={4} style={{padding: '1rem'}}>
+                <Row style={{ marginTop: '3rem', justifyContent: 'center'}}>
+                <Col md={4} >
                         <Table striped bordered responsive id='table' className='table-sm'>
                         <thead>
                             <tr style={{backgroundColor: '#e9ecef'}}>
