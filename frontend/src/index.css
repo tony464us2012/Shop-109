@@ -293,7 +293,7 @@ button:checked {
     width: 30%
 }
 .order-pay {
-    width: 45%
+    width: 70%
 }
 
 /* .cart-price h2 {
@@ -499,11 +499,8 @@ button:checked {
     padding: 1rem;
     margin: 2rem 1rem;
     grid-auto-rows: 1fr;
-}
-
-.menu-item-container,
-.cart-item-container {
     justify-content: center;
+    width: 100%;
 }
 
 #cart-cart {

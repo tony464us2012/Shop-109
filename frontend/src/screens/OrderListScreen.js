@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,13 +10,15 @@ import Loader from '../components/Loader'
 
 const OrderListScreen = () => {
 
+    const promoRef = useRef()
+    const discountRef = useRef()
+
     const [time, setTime] = useState(0)
     const [store, setStore] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)
     const [ordersPerPage] = useState(10)
-    const [promoCodes, setPromoCodes] = useState([{}])
-    const [promo, setPromo] = useState('')
-    const [discount, setDiscount] = useState(0)
+    const [promoCodes, setPromoCodes] = useState([])
+    const [updating, setUpdating] = useState(false)
     
     const dispatch = useDispatch()
 
@@ -46,18 +48,33 @@ const OrderListScreen = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
+        setUpdating(true)
         dispatch(updateSetup({
             minutes: time,
              cart: store,
-            promoCodes: [...promoCodes, {promo, discount}]
-        }))}
+             promoCodes: [...promoCodes, {promo: promoRef.current.value, discount: discountRef.current.value}]
+           
+        }))
+        promoRef.current.value = ''
+        discountRef.current.value = ''
+        setUpdating(false)
+    }
 
         const indexOfLastOrder = currentPage * ordersPerPage;
         const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
 
         const paginate = pageNumber => setCurrentPage(pageNumber);
 
-      
+      const deleteHandler = (id) => {
+        if (window.confirm('Are you sure you want to delete this promocode?')) {
+            setPromoCodes(promoCodes.filter((code, index) => index !== id))
+            dispatch(updateSetup({
+                minutes: time,
+                    cart: store,
+                    promoCodes: promoCodes.filter((code, index) => index !== id)
+            }))
+        }}
+
 
     return (
         <div className='padding'>
@@ -80,21 +97,21 @@ const OrderListScreen = () => {
                 <div className='promo-btns'>
                     <Form.Group controlId='promo' className='mr-2'>
                         <Form.Label>Promo Code</Form.Label>
-                        <Form.Control type='text' value={promo} onChange={(e) => setPromo(e.target.value)}></Form.Control>
+                        <Form.Control type='text' ref={promoRef}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Discount</Form.Label>
-                        <Form.Control type='number' min='0' max='50' value={discount} onChange={(e) => setDiscount(e.target.value)}></Form.Control>
+                        <Form.Control type='number' min='0' max='50' ref={discountRef}></Form.Control>
                     </Form.Group>
                 </div>
-                <Button type='submit' variant='primary'>
-                    Update
-                </Button>
+                { updating ? 
+                    <div className= 'lds-hourglass'></div> : 
+                <Button type='submit' className='btn'>Update</Button>
+                 }
             </Form>
            </div>
            {promoCodes && (
-                <div className='promo-codes'>
-                    <h1 className='text-center fs-4'>Promo Codes</h1>
+                <div className='promo-codes mt-5 mb-5'>
                     <Table striped bordered hover responsive className='table-sm'>
                         <thead>
                             <tr>
@@ -103,17 +120,21 @@ const OrderListScreen = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {promoCodes.map(code => (
+                            {promoCodes.map((code, index) => (
                                 <tr key={code.promo}>
                                     <td><button>{code.promo}</button></td>
-                                    <td><button>{code.discount}</button></td>
+                                    <td><button>{code.discount}%</button></td>
+                                    <td style={{display: 'flex', justifyContent: 'center'}}>
+                                        <button style={{color: 'red'}}  onClick={() => deleteHandler(index)}>
+                                            <i className='fas fa-trash'></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </Table>
                 </div>)
         }
-                <h1 className='text-center fs-4'>Orders</h1>
                 
                 <Table striped bordered hover responsive className='table-sm'>
                     <thead>

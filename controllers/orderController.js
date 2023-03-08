@@ -276,11 +276,12 @@ const guestOrder = asyncHandler( async(req, res) => {
     })
 
     const updateSetup = asyncHandler( async(req, res) => {
-    const {cart, minutes} = req.body
+    const {cart, minutes, promoCodes } = req.body
     let setup = await Setup.findById('6343390c73d2da4f32adc7ad')
     if(setup) {
         setup.cart = cart
         setup.minutes = minutes
+        setup.promoCodes = promoCodes
     } else {
         res.status(404)
         throw new Error('Setup Not Found')

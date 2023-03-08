@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import { Row, Col, ListGroup, Button, Form, Table } from 'react-bootstrap'
@@ -8,6 +8,8 @@ import Message from '../components/Message'
 import CardSection from '../components/CardSection'
 
 const PlaceOrderScreen = () => {
+
+    const promoRef = useRef()
 
     const [day, setDay] = useState(new Date().getDay())
     const [hour, setHour] = useState(new Date().getHours())
@@ -19,7 +21,14 @@ const PlaceOrderScreen = () => {
     const [id, setId] = useState('')
     const [billingDetails, setBillingDetails] = useState('')
     const [message, setMessage] = useState('')
-    const [promoCode, setPromoCode] = useState('');
+    const [subtotal, setSubtotal] = useState(0)
+    const [tax, setTax] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0)
+    const [promoCodes, setPromoCodes] = useState([])
+    const [discount, setDiscount] = useState(0)
+    const [, setCheckPromo] = useState(false)
+    const [numPromo, setNumPromo] = useState(0)
+    const [messagePromo, setMessagePromo] = useState('')
 
     const stripe = useStripe();
     const elements = useElements();
@@ -41,22 +50,35 @@ const PlaceOrderScreen = () => {
 
     const [processing, setProcessing] = useState(false);
  
-    const subtotal = Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2))
-    const tax = Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
-    const totalprice = Number(cartItems.reduce((acc, item) => acc + item.price, 0))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2))
-
     const handlePromoCode = (e) => {
         e.preventDefault()
-        // if (promoCode === '10off') {
-        //     setTotalPrice(totalprice - 10)
-        // } else if (promoCode === '20off') {
-        //     setTotalPrice(totalprice - 20)
-        // } else if (promoCode === '30off') {
-        //     setTotalPrice(totalprice - 30)
-        // }
-        console.log(promoCode)
+        setCheckPromo(true)
+        const promoCode = promoRef.current.value
+        if (promoCodes) {
+            const promo = promoCodes.find(code => code.promo === promoCode)
+            if (promo && numPromo < 1) {
+                setMessagePromo('promo code applied')
+                setDiscount(promo.discount * totalPrice / 100)
+                setTotalPrice(prevPrice => ((prevPrice - ((promo.discount * prevPrice / 100).toFixed(2)))))
+                setNumPromo(prevNum => prevNum + 1)
+            } else {
+                setMessagePromo('invalid promo code')
+            }
+        }
+
+        promoRef.current.value = ''
+        setCheckPromo(false)
     }
     useEffect(() => {
+       
+            setSubtotal(Number(cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)))
+            setTax(Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2)))
+            if (!discount) {
+                setTotalPrice(Number(cartItems.reduce((acc, item) => acc + item.price, 0))  + Number((cartItems.reduce((acc, item) => acc + item.price, 0) * .07).toFixed(2)))
+        }}, [cartItems, discount])
+
+    useEffect(() => {
+        setPromoCodes(setup.promoCodes)
         if(user) {
             setFirstName(user.firstName)
             setLastName(user.lastName)
@@ -83,7 +105,7 @@ const PlaceOrderScreen = () => {
         var timerID = setInterval( () => tick(), 1000 );
         return () => {
             clearInterval(timerID);}
-        },[success, day, hour, navigate, order, user])
+        },[success, day, hour, navigate, order, user, setup.promoCodes])
 
     function tick() {setDay(new Date().getDay()); setHour(new Date().getHours())}
 
@@ -107,7 +129,7 @@ const PlaceOrderScreen = () => {
                         orderItems: cartItems,
                         subtotal,
                         tax,
-                        totalprice,
+                        totalprice: totalPrice,
                         token: token.token.id
                     }))
         } else if ((token.token)) {
@@ -121,7 +143,7 @@ const PlaceOrderScreen = () => {
                         orderItems: cartItems,
                         subtotal,
                         tax,
-                        totalprice,
+                        totalprice: totalPrice,
                         token: token.token.id
                     }))
             } else {
@@ -172,7 +194,7 @@ const PlaceOrderScreen = () => {
                                     </div>
                                     <div className="order-pay">
                                         <Form.Label>Name on Card</Form.Label>
-                                        <Form.Control type="text" className='cardInfo' variant='light' size='sm' name='name' onChange={(e) => setBillingDetails(e.target.value)} placeholder="Enter Full Name" required />
+                                        <Form.Control type="text" className='cardInfo' variant='light' size= 'sm' name='name' onChange={(e) => setBillingDetails(e.target.value)} placeholder="Enter Full Name" required />
                                         <CardSection />
                                     </div>
                                 </Form.Group>
@@ -188,7 +210,8 @@ const PlaceOrderScreen = () => {
                     <Col md={4}>
                             <Form.Group className="m-3" controlId="formGroupEmail">
                                 <Form.Label>Enter Promo Code</Form.Label>
-                                <Form.Control type="text" className='mb-2' value={promoCode} onChange={(e) => setPromoCode(e.target.value)} size='sm'/>
+                                <Form.Control type="text" className='mb-2' ref={promoRef} size='sm'/>
+                                {messagePromo ? <div className='mb-2'>{messagePromo}</div> : ''}
                                 <button className='btn btn-success' size='sm' onClick={handlePromoCode}>Apply</button>
                             </Form.Group>
                         <Table striped bordered responsive id='table' className='table-sm'>
@@ -235,12 +258,20 @@ const PlaceOrderScreen = () => {
                                     <p>{(tax).toFixed(2)}</p>
                                 </td>
                             </tr>
+                           { discount ? <tr>
+                                <td>
+                                    <p>Discount</p>
+                                </td>
+                                <td>
+                                    <p style={{color: 'red'}}>-{(discount).toFixed(2)}</p>
+                                </td>
+                            </tr> : ''}
                             <tr>
                                 <td>
                                     <p>Total</p>
                                 </td>
                                 <td>
-                                    <p>{(totalprice).toFixed(2)}</p>
+                                    <p>{(totalPrice).toFixed(2)}</p>
                                 </td>
                             </tr>
                         </tbody>
