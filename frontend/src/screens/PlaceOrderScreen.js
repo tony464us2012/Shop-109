@@ -57,12 +57,12 @@ const PlaceOrderScreen = () => {
         if (promoCodes) {
             const promo = promoCodes.find(code => code.promo === promoCode)
             if (promo && numPromo < 1) {
-                setMessagePromo('promo code applied')
+                setMessagePromo('*promo code applied')
                 setDiscount(promo.discount * totalPrice / 100)
                 setTotalPrice(prevPrice => ((prevPrice - ((promo.discount * prevPrice / 100).toFixed(2)))))
                 setNumPromo(prevNum => prevNum + 1)
             } else {
-                setMessagePromo('invalid promo code')
+                setMessagePromo('*invalid promo code')
             }
         }
 
