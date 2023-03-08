@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Col, Button, Card } from 'react-bootstrap'
+import { Col, Button, Table } from 'react-bootstrap'
 import { removeFromCart } from '../actions/cartActions'
 import { Text } from '@chakra-ui/react'
 
@@ -24,35 +24,45 @@ const CartScreen = () => {
     return (
     <>
             <div className='gap'></div>
-            <Text fontSize='2xl' className='text-center title'>Shopping Cart</Text>
-               {cartItems.length === 0 ? <div className='empty-cart'>Your cart is empty.</div> : (
-                    <div className='cart-item-container'>
-                       {cartItems.map(item => (
-                           <Card variant='light' key={item.id} style={{boxShadow:'1px 1px 3px black', padding: '.5rem'}}>
-                                <Card.Body className='productInfo'>
-                                    <Card.Title>{item.name}</Card.Title>
-                                    <Card.Text className='text'>{item.description}</Card.Text>
-                                        {item.large ? <div>Large</div> : ''}
-                                        {item.sauce ? <div> {item.sauce}</div> : ''}
-                                        {item.burger ? <div>Burger: {item.burger}</div> : ''}
-                                        {item.extraPatty ? <div>{item.extraPatty}</div> : ''}
-                                        {item.pattySwap ? <div>{item.pattySwap}</div> : ''}
-                                        {item.extras ? <div>{item.extras.map(extra => <p>{extra}</p>)}</div> : ''}
-                                        {item.sideSwap ? <div>Side: {item.sideSwap}</div> : ''}
-                                        {item.upgradeSide ? <div>Side: {item.upgradeSide}</div> : ''}
-                                        {item.fryAddOn ? <div>Side Add: {item.fryAddOn}</div> : ''}
-                                        {item.tacoText ? <div>Taco Type: {item.tacoText}</div> : ''}
-                                        {item.taco ? <div>{item.taco}</div> : ''}
-                                        {item.instructions ? <div style={{marginTop: '1rem'}} md={8}>Instructions: {item.instructions}</div> : '' }
-                                        <Card.Text className='text'><div>${item.price}</div></Card.Text>
-                                </Card.Body>
-                                        <Button variant='danger' size='sm' style={{width: '25%', marginLeft: 'auto', marginRight: '.3rem', marginBottom:'.3rem', padding: '.1rem .4rem'}} onClick={() => removeFromCartHandler(item.id)}>delete</Button>
-                           </Card>
-                       ))}
-                    </div>
+            <Text fontSize='2xl' className='text-center title'>Your Order</Text>
+               {cartItems.length === 0 ? <div className='empty-cart'>No items</div> : (
+                     <Col md={8} style={{margin: '0 auto'}}>
+                        <Table striped bordered responsive id='table' className='table-sm cart-items'>
+                        <thead>
+                            <tr style={{backgroundColor: '#e9ecef'}}>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {cartItems.map((item, index) => (
+                                <tr className='item-table' key={index.id}>
+                                    <td>
+                                        <p style={{marginBottom: '.5rem'}}>{item.name}</p>
+                                            {item.large ? <i>Large</i> : ''}
+                                            {item.sauce ? <i> {item.sauce}</i> : ''}
+                                            {item.burger ? <i>Burger: {item.burger}</i> : ''}
+                                            {item.extraPatty ? <i>{item.extraPatty}</i> : ''}
+                                            {item.pattySwap ? <i>{item.pattySwap}</i> : ''}
+                                            {item.extras ? <i>{item.extras.map(extra => <div>{extra}</div>)}</i> : ''}
+                                            {item.sideSwap ? <i>Side: {item.sideSwap}</i> : ''}
+                                            {item.upgradeSide ? <i>Side: {item.upgradeSide}</i> : ''}
+                                            {item.fryAddOn ? <i>Side Add: {item.fryAddOn}</i> : ''}
+                                            {item.tacoText ? <i>Taco Type: {item.tacoText}</i> : ''}
+                                            {item.taco ? <i>{item.taco}</i> : ''}
+                                            {item.instructions ? <i style={{marginTop: '1rem'}} md={8}>Instructions: {item.instructions}</i> : '' }
+                                    </td>
+                                    <td><p>{(item.price).toFixed(2)}</p></td>
+                                    <td><button id='remove-item-btn' className='btn-sm btn btn-danger' onClick={() => removeFromCartHandler(item.id)}>X</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                    </Col>
                        )}
             {cartItems.length > 0 ? <Col className="checkout-btn" >
-                    <Button type='button' variant='success' className='btn' style={{marginTop: '2rem', padding: '.5rem 1rem'}} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
+                    <Button type='button' variant='success' className='btn mt-5' style={{padding: '.5rem 1rem'}} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>
             </Col> : ''}
       </>
     )

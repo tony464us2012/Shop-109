@@ -21,21 +21,7 @@ main {
 
 .banner-container {
     position: relative;
-}
-
-.banner-container::before {
-    position: absolute;
-    top: 35%;
-    right: 0;
-    left: 0;
-    bottom: 35%;
-    content: '';
-    background-image: linear-gradient(45deg, rgb(219, 59, 59), red);
-    -webkit-transform: skewY(-8deg);
-    -moz-transform: skewY(-8deg);
-    -ms-transform: skewY(-8deg);
-    -o-transform: skewY(-8deg);
-    transform: skewY(-8deg);
+    margin-top: 6rem !important;
 }
 
 .banner {
@@ -147,6 +133,18 @@ button:checked {
 #Logo {
     width: 4rem;
 }
+
+.item-table td {
+    padding: .6rem .2rem
+}
+
+
+#remove-item-btn {
+    margin-left: 45%;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+
 @media  (min-width: 600px ) {
     #Logo {
         display: block
@@ -282,7 +280,7 @@ button:checked {
 }
 .checkout-btn {
     display: flex;
-    margin: 2rem auto;
+    margin: 4rem auto;
     justify-content: center;
 }
 .place-order-title {
@@ -376,10 +374,9 @@ button:checked {
     border: none !important;
     position: relative;
     bottom: 0;
-    top: auto;
     width: 100%;
     padding: 1rem 0;
-    margin-top: auto
+    margin-top: 4rem
 }
 .nav-link {
     border: none !important;
@@ -497,7 +494,7 @@ button:checked {
     justify-content: space-around;
     grid-gap: 1.5rem;
     padding: 1rem 2rem 1rem 1rem;
-    margin: 2rem .5rem;
+    margin: 3rem .5rem;
     grid-auto-rows: 1fr;
 }
 
@@ -579,15 +576,15 @@ button:checked {
 .empty-cart {
     background-color: #ee5f5b;
     color: #fff;
-    width: 50%;
+    width: 35%;
     margin: 6rem auto;
     height: 20%;
     text-align: center;
     border-radius: 6px;
     font-size: large;
     padding: 10% 0;
-    max-width: 800px;
-    max-height: 600px;
+    max-width: 600px;
+    max-height: 300px;
 }
 
 /* Beer */
