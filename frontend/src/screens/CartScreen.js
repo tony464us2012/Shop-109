@@ -24,9 +24,14 @@ const CartScreen = () => {
     return (
     <>
             <div className='gap'></div>
-            <Text fontSize='2xl' className='text-center title'>Your Order</Text>
-               {cartItems.length === 0 ? <div className='empty-cart'>No items</div> : (
-                     <Col md={8} style={{margin: '0 auto'}}>
+               {cartItems.length === 0 ? 
+               <>
+               <div className='empty-cart'>Please add items to your cart</div>
+                <button className='btn btn-dark' id='menu-btn' onClick={() => navigate('/menu')}>Go To Menu</button>
+               </> : (
+                <>
+                <Text fontSize='2xl' className='text-center title'>Your Order</Text>
+                   <Col md={8} style={{margin: '0 auto'}}>
                         <Table striped bordered responsive id='table' className='table-sm cart-items'>
                         <thead>
                             <tr style={{backgroundColor: '#e9ecef'}}>
@@ -60,6 +65,7 @@ const CartScreen = () => {
                         </tbody>
                     </Table>
                     </Col>
+                    </>
                        )}
             {cartItems.length > 0 ? <Col className="checkout-btn" >
                     <Button type='button' variant='success' className='btn mt-5' style={{padding: '.5rem 1rem'}} onClick={checkoutHandler}>PROCEED TO CHECKOUT</Button>

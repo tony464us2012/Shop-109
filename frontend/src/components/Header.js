@@ -75,7 +75,7 @@ const Header = () => {
                             646 SW 109 Avenue  Miami, FL
                                 </Nav.Link>
                     <>
-                                <button type="button" style={{border: 'none'}} className="btn btn-sm btn-outline-light position-relative" onClick={() => navigate('/cart')}>
+                                <button type="button" id='cart-btn' className="btn btn-sm position-relative" onClick={() => navigate('/cart')}>
                                     <span className="material-symbols-outlined cart">shopping_cart</span>
                                     { cartItems.length > 0 ? 
                                         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
