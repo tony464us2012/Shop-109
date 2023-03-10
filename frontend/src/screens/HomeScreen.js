@@ -12,7 +12,7 @@ const HomeScreen = () => {
     return (
         <>
             <Meta />
-            <div style={{paddingBottom: '6rem'}}></div>
+            <div style={{paddingBottom: '3rem'}}></div>
             <MainPicture />
             <Banner/>
         </>

@@ -21,7 +21,7 @@ main {
 
 .banner-container {
     position: relative;
-    margin-top: 6rem !important;
+    margin-top: 6rem;
 }
 
 .banner {
@@ -445,6 +445,29 @@ button:checked {
     }  
     .order-info, .order-pay {
         width: 100%
+    }
+    .banner-container {
+        position: relative;
+        margin-top: 3rem;
+    }
+    .app {
+        padding: 0 4px
+    }
+    #navContainer {
+        padding: 2px 3px
+    }
+    #cardBody {
+        padding: 0 0 10px 0
+    }
+    #cardBody b  {
+        margin-top: .3rem;
+        font-size: 1.5rem !important;
+    }
+    #cardBody p {
+        margin-top: .5rem
+    }
+    .social {
+        margin-top: 1rem
     }
 }
 
