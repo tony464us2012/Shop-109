@@ -41,10 +41,10 @@ const Header = () => {
                 <Navbar.Brand href="#home" bg="light" style={noborder}><Image id='Logo' className="align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className="me-auto justify-content-end">
-                <Nav.Item id='navItem' className='borderbottom'><a href='/'>Home</a></Nav.Item>
-                <Nav.Item id='navItem' className='borderbottom'><a href='/menu'>Menu</a ></Nav.Item>
-                <Nav.Item id='navItem' className='borderbottom'><a href='/beers'>Beers</a></Nav.Item>
-                <Nav.Item id='navItem' className='borderbottom'><a href='/about'>About</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='/'>Home</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='/menu'>Menu</a ></Nav.Item>
+                <Nav.Item id='navItem'><a href='/beers'>Beers</a></Nav.Item>
+                <Nav.Item id='navItem'><a href='/about'>About</a></Nav.Item>
                 <Nav.Item id='navItem' ><a href="https://order.online/store/109BurgerJoint-73844/en-US/?hideModal=true&pickup=true" rel="noopener noreferrer" target="_blank">Delivery</a></Nav.Item>
                 { user ? (
                                 <NavDropdown id='navItem' title={user.firstName ? `Hi ${user.firstName}` : ''}  >
@@ -53,8 +53,8 @@ const Header = () => {
                                     </NavDropdown>
                         ) : (
                             <>
-                                 <Nav.Item id='navItem' className='borderbottom'><a href='/login'> <i className="fas fa-sign-in-alt"></i> Login</a></Nav.Item>
-                                 <Nav.Item id='navItem' className='borderbottom'><a href='/register'><i className="fas fa-user-plus"></i> Sign Up</a></Nav.Item>
+                                 <Nav.Item id='navItem' ><a href='/login'> <i className="fas fa-sign-in-alt"></i> Login</a></Nav.Item>
+                                 <Nav.Item id='navItem' ><a href='/register'><i className="fas fa-user-plus"></i> Sign Up</a></Nav.Item>
                             </>
                            )}
                 { user && user.isAdmin && (
@@ -68,7 +68,7 @@ const Header = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-        <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect id='navContainer'>
+        <Navbar expand="lg" collapseOnSelect id='navContainer'>
             <Container>
                 <Nav.Link eventKey="disabled" style={{textAlign:'center'}} className='address' disabled>
                                 <span className="material-icons pindrop">pin_drop</span>   

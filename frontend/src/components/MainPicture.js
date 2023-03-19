@@ -18,14 +18,13 @@ const MainPicture = () => {
             loading='lazy'
             src='/images/blue_moon.jpg'
             alt='Burger'
-            borderRadius='lg'
             objectFit='cover'
             width= '100%'
           />
           <div className='frontpage-text'>
-            <Badge ml='1' fontSize='1.5rem' variant='danger' color='red'>New</Badge>
+            <Badge ml='1' fontSize='1.5rem' variant='danger' color='red' style={{transform: 'rotate(-10deg)'}}>New</Badge>
             <h1 className='main-text'>Great Tasting Burgers</h1>
-            <Button variant='danger' onClick={() => navigate('/menu')} style={{marginLeft: '2rem', marginTop:'1rem'}}>Order Now</Button>
+            <Button variant='danger' onClick={() => navigate('/menu')} style={{marginTop:'1rem'}}>Order Now</Button>
           </div>
         </Box>
     )

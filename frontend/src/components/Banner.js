@@ -10,7 +10,6 @@ const Banner = () => {
         <Image
             src='/images/nica_burger.jpg'
             alt='Nica Burger'
-            borderRadius='lg'
             objectFit='cover'
           />
         <CardBody id='cardBody'>
@@ -26,7 +25,6 @@ const Banner = () => {
           <Image
             src='/images/beer-tap2.jpg'
             alt='Tap Beers'
-            borderRadius='lg'
             objectFit='cover'
           />
         <CardBody id='cardBody'>

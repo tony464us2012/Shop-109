@@ -134,12 +134,28 @@ button:checked {
     width: 4rem;
 }
 
+#navContainer {
+    border-top: 1px solid black;
+}
+
 #cart-btn {
     margin-left: auto;
     cursor: pointer;
-    border: 2px solid white;
+    border: none;
 }
 
+#cart-btn:hover {
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -ms-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
 
 .item-table td {
     padding: .6rem .2rem
@@ -162,7 +178,7 @@ button:checked {
 }
 
 .address {
-    color: white !important
+    color: black
 }
 .social-container {
    display: flex;
@@ -173,7 +189,7 @@ button:checked {
     color: black !important
 }
 .cart {
-    color: white;
+    color: black;
     font-size: 2rem;
     margin-left: auto
 }
@@ -215,11 +231,15 @@ button:checked {
     text-align: center;
     color: black;
     margin-right: 2rem;
+    border-bottom: 3px solid transparent;
+}
+
+#navItem:hover {
+    border-bottom: 3px solid red
 }
 
 #navItem a {
     color: black;
-    text-decoration: none;
 }
 
 .menu-container {
@@ -449,9 +469,6 @@ button:checked {
     .banner-container {
         position: relative;
         margin-top: 3rem;
-    }
-    .app {
-        padding: 0 4px
     }
     #navContainer {
         padding: 2px 3px
