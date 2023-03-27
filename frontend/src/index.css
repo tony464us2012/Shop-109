@@ -21,11 +21,26 @@ main {
 .banner-container {
     position: relative;
     margin-top: 6rem;
+    padding: 0 1rem
 }
 
 .banner {
-    box-shadow: 5px 5px 15px black;
     position: relative;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px black !important;
+}
+
+.banner img {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#cardBody p {
+   margin: 6px 0
 }
 
 .form-group {
@@ -470,16 +485,15 @@ button:checked {
     .banner-container {
         position: relative;
         margin-top: 3rem;
+        padding: 0 5px
     }
     #navContainer {
         padding: 2px 3px
     }
     #cardBody {
-        padding: 0 0 10px 0
+        padding: 5px 12px
     }
     #cardBody b  {
-        margin-top: .3rem;
-        font-size: 1.5rem !important;
     }
     #cardBody p {
         margin-top: .5rem
