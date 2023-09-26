@@ -24,7 +24,7 @@ const Header = () => {
                 dispatch(myOrders(user._id))
             }
         }, 1000)
-    }, [ user, dispatch])
+    }, [dispatch, user ])
     
     const logoutHandler = () => {
         dispatch(logout())

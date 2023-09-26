@@ -26,21 +26,20 @@ main {
 
 .banner {
     position: relative;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px black !important;
+    box-shadow: 5px 5px 15px black !important;
 }
 
-.banner img {
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+#cardBody {
+    -webkit-border-radius: none !important;
+    -moz-border-radius: none !important;
+    -ms-border-radius: none !important;
+    -o-border-radius: none !important;
+    border-radius: none !important;
+
 }
 
 #cardBody p {
-   margin: 6px 0
+   margin: 6px 0;
 }
 
 .form-group {
@@ -470,8 +469,12 @@ button:checked {
     font-size: 1rem !important;
     background-color: red;
     padding: 0 .2rem;
-    border-radius: 2px;
     margin-bottom: 1rem;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
 }
 }
 @media (max-width: 415px) {
@@ -492,8 +495,6 @@ button:checked {
     }
     #cardBody {
         padding: 5px 12px
-    }
-    #cardBody b  {
     }
     #cardBody p {
         margin-top: .5rem

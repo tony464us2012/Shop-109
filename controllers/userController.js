@@ -66,7 +66,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const updateUserProfile = asyncHandler(async (req, res) => {
 
-    console.log(req.body)
     const user = await User.findById(req.body.id)
 
     if(user) {

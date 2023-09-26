@@ -5,7 +5,7 @@ import { Card, Image, CardBody, Text, Stack, Flex, } from '@chakra-ui/react'
 const Banner = () => {
   return (
     
-    <Flex className='banner-container' justifyContent='space-evenly' margin='1.5rem auto' flexWrap='wrap'>
+    <Flex className='banner-container' justifyContent='space-evenly' margin='4.5rem auto' flexWrap='wrap'>
       <Card className='banner' maxW='sm' marginBottom='2rem'>
         <Image
             src='/images/nica_burger.jpg'

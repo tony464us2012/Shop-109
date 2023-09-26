@@ -25,13 +25,13 @@ const MenuScreen = () => {
     const productList = useSelector(state => state.productList)
     const { products, loading } = productList
 
-    const burgers = products.filter(product => product.category === 'Burger')
-    const appetizers = products.filter(appetizer => appetizer.category === 'Appetizer')
-    const salads = products.filter(salad => salad.category === 'Salad')
-    const forkandknifes = products.filter(forkandknife => forkandknife.category === 'ForkandKnife')
-    const sandwiches = products.filter(sandwich => sandwich.category === 'Sandwich')
-    const sliders = products.filter(slider => slider.category === 'Slider')
-    const sides = products.filter(side => side.category === 'Side')
+    const burgers = products?.filter(product => product.category === 'Burger')
+    const appetizers = products?.filter(appetizer => appetizer.category === 'Appetizer')
+    const salads = products?.filter(salad => salad.category === 'Salad')
+    const forkandknifes = products?.filter(forkandknife => forkandknife.category === 'ForkandKnife')
+    const sandwiches = products?.filter(sandwich => sandwich.category === 'Sandwich')
+    const sliders = products?.filter(slider => slider.category === 'Slider')
+    const sides = products?.filter(side => side.category === 'Side')
 
     const tabHandler = (tab) => {
         setTab(tab)
