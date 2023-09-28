@@ -8,7 +8,7 @@ const AboutScreen = () => {
         <div className='padding'>
             <Meta />
             <Text fontSize='2xl' className='text-center'>Our Story</Text>
-            <img className='' src='/images/owners.jpg' style={{marginTop: '1rem'}} width='250px' height='250px' alt='pic of owners' />
+            <img className='' src="https://images2.imgbox.com/79/78/26ZcgQlk_o.jpg" style={{marginTop: '1rem'}} width='250px' height='250px' alt='pic of owners' />
             <p className='about-description'>Our father-son chef duo Jose and Luis Blanco concentrate on always providing the most creative and innovative burgers and food items on the market. They accomplish this by using the freshest ingredients and never being afraid to test the limits of new flavor combinations. Chef Luis Blanco brings about two decades of culinary experience to the table. Traditionally trained in Italian cuisine he does not lack imagination or talent for burgers and American food that makes up the menu at 109 Burger Joint. Chef works with pride and love for his craft.</p>
             <div className="press-container">
                 <Text fontSize='2xl' className='text-center mb-5'>Press Release</Text>

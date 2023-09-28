@@ -16,7 +16,7 @@ const MainPicture = () => {
         <Box style={{position: 'relative', maxWidth:'1000px', margin: '0 auto'}} >
             <Image
             loading='lazy'
-            src='/images/blue_moon.jpg'
+            src="https://images2.imgbox.com/0a/aa/wiK0DYJ3_o.jpg"
             alt='Burger'
             objectFit='cover'
             width= '100%'

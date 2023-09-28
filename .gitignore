@@ -7,3 +7,7 @@
 .env.test.local
 .env.production.local
 /config/default.json
+# Local Netlify folder
+.netlify
+/frontend/src/images
+/frontend/public/images

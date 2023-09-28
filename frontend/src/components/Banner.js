@@ -8,7 +8,7 @@ const Banner = () => {
     <Flex className='banner-container' justifyContent='space-evenly' margin='4.5rem auto' flexWrap='wrap'>
       <Card className='banner' maxW='sm' marginBottom='2rem'>
         <Image
-            src='/images/nica_burger.jpg'
+            src="https://images2.imgbox.com/27/43/FDMVLpBs_o.jpg"
             alt='Nica Burger'
             objectFit='cover'
           />
@@ -23,7 +23,7 @@ const Banner = () => {
       </Card>
       <Card className='banner' maxW='sm' marginBottom='2rem'>
           <Image
-            src='/images/beer-tap2.jpg'
+            src="https://images2.imgbox.com/ab/aa/gV5YTgta_o.jpg"
             alt='Tap Beers'
             objectFit='cover'
           />

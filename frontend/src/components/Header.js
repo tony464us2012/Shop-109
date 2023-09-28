@@ -32,13 +32,14 @@ const Header = () => {
         render()
     }
 
+
     const noborder = {border: 'none'}
 
     return (
         <>
          <Navbar collapseOnSelect expand="lg">
             <Container>
-                <Navbar.Brand href="#home" bg="light" style={noborder}><Image id='Logo' className="align-top" alt='109-Logo' src='/images/109_Logo.png' roundedCircle variant='top'/></Navbar.Brand>
+                <Navbar.Brand href="#home" bg="light" style={noborder}><Image id='Logo' className="align-top" alt='109-Logo' src="https://images2.imgbox.com/48/7e/9omFd3Oa_o.png" roundedCircle variant='top'/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className="me-auto justify-content-end">
                 <Nav.Item id='navItem'><a href='/'>Home</a></Nav.Item>
