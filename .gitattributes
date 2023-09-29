@@ -1,0 +1,4 @@
+frontend/srd/images/sequence.gif filter=lfs diff=lfs merge=lfs -text
+frontend/src/images/sequence.gif filter=lfs diff=lfs merge=lfs -text
+fontend/src/images/sequence.gif filter=lfs diff=lfs merge=lfs -text
+frontend/src/images/sequence2.git filter=lfs diff=lfs merge=lfs -text
