@@ -25,7 +25,7 @@ const ProductModal = ({ show, onHide, id, price }) => {
       const [sauce, setSauce] = useState('')
       const [burger, setBurger] = useState('')
       const [fryAddOn, setFryAddOn] = useState('')
-      const [tacoText, setTacoText] = useState('')
+      const [, setTacoText] = useState('')
       const [instructions, setInstructions] = useState('')
       const ref = useRef(price)
 
