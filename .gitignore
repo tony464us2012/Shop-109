@@ -8,3 +8,5 @@
 .env.production.local
 /config/default.json
 # Local Netlify folder
+/frontend/src/images/sequence.gif
+/frontend/src/images/sequence2.gif
